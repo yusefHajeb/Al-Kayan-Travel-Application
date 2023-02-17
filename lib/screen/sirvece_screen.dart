@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:yah_app/screen/first_screen.dart';
+// import 'package:yah_app/screen/first_screen.dart';
 import 'package:yah_app/screen/sirvec_page.dart';
 import 'dealetes.dart';
 

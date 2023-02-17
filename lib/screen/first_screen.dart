@@ -12,14 +12,7 @@ import 'package:yah_app/screen/kaian_screen.dart';
 import '../main.dart';
 
 int _currentPage = 0;
-void select_screen(BuildContext ctx, int tab) {
-  //Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-  //return KaianScreen();
-
-  // Navigator.of(ctx).pushNamed(KaianScreen.routeName);
-  // }));
-  // KaianScreen.routeName,
-}
+void select_screen(BuildContext ctx, int tab) {}
 
 void SelectScreen2(BuildContext ctx, int index) {
   Navigator.of(ctx).pushNamed(Screen2.routeName, arguments: index);
@@ -58,7 +51,7 @@ class _firstScreenState extends State<firstScreen> {
       resizeToAvoidBottomInset: false,
       body: Flex(direction: Axis.vertical, children: <Widget>[
         Expanded(
-            flex: 6,
+            flex: 7,
             child: Stack(children: [
               Image.asset(
                 "assest/image/thim3.png",
@@ -215,20 +208,22 @@ class _firstScreenState extends State<firstScreen> {
   }
 
   Widget carousView(int index, Size s) {
-    return AnimatedBuilder(
-        animation: _pageController,
-        builder: (context, child) {
-          double value = 0.0;
-          if (_pageController.position.haveDimensions) {
-            value = index.toDouble() - (_pageController.page ?? 0);
-            value = (value * 0.038).clamp(-1, 1);
-            print("value $value index $index");
-          }
-          return Transform.rotate(
-            angle: -3.14 * value,
-            child: crouseCard(dataList[index], s),
-          );
-        });
+    return Container(
+      child: AnimatedBuilder(
+          animation: _pageController,
+          builder: (context, child) {
+            double value = 0.0;
+            if (_pageController.position.haveDimensions) {
+              value = index.toDouble() - (_pageController.page ?? 0);
+              value = (value * 0.038).clamp(-1, 1);
+              print("value $value index $index");
+            }
+            return Transform.rotate(
+              angle: -3.14 * value,
+              child: crouseCard(dataList[index], s),
+            );
+          }),
+    );
   }
 
   Widget crouseCard(DataModel data, Size size) {

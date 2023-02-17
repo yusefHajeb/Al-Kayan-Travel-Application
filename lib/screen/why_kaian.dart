@@ -13,11 +13,7 @@ import '../Widget/about.dart';
 import 'first_screen.dart';
 
 void select_screen(BuildContext ctx) {
-  //Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-  //return KaianScreen();
   Navigator.of(ctx).pushNamed(AboutUs.routeName);
-  // }));
-  // KaianScreen.routeName,
 }
 
 class Product {
@@ -26,8 +22,6 @@ class Product {
   final discrib;
   Product(this.image, this.name, this.discrib);
 }
-
-// bool check = false;
 
 class Screen2 extends StatefulWidget {
   @override
@@ -40,14 +34,7 @@ class Screen2 extends StatefulWidget {
 
 class _Screen2 extends State<Screen2> with TickerProviderStateMixin {
   late final AnimationController _controller;
-  // = AnimationController(
-  //   duration: const Duration(seconds: 2),
-  //   vsync: this,
-  // )..repeat(reverse: true);
-  // late final Animation<double> _animation = CurvedAnimation(
-  //   parent: _controller,
-  //   curve: Curves.easeIn,
-  // );
+
   late Animation<double> _fadeInFadeOut;
   @override
 
@@ -115,9 +102,7 @@ class _Screen2 extends State<Screen2> with TickerProviderStateMixin {
               children: [
                 Container(
                   height: size.height * .22,
-                  // margin: EdgeInsets.all(20),
                   decoration: const BoxDecoration(
-                      // color: Color.fromRGBO(255, 189, 0, 1),
                       image: DecorationImage(
                         image: AssetImage(
                           "assest/image/airplane1.jpg",
