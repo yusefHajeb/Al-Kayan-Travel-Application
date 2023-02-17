@@ -9,11 +9,6 @@ import 'package:yah_app/Widget/catagory_curd.dart';
 import 'package:yah_app/why_kian.dart' show Kaian;
 
 class MyHome extends StatelessWidget {
-  // Future<void> selectScreene(BuildContext ctx) async =>
-  //     Navigator.of(ctx).pushReplacement(MaterialPageRoute(builder: (_) {
-  //       return BottomPage();
-  //     }));
-
   int _selectedPageIndex = 0;
   void _x1(int index) {
     _selectedPageIndex = index;
