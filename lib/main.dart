@@ -10,6 +10,8 @@ import 'package:yah_app/home_old.dart';
 import 'package:yah_app/screen/kaian_screen.dart';
 import 'package:yah_app/why_kian.dart';
 import 'Widget/reponsive_card.dart';
+// import 'Widget/widget_tools/progres_button.dart';
+import 'Widget/widget_tools/button_slide.dart';
 import 'tolls.dart';
 import 'Widget/bottomNav.dart';
 
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => firstScreen(),
+          '/': (context) => MyCustomWidget(),
           AboutUs.routeName: (context) => AboutUs(),
           Screen2.routeName: (context) => Screen2(),
           SrvessScreen.routeName: (context) => SrvessScreen(),
@@ -67,13 +69,6 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Screen2();
-    //  DefaultTabController(
-    //     length: 2,
-    //     child: Scaffold(
-    //         appBar: AppBar(
-    //           title: Text("How are you"),
-    //         ),
-    //         body: Container()));
   }
 }
 

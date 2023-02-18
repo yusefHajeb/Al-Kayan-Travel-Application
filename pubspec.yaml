@@ -31,7 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   curved_navigation_bar: ^1.0.1
-  
+  progress_state_button: ^1.0.2
+  slider_button: any
  
 
   # The following adds the Cupertino Icons font to your application.

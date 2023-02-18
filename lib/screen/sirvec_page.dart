@@ -164,6 +164,33 @@ class _PageService extends State<PageService> {
                           )
                         ]),
                       ),
+                    ),
+                    SizedBox(width: 10),
+                    AspectRatio(
+                      aspectRatio: 3 / 1,
+                      child: Container(
+                        padding: EdgeInsets.all(13),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: const [
+                              Icon(
+                                Icons.web,
+                                size: 50,
+                              ),
+                              Text("الحج والعمرة"),
+                              // Container(
+                              //   width: 56,
+                              //   padding: EdgeInsets.all(20),
+                              //   decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(5),
+                              //       color: Color.fromARGB(255, 237, 180, 38)),
+                              // ),
+                            ]),
+                      ),
                     )
                   ],
                 ),
