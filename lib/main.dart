@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => MyCustomWidget(),
+          '/': (context) => firstScreen(),
           AboutUs.routeName: (context) => AboutUs(),
           Screen2.routeName: (context) => Screen2(),
           SrvessScreen.routeName: (context) => SrvessScreen(),

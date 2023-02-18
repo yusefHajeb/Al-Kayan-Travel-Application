@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animations/animations.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -9,6 +10,7 @@ import 'package:yah_app/tolls.dart';
 import 'package:yah_app/Widget/catagory_curd.dart';
 import 'package:yah_app/screen/kaian_screen.dart';
 
+import '../Widget/widget_tools/secreen_animation.dart';
 import '../main.dart';
 
 int _currentPage = 0;
@@ -64,29 +66,78 @@ class _firstScreenState extends State<firstScreen> {
         Expanded(
           flex: 2,
           child: Container(
-            margin: EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                offset: Offset(0, 6),
-                blurRadius: 17,
-                spreadRadius: -20,
-                color: Colors.black,
+              width: 400,
+              margin: EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 6),
+                    blurRadius: 17,
+                    spreadRadius: -20,
+                    color: Colors.black,
+                  ),
+                ],
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(29.5),
               ),
-            ], color: Colors.white, borderRadius: BorderRadius.circular(29.5)),
-            child: TextField(
+              //  color: Colors.white, borderRadius: BorderRadius.circular(29.5)),
+              child: TextField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    hintText: "ابحث برقم الجواز",
-                    icon: Icon(Icons.search),
-                    border: InputBorder.none,
-                    suffixIcon: MaterialButton(
-                      onPressed: () {},
-                      child: Text(
-                        "بحث",
-                      ),
-                    ))),
-          ),
+                  hintText: "ابحث برقم الجواز",
+                  icon: Icon(Icons.search),
+                  border: InputBorder.none,
+                  suffixIcon: OpenContainer(
+                    closedBuilder: (_, openContainer) {
+                      return Container(
+                        height: 80,
+                        width: 80,
+                        child: Center(
+                          child: Text(
+                            'بحث',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    openColor: Colors.white,
+                    closedElevation: 20,
+                    closedShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    transitionDuration: Duration(milliseconds: 700),
+                    openBuilder: (_, closeContainer) {
+                      return SecondScreen();
+                    },
+                  ),
+                ),
+              )),
+          // Container(
+          //   margin: EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
+          //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          //   decoration: BoxDecoration(boxShadow: [
+          //     BoxShadow(
+          //       offset: Offset(0, 6),
+          //       blurRadius: 17,
+          //       spreadRadius: -20,
+          //       color: Colors.black,
+          //     ),
+          //   ], color: Colors.white, borderRadius: BorderRadius.circular(29.5)),
+          //   child: TextField(
+          //       keyboardType: TextInputType.number,
+          //       decoration: InputDecoration(
+          //           hintText: "ابحث برقم الجواز",
+          //           icon: Icon(Icons.search),
+          //           border: InputBorder.none,
+          //           suffixIcon: MaterialButton(
+          //             onPressed: () {},
+          //             child: Text(
+          //               "بحث",
+          //             ),
+          //           ))),
+          // ),
         ),
         Expanded(
           flex: 4,
