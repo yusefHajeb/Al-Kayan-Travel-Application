@@ -11,7 +11,8 @@ import 'package:yah_app/screen/kaian_screen.dart';
 import 'package:yah_app/why_kian.dart';
 import 'Widget/reponsive_card.dart';
 // import 'Widget/widget_tools/progres_button.dart';
-import 'Widget/widget_tools/button_slide.dart';
+// import 'Widget/widget_tools/button_slide.dart';
+import 'Widget/widget_tools/secreen_animation.dart';
 import 'tolls.dart';
 import 'Widget/bottomNav.dart';
 
