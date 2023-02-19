@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -158,12 +159,21 @@ class SecondPage extends StatelessWidget {
           backgroundColor: Colors.black,
           systemOverlayStyle: SystemUiOverlayStyle.light),
       body: Center(
-        child: Text(
-          "تم ",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+        child: AnimatedTextKit(
+          animatedTexts: [
+            TypewriterAnimatedText(
+              'معاملتك قيد التنفيذ',
+              speed: Duration(milliseconds: 150),
+              textStyle: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+          isRepeatingAnimation: true,
+          repeatForever: true,
+          displayFullTextOnTap: true,
+          stopPauseOnTap: false,
         ),
       ),
     );
