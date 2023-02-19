@@ -1,7 +1,8 @@
-import 'dart:async';
+// import 'dart:async';
 
 import 'package:animations/animations.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:yah_app/screen/sirvece_screen.dart';
@@ -10,6 +11,7 @@ import 'package:yah_app/tolls.dart';
 import 'package:yah_app/Widget/catagory_curd.dart';
 import 'package:yah_app/screen/kaian_screen.dart';
 
+import '../Widget/widget_tools/mydrawer.dart';
 import '../Widget/widget_tools/secreen_animation.dart';
 import '../main.dart';
 
@@ -62,13 +64,14 @@ class _firstScreenState extends State<firstScreen> {
                 width: double.infinity,
               ),
             ])),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Expanded(
           flex: 2,
           child: Container(
               width: 400,
-              margin: EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              margin: const EdgeInsets.only(
+                  top: 0, right: 30, left: 30, bottom: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -92,6 +95,7 @@ class _firstScreenState extends State<firstScreen> {
                     closedBuilder: (_, openContainer) {
                       return Container(
                         height: 80,
+                        color: Colors.orange,
                         width: 80,
                         child: Center(
                           child: Text(
@@ -175,7 +179,7 @@ class _firstScreenState extends State<firstScreen> {
                 titleCurd: "لماذا كيان",
                 myIcon: Icon(
                   Icons.diamond,
-                  color: primary,
+                  color: Colors.blue,
                   size: 50,
                 ),
                 press: () {
@@ -229,7 +233,12 @@ class _firstScreenState extends State<firstScreen> {
                   size: 30,
                   color: Color.fromARGB(255, 22, 51, 26),
                 ),
-                press: () {},
+                press: () {
+                  setState(() {
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => ))
+                  });
+                  // Navigator.of(context).push(MyCustomUI());
+                },
               ),
               CatagoryCount(
                   titleCurd: "خدماتنا",
