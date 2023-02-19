@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yah_app/Widget/about.dart';
-import 'package:yah_app/Widget/servece_card.dart';
+import 'package:yah_app/Widget/widget_tools/mydrawer.dart';
+// import 'package:yah_app/Widget/servece_card.dart';
 import 'package:yah_app/screen/first_screen.dart';
 import 'package:yah_app/screen/sirvec_page.dart';
 import 'package:yah_app/screen/sirvece_screen.dart';
 import 'package:yah_app/screen/why_kaian.dart';
-import 'package:yah_app/home_old.dart';
-import 'package:yah_app/screen/kaian_screen.dart';
-import 'package:yah_app/why_kian.dart';
-import 'Widget/reponsive_card.dart';
-// import 'Widget/widget_tools/progres_button.dart';
-// import 'Widget/widget_tools/button_slide.dart';
-import 'Widget/widget_tools/secreen_animation.dart';
+// import 'package:yah_app/home_old.dart';
+
 import 'tolls.dart';
-import 'Widget/bottomNav.dart';
+// import 'Widget/bottomNav.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
@@ -27,8 +23,6 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    // SystemChrome.setPreferredOrientations(DeviceOrientation.values);
     return MaterialApp(
         theme: ThemeData(
           fontFamily: "Cairo",

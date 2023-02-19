@@ -55,16 +55,16 @@ class SrvessScreen extends StatelessWidget {
             itemBuilder: (ctx, index) {
               return InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.fade,
-                      child: PageService(),
-                      settings: RouteSettings(
-                        arguments: index,
-                      ),
-                    ),
-                  );
+                  showService(ctx, index);
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => Container(child: PageService()),
+                  //     settings: RouteSettings(
+                  //       arguments: index,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 child: Card(
                   shape: RoundedRectangleBorder(
@@ -74,16 +74,19 @@ class SrvessScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15),
-                        ),
-                        child: Image.asset(
-                          DUMMY_MEALS[index].imageUrl,
-                          width: double.infinity,
-                          height: 200,
-                          fit: BoxFit.fill,
+                      Hero(
+                        tag: DUMMY_MEALS[index].id,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                          ),
+                          child: Image.asset(
+                            DUMMY_MEALS[index].imageUrl,
+                            width: double.infinity,
+                            height: 200,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                       Padding(

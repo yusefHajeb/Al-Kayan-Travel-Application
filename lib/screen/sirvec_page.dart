@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yah_app/screen/why_kaian.dart';
 
 import 'dealetes.dart';
 
@@ -6,6 +7,14 @@ class PageService extends StatefulWidget {
   static const routeName = 'show_servece_index';
   @override
   State<PageService> createState() => _PageService();
+}
+
+@override
+void showService(BuildContext ctx, int index) {
+  Navigator.of(ctx).pushNamed(
+    PageService.routeName,
+    arguments: index,
+  );
 }
 
 class _PageService extends State<PageService> {
@@ -20,20 +29,22 @@ class _PageService extends State<PageService> {
     return Scaffold(
       body: Column(children: [
         Stack(children: <Widget>[
-          Container(
-            height: size.height / 3,
-            width: double.infinity,
-
-            child: Image.asset(
-              DUMMY_MEALS[sectionIndex].imageUrl,
-              fit: BoxFit.fill,
+          Hero(
+            tag: (DUMMY_MEALS[sectionIndex].id),
+            child: Container(
+              height: size.height / 3,
+              width: double.infinity,
+              child: Image.asset(
+                DUMMY_MEALS[sectionIndex].imageUrl,
+                fit: BoxFit.fill,
+              ),
+              // margin: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  // color: Color.fromRGBO(255, 189, 0, 1),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(50),
+                      bottomRight: Radius.circular(50))),
             ),
-            // margin: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-                // color: Color.fromRGBO(255, 189, 0, 1),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50),
-                    bottomRight: Radius.circular(50))),
           ),
           Positioned(
             top: 50,
@@ -71,19 +82,22 @@ class _PageService extends State<PageService> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "تاشيرات عمل ",
+                DUMMY_MEALS[sectionIndex].title,
                 style: TextStyle(
-                    color: Color.fromARGB(98, 90, 90, 0),
+                    color: Color.fromARGB(230, 25, 25, 18),
                     fontSize: 15,
                     height: 1.4),
               ),
               SizedBox(height: 40),
-              Text(
-                "تاشيرات عمل ",
-                style: TextStyle(
-                    color: Color.fromARGB(98, 90, 90, 0),
-                    fontSize: 15,
-                    height: 1.4),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                child: Text(
+                  DUMMY_MEALS[sectionIndex].paragraph,
+                  style: TextStyle(
+                      color: Color.fromARGB(219, 0, 0, 0),
+                      fontSize: 25,
+                      height: 1.4),
+                ),
               ),
               Row(
                 children: [
@@ -133,8 +147,8 @@ class _PageService extends State<PageService> {
               Text(
                 "مزيد من الخدمات",
                 style: TextStyle(
-                    color: Color.fromARGB(98, 90, 90, 0),
-                    fontSize: 18,
+                    color: Color.fromARGB(255, 38, 38, 34),
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     height: 1.4),
               ),
@@ -142,63 +156,83 @@ class _PageService extends State<PageService> {
                 height: 20,
               ),
               Container(
-                height: 80.0,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 3.2 / 1,
-                      child: Container(
-                        padding: EdgeInsets.all(13),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Row(children: [
-                          Container(
-                            width: 56,
-                            padding: EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color.fromARGB(255, 237, 180, 38)),
-                          )
-                        ]),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    AspectRatio(
-                      aspectRatio: 3 / 1,
-                      child: Container(
-                        padding: EdgeInsets.all(13),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: const [
-                              Icon(
-                                Icons.web,
-                                size: 50,
-                              ),
-                              Text("الحج والعمرة"),
-                              // Container(
-                              //   width: 56,
-                              //   padding: EdgeInsets.all(20),
-                              //   decoration: BoxDecoration(
-                              //       borderRadius: BorderRadius.circular(5),
-                              //       color: Color.fromARGB(255, 237, 180, 38)),
-                              // ),
-                            ]),
-                      ),
-                    )
-                  ],
-                ),
-              )
+                  height: 80.0,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return (CardBottom(sectionIndex: index));
+                      // SizedBox(width: 10),
+                      // CardBottom(sectionIndex: sectionIndex),
+                      // SizedBox(
+                      //   width: 10,
+                      // ),
+                      // CardBottom(sectionIndex: 2),
+                    },
+                    itemCount: DUMMY_MEALS.length,
+                  )),
+              // scrollDirection: Axis.horizontal,
+              // children: [
             ],
           ),
         )
       ]),
+    );
+  }
+}
+
+class CardBottom extends StatelessWidget {
+  const CardBottom({
+    Key? key,
+    required this.sectionIndex,
+  }) : super(key: key);
+
+  final int sectionIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        showService(context, sectionIndex);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => Container(child: PageService()),
+        //     settings: RouteSettings(
+        //       arguments: sectionIndex,
+        //     ),
+        //   ),
+        // );
+      },
+      child: AspectRatio(
+        aspectRatio: 3 / 1,
+        child: Container(
+          margin: EdgeInsets.only(left: 5, right: 10),
+          padding: EdgeInsets.all(13),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            Container(
+                width: 56,
+                height: 40,
+                // padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Color.fromARGB(255, 40, 39, 37)),
+                child: Image.asset(
+                  DUMMY_MEALS[sectionIndex].imageUrl,
+                  fit: BoxFit.cover,
+                )),
+            Text(
+              DUMMY_MEALS[sectionIndex].title,
+              style: TextStyle(
+                  color: Color.fromARGB(255, 54, 52, 52), fontSize: 13),
+            ),
+          ]),
+        ),
+      ),
     );
   }
 }
