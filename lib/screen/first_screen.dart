@@ -5,14 +5,17 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:yah_app/Widget/widget_tools/list_anmi.dart';
 import 'package:yah_app/screen/sirvece_screen.dart';
 import 'package:yah_app/screen/why_kaian.dart';
 import 'package:yah_app/tolls.dart';
 import 'package:yah_app/Widget/catagory_curd.dart';
 import 'package:yah_app/screen/kaian_screen.dart';
 
+import '../Widget/widget_tools/list_animition2.dart';
 import '../Widget/widget_tools/mydrawer.dart';
 import '../Widget/widget_tools/secreen_animation.dart';
+import '../Widget/widget_tools/text_ani,ation.dart';
 import '../main.dart';
 
 int _currentPage = 0;
@@ -55,7 +58,7 @@ class _firstScreenState extends State<firstScreen> {
       resizeToAvoidBottomInset: false,
       body: Flex(direction: Axis.vertical, children: <Widget>[
         Expanded(
-            flex: 7,
+            flex: 6,
             child: Stack(children: [
               Image.asset(
                 "assest/image/thim3.png",
@@ -118,30 +121,6 @@ class _firstScreenState extends State<firstScreen> {
                   ),
                 ),
               )),
-          // Container(
-          //   margin: EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
-          //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          //   decoration: BoxDecoration(boxShadow: [
-          //     BoxShadow(
-          //       offset: Offset(0, 6),
-          //       blurRadius: 17,
-          //       spreadRadius: -20,
-          //       color: Colors.black,
-          //     ),
-          //   ], color: Colors.white, borderRadius: BorderRadius.circular(29.5)),
-          //   child: TextField(
-          //       keyboardType: TextInputType.number,
-          //       decoration: InputDecoration(
-          //           hintText: "ابحث برقم الجواز",
-          //           icon: Icon(Icons.search),
-          //           border: InputBorder.none,
-          //           suffixIcon: MaterialButton(
-          //             onPressed: () {},
-          //             child: Text(
-          //               "بحث",
-          //             ),
-          //           ))),
-          // ),
         ),
         Expanded(
           flex: 4,
@@ -234,9 +213,12 @@ class _firstScreenState extends State<firstScreen> {
                   color: Color.fromARGB(255, 22, 51, 26),
                 ),
                 press: () {
-                  setState(() {
-                    Navigator.push(context, MaterialPageRoute(builder: ((context) => ))
-                  });
+                  // setState(() {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: ((context) => ListAnmition2())));
+                  // });
                   // Navigator.of(context).push(MyCustomUI());
                 },
               ),
