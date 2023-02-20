@@ -6,10 +6,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:yah_app/screen/sirvec_page.dart';
-import 'package:yah_app/tolls.dart';
+import 'package:yah_app/styles/tolls.dart';
 import 'package:yah_app/main.dart';
 import 'package:page_transition/page_transition.dart';
-import '../Widget/BouncingButton.dart';
+import '../Widget/widget_tools/BouncingButton.dart';
 import '../Widget/about.dart';
 import 'first_screen.dart';
 
