@@ -7,9 +7,10 @@ import 'package:yah_app/screen/first_screen.dart';
 import 'package:yah_app/screen/sirvec_page.dart';
 import 'package:yah_app/screen/sirvece_screen.dart';
 import 'package:yah_app/screen/why_kaian.dart';
+import 'package:yah_app/styles/tolls.dart';
 // import 'package:yah_app/home_old.dart';
 
-import 'tolls.dart';
+import 'styles/tolls.dart';
 // import 'Widget/bottomNav.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yah_app/tolls.dart';
+import 'package:yah_app/styles/tolls.dart';
 //import 'package:yah_app/lib/models/models.dart';
 
 class DetailsScreen extends StatefulWidget {

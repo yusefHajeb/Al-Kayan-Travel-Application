@@ -48,69 +48,75 @@ class SrvessScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: ListView.builder(
-            itemCount: DUMMY_MEALS.length,
-            itemBuilder: (ctx, index) {
-              return InkWell(
-                onTap: () {
-                  showService(ctx, index);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Container(child: PageService()),
-                  //     settings: RouteSettings(
-                  //       arguments: index,
-                  //     ),
-                  //   ),
-                  // );
-                },
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
-                  elevation: 4,
-                  margin: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Hero(
-                        tag: DUMMY_MEALS[index].id,
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
-                          child: Image.asset(
-                            DUMMY_MEALS[index].imageUrl,
-                            width: double.infinity,
-                            height: 200,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "الحج والعمرة",
-                              style: TextStyle(
-                                fontSize: 20,
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: ListView.builder(
+                itemCount: DUMMY_MEALS.length,
+                itemBuilder: (ctx, index) {
+                  return InkWell(
+                    onTap: () {
+                      showService(ctx, index);
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => Container(child: PageService()),
+                      //     settings: RouteSettings(
+                      //       arguments: index,
+                      //     ),
+                      //   ),
+                      // );
+                    },
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      elevation: 4,
+                      margin: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Hero(
+                            tag: DUMMY_MEALS[index].id,
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                              child: Image.asset(
+                                DUMMY_MEALS[index].imageUrl,
+                                width: double.infinity,
+                                height: 200,
+                                fit: BoxFit.fill,
                               ),
                             ),
-                            Text("sdfa sdfsdfa sdfs dfklsdf llkjf l"),
-                            SizedBox(height: 10),
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  DUMMY_MEALS[index].title,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Text(
+                                    DUMMY_MEALS[index].paragraph.split("_")[0] +
+                                        "..."),
+                                SizedBox(height: 10),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

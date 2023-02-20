@@ -9,6 +9,11 @@ const kBlueLightColor = Color(0xffc788f5);
 const kBlueColor = Color(0xff817Dc0);
 const kShadowColor = Color(0xFFe6e6e6);
 const bBackDark = Color(0xff002828);
+
+Color purple = Color.fromARGB(255, 255, 170, 0);
+Color blue = Color.fromARGB(255, 251, 212, 169);
+Color navy = Color(0xff0f0434);
+
 TextStyle stl =
     TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w700);
 

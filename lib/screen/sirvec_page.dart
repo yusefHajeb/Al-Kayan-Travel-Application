@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yah_app/screen/why_kaian.dart';
 
+import '../Widget/widget_tools/BouncingButton.dart';
 import 'dealetes.dart';
 
 class PageService extends StatefulWidget {
@@ -28,25 +29,19 @@ class _PageService extends State<PageService> {
     return Scaffold(
       body: Column(children: [
         Stack(children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Hero(
-              tag: (DUMMY_MEALS[sectionIndex].id),
-              child: Container(
-                height: size.height / 3,
-                width: double.infinity,
-                child: Image.asset(
-                  DUMMY_MEALS[sectionIndex].imageUrl,
-                  fit: BoxFit.fill,
-                ),
-                // margin: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    // color: Color.fromRGBO(255, 189, 0, 1),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(50),
-                        bottomRight: Radius.circular(50))),
-              ),
+          Container(
+            height: size.height / 3,
+            width: double.infinity,
+            child: Image.asset(
+              DUMMY_MEALS[sectionIndex].imageUrl,
+              fit: BoxFit.fill,
             ),
+            // margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                // color: Color.fromRGBO(255, 189, 0, 1),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50))),
           ),
           Positioned(
             top: 50,
@@ -61,7 +56,50 @@ class _PageService extends State<PageService> {
               ),
             ),
           ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 20,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25.0),
+                  topRight: Radius.circular(25.0),
+                ),
+              ),
+            ),
+          )
         ]),
+
+        Transform.translate(
+          offset: Offset(0, -50),
+          child: Container(
+            width: size.width / 1.50,
+            padding: EdgeInsets.all(10),
+            // color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(13),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 6),
+                    blurRadius: 17,
+                    spreadRadius: -6,
+                    color: Colors.black,
+                  )
+                ]),
+            child: Text(
+              DUMMY_MEALS[sectionIndex].title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color.fromARGB(230, 25, 25, 18),
+                fontSize: 20,
+              ),
+            ),
+          ),
+        ),
         // Transform.translate(
         //     offset: Offset(0, -35),
         //     child: Container(
@@ -84,16 +122,13 @@ class _PageService extends State<PageService> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  DUMMY_MEALS[sectionIndex].title,
-                  style: TextStyle(
-                    color: Color.fromARGB(230, 25, 25, 18),
-                    fontSize: 20,
-                  ),
-                ),
-              ),
+              // Text(
+              //   DUMMY_MEALS[sectionIndex].title,
+              //   style: TextStyle(
+              //     color: Color.fromARGB(230, 25, 25, 18),
+              //     fontSize: 20,
+              //   ),
+              // ),
               SizedBox(height: 40),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -105,48 +140,7 @@ class _PageService extends State<PageService> {
                       height: 1.4),
                 ),
               ),
-              Row(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    padding: EdgeInsets.all(7),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                        border: Border.all(width: 30, color: Colors.red)),
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.black),
-                    ),
-                  ),
-                  Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromARGB(255, 0, 26, 112)),
-                  ),
-                  Container(
-                    width: 25,
-                    height: 25,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromARGB(255, 158, 27, 27)),
-                  ),
-                  Container(
-                    width: 25,
-                    height: 25,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromARGB(255, 158, 27, 27)),
-                  ),
-                ],
-              ),
+
               SizedBox(
                 height: 20,
               ),
@@ -166,7 +160,9 @@ class _PageService extends State<PageService> {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return (CardBottom(sectionIndex: index));
+                      return Bouncing(
+                          onPress: () {},
+                          child: (CardBottom(sectionIndex: index)));
                       // SizedBox(width: 10),
                       // CardBottom(sectionIndex: sectionIndex),
                       // SizedBox(
