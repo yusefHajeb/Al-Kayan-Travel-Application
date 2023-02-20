@@ -29,6 +29,7 @@ void SelectScreen2(BuildContext ctx, int index) {
 
 class firstScreen extends StatefulWidget {
   const firstScreen({Key? key}) : super(key: key);
+  static const roteName = "Screen Home";
 
   @override
   State<firstScreen> createState() => _firstScreenState();
