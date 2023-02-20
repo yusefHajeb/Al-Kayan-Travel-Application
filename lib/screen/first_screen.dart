@@ -12,7 +12,6 @@ import 'package:yah_app/tolls.dart';
 import 'package:yah_app/Widget/catagory_curd.dart';
 import 'package:yah_app/screen/kaian_screen.dart';
 
-import '../Widget/widget_tools/list_animition2.dart';
 import '../Widget/widget_tools/mydrawer.dart';
 import '../Widget/widget_tools/secreen_animation.dart';
 import '../Widget/widget_tools/text_ani,ation.dart';
@@ -98,7 +97,7 @@ class _firstScreenState extends State<firstScreen> {
                     closedBuilder: (_, openContainer) {
                       return Container(
                         height: 80,
-                        color: Colors.orange,
+                        color: Colors.transparent,
                         width: 80,
                         child: Center(
                           child: Text(
@@ -213,12 +212,10 @@ class _firstScreenState extends State<firstScreen> {
                   color: Color.fromARGB(255, 22, 51, 26),
                 ),
                 press: () {
-                  // setState(() {
-                  //   Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: ((context) => ListAnmition2())));
-                  // });
+                  setState(() {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => CardNew())));
+                  });
                   // Navigator.of(context).push(MyCustomUI());
                 },
               ),

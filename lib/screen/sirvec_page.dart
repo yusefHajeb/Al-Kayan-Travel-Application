@@ -24,26 +24,28 @@ class _PageService extends State<PageService> {
     //عند الا
     final int sectionIndex = ModalRoute.of(context)?.settings.arguments as int;
     print(sectionIndex);
-    // final selectedMeal =
-    // DUMMY_MEALS.firstWhere((meal) => sectionIndex == meal.id);
+
     return Scaffold(
       body: Column(children: [
         Stack(children: <Widget>[
-          Hero(
-            tag: (DUMMY_MEALS[sectionIndex].id),
-            child: Container(
-              height: size.height / 3,
-              width: double.infinity,
-              child: Image.asset(
-                DUMMY_MEALS[sectionIndex].imageUrl,
-                fit: BoxFit.fill,
+          Expanded(
+            flex: 1,
+            child: Hero(
+              tag: (DUMMY_MEALS[sectionIndex].id),
+              child: Container(
+                height: size.height / 3,
+                width: double.infinity,
+                child: Image.asset(
+                  DUMMY_MEALS[sectionIndex].imageUrl,
+                  fit: BoxFit.fill,
+                ),
+                // margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    // color: Color.fromRGBO(255, 189, 0, 1),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(50),
+                        bottomRight: Radius.circular(50))),
               ),
-              // margin: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                  // color: Color.fromRGBO(255, 189, 0, 1),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50))),
             ),
           ),
           Positioned(
@@ -77,16 +79,20 @@ class _PageService extends State<PageService> {
         //       ),
         //       height: 60,
         //     )),
-        SingleChildScrollView(
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                DUMMY_MEALS[sectionIndex].title,
-                style: TextStyle(
+              Expanded(
+                flex: 1,
+                child: Text(
+                  DUMMY_MEALS[sectionIndex].title,
+                  style: TextStyle(
                     color: Color.fromARGB(230, 25, 25, 18),
-                    fontSize: 15,
-                    height: 1.4),
+                    fontSize: 20,
+                  ),
+                ),
               ),
               SizedBox(height: 40),
               Padding(
@@ -95,7 +101,7 @@ class _PageService extends State<PageService> {
                   DUMMY_MEALS[sectionIndex].paragraph,
                   style: TextStyle(
                       color: Color.fromARGB(219, 0, 0, 0),
-                      fontSize: 25,
+                      fontSize: 22,
                       height: 1.4),
                 ),
               ),
