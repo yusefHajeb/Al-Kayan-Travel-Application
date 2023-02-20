@@ -1,5 +1,7 @@
 // import 'dart:async';
 
+import 'dart:async';
+
 import 'package:animations/animations.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,10 +10,11 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:yah_app/Widget/widget_tools/list_anmi.dart';
 import 'package:yah_app/screen/sirvece_screen.dart';
 import 'package:yah_app/screen/why_kaian.dart';
-import 'package:yah_app/tolls.dart';
+import 'package:yah_app/styles/tolls.dart';
 import 'package:yah_app/Widget/catagory_curd.dart';
 import 'package:yah_app/screen/kaian_screen.dart';
 
+import '../Widget/widget_tools/BouncingButton.dart';
 import '../Widget/widget_tools/mydrawer.dart';
 import '../Widget/widget_tools/secreen_animation.dart';
 import '../Widget/widget_tools/text_ani,ation.dart';
@@ -49,7 +52,7 @@ class _firstScreenState extends State<firstScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     // int currentCarouselIndex = 0;
-    // Timer t = Timer(Duration(seconds: 2), () {
+    // Timer t = Timer(const Duration(seconds: 2), () {
     //   setState(() => currentCarouselIndex++);
     //   print(currentCarouselIndex);
     // });
@@ -76,8 +79,8 @@ class _firstScreenState extends State<firstScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               decoration: BoxDecoration(
                 boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 6),
+                  const BoxShadow(
+                    offset: const Offset(0, 6),
                     blurRadius: 17,
                     spreadRadius: -20,
                     color: Colors.black,
@@ -91,7 +94,7 @@ class _firstScreenState extends State<firstScreen> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: "ابحث برقم الجواز",
-                  icon: Icon(Icons.search),
+                  icon: const Icon(Icons.search),
                   border: InputBorder.none,
                   suffixIcon: OpenContainer(
                     closedBuilder: (_, openContainer) {
@@ -99,7 +102,7 @@ class _firstScreenState extends State<firstScreen> {
                         height: 80,
                         color: Colors.transparent,
                         width: 80,
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'بحث',
                             style: TextStyle(
@@ -113,7 +116,7 @@ class _firstScreenState extends State<firstScreen> {
                     closedElevation: 20,
                     closedShape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    transitionDuration: Duration(milliseconds: 700),
+                    transitionDuration: const Duration(milliseconds: 700),
                     openBuilder: (_, closeContainer) {
                       return SecondScreen();
                     },
@@ -125,7 +128,7 @@ class _firstScreenState extends State<firstScreen> {
           flex: 4,
           child: Container(
             height: 200,
-            padding: EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 10),
             width: double.infinity,
             child: AspectRatio(
               aspectRatio: 10,
@@ -134,7 +137,7 @@ class _firstScreenState extends State<firstScreen> {
                 child: PageView.builder(
                     itemCount: dataList.length,
                     controller: _pageController,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(top: 20.0),
@@ -145,7 +148,7 @@ class _firstScreenState extends State<firstScreen> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Expanded(
@@ -155,7 +158,7 @@ class _firstScreenState extends State<firstScreen> {
             child: ListView(scrollDirection: Axis.horizontal, children: [
               CatagoryCount(
                 titleCurd: "لماذا كيان",
-                myIcon: Icon(
+                myIcon: const Icon(
                   Icons.diamond,
                   color: Colors.blue,
                   size: 50,
@@ -168,10 +171,10 @@ class _firstScreenState extends State<firstScreen> {
               ),
               CatagoryCount(
                 titleCurd: "لماذا كيان",
-                myIcon: Icon(
+                myIcon: const Icon(
                   Icons.diamond,
                   size: 50,
-                  color: Color.fromARGB(255, 22, 51, 26),
+                  color: const Color.fromARGB(255, 22, 51, 26),
                 ),
                 press: () {
                   setState(() {
@@ -181,9 +184,9 @@ class _firstScreenState extends State<firstScreen> {
               ),
               CatagoryCount(
                 titleCurd: "شركائنا",
-                myIcon: Icon(
+                myIcon: const Icon(
                   Icons.handshake,
-                  color: Color.fromARGB(255, 22, 51, 26),
+                  color: const Color.fromARGB(255, 22, 51, 26),
                   size: 50,
                 ),
                 press: () {
@@ -194,9 +197,9 @@ class _firstScreenState extends State<firstScreen> {
               ),
               CatagoryCount(
                 titleCurd: "الفروع",
-                myIcon: Icon(
+                myIcon: const Icon(
                   Icons.slideshow,
-                  color: Color.fromARGB(255, 22, 51, 26),
+                  color: const Color.fromARGB(255, 22, 51, 26),
                 ),
                 press: () {
                   setState(() {
@@ -206,7 +209,7 @@ class _firstScreenState extends State<firstScreen> {
               ),
               CatagoryCount(
                 titleCurd: "حساباتنا",
-                myIcon: Icon(
+                myIcon: const Icon(
                   Icons.media_bluetooth_on,
                   size: 30,
                   color: Color.fromARGB(255, 22, 51, 26),
@@ -221,7 +224,7 @@ class _firstScreenState extends State<firstScreen> {
               ),
               CatagoryCount(
                   titleCurd: "خدماتنا",
-                  myIcon: Icon(Icons.design_services),
+                  myIcon: const Icon(Icons.design_services),
                   press: () {
                     setState(() {
                       Navigator.of(context).pushNamed(SrvessScreen.routeName);
@@ -247,21 +250,24 @@ class _firstScreenState extends State<firstScreen> {
   }
 
   Widget carousView(int index, Size s) {
-    return Container(
-      child: AnimatedBuilder(
-          animation: _pageController,
-          builder: (context, child) {
-            double value = 0.0;
-            if (_pageController.position.haveDimensions) {
-              value = index.toDouble() - (_pageController.page ?? 0);
-              value = (value * 0.038).clamp(-1, 1);
-              print("value $value index $index");
-            }
-            return Transform.rotate(
-              angle: -3.14 * value,
-              child: crouseCard(dataList[index], s),
-            );
-          }),
+    return Bouncing(
+      onPress: () {},
+      child: Container(
+        child: AnimatedBuilder(
+            animation: _pageController,
+            builder: (context, child) {
+              double value = 0.0;
+              if (_pageController.position.haveDimensions) {
+                value = index.toDouble() - (_pageController.page ?? 0);
+                value = (value * 0.038).clamp(-1, 1);
+                print("value $value indexss $index");
+              }
+              return Transform.rotate(
+                angle: -3.14 * value,
+                child: crouseCard(dataList[index], s),
+              );
+            }),
+      ),
     );
   }
 
@@ -271,9 +277,9 @@ class _firstScreenState extends State<firstScreen> {
         Container(
           width: double.infinity,
           height: size.height / 5,
-          margin: EdgeInsets.only(left: 20),
+          margin: const EdgeInsets.only(left: 20),
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 175, 107, 107),
+              color: const Color.fromARGB(255, 175, 107, 107),
               borderRadius: BorderRadius.circular(30),
               image: DecorationImage(
                 image: AssetImage(
@@ -282,7 +288,7 @@ class _firstScreenState extends State<firstScreen> {
                 fit: BoxFit.fill,
               ),
               boxShadow: [
-                BoxShadow(
+                const BoxShadow(
                     offset: Offset(0, 4), blurRadius: 4, color: Colors.black)
               ]),
         )

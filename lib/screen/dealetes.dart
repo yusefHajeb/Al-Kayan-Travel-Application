@@ -53,7 +53,7 @@ List<Meal> DUMMY_MEALS = [
       'c2',
     ],
     paragraph:
-        " نسعى من خلال مكتب الكيان توفير الخدمات لحجاج ومعتمري بيت الله الحرام بما يلبي مطالبهم من سرعة انجاز معاملاتهم وتأمين وسية نقل أمنه",
+        " نسعى من خلال مكتب الكيان توفير الخدمات لحجاج ومعتمري بيت الله الحرام بما يلبي مطالبهم من سرعة _  انجاز معاملاتهم وتأمين وسية نقل أمنه",
     title: 'حج وعمرة',
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
@@ -90,7 +90,7 @@ List<Meal> DUMMY_MEALS = [
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
     imageUrl: 'assest/image/airplane4.jpg',
-    paragraph: "اصدار تاشيرات الزيارات العائلية بااقل الاسعار وسرعة معاملة",
+    paragraph: "اصدار تاشيرات الزيارات العائلية بااقل الاسعار _ وسرعة معاملة",
     duration: 30,
     ingredients: [
       '1 Slice White Bread',
@@ -140,7 +140,7 @@ List<Meal> DUMMY_MEALS = [
     isVegetarian: false,
     isLactoseFree: true,
     paragraph:
-        'تاشيرات عمل الئ معظم الدول المجاورة بااسعار مناسبة وتاشيرات مضمونة ',
+        'تاشيرات عمل الئ معظم الدول المجاورة بااسعار مناسبة _ وتاشيرات مضمونة ',
   ),
   Meal(
     id: '4',
@@ -185,7 +185,7 @@ List<Meal> DUMMY_MEALS = [
       'c10',
     ],
     paragraph:
-        " يسعئ مكتب الكيان ان يوفر لعملائه خدمات اخرئ منها اصدار الاقامات والمعاملات الاخرئ ",
+        " يسعئ مكتب الكيان ان يوفر لعملائه خدمات اخرئ منها اصدار _ الاقامات والمعاملات الاخرئ ",
     title: 'خمات اخرئ ',
     affordability: Affordability.Luxurious,
     complexity: Complexity.Simple,
