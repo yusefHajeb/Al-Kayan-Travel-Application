@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yah_app/screen/sirvece_screen.dart';
 import 'package:yah_app/screen/why_kaian.dart';
 
 import '../Widget/widget_tools/BouncingButton.dart';
@@ -48,7 +49,7 @@ class _PageService extends State<PageService> {
             right: 20,
             child: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(context, SrvessScreen.routeName);
               },
               icon: Icon(
                 Icons.arrow_back_ios,
@@ -72,7 +73,6 @@ class _PageService extends State<PageService> {
             ),
           )
         ]),
-
         Transform.translate(
           offset: Offset(0, -50),
           child: Container(
@@ -100,35 +100,11 @@ class _PageService extends State<PageService> {
             ),
           ),
         ),
-        // Transform.translate(
-        //     offset: Offset(0, -35),
-        //     child: Container(
-        //       margin: EdgeInsets.symmetric(horizontal: 20),
-        //       decoration: BoxDecoration(
-        //         color: Colors.white,
-        //         borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        //         boxShadow: [
-        //           BoxShadow(
-        //             offset: Offset(0, 10.0),
-        //             blurRadius: 20.0,
-        //             color: Color.fromARGB(255, 158, 158, 158),
-        //           ),
-        //         ],
-        //       ),
-        //       height: 60,
-        //     )),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Text(
-              //   DUMMY_MEALS[sectionIndex].title,
-              //   style: TextStyle(
-              //     color: Color.fromARGB(230, 25, 25, 18),
-              //     fontSize: 20,
-              //   ),
-              // ),
               SizedBox(height: 40),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -140,7 +116,6 @@ class _PageService extends State<PageService> {
                       height: 1.4),
                 ),
               ),
-
               SizedBox(
                 height: 20,
               ),
@@ -163,17 +138,9 @@ class _PageService extends State<PageService> {
                       return Bouncing(
                           onPress: () {},
                           child: (CardBottom(sectionIndex: index)));
-                      // SizedBox(width: 10),
-                      // CardBottom(sectionIndex: sectionIndex),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      // CardBottom(sectionIndex: 2),
                     },
                     itemCount: DUMMY_MEALS.length,
                   )),
-              // scrollDirection: Axis.horizontal,
-              // children: [
             ],
           ),
         )
@@ -195,29 +162,28 @@ class CardBottom extends StatelessWidget {
     return InkWell(
       onTap: () {
         showService(context, sectionIndex);
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => Container(child: PageService()),
-        //     settings: RouteSettings(
-        //       arguments: sectionIndex,
-        //     ),
-        //   ),
-        // );
       },
       child: AspectRatio(
         aspectRatio: 3 / 1,
         child: Container(
-          margin: EdgeInsets.only(left: 5, right: 10),
+          margin: EdgeInsets.only(left: 5, right: 10, bottom: 10),
           padding: EdgeInsets.all(13),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(15),
-          ),
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 6),
+                  blurRadius: 3,
+                  spreadRadius: -7,
+                  color: Colors.black,
+                )
+              ]),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             Container(
-                width: 56,
+                width: 60,
                 height: 40,
                 // padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
