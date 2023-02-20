@@ -32,9 +32,13 @@ dependencies:
     sdk: flutter
   curved_navigation_bar: ^1.0.1
   progress_state_button: ^1.0.2
+  # slideButton 
   slider_button: any
+  # is animation to list
   flutter_staggered_animations:
-
+  # naimation Text
+  animated_text_kit:
+  google_fonts: ^3.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
