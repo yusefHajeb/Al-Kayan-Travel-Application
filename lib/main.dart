@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          fontFamily: "Cairo",
+          primaryColor: Colors.white38,
+          fontFamily: 'ReadexPro',
           scaffoldBackgroundColor: yBackgroundColor,
           textTheme:
               Theme.of(context).textTheme.apply(displayColor: ktextColor),

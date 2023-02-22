@@ -10,6 +10,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:yah_app/Widget/widget_tools/list_anmi.dart';
 import 'package:yah_app/screen/sirvece_screen.dart';
 import 'package:yah_app/screen/why_kaian.dart';
+import 'package:yah_app/styles/style.dart';
 import 'package:yah_app/styles/tolls.dart';
 import 'package:yah_app/Widget/catagory_curd.dart';
 import 'package:yah_app/screen/kaian_screen.dart';
@@ -18,6 +19,7 @@ import '../Widget/widget_tools/BouncingButton.dart';
 import '../Widget/widget_tools/mydrawer.dart';
 import '../Widget/widget_tools/secreen_animation.dart';
 import '../Widget/widget_tools/text_ani,ation.dart';
+import 'package:yah_app/styles/style.dart';
 import '../main.dart';
 
 int _currentPage = 0;
@@ -95,26 +97,24 @@ class _firstScreenState extends State<firstScreen> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: "ابحث برقم الجواز",
-                  icon: const Icon(Icons.search),
+                  icon: const Icon(
+                    Icons.search,
+                    color: primary,
+                  ),
                   border: InputBorder.none,
                   suffixIcon: OpenContainer(
                     closedBuilder: (_, openContainer) {
                       return Container(
-                        height: 80,
-                        color: Colors.transparent,
+                        height: 130,
+                        // color: Colors.transparent,
                         width: 80,
                         child: const Center(
-                          child: Text(
-                            'بحث',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: Text('بحث'),
                         ),
                       );
                     },
                     openColor: Colors.white,
-                    closedElevation: 20,
+                    // closedElevation: 30,
                     closedShape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     transitionDuration: const Duration(milliseconds: 700),
@@ -128,20 +128,23 @@ class _firstScreenState extends State<firstScreen> {
         Expanded(
           flex: 4,
           child: Container(
-            height: 200,
-            padding: const EdgeInsets.only(top: 10),
+            // height: 100,
+            padding: const EdgeInsets.only(top: 10, bottom: 20),
             width: double.infinity,
             child: AspectRatio(
               aspectRatio: 10,
               child: Container(
+                // margin: EdgeInsets.only(bottom: 5),
                 padding: const EdgeInsets.all(0),
                 child: PageView.builder(
                     itemCount: dataList.length,
                     controller: _pageController,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
+                      return Container(
+                        padding: const EdgeInsets.only(
+                          top: 10.0,
+                        ),
                         child: carousView(index, size),
                       );
                     }),
@@ -217,8 +220,10 @@ class _firstScreenState extends State<firstScreen> {
                 ),
                 press: () {
                   setState(() {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => CardNew())));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => ScreenMedia())));
                   });
                   // Navigator.of(context).push(MyCustomUI());
                 },
@@ -276,11 +281,13 @@ class _firstScreenState extends State<firstScreen> {
     return Column(
       children: [
         Container(
-          width: double.infinity,
+          width: 250,
           height: size.height / 5,
-          margin: const EdgeInsets.only(left: 20),
+          margin: const EdgeInsets.only(
+            left: 20,
+          ),
           decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 175, 107, 107),
+              color: primary,
               borderRadius: BorderRadius.circular(30),
               image: DecorationImage(
                 image: AssetImage(

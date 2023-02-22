@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:yah_app/screen/kaian_screen.dart';
 
 const primary = Color.fromARGB(255, 237, 180, 38);
-const yBackgroundColor = Color(0xFFF8f8f8);
+const yBackgroundColor = Color.fromARGB(255, 255, 255, 255);
 const kActiveIconColor = Color(0x1abc9c);
-const ktextColor = Color(0xff222845);
+const ktextColor = Color.fromARGB(255, 60, 55, 50);
 const kBlueLightColor = Color(0xffc788f5);
 const kBlueColor = Color(0xff817Dc0);
 const kShadowColor = Color(0xFFe6e6e6);
-const bBackDark = Color(0xff002828);
+const bBackDark = Color.fromARGB(255, 84, 58, 12);
 
 Color purple = Color.fromARGB(255, 255, 170, 0);
 Color blue = Color.fromARGB(255, 251, 212, 169);
@@ -29,8 +29,8 @@ class DataModel {
 }
 
 List<DataModel> dataList = [
-  DataModel("Short Dress", "assest/image/me.jpg", 300.8),
+  DataModel("Short Dress", "assest/image/airplane1.jpg", 300.8),
   DataModel("Office Formals", "assest/image/me.jpg", 245.2),
-  DataModel("Casual Jeans", "assest/image/me.jpg", 168.2),
+  DataModel("Casual Jeans", "assest/image/airplane2.jpg", 168.2),
   DataModel("Jeans Skirt", "assest/image/me.jpg", 136.7),
 ];

@@ -49,6 +49,8 @@ dependencies:
   animations: ^2.0.2
   fluttertoast: ^8.1.2
   flare_flutter: ^3.0.2
+  flutter_svg: ^1.0.3
+  # flutter_staggered_animations: 
   # flutter_svg: ^0.17.4
   # dependencies:
   #   curved_navigation_bar: ^1.0.3 #latest version
@@ -92,12 +94,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Cairo
-  #     fonts:
-  #       - asset: fonts\CairoRegular400.ttf
-  #         weight: 600
-  #         style: italic
+  fonts:
+    - family: ReadexPro
+      fonts:
+        - asset: assest/image/Fonts/ReadexPro-Medium.ttf
+        - asset: assest/image/Fonts/ReadexPro-Light.ttf
+          weight: 600
+          # style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
