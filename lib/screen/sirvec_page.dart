@@ -4,6 +4,7 @@ import 'package:yah_app/screen/why_kaian.dart';
 
 import '../Widget/widget_tools/BouncingButton.dart';
 import 'dealetes.dart';
+import 'package:yah_app/styles/style.dart';
 
 class PageService extends StatefulWidget {
   static const routeName = 'show_servece_index';
@@ -31,14 +32,14 @@ class _PageService extends State<PageService> {
       body: Column(children: [
         Stack(children: <Widget>[
           Container(
-            height: size.height / 3,
+            height: size.height / 3.5,
             width: double.infinity,
             child: Image.asset(
               DUMMY_MEALS[sectionIndex].imageUrl,
               fit: BoxFit.fill,
             ),
             // margin: EdgeInsets.all(20),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 // color: Color.fromRGBO(255, 189, 0, 1),
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(50),
@@ -51,9 +52,9 @@ class _PageService extends State<PageService> {
               onPressed: () {
                 Navigator.popAndPushNamed(context, SrvessScreen.routeName);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           ),
@@ -93,10 +94,13 @@ class _PageService extends State<PageService> {
             child: Text(
               DUMMY_MEALS[sectionIndex].title,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color.fromARGB(230, 25, 25, 18),
-                fontSize: 20,
-              ),
+              style: header2,
+              //  TextAlign.center,
+              // style: TextStyle(
+              //   color: Color.fromARGB(230, 25, 25, 18),
+              //   fontFamily: 'ReadexPro',
+              //   fontSize: 20,
+              // ),
             ),
           ),
         ),
@@ -110,10 +114,11 @@ class _PageService extends State<PageService> {
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: Text(
                   DUMMY_MEALS[sectionIndex].paragraph,
-                  style: TextStyle(
-                      color: Color.fromARGB(219, 0, 0, 0),
-                      fontSize: 22,
-                      height: 1.4),
+                  style: paragraph2,
+                  //    TextStyle(
+                  //       color: Color.fromARGB(219, 0, 0, 0),
+                  //       fontSize: 22,
+                  //       height: 1.4),
                 ),
               ),
               SizedBox(
@@ -121,11 +126,12 @@ class _PageService extends State<PageService> {
               ),
               Text(
                 "مزيد من الخدمات",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 38, 38, 34),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    height: 1.4),
+                style: header,
+                //  TextStyle(
+                //     color: Color.fromARGB(255, 38, 38, 34),
+                //     fontSize: 20,
+                //     fontWeight: FontWeight.bold,
+                //     height: 1.4),
               ),
               SizedBox(
                 height: 20,
@@ -195,8 +201,9 @@ class CardBottom extends StatelessWidget {
                 )),
             Text(
               DUMMY_MEALS[sectionIndex].title,
-              style: TextStyle(
-                  color: Color.fromARGB(255, 54, 52, 52), fontSize: 13),
+              style: paragraph,
+              //  TextStyle(
+              //     color: Color.fromARGB(255, 54, 52, 52), fontSize: 13),
             ),
           ]),
         ),
