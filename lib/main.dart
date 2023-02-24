@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:yah_app/Widget/about.dart';
-// import 'package:yah_app/Widget/widget_tools/mydrawer.dart';
-// import 'package:yah_app/Widget/servece_card.dart';
-import 'package:yah_app/screen/first_screen.dart';
-import 'package:yah_app/screen/sirvec_page.dart';
-import 'package:yah_app/screen/sirvece_screen.dart';
-import 'package:yah_app/screen/why_kaian.dart';
+import 'package:yah_app/screen/home_screen.dart';
+import 'package:yah_app/screen/servis/sirvec_page.dart';
+import 'package:yah_app/screen/servis/sirvece_screen.dart';
+import 'package:yah_app/screen/kaian__screen.dart';
 import 'package:yah_app/styles/tolls.dart';
-// import 'package:yah_app/home_old.dart';
-
 import 'styles/tolls.dart';
-// import 'Widget/bottomNav.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
@@ -43,7 +37,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => firstScreen(),
-          AboutUs.routeName: (context) => AboutUs(),
           Screen2.routeName: (context) => Screen2(),
           SrvessScreen.routeName: (context) => SrvessScreen(),
           PageService.routeName: (context) => PageService(),

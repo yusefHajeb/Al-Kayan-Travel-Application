@@ -1,21 +1,10 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:yah_app/screen/sirvec_page.dart';
-import 'package:yah_app/styles/tolls.dart';
-import 'package:yah_app/main.dart';
-import 'package:page_transition/page_transition.dart';
-import '../Widget/widget_tools/BouncingButton.dart';
-import '../Widget/about.dart';
-import 'first_screen.dart';
 
-void select_screen(BuildContext ctx) {
-  Navigator.of(ctx).pushNamed(AboutUs.routeName);
-}
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:yah_app/styles/style.dart';
+
+import '../unUsing/about.dart';
 
 class Product {
   final image;
@@ -73,7 +62,6 @@ class _Screen2 extends State<Screen2> with TickerProviderStateMixin {
         "assest/image/thim2.png", 'معتمدون من السفارة السعودية', "سييبشسيبش"),
   ];
 
-  int _page = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -93,7 +81,6 @@ class _Screen2 extends State<Screen2> with TickerProviderStateMixin {
       return products;
     }
 
-    // String index = numTab.toString();
     return Scaffold(
       backgroundColor: Color(0xfff6f7f9),
       body: ListView(
@@ -119,11 +106,11 @@ class _Screen2 extends State<Screen2> with TickerProviderStateMixin {
                 right: 20,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.popAndPushNamed(context, '/');
                   },
                   icon: Icon(
                     Icons.arrow_back_ios,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -192,68 +179,68 @@ class _Screen2 extends State<Screen2> with TickerProviderStateMixin {
           SizedBox(
             height: 4,
           ),
-          Expanded(
-            child: Column(
-                children: check()
-                    .map((e) => AnimationConfiguration.staggeredList(
-                        position: 2,
-                        delay: Duration(milliseconds: 100),
+          Column(
+              children: check()
+                  .map((e) => AnimationConfiguration.staggeredList(
+                      position: 2,
+                      delay: Duration(milliseconds: 100),
+                      child: SlideAnimation(
+                        duration: Duration(milliseconds: 2500),
+                        curve: Curves.fastLinearToSlowEaseIn,
                         child: SlideAnimation(
                           duration: Duration(milliseconds: 2500),
                           curve: Curves.fastLinearToSlowEaseIn,
-                          child: SlideAnimation(
-                            duration: Duration(milliseconds: 2500),
+                          child: FadeInAnimation(
                             curve: Curves.fastLinearToSlowEaseIn,
-                            child: FadeInAnimation(
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              duration: Duration(milliseconds: 2500),
-                              child: Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 20),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(13),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(0, 6),
-                                      blurRadius: 10,
-                                      spreadRadius: -12,
-                                      color: Colors.black,
-                                    )
-                                  ],
+                            duration: Duration(milliseconds: 2500),
+                            child: Container(
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 20),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(13),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 6),
+                                    blurRadius: 10,
+                                    spreadRadius: -12,
+                                    color: Colors.black,
+                                  )
+                                ],
+                              ),
+                              child: ListTile(
+                                onTap: () {},
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset(
+                                    e.image,
+                                    fit: BoxFit.cover,
+                                    width: 100,
+                                    height: 100,
+                                    // color: Colors.transparent,
+                                  ),
                                 ),
-                                child: ListTile(
-                                  onTap: () {},
-                                  leading: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      e.image,
-                                      fit: BoxFit.cover,
-                                      width: 100,
-                                      height: 100,
-                                      // color: Colors.transparent,
+                                title: Text(
+                                  e.name,
+                                  style: header2,
+                                ),
+                                subtitle: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      e.discrib,
+                                      style: paragraph,
                                     ),
-                                  ),
-                                  title: Text(
-                                    e.name,
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  subtitle: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(e.discrib),
-                                      SizedBox(height: 10),
-                                    ],
-                                  ),
+                                    SizedBox(height: 10),
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                        )))
-                    .toList()),
-          ),
+                        ),
+                      )))
+                  .toList()),
         ],
       ),
     );
