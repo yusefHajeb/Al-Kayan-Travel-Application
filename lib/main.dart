@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:yah_app/Widget/about.dart';
-import 'package:yah_app/Widget/servece_card.dart';
-import 'package:yah_app/screen/first_screen.dart';
-import 'package:yah_app/screen/sirvec_page.dart';
-import 'package:yah_app/screen/sirvece_screen.dart';
-import 'package:yah_app/screen/why_kaian.dart';
-import 'package:yah_app/home_old.dart';
-import 'package:yah_app/screen/kaian_screen.dart';
-import 'package:yah_app/why_kian.dart';
-import 'Widget/reponsive_card.dart';
-// import 'Widget/widget_tools/progres_button.dart';
-// import 'Widget/widget_tools/button_slide.dart';
-import 'Widget/widget_tools/secreen_animation.dart';
-import 'tolls.dart';
-import 'Widget/bottomNav.dart';
+import 'package:yah_app/screen/home_screen.dart';
+import 'package:yah_app/screen/servis/sirvec_page.dart';
+import 'package:yah_app/screen/servis/sirvece_screen.dart';
+import 'package:yah_app/screen/kaian__screen.dart';
+import 'package:yah_app/styles/tolls.dart';
+import 'styles/tolls.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
@@ -27,11 +18,10 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    // SystemChrome.setPreferredOrientations(DeviceOrientation.values);
     return MaterialApp(
         theme: ThemeData(
-          fontFamily: "Cairo",
+          primaryColor: Colors.white38,
+          fontFamily: 'ReadexPro',
           scaffoldBackgroundColor: yBackgroundColor,
           textTheme:
               Theme.of(context).textTheme.apply(displayColor: ktextColor),
@@ -47,7 +37,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => firstScreen(),
-          AboutUs.routeName: (context) => AboutUs(),
           Screen2.routeName: (context) => Screen2(),
           SrvessScreen.routeName: (context) => SrvessScreen(),
           PageService.routeName: (context) => PageService(),

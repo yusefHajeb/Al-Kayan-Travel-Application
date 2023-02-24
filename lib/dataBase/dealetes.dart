@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:flutter/material.dart';
 
 enum Complexity {
@@ -16,6 +14,7 @@ enum Affordability {
 
 class Meal {
   final String id;
+  final String paragraph;
   final List<String> categories;
   final String title;
   final String imageUrl;
@@ -31,6 +30,7 @@ class Meal {
 
   Meal(
       {required this.id,
+      required this.paragraph,
       required this.categories,
       required this.title,
       required this.imageUrl,
@@ -52,7 +52,9 @@ List<Meal> DUMMY_MEALS = [
       'c1',
       'c2',
     ],
-    title: 'Spaghetti with Tomato Sauce',
+    paragraph:
+        " نسعى من خلال مكتب الكيان توفير الخدمات لحجاج ومعتمري بيت الله الحرام بما يلبي مطالبهم من سرعة _  انجاز معاملاتهم وتأمين وسية نقل أمنه",
+    title: 'حج وعمرة',
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
     imageUrl: 'assest/image/airplane.jpg',
@@ -84,11 +86,12 @@ List<Meal> DUMMY_MEALS = [
     categories: [
       'c2',
     ],
-    title: 'Toast Hawaii',
+    title: 'الزيارات العائلية',
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
     imageUrl: 'assest/image/airplane4.jpg',
-    duration: 10,
+    paragraph: "اصدار تاشيرات الزيارات العائلية بااقل الاسعار _ وسرعة معاملة",
+    duration: 30,
     ingredients: [
       '1 Slice White Bread',
       '1 Slice Ham',
@@ -112,7 +115,7 @@ List<Meal> DUMMY_MEALS = [
       'c2',
       'c3',
     ],
-    title: 'Classic Hamburger',
+    title: 'تأشيرات عمل',
     affordability: Affordability.Pricey,
     complexity: Complexity.Simple,
     imageUrl: 'assest/image/airplane.jpg',
@@ -136,6 +139,8 @@ List<Meal> DUMMY_MEALS = [
     isVegan: false,
     isVegetarian: false,
     isLactoseFree: true,
+    paragraph:
+        'تاشيرات عمل الئ معظم الدول المجاورة بااسعار مناسبة _ وتاشيرات مضمونة ',
   ),
   Meal(
     id: '4',
@@ -170,6 +175,7 @@ List<Meal> DUMMY_MEALS = [
     isVegan: false,
     isVegetarian: false,
     isLactoseFree: false,
+    paragraph: '',
   ),
   Meal(
     id: '5',
@@ -178,7 +184,9 @@ List<Meal> DUMMY_MEALS = [
           'c5',
       'c10',
     ],
-    title: 'Salad with Smoked Salmon',
+    paragraph:
+        " يسعئ مكتب الكيان ان يوفر لعملائه خدمات اخرئ منها اصدار _ الاقامات والمعاملات الاخرئ ",
+    title: 'خمات اخرئ ',
     affordability: Affordability.Luxurious,
     complexity: Complexity.Simple,
     imageUrl: 'assest/image/airplane2.jpg',
@@ -212,7 +220,8 @@ List<Meal> DUMMY_MEALS = [
       'c6',
       'c10',
     ],
-    title: 'Delicious Orange Mousse',
+    paragraph: "الكيان الدولي",
+    title: 'اخرئ',
     affordability: Affordability.Affordable,
     complexity: Complexity.Hard,
     imageUrl: 'assest/image/airplane3.jpg',

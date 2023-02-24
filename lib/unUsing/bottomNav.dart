@@ -3,8 +3,8 @@ import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:yah_app/main.dart';
-import 'package:yah_app/screen/first_screen.dart';
-import 'catagory_curd.dart';
+import 'package:yah_app/screen/home_screen.dart';
+import '../Widget/card_widget/catagory_curd.dart';
 
 int _currentPage = 0;
 

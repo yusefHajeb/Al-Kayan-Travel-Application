@@ -4,9 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:yah_app/Widget/bottomNav.dart';
-import 'package:yah_app/Widget/catagory_curd.dart';
-import 'package:yah_app/why_kian.dart' show Kaian;
+import 'package:yah_app/unUsing/bottomNav.dart';
+import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
 
 class MyHome extends StatelessWidget {
   /// sdflsffsdf
