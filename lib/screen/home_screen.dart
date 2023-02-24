@@ -44,12 +44,31 @@ class firstScreen extends StatefulWidget {
 class _firstScreenState extends State<firstScreen> {
   // ignore: non_constant_identifier_names
 
+  GlobalKey<FormState> fromstat = new GlobalKey<FormState>();
+
+  // int currentCarouselIndex = 0;
+  // Timer t = Timer(const Duration(seconds: 2), () {
+  //   setState(() => currentCarouselIndex++);
+  //   print(currentCarouselIndex);
+  // });
+  late var numPass;
+  var messageError;
+
   @override
   late PageController _pageController;
   void initState() {
     super.initState();
     _pageController =
         PageController(initialPage: _currentPage, viewportFraction: 0.8);
+  }
+
+  Search() async {
+    var formdata = fromstat.currentState!;
+    if (formdata.validate()) {
+      formdata.save();
+    } else {
+      print("not valid");
+    }
   }
 
   @override
@@ -60,24 +79,6 @@ class _firstScreenState extends State<firstScreen> {
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    // int currentCarouselIndex = 0;
-    // Timer t = Timer(const Duration(seconds: 2), () {
-    //   setState(() => currentCarouselIndex++);
-    //   print(currentCarouselIndex);
-    // });
-    late var numPass;
-    var messageError;
-    GlobalKey<FormState> fromstat = new GlobalKey<FormState>();
-
-    Search() async {
-      var formdata = fromstat.currentState!;
-      if (formdata.validate()) {
-        formdata.save();
-      } else {
-        print("not valid");
-      }
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
