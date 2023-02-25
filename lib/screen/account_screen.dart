@@ -13,10 +13,9 @@ class ScreenMedia extends StatelessWidget {
   @override
   List myIcons = [
     "assest/icon/icons8-facebook-64.png",
-    "assest/icon/icons8-instagram-64.png",
     "assest/icon/icons8-twitter-64.png",
     "assest/icon/icons8-telegram-app-64.png",
-    // "assest/icon/icons8-whatsapp-64.png.png",
+    "assest/icon/icons8-whatsapp-64.png",
     "assest/icon/icons8-instagram-64.png",
     "assest/icon/icons8-instagram-64.png",
   ];

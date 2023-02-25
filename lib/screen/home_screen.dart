@@ -20,6 +20,7 @@ import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
 // import 'package:yah_app/screen/kaian_screen.dart';
 
 import '../Widget/AnimaiWidget/BouncingButton.dart';
+import '../Widget/widgetMessage/message_error.dart';
 import 'account_screen.dart';
 import 'screen_search/secreen_animation.dart';
 // import '../Widget/widget_tools/text_ani,ation.dart';
@@ -89,7 +90,7 @@ class _firstScreenState extends State<firstScreen> {
                 clipper: MyClipper(),
                 child: Container(
                   padding: EdgeInsets.only(left: 40, top: 50, right: 20),
-                  height: 350,
+                  height: 500,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -98,11 +99,6 @@ class _firstScreenState extends State<firstScreen> {
                         colors: [bBackDark, Color.fromARGB(255, 56, 24, 2)]
                         // primary, Color.fromARGB(255, 170, 143, 76)],
                         ),
-
-                    // image: DecorationImage(
-
-                    //   image: AssetImage("assest/image/imageKaian.png"),
-                    // ),
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(20),
@@ -111,16 +107,7 @@ class _firstScreenState extends State<firstScreen> {
                       color: primary,
                     ),
                   ),
-                ))
-            // Stack(children: [
-            //   Image.asset(
-            //     "assest/image/thim3.png",
-            //     alignment: Alignment.center,
-            //     fit: BoxFit.fill,
-            //     width: double.infinity,
-            //   ),
-            // ])),
-            ),
+                ))),
         const SizedBox(height: 20),
         Expanded(
           flex: 2,
@@ -174,20 +161,7 @@ class _firstScreenState extends State<firstScreen> {
                               SnackBar(
                                 content: Stack(
                                   clipBehavior: Clip.none,
-                                  // alignment: AlignmentDirectional.topStart,
                                   children: [
-                                    // Positioned(
-                                    //   top: -18,
-                                    //   child: CircleAvatar(
-                                    //     radius: 10,
-                                    //     backgroundColor: bBackDark,
-                                    //     child: Icon(
-                                    //       Icons.close_rounded,
-                                    //       color: primary,
-                                    //       size: 20,
-                                    //     ),
-                                    //   ),
-                                    // ),
                                     Container(
                                       padding: EdgeInsets.all(16),
                                       height: 90,
@@ -196,29 +170,8 @@ class _firstScreenState extends State<firstScreen> {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20)),
                                       ),
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(
-                                            width: 47,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "خطاء",
-                                                  style: header2,
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                                Text(messageError),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                      child: MessageShow(
+                                          messageError: messageError),
                                     ),
                                     Positioned(
                                       bottom: 0,
