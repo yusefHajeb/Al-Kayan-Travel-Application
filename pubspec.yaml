@@ -50,6 +50,8 @@ dependencies:
   fluttertoast: ^8.1.2
   flare_flutter: ^3.0.2
   flutter_svg: ^1.0.3
+  # wahtsapp
+  # url_launcher: ^6.1.10
   # flutter_staggered_animations: 
   # flutter_svg: ^0.17.4
   # dependencies:
