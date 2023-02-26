@@ -136,10 +136,10 @@ class _firstScreenState extends State<firstScreen> {
                     numPass = val;
                   },
                   validator: (val) {
-                    if (val!.length > 5) {
+                    if (val!.length >= 9) {
                       messageError = "رقم الجواز كبير  جدا";
                     }
-                    if (val.length < 2) {
+                    if (val.length < 1) {
                       messageError = "القيمة المدخله خاطئة";
                     }
                     return null;
@@ -154,69 +154,98 @@ class _firstScreenState extends State<firstScreen> {
                     ),
                     border: InputBorder.none,
                     suffixIcon: OpenContainer(
+                      openBuilder: (_, closeContainer) {
+                        return SecondScreen();
+                      },
                       closedBuilder: (_, openContainer) {
                         return InkWell(
                           onTap: () async {
                             await Search();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(16),
-                                      height: 90,
-                                      decoration: const BoxDecoration(
-                                        color: primary,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20)),
-                                      ),
-                                      child: MessageShow(
-                                          messageError: messageError),
-                                    ),
-                                    Positioned(
-                                      bottom: 0,
-                                      left: 0,
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.only(
-                                            bottomLeft: Radius.circular(20)),
-                                        child: SvgPicture.asset(
-                                          "assest/image/svg/bubbles.svg",
-                                          height: 48,
-                                          width: 48,
-                                          color:
-                                              Color.fromARGB(255, 212, 152, 0),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: -20,
-                                      right: 0,
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          SvgPicture.asset(
-                                            "assest/image/svg/fail.svg",
-                                            height: 40,
-                                            color: bBackDark,
-                                          ),
-                                          SvgPicture.asset(
-                                            "assest/image/svg/close.svg",
-                                            height: 15,
-                                            color: Color.fromARGB(
-                                                255, 212, 152, 0),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    //svg
-                                  ],
-                                ),
-                                behavior: SnackBarBehavior.floating,
-                                backgroundColor: Colors.transparent,
-                                elevation: 0,
-                              ),
-                            );
+
+                            // MessageShow(messageError: messageError);
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //   SnackBar(
+                            //     content: Stack(
+                            //       clipBehavior: Clip.none,
+                            //       children: [
+                            //         Container(
+                            //           padding: EdgeInsets.all(16),
+                            //           height: 90,
+                            //           decoration: const BoxDecoration(
+                            //             color: primary,
+                            //             borderRadius: BorderRadius.all(
+                            //                 Radius.circular(20)),
+                            //           ),
+                            //           child: Row(
+                            //             children: [
+                            //               const SizedBox(
+                            //                 width: 47,
+                            //               ),
+                            //               Expanded(
+                            //                 child: Column(
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     Text(
+                            //                       "خطاء",
+                            //                       style: header2,
+                            //                       maxLines: 2,
+                            //                       overflow:
+                            //                           TextOverflow.ellipsis,
+                            //                     ),
+                            //                     Text(messageError),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ],
+                            //           ),
+
+                            //           //  MessageShow(
+                            //           //     messageError: messageError),
+                            //         ),
+                            //         Positioned(
+                            //           bottom: 0,
+                            //           left: 0,
+                            //           child: ClipRRect(
+                            //             borderRadius: const BorderRadius.only(
+                            //                 bottomLeft: Radius.circular(20)),
+                            //             child: SvgPicture.asset(
+                            //               "assest/image/svg/bubbles.svg",
+                            //               height: 48,
+                            //               width: 48,
+                            //               color:
+                            //                   Color.fromARGB(255, 212, 152, 0),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //         Positioned(
+                            //           top: -20,
+                            //           right: 0,
+                            //           child: Stack(
+                            //             alignment: Alignment.center,
+                            //             children: [
+                            //               SvgPicture.asset(
+                            //                 "assest/image/svg/fail.svg",
+                            //                 height: 40,
+                            //                 color: bBackDark,
+                            //               ),
+                            //               SvgPicture.asset(
+                            //                 "assest/image/svg/close.svg",
+                            //                 height: 15,
+                            //                 color: Color.fromARGB(
+                            //                     255, 212, 152, 0),
+                            //               ),
+                            //             ],
+                            //           ),
+                            //         ),
+                            //         //svg
+                            //       ],
+                            //     ),
+                            //     behavior: SnackBarBehavior.floating,
+                            //     backgroundColor: Colors.transparent,
+                            //     elevation: 0,
+                            //   ),
+                            // );
                           },
                           child: Container(
                             height: 140,
@@ -230,13 +259,11 @@ class _firstScreenState extends State<firstScreen> {
                           ),
                         );
                       },
+                      // openBuilder: (BuildContext context, void Function({Object? returnValue}) action) {  },
                       openColor: Colors.white,
                       closedShape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
-                      transitionDuration: const Duration(milliseconds: 700),
-                      openBuilder: (_, closeContainer) {
-                        return SecondScreen();
-                      },
+                      transitionDuration: const Duration(milliseconds: 200),
                     ),
                   ),
                 ),
