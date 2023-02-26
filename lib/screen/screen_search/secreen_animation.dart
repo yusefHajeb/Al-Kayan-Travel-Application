@@ -4,70 +4,73 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// import 'package:cloud_firestore/cloud_firestore.dart';
-class MyCustomWidget extends StatefulWidget {
-  @override
-  _MyCustomWidgetState createState() => _MyCustomWidgetState();
-}
+import '../../Widget/new_page.dart';
+import '../../styles/tolls.dart';
 
-class _MyCustomWidgetState extends State<MyCustomWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-            width: 400,
-            margin: EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 6),
-                  blurRadius: 17,
-                  spreadRadius: -20,
-                  color: Colors.black,
-                ),
-              ],
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(29.5),
-            ),
-            //  color: Colors.white, borderRadius: BorderRadius.circular(29.5)),
-            child: TextField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                hintText: "ابحث برقم ",
-                icon: Icon(Icons.search),
-                border: InputBorder.none,
-                suffixIcon: OpenContainer(
-                  closedBuilder: (_, openContainer) {
-                    return Container(
-                      height: 80,
-                      width: 80,
-                      child: Center(
-                        child: Text(
-                          'بحث',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  openColor: Colors.white,
-                  closedElevation: 20,
-                  closedShape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  transitionDuration: Duration(milliseconds: 700),
-                  openBuilder: (_, closeContainer) {
-                    return SecondScreen();
-                  },
-                ),
-              ),
-            )),
-      ),
-    );
-  }
-}
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// class MyCustomWidget extends StatefulWidget {
+//   @override
+//   _MyCustomWidgetState createState() => _MyCustomWidgetState();
+// }
+
+// class _MyCustomWidgetState extends State<MyCustomWidget> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//         child: Container(
+//             width: 400,
+//             margin: EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
+//             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+//             decoration: BoxDecoration(
+//               boxShadow: [
+//                 BoxShadow(
+//                   offset: Offset(0, 6),
+//                   blurRadius: 17,
+//                   spreadRadius: -20,
+//                   color: Colors.black,
+//                 ),
+//               ],
+//               color: Colors.white,
+//               borderRadius: BorderRadius.circular(29.5),
+//             ),
+//             //  color: Colors.white, borderRadius: BorderRadius.circular(29.5)),
+//             child: TextField(
+//               keyboardType: TextInputType.number,
+//               decoration: InputDecoration(
+//                 hintText: "ابحث برقم ",
+//                 icon: Icon(Icons.search),
+//                 border: InputBorder.none,
+//                 suffixIcon: OpenContainer(
+//                   closedBuilder: (_, openContainer) {
+//                     return Container(
+//                       height: 80,
+//                       width: 80,
+//                       child: Center(
+//                         child: Text(
+//                           'بحث',
+//                           style: TextStyle(
+//                             fontWeight: FontWeight.bold,
+//                           ),
+//                         ),
+//                       ),
+//                     );
+//                   },
+//                   openColor: Colors.white,
+//                   closedElevation: 20,
+//                   closedShape: RoundedRectangleBorder(
+//                       borderRadius: BorderRadius.circular(20)),
+//                   transitionDuration: Duration(milliseconds: 700),
+//                   openBuilder: (_, closeContainer) {
+//                     return SecondScreen();
+//                   },
+//                 ),
+//               ),
+//             )),
+//       ),
+//     );
+//   }
+// }
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -126,6 +129,8 @@ class _SecondScreenState extends State<SecondScreen> {
                     left: MediaQuery.of(context).size.width * 0.065,
                     right: MediaQuery.of(context).size.width * 0.065,
                     child: Container(
+                      child:
+                          Image.asset("assest/image/14_No Search Results.png"),
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -135,24 +140,24 @@ class _SecondScreenState extends State<SecondScreen> {
                           ),
                         ],
                       ),
-                      child: TextField(
-                        style: TextStyle(fontSize: 12),
-                        onChanged: (value) {},
-                        decoration: InputDecoration(
-                          hintText: "Search...",
-                          contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                          fillColor: Colors.white,
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide.none,
-                          ),
-                          suffixIcon: Icon(
-                            Icons.search,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
+                      // child: TextField(
+                      //   style: TextStyle(fontSize: 12),
+                      //   onChanged: (value) {},
+                      //   decoration: InputDecoration(
+                      //     hintText: "Search...",
+                      //     contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                      //     fillColor: Colors.white,
+                      //     filled: true,
+                      //     border: OutlineInputBorder(
+                      //       borderRadius: BorderRadius.circular(50),
+                      //       borderSide: BorderSide.none,
+                      //     ),
+                      //     suffixIcon: Icon(
+                      //       Icons.search,
+                      //       color: Colors.black,
+                      //     ),
+                      //   ),
+                      // ),
                     ),
                   )
                 ],
@@ -193,23 +198,42 @@ class SecondPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.black,
           systemOverlayStyle: SystemUiOverlayStyle.light),
-      body: Center(
-        child: AnimatedTextKit(
-          animatedTexts: [
-            TypewriterAnimatedText(
-              'معاملتك قيد ',
-              speed: Duration(milliseconds: 150),
-              textStyle: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+      body: Column(
+        children: [
+          ClipPath(
+              clipper: MyClipper(),
+              child: Container(
+                padding: EdgeInsets.only(left: 40, top: 50, right: 20),
+                height: 500,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [bBackDark, Color.fromARGB(255, 56, 24, 2)]
+                      // primary, Color.fromARGB(255, 170, 143, 76)],
+                      ),
+                ),
+              )),
+          Center(
+            child: AnimatedTextKit(
+              animatedTexts: [
+                TypewriterAnimatedText(
+                  'معاملتك قيد ',
+                  speed: Duration(milliseconds: 150),
+                  textStyle: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+              isRepeatingAnimation: true,
+              repeatForever: true,
+              displayFullTextOnTap: true,
+              stopPauseOnTap: false,
             ),
-          ],
-          isRepeatingAnimation: true,
-          repeatForever: true,
-          displayFullTextOnTap: true,
-          stopPauseOnTap: false,
-        ),
+          ),
+        ],
       ),
     );
   }

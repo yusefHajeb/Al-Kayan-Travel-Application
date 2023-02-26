@@ -11,6 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yah_app/Widget/new_page.dart';
 import 'package:yah_app/styles/tolls.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:yah_app/Widget/widget_tools/animai/list_anmi.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
 import 'package:yah_app/screen/kaian__screen.dart';
@@ -47,6 +48,22 @@ class _firstScreenState extends State<firstScreen> {
 
   GlobalKey<FormState> fromstat = new GlobalKey<FormState>();
 
+  // getData() async {
+  //   DocumentReference doc = FirebaseFirestore.instance
+  //       .collection("customer")
+  //       .doc("p7EGGN5PWnD0bXcl9apb");
+
+  //   await doc.get().then((value) {
+  //     print(value.data());
+  //   });
+  // }
+
+  // @override
+  // void initState() {
+  //   getData();
+  //   super.initState();
+  // }
+
   // int currentCarouselIndex = 0;
   // Timer t = Timer(const Duration(seconds: 2), () {
   //   setState(() => currentCarouselIndex++);
@@ -58,6 +75,7 @@ class _firstScreenState extends State<firstScreen> {
   @override
   late PageController _pageController;
   void initState() {
+    // getData();
     super.initState();
     _pageController =
         PageController(initialPage: _currentPage, viewportFraction: 0.8);
@@ -155,110 +173,129 @@ class _firstScreenState extends State<firstScreen> {
                     border: InputBorder.none,
                     suffixIcon: OpenContainer(
                       openBuilder: (_, closeContainer) {
+                        Container(
+                          child: Text("eefrcrsd"),
+                          height: 1000,
+                        );
                         return SecondScreen();
                       },
+                      //                     closedBuilder: (_, openContainer) {
+                      //                       return InkWell(
+                      //                         onTap: () async {
+                      //                           await Search();
+                      // return SecondScreen();
                       closedBuilder: (_, openContainer) {
-                        return InkWell(
-                          onTap: () async {
-                            await Search();
-
-                            // MessageShow(messageError: messageError);
-                            // ScaffoldMessenger.of(context).showSnackBar(
-                            //   SnackBar(
-                            //     content: Stack(
-                            //       clipBehavior: Clip.none,
-                            //       children: [
-                            //         Container(
-                            //           padding: EdgeInsets.all(16),
-                            //           height: 90,
-                            //           decoration: const BoxDecoration(
-                            //             color: primary,
-                            //             borderRadius: BorderRadius.all(
-                            //                 Radius.circular(20)),
-                            //           ),
-                            //           child: Row(
-                            //             children: [
-                            //               const SizedBox(
-                            //                 width: 47,
-                            //               ),
-                            //               Expanded(
-                            //                 child: Column(
-                            //                   crossAxisAlignment:
-                            //                       CrossAxisAlignment.start,
-                            //                   children: [
-                            //                     Text(
-                            //                       "خطاء",
-                            //                       style: header2,
-                            //                       maxLines: 2,
-                            //                       overflow:
-                            //                           TextOverflow.ellipsis,
-                            //                     ),
-                            //                     Text(messageError),
-                            //                   ],
-                            //                 ),
-                            //               ),
-                            //             ],
-                            //           ),
-
-                            //           //  MessageShow(
-                            //           //     messageError: messageError),
-                            //         ),
-                            //         Positioned(
-                            //           bottom: 0,
-                            //           left: 0,
-                            //           child: ClipRRect(
-                            //             borderRadius: const BorderRadius.only(
-                            //                 bottomLeft: Radius.circular(20)),
-                            //             child: SvgPicture.asset(
-                            //               "assest/image/svg/bubbles.svg",
-                            //               height: 48,
-                            //               width: 48,
-                            //               color:
-                            //                   Color.fromARGB(255, 212, 152, 0),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //         Positioned(
-                            //           top: -20,
-                            //           right: 0,
-                            //           child: Stack(
-                            //             alignment: Alignment.center,
-                            //             children: [
-                            //               SvgPicture.asset(
-                            //                 "assest/image/svg/fail.svg",
-                            //                 height: 40,
-                            //                 color: bBackDark,
-                            //               ),
-                            //               SvgPicture.asset(
-                            //                 "assest/image/svg/close.svg",
-                            //                 height: 15,
-                            //                 color: Color.fromARGB(
-                            //                     255, 212, 152, 0),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //         //svg
-                            //       ],
-                            //     ),
-                            //     behavior: SnackBarBehavior.floating,
-                            //     backgroundColor: Colors.transparent,
-                            //     elevation: 0,
-                            //   ),
-                            // );
-                          },
-                          child: Container(
-                            height: 140,
-                            width: 80,
-                            child: Center(
-                              child: Text(
-                                'استعلام',
-                                style: paragraph2,
-                              ),
+                        return Container(
+                          height: 80,
+                          width: 80,
+                          child: Center(
+                            child: Text(
+                              'بحث',
+                              // style: TextStyle(
+                              //   fontWeight: FontWeight.bold,
+                              // ),
                             ),
                           ),
                         );
                       },
+                      // MessageShow(messageError: messageError);
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   SnackBar(
+                      //     content: Stack(
+                      //       clipBehavior: Clip.none,
+                      //       children: [
+                      //         Container(
+                      //           padding: EdgeInsets.all(16),
+                      //           height: 90,
+                      //           decoration: const BoxDecoration(
+                      //             color: primary,
+                      //             borderRadius: BorderRadius.all(
+                      //                 Radius.circular(20)),
+                      //           ),
+                      //           child: Row(
+                      //             children: [
+                      //               const SizedBox(
+                      //                 width: 47,
+                      //               ),
+                      //               Expanded(
+                      //                 child: Column(
+                      //                   crossAxisAlignment:
+                      //                       CrossAxisAlignment.start,
+                      //                   children: [
+                      //                     Text(
+                      //                       "خطاء",
+                      //                       style: header2,
+                      //                       maxLines: 2,
+                      //                       overflow:
+                      //                           TextOverflow.ellipsis,
+                      //                     ),
+                      //                     Text(messageError),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+
+                      //           //  MessageShow(
+                      //           //     messageError: messageError),
+                      //         ),
+                      //         Positioned(
+                      //           bottom: 0,
+                      //           left: 0,
+                      //           child: ClipRRect(
+                      //             borderRadius: const BorderRadius.only(
+                      //                 bottomLeft: Radius.circular(20)),
+                      //             child: SvgPicture.asset(
+                      //               "assest/image/svg/bubbles.svg",
+                      //               height: 48,
+                      //               width: 48,
+                      //               color:
+                      //                   Color.fromARGB(255, 212, 152, 0),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         Positioned(
+                      //           top: -20,
+                      //           right: 0,
+                      //           child: Stack(
+                      //             alignment: Alignment.center,
+                      //             children: [
+                      //               SvgPicture.asset(
+                      //                 "assest/image/svg/fail.svg",
+                      //                 height: 40,
+                      //                 color: bBackDark,
+                      //               ),
+                      //               SvgPicture.asset(
+                      //                 "assest/image/svg/close.svg",
+                      //                 height: 15,
+                      //                 color: Color.fromARGB(
+                      //                     255, 212, 152, 0),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ),
+                      //         //svg
+                      //       ],
+                      //     ),
+                      //     behavior: SnackBarBehavior.floating,
+                      //     backgroundColor: Colors.transparent,
+                      //     elevation: 0,
+                      //   ),
+                      // );
+
+                      //   child: Container(
+                      //     height: 140,
+                      //     width: 80,
+                      //     child: Center(
+                      //       child: Text(
+                      //         'استعلام',
+                      //         style: paragraph2,
+                      //       ),
+                      //     ),
+                      //   ),
+
+                      // );
+
                       // openBuilder: (BuildContext context, void Function({Object? returnValue}) action) {  },
                       openColor: Colors.white,
                       closedShape: RoundedRectangleBorder(
