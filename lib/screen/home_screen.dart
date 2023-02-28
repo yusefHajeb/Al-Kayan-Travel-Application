@@ -1,11 +1,15 @@
 // import 'dart:async';
 
 import 'dart:async';
+import 'dart:io';
 // import 'dart:html';
 
 import 'package:animations/animations.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yah_app/Widget/new_page.dart';
@@ -47,7 +51,7 @@ class _firstScreenState extends State<firstScreen> {
   // ignore: non_constant_identifier_names
 
   GlobalKey<FormState> fromstat = new GlobalKey<FormState>();
-
+  GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
   // getData() async {
   //   DocumentReference doc = FirebaseFirestore.instance
   //       .collection("customer")
@@ -57,30 +61,36 @@ class _firstScreenState extends State<firstScreen> {
   //     print(value.data());
   //   });
   // }
+//  var formdata = fromstat.currentState!;
+  @override
+  void initState() {
+    // getData();
+    markNeedsBuild();
+    // numPass = 0;
+    // fromstat;
 
-  // @override
-  // void initState() {
-  //   getData();
-  //   super.initState();
-  // }
+    // var s = fromstat.currentState;
+    // Search();
+    _pageController =
+        PageController(initialPage: _currentPage, viewportFraction: 0.8);
+    super.initState();
+  }
+
+  markNeedsBuild() {
+    ScaffoldState();
+    super.initState();
+  }
 
   // int currentCarouselIndex = 0;
   // Timer t = Timer(const Duration(seconds: 2), () {
   //   setState(() => currentCarouselIndex++);
   //   print(currentCarouselIndex);
   // });
-  late var numPass;
-  var messageError;
-
-  @override
+  var numPass;
+  var messageError = "";
   late PageController _pageController;
-  void initState() {
-    // getData();
-    super.initState();
-    _pageController =
-        PageController(initialPage: _currentPage, viewportFraction: 0.8);
-  }
 
+  // ignore: non_constant_identifier_names
   Search() async {
     var formdata = fromstat.currentState!;
     if (formdata.validate()) {
@@ -98,6 +108,7 @@ class _firstScreenState extends State<firstScreen> {
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    bool? fige = true;
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -152,13 +163,17 @@ class _firstScreenState extends State<firstScreen> {
                 child: TextFormField(
                   onSaved: (val) {
                     numPass = val;
+                    Search();
                   },
                   validator: (val) {
                     if (val!.length >= 9) {
                       messageError = "رقم الجواز كبير  جدا";
+                      fige = false;
+                      Search();
                     }
                     if (val.length < 1) {
                       messageError = "القيمة المدخله خاطئة";
+                      fige = false;
                     }
                     return null;
                   },
@@ -173,11 +188,93 @@ class _firstScreenState extends State<firstScreen> {
                     border: InputBorder.none,
                     suffixIcon: OpenContainer(
                       openBuilder: (_, closeContainer) {
-                        Container(
-                          child: Text("eefrcrsd"),
-                          height: 1000,
-                        );
-                        return SecondScreen();
+                        // Search();
+                        if (fige != true) {
+                          print("sdfgh");
+
+                          _scaffoldkey.currentState?.showSnackBar(SnackBar(
+                            content: Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(16),
+                                  height: 90,
+                                  decoration: const BoxDecoration(
+                                    color: primary,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(
+                                        width: 47,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "خطاء",
+                                              style: header2,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(messageError),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  //  MessageShow(
+                                  //     messageError: messageError),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  left: 0,
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(20)),
+                                    child: SvgPicture.asset(
+                                      "assest/image/svg/bubbles.svg",
+                                      height: 48,
+                                      width: 48,
+                                      color: Color.fromARGB(255, 212, 152, 0),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: -20,
+                                  right: 0,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assest/image/svg/fail.svg",
+                                        height: 40,
+                                        color: bBackDark,
+                                      ),
+                                      SvgPicture.asset(
+                                        "assest/image/svg/close.svg",
+                                        height: 15,
+                                        color: Color.fromARGB(255, 212, 152, 0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                //svg
+                              ],
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                          ));
+                        } else {
+                          print(numPass);
+                          return SecondScreen();
+                        }
+                        return Container();
                       },
                       //                     closedBuilder: (_, openContainer) {
                       //                       return InkWell(

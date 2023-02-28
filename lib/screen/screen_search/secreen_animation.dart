@@ -3,7 +3,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:yah_app/screen/screen_search/dataselect.dart';
+import 'dataselect.dart';
 import '../../Widget/new_page.dart';
 import '../../styles/tolls.dart';
 
@@ -189,8 +190,19 @@ class SlideTransitionAnimation extends PageRouteBuilder {
             });
 }
 
+int index = 24434;
+
 class SecondPage extends StatelessWidget {
   @override
+  indexList() {
+    for (int i = 0; i < dataCustomer.length; i++) {
+      if (index == dataCustomer[2].numberPass) {
+        dataCustomer[i];
+      }
+    }
+    return dataCustomer[0];
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -204,7 +216,7 @@ class SecondPage extends StatelessWidget {
               clipper: MyClipper(),
               child: Container(
                 padding: EdgeInsets.only(left: 40, top: 50, right: 20),
-                height: 500,
+                height: 300,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -233,6 +245,10 @@ class SecondPage extends StatelessWidget {
               stopPauseOnTap: false,
             ),
           ),
+          ListView(scrollDirection: Axis.vertical, shrinkWrap: true, children: [
+            Text(indexList().nameCustomer),
+            Text(indexList().statePapp)
+          ])
         ],
       ),
     );
