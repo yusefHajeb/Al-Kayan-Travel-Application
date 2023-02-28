@@ -14,7 +14,7 @@ class _MyHeaderState extends State<MyHeader2> {
     return ClipPath(
         clipper: MyClipper(),
         child: Container(
-          padding: EdgeInsets.only(left: 40, top: 50, right: 20),
+          padding: const EdgeInsets.only(left: 40, top: 50, right: 20),
           height: 350,
           width: double.infinity,
           decoration: BoxDecoration(
@@ -41,7 +41,7 @@ class MyClipper extends CustomClipper<Path> {
     var path = Path();
     path.lineTo(0, size.height - 80);
     path.quadraticBezierTo(
-        size.width / 2, size.height, size.width, size.height + 30);
+        size.width / 2, size.height, size.width, size.height - 80);
     path.lineTo(size.width, 0);
     path.close();
     return path;
