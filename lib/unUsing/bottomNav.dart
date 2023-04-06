@@ -3,8 +3,28 @@ import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:yah_app/main.dart';
-import 'package:yah_app/screen/home_screen.dart';
+import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 import '../Widget/card_widget/catagory_curd.dart';
+
+class Fruit {
+  String type;
+  Fruit({required this.type});
+}
+
+class Apple extends Fruit {
+  String variety;
+  int count;
+
+  Apple({required String type, required this.variety, required this.count})
+      : assert(type != null),
+        assert(variety != null),
+        assert(count != null),
+        super(type: type);
+
+  void eat() {
+    print('Eating an apple');
+  }
+}
 
 int _currentPage = 0;
 

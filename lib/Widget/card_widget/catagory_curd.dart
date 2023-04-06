@@ -22,10 +22,11 @@ class CatagoryCount extends StatelessWidget {
         bottomRight: Radius.circular(40),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(0.0),
         child: Container(
           margin: EdgeInsets.only(left: 10, bottom: 20),
           width: size.width / 3,
+          height: 200,
           decoration: BoxDecoration(
             color: Color.fromRGBO(255, 255, 255, 1),
             borderRadius: BorderRadius.only(
@@ -48,21 +49,23 @@ class CatagoryCount extends StatelessWidget {
                 press();
               },
               child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(children: <Widget>[
-                  Spacer(),
-                  myIcon,
-                  Spacer(),
-                  Text(
-                    titleCurd,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontSize: 12,
-                          color: primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                ]),
+                padding: EdgeInsets.all(10.0),
+                child: SizedBox(
+                  child: Column(children: <Widget>[
+                    Spacer(),
+                    myIcon,
+                    Spacer(),
+                    Text(
+                      titleCurd,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontSize: 12,
+                            color: primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ]),
+                ),
               ),
             ),
           ),

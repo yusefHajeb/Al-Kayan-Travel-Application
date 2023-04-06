@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
+// import 'package:url_launcher/url_launcher.dart';
 import 'package:yah_app/styles/style.dart';
 import 'package:yah_app/styles/tolls.dart';
 
@@ -60,7 +60,7 @@ class ScreenMedia extends StatelessWidget {
                         margin: EdgeInsets.only(
                             bottom: _w / 30, left: _w / 60, right: _w / 60),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(24),
                           ),
                           gradient: LinearGradient(

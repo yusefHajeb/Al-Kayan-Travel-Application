@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:yah_app/screen/home_screen.dart';
+import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 import 'package:yah_app/screen/servis/sirvec_page.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
 import 'package:yah_app/screen/kaian__screen.dart';
 import 'package:yah_app/styles/tolls.dart';
-import 'styles/tolls.dart';
+import 'package:provider/provider.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
@@ -13,7 +13,8 @@ void _xx(int index) {
   _selectedIndex = index;
 }
 
-void main() => runApp(MyApp());
+void main() => runApp(
+    ChangeNotifierProvider(create: (_) => passpordProvider(), child: MyApp()));
 
 class MyApp extends StatelessWidget {
   @override
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
 
 final List<Map<String, Object>> _page = [
   {
-    'page': Scaffold(body: Center()),
+    'page': const Scaffold(body: const Center()),
     'title': "Part1",
   },
 ];
@@ -73,6 +74,6 @@ class HomePage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

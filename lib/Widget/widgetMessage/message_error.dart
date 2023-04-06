@@ -5,12 +5,24 @@ import '../../styles/style.dart';
 import '../../styles/tolls.dart';
 
 class MessageShow extends StatefulWidget {
-  const MessageShow({
+  MessageShow({
     Key? key,
     required this.messageError,
   }) : super(key: key);
-
+  @override
+  State<StatefulWidget> createState() => _MessageShow();
   final messageError;
+}
+
+class _MessageShow extends State<MessageShow> {
+  Widget _showErrorMessage(String error) {
+    return Text(error);
+  }
+
+  @override
+  Widget myBilder(BuildContext context) {
+    return _showErrorMessage(widget.messageError);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +53,7 @@ class MessageShow extends StatefulWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        Text(messageError),
+                        // myBilder(context),
                       ],
                     ),
                   ),
@@ -113,9 +125,10 @@ class MessageShow extends StatefulWidget {
     // );
   }
 
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
+  // @override
+//   State<StatefulWidget> createState() {
+//     // TODO: implement createState
+//     throw UnimplementedError();
+//   }
+// }
 }

@@ -70,7 +70,7 @@ class _PageService extends State<PageService> {
                   bottom: 0,
                   height: 20,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(25.0),
@@ -124,14 +124,14 @@ class _PageService extends State<PageService> {
                     style: paragraph2,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
                   "مزيد من الخدمات",
                   style: header,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(

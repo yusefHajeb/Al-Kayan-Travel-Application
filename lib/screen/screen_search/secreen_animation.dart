@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:animations/animations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yah_app/screen/screen_search/dataselect.dart';
-import 'dataselect.dart';
+import 'package:yah_app/styles/style.dart';
+import 'package:yah_app/styles/tolls.dart';
+import 'package:provider/provider.dart';
 import '../../Widget/new_page.dart';
-import '../../styles/tolls.dart';
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // class MyCustomWidget extends StatefulWidget {
@@ -170,6 +171,7 @@ class _SecondScreenState extends State<SecondScreen> {
 }
 
 class SlideTransitionAnimation extends PageRouteBuilder {
+  final x = 0;
   final Widget page;
 
   SlideTransitionAnimation(this.page)
@@ -194,63 +196,116 @@ int index = 24434;
 
 class SecondPage extends StatelessWidget {
   @override
-  indexList() {
-    for (int i = 0; i < dataCustomer.length; i++) {
-      if (index == dataCustomer[2].numberPass) {
-        dataCustomer[i];
-      }
-    }
-    return dataCustomer[0];
-  }
+  // indexList() {
+  //   for (int i = 0; i < dataCustomer.length; i++) {
+  //     if (index == dataCustomer[2].numberPass) {
+  //       dataCustomer[i];
+  //     }
+  //   }
+  //   return dataCustomer[0];
+  // }
 
   Widget build(BuildContext context) {
+    List<passbord> Data = Provider.of<passpordProvider>(context).listData;
+    String searchNumber =
+        Provider.of<passpordProvider>(context).getNumberPassbord();
+
+    late var filterData =
+        Data.firstWhere((element) => element.numberPassbord == searchNumber);
+
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-          title: Text('الاستعلام'),
+          title: const Text("عرض البيانات"),
           centerTitle: true,
           backgroundColor: Colors.black,
           systemOverlayStyle: SystemUiOverlayStyle.light),
-      body: Column(
-        children: [
-          ClipPath(
-              clipper: MyClipper(),
-              child: Container(
-                padding: EdgeInsets.only(left: 40, top: 50, right: 20),
-                height: 300,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [bBackDark, Color.fromARGB(255, 56, 24, 2)]
-                      // primary, Color.fromARGB(255, 170, 143, 76)],
-                      ),
-                ),
-              )),
-          Center(
-            child: AnimatedTextKit(
-              animatedTexts: [
-                TypewriterAnimatedText(
-                  'معاملتك قيد ',
-                  speed: Duration(milliseconds: 150),
-                  textStyle: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+      body: Provider.of<passpordProvider>(context).searchList(searchNumber)
+          ? Card(
+              semanticContainer: false,
+              elevation: 20,
+              clipBehavior: Clip.antiAlias,
+              margin: EdgeInsets.all(20.0),
+              // padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    child: Text(
+                      filterData.name,
+                      style: header,
+                    ),
                   ),
-                ),
-              ],
-              isRepeatingAnimation: true,
-              repeatForever: true,
-              displayFullTextOnTap: true,
-              stopPauseOnTap: false,
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      filterData.image,
+                      fit: BoxFit.cover,
+                      width: size.width - 50,
+                      height: size.height / 3,
+                      // color: Colors.transparent,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: Text(
+                      " صاحب الجواز :" + filterData.name,
+                      style: header2,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: Text(
+                      " الرقم :" + filterData.phone,
+                      style: header2,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: Text(
+                      " نوع المعاملة :" + filterData.state,
+                      style: header2,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: Text(
+                      " نوع المعاملة :" + filterData.state,
+                      style: header2,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : Center(
+              child: AnimatedTextKit(
+                animatedTexts: [
+                  TypewriterAnimatedText(
+                    'معاملتك قيد ',
+                    speed: Duration(milliseconds: 150),
+                    textStyle: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+                isRepeatingAnimation: true,
+                repeatForever: true,
+                displayFullTextOnTap: true,
+                stopPauseOnTap: false,
+              ),
             ),
-          ),
-          ListView(scrollDirection: Axis.vertical, shrinkWrap: true, children: [
-            Text(indexList().nameCustomer),
-            Text(indexList().statePapp)
-          ])
-        ],
-      ),
     );
   }
 }

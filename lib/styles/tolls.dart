@@ -34,3 +34,68 @@ List<DataModel> dataList = [
   DataModel("Casual Jeans", "assest/image/airplane2.jpg", 168.2),
   DataModel("Jeans Skirt", "assest/image/me.jpg", 136.7),
 ];
+
+class passbord {
+  final String numberPassbord;
+  final String state;
+  final String name;
+  final String phone;
+  final String another;
+  final String image;
+  passbord(
+      {required this.numberPassbord,
+      required this.state,
+      required this.name,
+      required this.phone,
+      required this.another,
+      required this.image});
+}
+
+class passpordProvider with ChangeNotifier {
+  List<passbord> listData = [
+    passbord(
+        numberPassbord: "123456789",
+        state: "المعامله جاهزه",
+        name: "احمد علي قاسم",
+        phone: "777777777",
+        another: "المعامله في السفاره  في حال وصولها ستصلك رساله نصيه",
+        image: "assest/image/me.jpg"),
+    passbord(
+        numberPassbord: "1111111111",
+        state: "المعامله مازالت في السفاره",
+        name: "يوسف عبدالملك حاجب",
+        phone: "777777777",
+        another: "المعامله في السفاره  في حال وصولها ستصلك رساله نصيه",
+        image: "assest/image/me.jpg"),
+  ];
+
+  bool searchList(String searchNumber) {
+    for (var item in listData) {
+      if (item.numberPassbord == searchNumber) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void setNumberPassbord(String val) {
+    notifyListeners();
+    numberPass = val;
+  }
+
+  String getNumberPassbord() {
+    return numberPass;
+  }
+
+  String numberPass = "";
+  // void checking(){
+  //   if()
+  // }
+}
+
+// class passpord2 with ChangeNotifier{
+//   List <passpord> passList = [];
+ 
+ 
+
+// }
