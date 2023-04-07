@@ -13,7 +13,7 @@ import '../screen_search/secreen_animation.dart';
 import 'package:provider/provider.dart';
 
 int _currentPage = 0;
-void select_screen(BuildContext ctx, int tab) {}
+// void select_screen(BuildContext ctx, int tab) {}
 
 void selectScreen2(BuildContext ctx, int index) {
   Navigator.of(ctx).pushNamed(Screen2.routeName, arguments: index);
@@ -236,11 +236,11 @@ class _firstScreenState extends State<firstScreen> {
               size: 50,
             ),
             press: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: ((context) => MyHeader2())));
-              // setState(() {
-              //   SelectScreen2(context, 2);
-              // });
+              // Navigator.of(context)
+              //     .push(MaterialPageRoute(builder: ((context) => MyHeader2())));
+              setState(() {
+                selectScreen2(context, 2);
+              });
             },
           ),
           CatagoryCount(

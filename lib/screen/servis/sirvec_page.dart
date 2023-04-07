@@ -28,7 +28,6 @@ class _PageService extends State<PageService> {
     var size = MediaQuery.of(context).size;
     //عند الا
     final int sectionIndex = ModalRoute.of(context)?.settings.arguments as int;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(children: [
@@ -43,9 +42,7 @@ class _PageService extends State<PageService> {
                     DUMMY_MEALS[sectionIndex].imageUrl,
                     fit: BoxFit.fill,
                   ),
-                  // margin: EdgeInsets.all(20),
                   decoration: const BoxDecoration(
-                      // color: Color.fromRGBO(255, 189, 0, 1),
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(50),
                           bottomRight: Radius.circular(50))),

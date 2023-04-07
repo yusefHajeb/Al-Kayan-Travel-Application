@@ -1,5 +1,9 @@
 // import 'dart:html';
 // import 'package:flutter/cupertino.dart';
+// import 'dart:html';
+// import 'dart:html';
+
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -19,6 +23,58 @@ class ScreenMedia extends StatelessWidget {
     "assest/icon/icons8-instagram-64.png",
     "assest/icon/icons8-instagram-64.png",
   ];
+  var number = "+967771274299";
+  String msg = " Hello";
+  // ignore: prefer_final_fields
+  List<Uri> _listLunchUrl = [
+    //https
+    // Uri.https('whatsapp:send?phone=+967771274299&text=Hellow'),
+    Uri(
+        scheme: 'whatsapp',
+        path: 'https://api.whatsapp.com/send?phone=+967734084140&text=hello',
+        query: encodeQueryParameters(<String, String>{
+          'subject': 'Testing mail lunch from flutter app',
+          'body': 'this mail body is from flutter code'
+        })),
+    //mail
+    Uri(
+        scheme: 'mailto',
+        path: 'watanalihsas@gmail.com',
+        query: encodeQueryParameters(<String, String>{
+          'subject': 'Testing mail lunch from flutter app',
+          'body': 'this mail body is from flutter code'
+        })),
+//whatsapp
+    Uri(
+      scheme: 'whatsapp',
+      path: '//api.whatsapp.com/send?phone=967771274299&text=Hellow',
+      query: encodeQueryParameters(<String, String>{
+        'subject': 'Testing whatsapp lunch from flutter app',
+        'body': 'this whatsapp body is from flutter code'
+      }),
+    ),
+//sms
+    Uri(scheme: 'sms', path: '+967771274299', queryParameters: <String, String>{
+      'body': Uri.encodeComponent('Hello'),
+    }),
+
+    //phone
+    Uri(
+      scheme: 'tel',
+      path: '+967771274299',
+    ),
+
+    Uri(
+      scheme: 'tel',
+      path: '+967771274299',
+    ),
+
+    Uri(
+      scheme: 'tel',
+      path: '+967771274299',
+    ),
+  ];
+
   Widget build(BuildContext context) {
     double _w = MediaQuery.of(context).size.width;
     int columnCount = 3;
@@ -46,34 +102,39 @@ class ScreenMedia extends StatelessWidget {
                 duration: Duration(milliseconds: 500),
                 columnCount: columnCount,
                 child: ScaleAnimation(
-                  duration: Duration(milliseconds: 900),
+                  duration: const Duration(milliseconds: 900),
                   curve: Curves.fastLinearToSlowEaseIn,
                   child: FadeInAnimation(
                     child: Bouncing(
                       onPress: () {},
-                      child: Container(
-                        child: Image.asset(
-                          myIcons[index],
-                          // fit: BoxFit.cover,
-                          width: 50,
-                        ),
-                        margin: EdgeInsets.only(
-                            bottom: _w / 30, left: _w / 60, right: _w / 60),
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(24),
+                      child: InkWell(
+                        onTap: () {
+                          _lunchUrl(_listLunchUrl[index]);
+                        },
+                        child: Container(
+                          child: Image.asset(
+                            myIcons[index],
+                            // fit: BoxFit.cover,
+                            width: 50,
                           ),
-                          gradient: LinearGradient(
-                              colors: [Colors.white, yBackgroundColor],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 40,
-                              spreadRadius: 10,
+                          margin: EdgeInsets.only(
+                              bottom: _w / 30, left: _w / 60, right: _w / 60),
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(24),
                             ),
-                          ],
+                            gradient: LinearGradient(
+                                colors: [Colors.white, yBackgroundColor],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 40,
+                                spreadRadius: 10,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -86,6 +147,25 @@ class ScreenMedia extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> _lunchUrl(Uri url) async {
+  try {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
+        url,
+      );
+    } else {
+      throw "Couldent lunch $url";
+    }
+  } catch (_) {}
+}
+
+String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((MapEntry<String, String> e) =>
+          '${Uri.encodeComponent(e.key)}->${Uri.encodeComponent(e.value)}')
+      .join('&');
 }
 
 Color purple = Color.fromARGB(255, 255, 170, 0);

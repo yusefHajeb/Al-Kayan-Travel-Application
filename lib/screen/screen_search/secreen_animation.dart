@@ -196,15 +196,6 @@ int index = 24434;
 
 class SecondPage extends StatelessWidget {
   @override
-  // indexList() {
-  //   for (int i = 0; i < dataCustomer.length; i++) {
-  //     if (index == dataCustomer[2].numberPass) {
-  //       dataCustomer[i];
-  //     }
-  //   }
-  //   return dataCustomer[0];
-  // }
-
   Widget build(BuildContext context) {
     List<passbord> Data = Provider.of<passpordProvider>(context).listData;
     String searchNumber =

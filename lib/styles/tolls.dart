@@ -92,10 +92,3 @@ class passpordProvider with ChangeNotifier {
   //   if()
   // }
 }
-
-// class passpord2 with ChangeNotifier{
-//   List <passpord> passList = [];
- 
- 
-
-// }

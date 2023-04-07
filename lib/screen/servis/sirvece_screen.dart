@@ -12,7 +12,7 @@ class SrvessScreen extends StatelessWidget {
 
   Widget buildSectionTile(BuildContext context, String text) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         text,
         style: Theme.of(context).textTheme.titleLarge,
@@ -20,7 +20,6 @@ class SrvessScreen extends StatelessWidget {
     );
   }
 
-  @override
   void showService(BuildContext ctx, int index) {
     Navigator.of(ctx).pushNamed(
       PageService.routeName,
@@ -44,16 +43,11 @@ class SrvessScreen extends StatelessWidget {
               Container(
                 height: size.height / 4.5,
                 width: double.infinity,
-                // child: SvgPicture.asset(
-                //   "assest/image/WorldMap.svg",
-                //   fit: BoxFit.fill,
-                // ),
                 child: Image.asset(
-                  "assest/image/airplane1.jpg",
+                  "assest/image/top_image.png",
                   fit: BoxFit.fill,
                 ),
-
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(50),
                     bottomRight: Radius.circular(50),
@@ -67,7 +61,7 @@ class SrvessScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.popAndPushNamed(context, '/');
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios,
                     color: Colors.white,
                   ),
@@ -77,14 +71,14 @@ class SrvessScreen extends StatelessWidget {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                height: 30,
+                height: 38,
                 child: Container(
                   child: Text(
                     "خدماتنا",
                     textAlign: TextAlign.center,
                     style: header,
                   ),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25.0),

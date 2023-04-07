@@ -1,121 +1,99 @@
 import 'package:flutter/material.dart';
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+// import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:provider/provider.dart';
+// import 'package:yah_app/screen/screen_search/secreen_animation.dart';
+import 'package:yah_app/styles/myprovider.dart';
 import 'package:yah_app/styles/style.dart';
 
-import '../unUsing/about.dart';
+// import '../unUsing/about.dart';
 
-class Product {
-  final image;
-  final name;
-  final discrib;
-  Product(this.image, this.name, this.discrib);
-}
+// class Product {
+//   final image;
+//   final name;
+//   final discrib;
+//   Product(this.image, this.name, this.discrib);
+// }
 
 class Screen2 extends StatefulWidget {
   @override
   State<Screen2> createState() => _Screen2();
   static const routeName = 'screen2 ';
-
-  @override
-  void initState() {}
 }
 
 class _Screen2 extends State<Screen2> with TickerProviderStateMixin {
   late final AnimationController _controller;
 
   late Animation<double> _fadeInFadeOut;
-  @override
-
-  // عند فتح الصفحة تظهر هذي البانات الخاصة بزر لماذا كيان
-  List products = [
-    Product("assest/image/imageKaian.png", 'مصداقية', "دائما الزبون على حق"),
-    Product("assest/image/imageKaian.png", 'اسعار منافسة',
-        "خدمات متعددة بااسعار منافسة"),
-    Product("assest/image/thim3.png", 'دقة في المواعيد ',
-        "سرعة في انجاز المعاملات"),
-    Product(
-        "assest/image/thim2.png", 'معتمدون من السفارة السعودية', "سييبشسيبش"),
-    Product(
-        "assest/image/thim2.png", 'معتمدون من السفارة السعودية', "سييبشسيبش"),
-  ];
-//اقائمة هذي حق شركائنا
-  List partners = [
-    Product("assest/image/me.jpg", 'طيران السعيدة', "دائما الزبون على حق"),
-    Product("assest/image/me.jpg", 'مصر للطيران', ""),
-    Product(
-        "assest/image/me.jpg", 'دقة في المواعيد ', "سرعة في انجاز المعاملات"),
-    Product("assest/image/me.jpg", 'معتمدون من السفارة السعودية', "سييبشسيبش"),
-    Product(
-        "assest/image/thim2.png", 'معتمدون من السفارة السعودية', "سييبشسيبش"),
-  ];
-
-  // فروعنا
-  List branch = [
-    Product("assest/image/thim3.png", 'طيران السعيدة', "دائما الزبون على حق"),
-    Product("assest/image/thim3.png", 'مصر للطيران', ""),
-    Product(
-        "assest/image/me.jpg", 'دقة في المواعيد ', "سرعة في انجاز المعاملات"),
-    Product("assest/image/me.jpg", 'معتمدون من السفارة السعودية', "سييبشسيبش"),
-    Product(
-        "assest/image/thim2.png", 'معتمدون من السفارة السعودية', "سييبشسيبش"),
-  ];
-
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  // @override
+  // GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final numTab = ModalRoute.of(context)?.settings.arguments.toString();
-    String index = numTab.toString();
-    List<dynamic> check() {
-      if (index == "1")
-        return products;
-      else if (index == "2")
-        return partners;
-      else if (index == "3")
-        return branch;
-      else
-        // index = "1";
-        print(index);
-      return products;
-    }
+    //set val to index in provider
+    Provider.of<ProviderService>(context, listen: false)
+        .setIndex(numTab.toString());
+    // final String index = Provider.of<ProviderService>(context).getIndex();
+
+    List<dynamic> check = Provider.of<ProviderService>(context).check();
 
     return Scaffold(
-      backgroundColor: Color(0xfff6f7f9),
+      backgroundColor: Colors.white,
       body: ListView(
         shrinkWrap: true,
         children: <Widget>[
-          Stack(
-            children: [
-              Container(
-                height: size.height * .22,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        "assest/image/airplane1.jpg",
-                      ),
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(50),
-                        bottomRight: Radius.circular(50))),
+          Stack(children: <Widget>[
+            Container(
+              height: size.height / 4.5,
+              width: double.infinity,
+              child: Image.asset(
+                "assest/image/top_image.png",
+                fit: BoxFit.fill,
               ),
-              Positioned(
-                top: 50,
-                right: 20,
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.popAndPushNamed(context, '/');
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(50),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 50,
+              right: 20,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.popAndPushNamed(context, '/');
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              height: 30,
+              child: Container(
+                child: Text(
+                  "خدماتنا",
+                  textAlign: TextAlign.center,
+                  style: header,
+                ),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(25.0),
+                    topRight: Radius.circular(25.0),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ]),
+          // myAppBarServece(size: size),
           // Transform.translate(
           //   offset: Offset(0, -35),
           //   child: Container(
@@ -180,7 +158,7 @@ class _Screen2 extends State<Screen2> with TickerProviderStateMixin {
             height: 4,
           ),
           Column(
-              children: check()
+              children: check
                   .map((e) => AnimationConfiguration.staggeredList(
                       position: 2,
                       delay: Duration(milliseconds: 100),
@@ -243,6 +221,57 @@ class _Screen2 extends State<Screen2> with TickerProviderStateMixin {
                   .toList()),
         ],
       ),
+    );
+  }
+}
+
+class myAppBarServece extends StatelessWidget {
+  const myAppBarServece({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          height: size.height / 4.9,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  "assest/image/top_background.png",
+                ),
+                fit: BoxFit.fill,
+              ),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(0))),
+        ),
+        Positioned(
+          top: 50,
+          right: 20,
+          child: IconButton(
+            onPressed: () {
+              Navigator.popAndPushNamed(context, '/');
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        Positioned(
+          top: 80,
+          right: 150,
+          child: Text(
+            "لماذا نحن",
+            style: header,
+          ),
+        ),
+      ],
     );
   }
 }

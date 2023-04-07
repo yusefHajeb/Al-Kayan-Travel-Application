@@ -4,6 +4,7 @@ import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 import 'package:yah_app/screen/servis/sirvec_page.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
 import 'package:yah_app/screen/kaian__screen.dart';
+import 'package:yah_app/styles/myprovider.dart';
 import 'package:yah_app/styles/tolls.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +14,11 @@ void _xx(int index) {
   _selectedIndex = index;
 }
 
-void main() => runApp(
-    ChangeNotifierProvider(create: (_) => passpordProvider(), child: MyApp()));
+void main() => runApp(MultiProvider(providers: [
+      ChangeNotifierProvider<passpordProvider>(
+          create: (_) => passpordProvider()),
+      ChangeNotifierProvider<ProviderService>(create: (_) => ProviderService()),
+    ], child: MyApp()));
 
 class MyApp extends StatelessWidget {
   @override

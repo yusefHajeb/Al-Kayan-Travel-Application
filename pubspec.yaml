@@ -50,8 +50,9 @@ dependencies:
   fluttertoast: ^8.1.2
   flare_flutter: ^3.0.2
   flutter_svg: ^1.0.3
-  url_launcher: ^6.1.8
+
   provider: ^6.0.5
+  url_launcher: ^6.1.10
   # url to open any link 
   # url_launcher: ^6.1.10
   # cloud_firestore: ^4.4.3
