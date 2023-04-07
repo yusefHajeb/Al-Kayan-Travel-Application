@@ -58,20 +58,20 @@ class ProviderService with ChangeNotifier {
     index = val;
   }
 
-  // void setNumberScreen(String val) {
-  //   notifyListeners();
-  //   indexScreen = val;
-  // }
+  void setNumberScreen(String val) {
+    notifyListeners();
+    indexScreen = val;
+  }
 
-  // String getNumberScreen() {
-  //   return indexScreen;
-  // }
+  String getNumberScreen() {
+    return indexScreen;
+  }
 
   String getIndex() {
     return index;
   }
 
-  // String indexScreen = "0";
+  String indexScreen = "0";
   String index = "0";
   List<dynamic> check() {
     if (getIndex() == "1")

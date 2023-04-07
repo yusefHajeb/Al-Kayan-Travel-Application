@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:yah_app/Widget/new_page.dart';
 import 'package:yah_app/screen/Hom%20Screen/widget/mysnackbar.dart';
+import 'package:yah_app/styles/myprovider.dart';
 import 'package:yah_app/styles/tolls.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
 import 'package:yah_app/screen/kaian__screen.dart';
@@ -223,9 +224,12 @@ class _firstScreenState extends State<firstScreen> {
               size: 50,
             ),
             press: () {
-              setState(() {
-                selectScreen2(context, 1);
-              });
+              Navigator.of(context).pushNamed(Screen2.routeName);
+              Provider.of<ProviderService>(context, listen: false)
+                  .setNumberScreen(1.toString());
+              // setState(() {
+              //   selectScreen2(context, 1);
+              // });
             },
           ),
           CatagoryCount(
@@ -236,11 +240,12 @@ class _firstScreenState extends State<firstScreen> {
               size: 50,
             ),
             press: () {
-              // Navigator.of(context)
-              //     .push(MaterialPageRoute(builder: ((context) => MyHeader2())));
-              setState(() {
-                selectScreen2(context, 2);
-              });
+              //           setState(() {
+              //   selectScreen2(context, 2);
+              // });
+              Navigator.of(context).pushNamed(Screen2.routeName);
+              Provider.of<ProviderService>(context, listen: false)
+                  .setNumberScreen(2.toString());
             },
           ),
           CatagoryCount(
@@ -250,9 +255,13 @@ class _firstScreenState extends State<firstScreen> {
               color: const Color.fromARGB(255, 22, 51, 26),
             ),
             press: () {
-              setState(() {
-                selectScreen2(context, 3);
-              });
+              Navigator.of(context).pushNamed(Screen2.routeName);
+              Provider.of<ProviderService>(context, listen: false)
+                  .setNumberScreen(3.toString());
+
+              // setState(() {
+              //   selectScreen2(context, 3);
+              // });
             },
           ),
           CatagoryCount(
