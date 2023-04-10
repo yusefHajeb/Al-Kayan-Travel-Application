@@ -1,7 +1,5 @@
 import 'package:animations/animations.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:yah_app/Widget/new_page.dart';
 import 'package:yah_app/screen/Hom%20Screen/widget/mysnackbar.dart';
 import 'package:yah_app/styles/myprovider.dart';
@@ -30,7 +28,7 @@ class firstScreen extends StatefulWidget {
 
 class _firstScreenState extends State<firstScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  // GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
+
   TextEditingController numPass = TextEditingController()..text = "";
   var key = GlobalKey<FormState>();
   // getData() async {
@@ -74,6 +72,7 @@ class _firstScreenState extends State<firstScreen> {
     final scaffold = ScaffoldMessenger.of(context);
 
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
@@ -224,7 +223,8 @@ class _firstScreenState extends State<firstScreen> {
               size: 50,
             ),
             press: () {
-              Navigator.of(context).pushNamed(Screen2.routeName);
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => Screen2()));
               Provider.of<ProviderService>(context, listen: false)
                   .setNumberScreen(1.toString());
               // setState(() {
@@ -243,7 +243,9 @@ class _firstScreenState extends State<firstScreen> {
               //           setState(() {
               //   selectScreen2(context, 2);
               // });
-              Navigator.of(context).pushNamed(Screen2.routeName);
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => Screen2()));
+              //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
               Provider.of<ProviderService>(context, listen: false)
                   .setNumberScreen(2.toString());
             },
@@ -255,7 +257,8 @@ class _firstScreenState extends State<firstScreen> {
               color: const Color.fromARGB(255, 22, 51, 26),
             ),
             press: () {
-              Navigator.of(context).pushNamed(Screen2.routeName);
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => Screen2()));
               Provider.of<ProviderService>(context, listen: false)
                   .setNumberScreen(3.toString());
 
@@ -282,9 +285,8 @@ class _firstScreenState extends State<firstScreen> {
               titleCurd: "خدماتنا",
               myIcon: const Icon(Icons.design_services),
               press: () {
-                setState(() {
-                  Navigator.of(context).pushNamed(SrvessScreen.routeName);
-                });
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (_) => ShowService()));
               }),
         ]),
       ),

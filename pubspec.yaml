@@ -53,6 +53,7 @@ dependencies:
 
   provider: ^6.0.5
   url_launcher: ^6.1.10
+  connectivity_plus: ^3.0.3
   # url to open any link 
   # url_launcher: ^6.1.10
   # cloud_firestore: ^4.4.3

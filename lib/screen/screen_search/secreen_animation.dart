@@ -3,11 +3,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yah_app/screen/screen_search/dataselect.dart';
 import 'package:yah_app/styles/style.dart';
 import 'package:yah_app/styles/tolls.dart';
 import 'package:provider/provider.dart';
-import '../../Widget/new_page.dart';
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // class MyCustomWidget extends StatefulWidget {
@@ -194,8 +192,25 @@ class SlideTransitionAnimation extends PageRouteBuilder {
 
 int index = 24434;
 
-class SecondPage extends StatelessWidget {
+class SecondPage extends StatefulWidget {
+  const SecondPage({Key? key}) : super(key: key);
+
   @override
+  State<SecondPage> createState() => _SecondePage();
+}
+
+class _SecondePage extends State<SecondPage> {
+  late bool _isLoding;
+
+  @override
+  void initState() {
+    _isLoding = true;
+    Future.delayed(const Duration(seconds: 10), () {});
+    setState(() {
+      _isLoding = false;
+    });
+  }
+
   Widget build(BuildContext context) {
     List<passbord> Data = Provider.of<passpordProvider>(context).listData;
     String searchNumber =
@@ -211,92 +226,278 @@ class SecondPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.black,
           systemOverlayStyle: SystemUiOverlayStyle.light),
-      body: Provider.of<passpordProvider>(context).searchList(searchNumber)
-          ? Card(
-              semanticContainer: false,
-              elevation: 20,
-              clipBehavior: Clip.antiAlias,
-              margin: EdgeInsets.all(20.0),
-              // padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Container(
-                    child: Text(
-                      filterData.name,
-                      style: header,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      filterData.image,
-                      fit: BoxFit.cover,
-                      width: size.width - 50,
-                      height: size.height / 3,
-                      // color: Colors.transparent,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Text(
-                      " صاحب الجواز :" + filterData.name,
-                      style: header2,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Text(
-                      " الرقم :" + filterData.phone,
-                      style: header2,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Text(
-                      " نوع المعاملة :" + filterData.state,
-                      style: header2,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Text(
-                      " نوع المعاملة :" + filterData.state,
-                      style: header2,
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : Center(
-              child: AnimatedTextKit(
-                animatedTexts: [
-                  TypewriterAnimatedText(
-                    'معاملتك قيد ',
-                    speed: Duration(milliseconds: 150),
-                    textStyle: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-                isRepeatingAnimation: true,
-                repeatForever: true,
-                displayFullTextOnTap: true,
-                stopPauseOnTap: false,
-              ),
+      body: Column(
+        children: [
+          _isLoding
+              ? Expanded(child: ShowSktolin(size: size))
+              : Expanded(
+                  child: Provider.of<passpordProvider>(context)
+                          .searchList(searchNumber)
+                      ? SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Card(
+                                semanticContainer: false,
+                                elevation: 20,
+                                clipBehavior: Clip.antiAlias,
+                                margin: EdgeInsets.all(20.0),
+                                // padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        filterData.name,
+                                        style: header,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.asset(
+                                        filterData.image,
+                                        fit: BoxFit.cover,
+                                        width: size.width - 50,
+                                        height: size.height / 3,
+                                        // color: Colors.transparent,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        " صاحب الجواز :" + filterData.name,
+                                        style: header2,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        " الرقم :" + filterData.phone,
+                                        style: header2,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        " نوع المعاملة :" + filterData.state,
+                                        style: header2,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        " نوع المعاملة :" + filterData.state,
+                                        style: header2,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Center(
+                          child: AnimatedTextKit(
+                            animatedTexts: [
+                              TypewriterAnimatedText(
+                                'معاملتك قيد ',
+                                speed: Duration(milliseconds: 150),
+                                textStyle: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                            isRepeatingAnimation: true,
+                            repeatForever: true,
+                            displayFullTextOnTap: true,
+                            stopPauseOnTap: false,
+                          ),
+                        ),
+                ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
+}
+
+class ShowSktolin extends StatelessWidget {
+  const ShowSktolin({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+                child: Column(
+              children: const [
+                Skelton(
+                  height: 20,
+                  width: 230,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Skelton(
+                  height: 20,
+                  width: 230,
+                ),
+              ],
+            )),
+            Skelton(
+              height: 30,
+              width: 120,
             ),
+          ],
+        ),
+        SizedBox(
+          height: 40,
+        ),
+        Column(
+          children: [
+            Skelton(
+              width: size.width - 50,
+              height: size.height / 3,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                    child: Column(
+                  children: const [
+                    Skelton(
+                      height: 20,
+                      width: 230,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Skelton(
+                      height: 20,
+                      width: 230,
+                    ),
+                  ],
+                )),
+                Skelton(
+                  height: 30,
+                  width: 120,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                    child: Column(
+                  children: const [
+                    Skelton(
+                      height: 20,
+                      width: 230,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Skelton(
+                      height: 20,
+                      width: 230,
+                    ),
+                  ],
+                )),
+                Skelton(
+                  height: 30,
+                  width: 120,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                    child: Column(
+                  children: const [
+                    Skelton(
+                      height: 20,
+                      width: 230,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Skelton(
+                      height: 20,
+                      width: 230,
+                    ),
+                  ],
+                )),
+                Skelton(
+                  height: 25,
+                  width: 120,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class Skelton extends StatelessWidget {
+  const Skelton({
+    Key? key,
+    this.width,
+    this.height,
+  }) : super(key: key);
+  final double? width, height;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.04),
+          borderRadius: const BorderRadius.all(Radius.circular(16))),
     );
   }
 }

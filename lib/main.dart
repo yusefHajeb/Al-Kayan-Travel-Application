@@ -1,5 +1,7 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:yah_app/providers/service_provider.dart';
 import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 import 'package:yah_app/screen/servis/sirvec_page.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
@@ -18,10 +20,22 @@ void main() => runApp(MultiProvider(providers: [
       ChangeNotifierProvider<passpordProvider>(
           create: (_) => passpordProvider()),
       ChangeNotifierProvider<ProviderService>(create: (_) => ProviderService()),
+      ChangeNotifierProvider(create: (_) => ProviderShowService()),
     ], child: MyApp()));
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
+  void initState() {
+    checkConnecrivity();
+  }
+
+  void checkConnecrivity() async {
+    var result = await Connectivity().checkConnectivity();
+    print(result.name);
+  }
+
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
@@ -38,14 +52,28 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: const [Locale("ar", "AE")],
-        initialRoute: '/',
+        home: StreamBuilder<ConnectivityResult>(
+            stream: Connectivity().onConnectivityChanged,
+            builder: (context, snapshot) {
+              return snapshot.data == ConnectivityResult.none
+                  ? Center(
+                      child: Text("No Inter net Connecrion "),
+                    )
+                  : firstScreen();
+            }),
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => firstScreen(),
+          // '/': (context) => firstScreen(),
           Screen2.routeName: (context) => Screen2(),
-          SrvessScreen.routeName: (context) => SrvessScreen(),
+          ShowService.routeName: (context) => ShowService(),
           PageService.routeName: (context) => PageService(),
         });
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 

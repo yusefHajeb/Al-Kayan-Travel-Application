@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "783481701289",
+    "project_id": "alkayantravel-a1c6e",
+    "storage_bucket": "alkayantravel-a1c6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783481701289:android:1d19259406a84138c4fab8",
+        "android_client_info": {
+          "package_name": "com.example.yah_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783481701289-d0ildq977tpu34bo1gnvtm66661lb543.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZnsAPiiOp6WcWXKII8ThNZCZ5zeHN0Ek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783481701289-d0ildq977tpu34bo1gnvtm66661lb543.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:yah_app/dataBase/dealetes.dart';
 // import 'package:yah_app/Widget/widget_tools/dealetes.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
@@ -8,6 +9,8 @@ import '../../Widget/AnimaiWidget/BouncingButton.dart';
 // import '../../Widget/widget_tools/dealetes.dart';
 import 'package:yah_app/styles/style.dart';
 
+import '../../providers/service_provider.dart';
+
 class PageService extends StatefulWidget {
   static const routeName = 'show_servece_index';
   @override
@@ -15,19 +18,20 @@ class PageService extends StatefulWidget {
 }
 
 @override
-void showService(BuildContext ctx, int index) {
-  Navigator.of(ctx).pushNamed(
-    PageService.routeName,
-    arguments: index,
-  );
-}
+// void showService(BuildContext ctx, int index) {
+//   Navigator.of(ctx).pushNamed(
+//     PageService.routeName,
+//     arguments: index,
+//   );
+// }
 
 class _PageService extends State<PageService> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     //عند الا
-    final int sectionIndex = ModalRoute.of(context)?.settings.arguments as int;
+    final int sectionIndex =
+        Provider.of<ProviderShowService>(context).getIndex();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(children: [
@@ -52,8 +56,9 @@ class _PageService extends State<PageService> {
                   right: 20,
                   child: IconButton(
                     onPressed: () {
-                      Navigator.popAndPushNamed(
-                          context, SrvessScreen.routeName);
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (_) => ShowService()));
+                      // Navigator.popAndPushNamed(context, ShowService.routeName);
                     },
                     icon: const Icon(
                       Icons.arrow_back_ios,
@@ -163,7 +168,8 @@ class CardBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        showService(context, sectionIndex);
+        Provider.of<ProviderShowService>(context, listen: false)
+            .showService(context, sectionIndex);
       },
       child: AspectRatio(
         aspectRatio: 3 / 1,
