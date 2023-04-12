@@ -7,71 +7,6 @@ import 'package:yah_app/styles/style.dart';
 import 'package:yah_app/styles/tolls.dart';
 import 'package:provider/provider.dart';
 
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// class MyCustomWidget extends StatefulWidget {
-//   @override
-//   _MyCustomWidgetState createState() => _MyCustomWidgetState();
-// }
-
-// class _MyCustomWidgetState extends State<MyCustomWidget> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: Container(
-//             width: 400,
-//             margin: EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
-//             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-//             decoration: BoxDecoration(
-//               boxShadow: [
-//                 BoxShadow(
-//                   offset: Offset(0, 6),
-//                   blurRadius: 17,
-//                   spreadRadius: -20,
-//                   color: Colors.black,
-//                 ),
-//               ],
-//               color: Colors.white,
-//               borderRadius: BorderRadius.circular(29.5),
-//             ),
-//             //  color: Colors.white, borderRadius: BorderRadius.circular(29.5)),
-//             child: TextField(
-//               keyboardType: TextInputType.number,
-//               decoration: InputDecoration(
-//                 hintText: "ابحث برقم ",
-//                 icon: Icon(Icons.search),
-//                 border: InputBorder.none,
-//                 suffixIcon: OpenContainer(
-//                   closedBuilder: (_, openContainer) {
-//                     return Container(
-//                       height: 80,
-//                       width: 80,
-//                       child: Center(
-//                         child: Text(
-//                           'بحث',
-//                           style: TextStyle(
-//                             fontWeight: FontWeight.bold,
-//                           ),
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                   openColor: Colors.white,
-//                   closedElevation: 20,
-//                   closedShape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(20)),
-//                   transitionDuration: Duration(milliseconds: 700),
-//                   openBuilder: (_, closeContainer) {
-//                     return SecondScreen();
-//                   },
-//                 ),
-//               ),
-//             )),
-//       ),
-//     );
-//   }
-// }
-
 class SecondScreen extends StatefulWidget {
   @override
   _SecondScreenState createState() => _SecondScreenState();
@@ -140,24 +75,6 @@ class _SecondScreenState extends State<SecondScreen> {
                           ),
                         ],
                       ),
-                      // child: TextField(
-                      //   style: TextStyle(fontSize: 12),
-                      //   onChanged: (value) {},
-                      //   decoration: InputDecoration(
-                      //     hintText: "Search...",
-                      //     contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                      //     fillColor: Colors.white,
-                      //     filled: true,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(50),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //     suffixIcon: Icon(
-                      //       Icons.search,
-                      //       color: Colors.black,
-                      //     ),
-                      //   ),
-                      // ),
                     ),
                   )
                 ],
@@ -200,24 +117,35 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondePage extends State<SecondPage> {
-  late bool _isLoding;
-
+  late bool _isLoding = true;
+  late bool _isCheck = false;
+  late List<passbord> Data;
+  var filterData;
+  String searchNumber = "123456789";
   @override
   void initState() {
-    _isLoding = true;
-    Future.delayed(const Duration(seconds: 10), () {});
-    setState(() {
-      _isLoding = false;
+    // _isLoding = true;
+    Provider.of<passpordProvider>(context, listen: false).fectData().then((_) {
+      Data = Provider.of<passpordProvider>(context, listen: false).listClint;
+      if (Data.isEmpty) {
+        _isLoding = true;
+      } else {
+        print("xxxxxxxxxxxxxxxxxxxxxxx");
+        // _isCheck =
+        //     Provider.of<passpordProvider>(context).searchList(searchNumber);
+
+        filterData =
+            Data.firstWhere((element) => element.numberPassbord == 123456789);
+
+        _isLoding = false;
+      }
     });
+    super.initState();
   }
 
   Widget build(BuildContext context) {
-    List<passbord> Data = Provider.of<passpordProvider>(context).listData;
-    String searchNumber =
-        Provider.of<passpordProvider>(context).getNumberPassbord();
-
-    late var filterData =
-        Data.firstWhere((element) => element.numberPassbord == searchNumber);
+    // searchNumber = Provider.of<passpordProvider>(context, listen: true)
+    //     .getNumberPassbord();
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -226,111 +154,31 @@ class _SecondePage extends State<SecondPage> {
           centerTitle: true,
           backgroundColor: Colors.black,
           systemOverlayStyle: SystemUiOverlayStyle.light),
-      body: Column(
-        children: [
-          _isLoding
-              ? Expanded(child: ShowSktolin(size: size))
-              : Expanded(
-                  child: Provider.of<passpordProvider>(context)
-                          .searchList(searchNumber)
-                      ? SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Card(
-                                semanticContainer: false,
-                                elevation: 20,
-                                clipBehavior: Clip.antiAlias,
-                                margin: EdgeInsets.all(20.0),
-                                // padding: const EdgeInsets.all(20.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      child: Text(
-                                        filterData.name,
-                                        style: header,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset(
-                                        filterData.image,
-                                        fit: BoxFit.cover,
-                                        width: size.width - 50,
-                                        height: size.height / 3,
-                                        // color: Colors.transparent,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        " صاحب الجواز :" + filterData.name,
-                                        style: header2,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        " الرقم :" + filterData.phone,
-                                        style: header2,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        " نوع المعاملة :" + filterData.state,
-                                        style: header2,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        " نوع المعاملة :" + filterData.state,
-                                        style: header2,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+      body: _isLoding
+          ? SizedBox(height: size.height, child: ShowSktolin(size: size))
+          : SizedBox(
+              height: size.height,
+              child: !_isLoding
+                  ? clintData(filterData: filterData, size: size)
+                  : Center(
+                      child: AnimatedTextKit(
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            'معاملتك قيد ',
+                            speed: Duration(milliseconds: 150),
+                            textStyle: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        )
-                      : Center(
-                          child: AnimatedTextKit(
-                            animatedTexts: [
-                              TypewriterAnimatedText(
-                                'معاملتك قيد ',
-                                speed: Duration(milliseconds: 150),
-                                textStyle: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                            isRepeatingAnimation: true,
-                            repeatForever: true,
-                            displayFullTextOnTap: true,
-                            stopPauseOnTap: false,
-                          ),
-                        ),
-                ),
-        ],
-      ),
+                        ],
+                        isRepeatingAnimation: true,
+                        repeatForever: true,
+                        displayFullTextOnTap: true,
+                        stopPauseOnTap: false,
+                      ),
+                    ),
+            ),
     );
   }
 
@@ -338,6 +186,98 @@ class _SecondePage extends State<SecondPage> {
   State<StatefulWidget> createState() {
     // TODO: implement createState
     throw UnimplementedError();
+  }
+}
+
+class clintData extends StatelessWidget {
+  const clintData({
+    Key? key,
+    required this.filterData,
+    required this.size,
+  }) : super(key: key);
+
+  final passbord filterData;
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          Card(
+            semanticContainer: false,
+            elevation: 20,
+            clipBehavior: Clip.antiAlias,
+            margin: EdgeInsets.all(20.0),
+            // padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  child: Text(
+                    filterData.name,
+                    style: header,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    filterData.image,
+                    fit: BoxFit.cover,
+                    width: size.width - 50,
+                    height: size.height / 3,
+                    // color: Colors.transparent,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  child: Text(
+                    " صاحب الجواز :" + filterData.name,
+                    style: header2,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  child: Text(
+                    " الرقم :" + filterData.phone,
+                    style: header2,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  child: Text(
+                    " نوع المعاملة :" + filterData.state,
+                    style: header2,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  child: Text(
+                    " نوع المعاملة :" + filterData.state,
+                    style: header2,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
