@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:yah_app/styles/myprovider.dart';
 
 // import 'package:yah_app/screen/kaian_screen.dart';
 const secanderyColor = Color.fromARGB(255, 212, 152, 0);
@@ -52,6 +56,34 @@ class passbord {
 }
 
 class passpordProvider with ChangeNotifier {
+  Future<void> fectData() async {
+    final url = Uri.parse(
+        "https://alkayantravel-a1c6e-default-rtdb.firebaseio.com/customer.json");
+
+    try {
+      final http.Response res = await http.get(url);
+      // print(json.decode(res.body));
+      final extractedData = json.decode(res.body) as Map<String, dynamic>;
+      extractedData.forEach((clintID, clintData) {
+        listClint.add(
+          passbord(
+              numberPassbord: clintData['passbord'].toString(),
+              state: clintData['stateTransaction'],
+              name: clintData['name'],
+              phone: clintData['phone'].toString(),
+              another: clintData['Note'],
+              image: clintData['stateTransaction']),
+        );
+      });
+      print(json.decode(res.body));
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  List<passbord> listClint = [];
+
   List<passbord> listData = [
     passbord(
         numberPassbord: "123456789",
@@ -70,7 +102,7 @@ class passpordProvider with ChangeNotifier {
   ];
 
   bool searchList(String searchNumber) {
-    for (var item in listData) {
+    for (var item in listClint) {
       if (item.numberPassbord == searchNumber) {
         return true;
       }

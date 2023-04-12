@@ -46,6 +46,9 @@ class _firstScreenState extends State<firstScreen> {
     key = GlobalKey<FormState>();
     // fromstat = new GlobalKey<FormState>();
     setNumPass();
+    // Provider.of<passpordProvider>(context, listen: false).fectData();
+    Provider.of<passpordProvider>(context, listen: false).fectData();
+
     _pageController =
         PageController(initialPage: _currentPage, viewportFraction: 0.8);
     super.initState();

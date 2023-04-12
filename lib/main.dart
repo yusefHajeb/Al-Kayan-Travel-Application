@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,6 +11,9 @@ import 'package:yah_app/screen/kaian__screen.dart';
 import 'package:yah_app/styles/myprovider.dart';
 import 'package:yah_app/styles/tolls.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:http/http.dart' as http;
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
@@ -16,12 +21,32 @@ void _xx(int index) {
   _selectedIndex = index;
 }
 
-void main() => runApp(MultiProvider(providers: [
-      ChangeNotifierProvider<passpordProvider>(
-          create: (_) => passpordProvider()),
-      ChangeNotifierProvider<ProviderService>(create: (_) => ProviderService()),
-      ChangeNotifierProvider(create: (_) => ProviderShowService()),
-    ], child: MyApp()));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  future:
+  await Firebase.initializeApp();
+  // var _ref = FirebaseDatabase.instance.ref().child("customer");
+
+  // _ref.set(10);
+  // final url = Uri.parse(
+  //     "https://alkayantravel-a1c6e-default-rtdb.firebaseio.com/customer.json");
+  // "https://alkayantravel-a1c6e-default-rtdb.firebaseio.com/customer.json";
+  // http.post(url,
+  //     body: json.encode({
+  //       "passbord": 123456789,
+  //       'phone': 771274299,
+  //       'transictionNum': 222222222,
+  //       "name": "Yousef Abda AL-malick",
+  //       'typeTrnsaction': "Omra",
+  //       "stateTransaction": 'Ok',
+  //       'Note': "after month will arrive passbord"
+  //     }));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<passpordProvider>(create: (_) => passpordProvider()),
+    ChangeNotifierProvider<ProviderService>(create: (_) => ProviderService()),
+    ChangeNotifierProvider(create: (_) => ProviderShowService()),
+  ], child: MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -53,14 +78,15 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: const [Locale("ar", "AE")],
         home: StreamBuilder<ConnectivityResult>(
-            stream: Connectivity().onConnectivityChanged,
-            builder: (context, snapshot) {
-              return snapshot.data == ConnectivityResult.none
-                  ? Center(
-                      child: Text("No Inter net Connecrion "),
-                    )
-                  : firstScreen();
-            }),
+          stream: Connectivity().onConnectivityChanged,
+          builder: (context, snapshot) {
+            return snapshot.data == ConnectivityResult.none
+                ? const Center(
+                    child: Text("No Inter net Connecrion "),
+                  )
+                : firstScreen();
+          },
+        ),
         debugShowCheckedModeBanner: false,
         routes: {
           // '/': (context) => firstScreen(),
