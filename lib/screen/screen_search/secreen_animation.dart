@@ -3,6 +3,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yah_app/screen/screen_search/dataselect.dart';
 import 'package:yah_app/styles/style.dart';
 import 'package:yah_app/styles/tolls.dart';
 import 'package:provider/provider.dart';
@@ -118,29 +119,57 @@ class SecondPage extends StatefulWidget {
 
 class _SecondePage extends State<SecondPage> {
   late bool _isLoding = true;
-  late bool _isCheck = false;
+  late bool _isCheck = true;
   late List<passbord> Data;
-  var filterData;
-  String searchNumber = "123456789";
+  var filterData1;
+  String? searchNumber;
+
   @override
   void initState() {
     // _isLoding = true;
     Provider.of<passpordProvider>(context, listen: false).fectData().then((_) {
       Data = Provider.of<passpordProvider>(context, listen: false).listClint;
-      if (Data.isEmpty) {
-        _isLoding = true;
-      } else {
-        print("xxxxxxxxxxxxxxxxxxxxxxx");
-        // _isCheck =
-        //     Provider.of<passpordProvider>(context).searchList(searchNumber);
-
-        filterData =
-            Data.firstWhere((element) => element.numberPassbord == 123456789);
-
-        _isLoding = false;
+      if (!Data.isEmpty) {
+        filterData1 = Data.firstWhere(
+          (element) => element.numberPassbord.toString() == searchNumber,
+        );
       }
+      _isLoding = false;
+      // try {
+      //   Timer(Duration(seconds: 2), () {
+      //     setState(() {
+      //       if (filterData1!.numberPassbord.isEmpty) {
+      //         _isLoding = true;
+      //         _isCheck = false;
+      //         print("xxxxxxxxxxxxxxxxxxxxxxx");
+      //       } else {
+      //         // print("xxxxxxxxxxxxxxxxxxxxxxx");
+      //         // _isCheck =
+      //         //     Provider.of<passpordProvider>(context).searchList("123456789");
+      //         // filterData = Data.firstWhere(
+      //         //     (element) => element.numberPassbord == searchNumber);
+      //         _isLoding = false;
+
+      //         print("xxxxxxxxxxxxxxxxxxxxxxx" + _isCheck.toString());
+      //       }
+      //     });
+      //   });
+      // } catch (_) {
+      //   //
+      // }
     });
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    searchNumber = Provider.of<passpordProvider>(context, listen: true)
+        .getNumberPassbord();
+
+    // if (filterData1.toString().isEmpty) _isCheck = false;
+    // _isCheck = filterData.toString().isEmpty;
+    super.didChangeDependencies();
   }
 
   Widget build(BuildContext context) {
@@ -158,8 +187,9 @@ class _SecondePage extends State<SecondPage> {
           ? SizedBox(height: size.height, child: ShowSktolin(size: size))
           : SizedBox(
               height: size.height,
-              child: !_isLoding
-                  ? clintData(filterData: filterData, size: size)
+              child: Provider.of<passpordProvider>(context)
+                      .searchList(searchNumber!)
+                  ? clintData(filterData: filterData1!, size: size)
                   : Center(
                       child: AnimatedTextKit(
                         animatedTexts: [
@@ -226,16 +256,16 @@ class clintData extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    filterData.image,
-                    fit: BoxFit.cover,
-                    width: size.width - 50,
-                    height: size.height / 3,
-                    // color: Colors.transparent,
-                  ),
-                ),
+                // ClipRRect(
+                //   borderRadius: BorderRadius.circular(10),
+                //   child: Image.asset(
+                //     filterData.image,
+                //     fit: BoxFit.cover,
+                //     width: size.width - 50,
+                //     height: size.height / 3,
+                //     // color: Colors.transparent,
+                //   ),
+                // ),
                 SizedBox(
                   height: 20,
                 ),
