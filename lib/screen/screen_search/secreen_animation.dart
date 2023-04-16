@@ -3,10 +3,13 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 import 'package:yah_app/screen/screen_search/dataselect.dart';
 import 'package:yah_app/styles/style.dart';
-import 'package:yah_app/styles/tolls.dart';
+import 'package:yah_app/styles/provider_passboard.dart';
 import 'package:provider/provider.dart';
+
+import '../../styles/tolls.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -26,7 +29,7 @@ class _SecondScreenState extends State<SecondScreen> {
     });
     Timer(Duration(milliseconds: 2000), () {
       Navigator.of(context)
-          .pushReplacement(SlideTransitionAnimation(SecondPage()));
+          .pushReplacement(SlideTransitionAnimation(const SecondPage()));
     });
   }
 
@@ -49,8 +52,9 @@ class _SecondScreenState extends State<SecondScreen> {
               duration: Duration(milliseconds: 6000),
               curve: Curves.fastLinearToSlowEaseIn,
               width: _a ? _width : 0,
+              color: primary,
               height: _height,
-              color: Color.fromARGB(255, 238, 224, 194),
+              // color: Color.fromARGB(255, 234, 166, 18),
             ),
             Center(
               child: Stack(
@@ -65,8 +69,7 @@ class _SecondScreenState extends State<SecondScreen> {
                     left: MediaQuery.of(context).size.width * 0.065,
                     right: MediaQuery.of(context).size.width * 0.065,
                     child: Container(
-                      child:
-                          Image.asset("assest/image/14_No Search Results.png"),
+//image here
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -119,22 +122,22 @@ class SecondPage extends StatefulWidget {
 
 class _SecondePage extends State<SecondPage> {
   late bool _isLoding = true;
-  late bool _isCheck = true;
-  late List<passbord> Data;
+  late bool _isCheck = false;
+  late List<Passbord> Data;
   var filterData1;
   String? searchNumber;
 
   @override
   void initState() {
     // _isLoding = true;
-    Provider.of<passpordProvider>(context, listen: false).fectData().then((_) {
-      Data = Provider.of<passpordProvider>(context, listen: false).listClint;
-      if (!Data.isEmpty) {
-        filterData1 = Data.firstWhere(
-          (element) => element.numberPassbord.toString() == searchNumber,
-        );
-      }
-      _isLoding = false;
+    Provider.of<PasspordProvider>(context, listen: false).fectData().then((_) {
+      // Data = Provider.of<passpordProvider>(context, listen: false).listClint;
+      // if (!Data.isEmpty) {
+      //   filterData1 = Data.firstWhere(
+      //     (element) => element.numberPassbord.toString() == searchNumber,
+      //   );
+      // }
+      // _isLoding = false;
       // try {
       //   Timer(Duration(seconds: 2), () {
       //     setState(() {
@@ -157,6 +160,8 @@ class _SecondePage extends State<SecondPage> {
       // } catch (_) {
       //   //
       // }
+      _isLoding = false;
+      _isCheck = false;
     });
 
     super.initState();
@@ -164,12 +169,33 @@ class _SecondePage extends State<SecondPage> {
 
   @override
   void didChangeDependencies() {
-    searchNumber = Provider.of<passpordProvider>(context, listen: true)
+    searchNumber = Provider.of<PasspordProvider>(context, listen: true)
         .getNumberPassbord();
+
+    _isCheck = Provider.of<PasspordProvider>(context, listen: true).getExist();
+    if (_isCheck) {
+      filterData1 =
+          Provider.of<PasspordProvider>(context, listen: true).getPasspordVar();
+      _isLoding = false;
+    } else {
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          _isLoding = false;
+        });
+      });
+    }
 
     // if (filterData1.toString().isEmpty) _isCheck = false;
     // _isCheck = filterData.toString().isEmpty;
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    // _isCheck = false;
+    _isLoding = true;
+    filterData1 = null;
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
@@ -187,9 +213,8 @@ class _SecondePage extends State<SecondPage> {
           ? SizedBox(height: size.height, child: ShowSktolin(size: size))
           : SizedBox(
               height: size.height,
-              child: Provider.of<passpordProvider>(context)
-                      .searchList(searchNumber!)
-                  ? clintData(filterData: filterData1!, size: size)
+              child: _isCheck
+                  ? clintData(filterData: filterData1, size: size)
                   : Center(
                       child: AnimatedTextKit(
                         animatedTexts: [
@@ -226,7 +251,7 @@ class clintData extends StatelessWidget {
     required this.size,
   }) : super(key: key);
 
-  final passbord filterData;
+  final Passbord filterData;
   final Size size;
 
   @override
@@ -242,7 +267,7 @@ class clintData extends StatelessWidget {
             semanticContainer: false,
             elevation: 20,
             clipBehavior: Clip.antiAlias,
-            margin: EdgeInsets.all(20.0),
+            margin: const EdgeInsets.all(20.0),
             // padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -253,20 +278,10 @@ class clintData extends StatelessWidget {
                     style: header,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                // ClipRRect(
-                //   borderRadius: BorderRadius.circular(10),
-                //   child: Image.asset(
-                //     filterData.image,
-                //     fit: BoxFit.cover,
-                //     width: size.width - 50,
-                //     height: size.height / 3,
-                //     // color: Colors.transparent,
-                //   ),
-                // ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(

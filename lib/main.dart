@@ -8,12 +8,14 @@ import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 import 'package:yah_app/screen/servis/sirvec_page.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
 import 'package:yah_app/screen/kaian__screen.dart';
+import 'package:yah_app/screen/splash%20screen/splash_screen.dart';
 import 'package:yah_app/styles/myprovider.dart';
-import 'package:yah_app/styles/tolls.dart';
+import 'package:yah_app/styles/provider_passboard.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:http/http.dart' as http;
+import 'package:yah_app/styles/tolls.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
@@ -84,7 +86,7 @@ class MyApp extends StatelessWidget {
                 ? const Center(
                     child: Text("No Inter net Connecrion "),
                   )
-                : firstScreen();
+                : SplashScreen();
           },
         ),
         debugShowCheckedModeBanner: false,
@@ -121,17 +123,17 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class HomePage2 extends StatelessWidget {
-  void selectScren(BuildContext ctx, int n) {
-    Navigator.of(ctx).pushNamed(
-      '/x',
-    );
-  }
+// class HomePage2 extends StatelessWidget {
+//   void selectScren(BuildContext ctx, int n) {
+//     Navigator.of(ctx).pushNamed(
+//       '/x',
+//     );
+//   }
 
-  const HomePage2({Key? key}) : super(key: key);
+//   const HomePage2({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Scaffold();
+//   }
+// }

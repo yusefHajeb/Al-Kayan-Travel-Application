@@ -1,13 +1,20 @@
+import 'dart:async';
 import 'package:animations/animations.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:yah_app/Widget/new_page.dart';
 import 'package:yah_app/screen/Hom%20Screen/widget/mysnackbar.dart';
+import 'package:yah_app/screen/servis/widget/scale_transition.dart';
 import 'package:yah_app/styles/myprovider.dart';
-import 'package:yah_app/styles/tolls.dart';
+import 'package:yah_app/styles/provider_passboard.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
-import 'package:yah_app/screen/kaian__screen.dart';
+import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
 import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
-import '../account_screen.dart';
+import '../../Widget/AnimaiWidget/BouncingButton.dart';
+import '../../styles/tolls.dart';
+import '../about screen/account_screen.dart';
 import '../screen_search/secreen_animation.dart';
 import 'package:provider/provider.dart';
 
@@ -27,43 +34,45 @@ class firstScreen extends StatefulWidget {
 }
 
 class _firstScreenState extends State<firstScreen> {
+  late StreamSubscription subscription;
+  late StreamSubscription internetSubscription;
+  bool hasInternet = false;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  // to close Kyboarde
+  FocusNode _focusNode = FocusNode();
   TextEditingController numPass = TextEditingController()..text = "";
   var key = GlobalKey<FormState>();
-  // getData() async {
-  //   DocumentReference doc = FirebaseFirestore.instance
-  //       .collection("customer")
-  //       .doc("p7EGGN5PWnD0bXcl9apb");
-
-  //   await doc.get().then((value) {
-  //     print(value.data());
-  //   });
-  // }
-//  var formdata = fromstat.currentState!;
   @override
   void initState() {
     key = GlobalKey<FormState>();
-    // fromstat = new GlobalKey<FormState>();
     setNumPass();
-    // Provider.of<passpordProvider>(context, listen: false).fectData();
-    Provider.of<passpordProvider>(context, listen: false).fectData();
+    internetSubscription =
+        InternetConnectionChecker().onStatusChange.listen((status) {
+      final hasInternet = status == InternetConnectionStatus.connected;
+      setState(() {
+        this.hasInternet = hasInternet;
+      });
+    });
+
+    subscription =
+        Connectivity().onConnectivityChanged.listen(_showConnectivityResult);
 
     _pageController =
         PageController(initialPage: _currentPage, viewportFraction: 0.8);
     super.initState();
   }
 
-  // int currentCarouselIndex = 0;
-  // Timer t = Timer(const Duration(seconds: 2), () {
-  //   setState(() => currentCarouselIndex++);
-  //   print(currentCarouselIndex);
-  // });
-  // var numPass = 0;
+  String _showConnectivityResult(ConnectivityResult result) {
+    final hasInternet = result != ConnectivityResult.none;
+    final message = hasInternet
+        ? "You are connected to mobile network"
+        : "تاكد من إتصالك با الإنترنت ";
+    final Color color = hasInternet ? Colors.green : Colors.red;
+    return message;
+  }
+
   var messageError = "";
   late PageController _pageController;
-
-  // ignore: non_constant_identifier_names
 
   @override
   void dispose() {
@@ -71,33 +80,36 @@ class _firstScreenState extends State<firstScreen> {
     _pageController.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
-
+    String searchQuery = '';
     Size size = MediaQuery.of(context).size;
+
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-
       body: Flex(direction: Axis.vertical, children: <Widget>[
         Expanded(
-            flex: 6,
+            flex: 7,
             child: ClipPath(
                 clipper: MyClipper(),
                 child: Container(
-                  padding: EdgeInsets.only(left: 40, top: 50, right: 20),
+                  padding: const EdgeInsets.only(left: 40, top: 50, right: 20),
                   height: 500,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [bBackDark, Color.fromARGB(255, 56, 24, 2)]),
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [bBackDark, Color.fromARGB(255, 56, 24, 2)],
+                    ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(30),
                     child: Image.asset(
                       "assest/image/imageKaian.png",
                       color: primary,
@@ -107,55 +119,94 @@ class _firstScreenState extends State<firstScreen> {
         const SizedBox(height: 20),
         Expanded(
           flex: 2,
-          child: Container(
-            width: 400,
-            margin:
-                const EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                  offset: Offset(0, 6),
-                  blurRadius: 17,
-                  spreadRadius: -20,
-                  color: Colors.black,
-                ),
-              ],
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(29.5),
-            ),
-            child: Form(
-              key: key,
-              child: TextFormField(
-                controller: numPass,
-                keyboardType: TextInputType.number,
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: "ابحث برقم الجواز",
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: primary,
+          child: Bouncing(
+            onPress: () {},
+            child: Container(
+              width: 400,
+              margin: const EdgeInsets.only(
+                  top: 0, right: 30, left: 30, bottom: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                    offset: Offset(0, 6),
+                    blurRadius: 17,
+                    spreadRadius: -20,
+                    color: Colors.black,
                   ),
-                  border: InputBorder.none,
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      if (numPass.text.isEmpty || numPass.text.length < 9) {
-                        MySnackBar(scaffold);
-                      } else {
-                        print("Passbord is :" + numPass.text);
-                        Provider.of<passpordProvider>(context, listen: false)
-                            .setNumberPassbord(numPass.text);
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SecondScreen()));
-                      }
-                    },
-                    focusColor: Colors.amber,
-                    hoverColor: Colors.black,
-                    child: Container(
-                      // color: Colors.amber,
-                      child: const Text("Search"),
-                      decoration: const BoxDecoration(
-                        color: Colors.amber,
+                ],
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(29.5),
+              ),
+              child: Form(
+                key: key,
+                child: TextFormField(
+                  controller: numPass,
+                  focusNode: _focusNode,
+                  keyboardType: TextInputType.number,
+                  obscureText: false,
+                  textInputAction: TextInputAction.search,
+                  onEditingComplete: () async {
+                    final result = await Connectivity().checkConnectivity();
+                    // _showConnectivityResult(result);
+                    if (_showConnectivityResult(result) ==
+                        "تاكد من إتصالك با الإنترنت ") {
+                      _focusNode.unfocus();
+                      MySnackBar(scaffold, _showConnectivityResult(result));
+                    } else if (numPass.text.isEmpty ||
+                        numPass.text.length < 9) {
+                      _focusNode.unfocus();
+                      MySnackBar(scaffold, "القيمة المدخله خاطة");
+                    } else {
+                      print("Passbord is :" + numPass.text);
+                      Provider.of<PasspordProvider>(context, listen: false)
+                          .setNumberPassbord(numPass.text);
+                      _focusNode.unfocus();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => SecondScreen()));
+                    }
+                  },
+                  decoration: InputDecoration(
+                    hintText: "ابحث برقم الجواز",
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: primary,
+                    ),
+
+                    border: InputBorder.none,
+
+                    //  suffixIcon: 24.0,
+                    suffixIconColor: Colors.grey,
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 16.0,
+                    ),
+
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        if (numPass.text.isEmpty || numPass.text.length < 9) {
+                          _focusNode.unfocus();
+                          MySnackBar(scaffold, "القيمة المدخله خاطة");
+                        } else {
+                          print("Passbord is :" + numPass.text);
+                          Provider.of<PasspordProvider>(context, listen: false)
+                              .setNumberPassbord(numPass.text);
+                          // Navigator.of(context).Reblase
+                          _focusNode.unfocus();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => SecondScreen()));
+                        }
+                      },
+                      focusColor: Colors.amber,
+                      hoverColor: Colors.black,
+                      child: Container(
+                        // color: Colors.amber,
+                        child: const Text("Search"),
+                        decoration: const BoxDecoration(
+                          color: Colors.amber,
+                        ),
                       ),
                     ),
                   ),
@@ -165,9 +216,9 @@ class _firstScreenState extends State<firstScreen> {
           ),
         ),
         Expanded(
-          flex: 5,
+          flex: 6,
           child: Container(
-            padding: const EdgeInsets.only(top: 10, bottom: 20),
+            padding: const EdgeInsets.only(top: 20, bottom: 20),
             width: double.infinity,
             child: AspectRatio(
               aspectRatio: 10,
@@ -191,22 +242,10 @@ class _firstScreenState extends State<firstScreen> {
           ),
         ),
         const SizedBox(
-          height: 10,
+          height: 6,
         ),
         CardBottom(context),
       ]),
-      // bottomNavigationBar: CurvedNavigationBar(
-      //   items: <Widget>[
-      //     Icon(Icons.add, size: 30),
-      //     Icon(Icons.list, size: 30),
-      //     Icon(Icons.compare_arrows, size: 30),
-      //   ],
-      //   onTap: (index) {
-      //     setState(() {
-      //       index = index;
-      //     });
-      //   },
-      // ),
     );
   }
 
@@ -214,40 +253,32 @@ class _firstScreenState extends State<firstScreen> {
     return Expanded(
       flex: 3,
       child: Container(
-        // height: 600,
+        height: 700,
         padding: const EdgeInsets.symmetric(horizontal: 0.0),
-        margin: EdgeInsets.only(right: 20),
+        margin: const EdgeInsets.only(right: 20),
         child: ListView(scrollDirection: Axis.horizontal, children: [
           CatagoryCount(
             titleCurd: "لماذا كيان",
             myIcon: const Icon(
               Icons.diamond,
               color: Colors.blue,
-              size: 50,
+              size: 40,
             ),
             press: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => Screen2()));
+              Navigator.push(context, ScaleTransitionScreen(Screen2()));
               Provider.of<ProviderService>(context, listen: false)
                   .setNumberScreen(1.toString());
-              // setState(() {
-              //   selectScreen2(context, 1);
-              // });
             },
           ),
           CatagoryCount(
             titleCurd: "شركائنا",
             myIcon: const Icon(
               Icons.handshake,
-              color: const Color.fromARGB(255, 22, 51, 26),
+              color: Color.fromARGB(255, 22, 51, 26),
               size: 50,
             ),
             press: () {
-              //           setState(() {
-              //   selectScreen2(context, 2);
-              // });
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => Screen2()));
+              Navigator.push(context, ScaleTransitionScreen(Screen2()));
               //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
               Provider.of<ProviderService>(context, listen: false)
                   .setNumberScreen(2.toString());
@@ -260,14 +291,9 @@ class _firstScreenState extends State<firstScreen> {
               color: const Color.fromARGB(255, 22, 51, 26),
             ),
             press: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => Screen2()));
+              Navigator.push(context, ScaleTransitionScreen(Screen2()));
               Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(3.toString());
-
-              // setState(() {
-              //   selectScreen2(context, 3);
-              // });
+                  .setNumberScreen(2.toString());
             },
           ),
           CatagoryCount(
@@ -328,7 +354,7 @@ class _firstScreenState extends State<firstScreen> {
           // padding: EdgeInsets.only(bottom: 30),
 
           width: 300,
-          height: size.height / 4.8,
+          height: size.height / 4.3,
           margin: const EdgeInsets.only(
             left: 20,
           ),
