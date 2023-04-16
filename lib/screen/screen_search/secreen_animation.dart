@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,7 +70,6 @@ class _SecondScreenState extends State<SecondScreen> {
                     left: MediaQuery.of(context).size.width * 0.065,
                     right: MediaQuery.of(context).size.width * 0.065,
                     child: Container(
-//image here
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -209,31 +209,54 @@ class _SecondePage extends State<SecondPage> {
           centerTitle: true,
           backgroundColor: Colors.black,
           systemOverlayStyle: SystemUiOverlayStyle.light),
-      body: _isLoding
-          ? SizedBox(height: size.height, child: ShowSktolin(size: size))
-          : SizedBox(
-              height: size.height,
-              child: _isCheck
-                  ? clintData(filterData: filterData1, size: size)
-                  : Center(
-                      child: AnimatedTextKit(
-                        animatedTexts: [
-                          TypewriterAnimatedText(
-                            'معاملتك قيد ',
-                            speed: Duration(milliseconds: 150),
-                            textStyle: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection("users").snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            }
+
+            final docs = snapshot.data!.docs;
+
+            return _isLoding
+                ? SizedBox(height: size.height, child: ShowSktolin(size: size))
+                : SizedBox(
+                    height: size.height,
+                    child: _isCheck
+                        ? clintData(filterData: filterData1, size: size)
+                        : Center(
+                            child: !_isCheck
+                                ? ListView.builder(
+                                    itemCount: docs.length,
+                                    // itemCount: docs.length ,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Container(
+                                        child: Text(
+                                            docs[index]['name'].toString()),
+                                      );
+                                    },
+                                  )
+                                : AnimatedTextKit(
+                                    animatedTexts: [
+                                      TypewriterAnimatedText(
+                                        'معاملتك قيد ',
+                                        speed: Duration(milliseconds: 150),
+                                        textStyle: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                    isRepeatingAnimation: true,
+                                    repeatForever: true,
+                                    displayFullTextOnTap: true,
+                                    stopPauseOnTap: false,
+                                  ),
                           ),
-                        ],
-                        isRepeatingAnimation: true,
-                        repeatForever: true,
-                        displayFullTextOnTap: true,
-                        stopPauseOnTap: false,
-                      ),
-                    ),
-            ),
+                  );
+          }),
     );
   }
 

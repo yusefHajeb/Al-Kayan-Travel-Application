@@ -8,16 +8,7 @@ class Product {
 }
 
 class ProviderService with ChangeNotifier {
-  // String indexScreen = "0";
-
-  // String getIndexScreen() {
-  //   return indexScreen;
-  // }
-
-  // void setIndexScreen(String val) {
-  //   notifyListeners();
-  //   indexScreen = val;
-  // }
+  List<String> titleTopScreen = ["لماذا كيان", "شركائنا", "الفروع"];
 
   List products = [
     Product("assest/image/imageKaian.png", 'مصداقية', "دائما الزبون على حق"),

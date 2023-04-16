@@ -13,6 +13,7 @@ import 'package:yah_app/screen/servis/sirvece_screen.dart';
 import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
 import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
+import '../../styles/style.dart';
 import '../../styles/tolls.dart';
 import '../about screen/account_screen.dart';
 import '../screen_search/secreen_animation.dart';

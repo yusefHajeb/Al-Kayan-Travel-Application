@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yah_app/screen/servis/widget/scale_transition.dart';
 
 import '../screen/servis/sirvec_page.dart';
 
@@ -15,7 +16,6 @@ class ProviderShowService with ChangeNotifier {
 
   void showService(BuildContext ctx, int index) {
     setIndexScreen(index);
-    Navigator.pushReplacement(
-        ctx, MaterialPageRoute(builder: (_) => PageService()));
+    Navigator.pushReplacement(ctx, ScaleTransitionScreen(PageService()));
   }
 }
