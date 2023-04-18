@@ -50,9 +50,10 @@ class _firstScreenState extends State<firstScreen> {
     internetSubscription =
         InternetConnectionChecker().onStatusChange.listen((status) {
       final hasInternet = status == InternetConnectionStatus.connected;
-      setState(() {
-        this.hasInternet = hasInternet;
-      });
+      this.hasInternet = hasInternet;
+      // setState(() {
+
+      // });
     });
 
     subscription =
@@ -268,7 +269,7 @@ class _firstScreenState extends State<firstScreen> {
             press: () {
               Navigator.push(context, ScaleTransitionScreen(Screen2()));
               Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(1.toString());
+                  .setNumberScreen(0.toString());
             },
           ),
           CatagoryCount(
@@ -282,7 +283,7 @@ class _firstScreenState extends State<firstScreen> {
               Navigator.push(context, ScaleTransitionScreen(Screen2()));
               //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
               Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(2.toString());
+                  .setNumberScreen(1.toString());
             },
           ),
           CatagoryCount(
@@ -294,7 +295,7 @@ class _firstScreenState extends State<firstScreen> {
             press: () {
               Navigator.push(context, ScaleTransitionScreen(Screen2()));
               Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(3.toString());
+                  .setNumberScreen(2.toString());
             },
           ),
           CatagoryCount(

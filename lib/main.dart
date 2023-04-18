@@ -1,4 +1,4 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +13,9 @@ import 'package:yah_app/styles/myprovider.dart';
 import 'package:yah_app/styles/provider_passboard.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:http/http.dart' as http;
+// import 'package:firebase_database/firebase_database.dart';
+// import 'package:http/http.dart' as http;
 import 'package:yah_app/styles/style.dart';
-import 'package:yah_app/styles/tolls.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
@@ -113,18 +112,3 @@ class MyHomePage extends StatelessWidget {
     return const Screen2();
   }
 }
-
-// class HomePage2 extends StatelessWidget {
-//   void selectScren(BuildContext ctx, int n) {
-//     Navigator.of(ctx).pushNamed(
-//       '/x',
-//     );
-//   }
-
-//   const HomePage2({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Scaffold();
-//   }
-// }
