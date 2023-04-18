@@ -294,7 +294,7 @@ class _firstScreenState extends State<firstScreen> {
             press: () {
               Navigator.push(context, ScaleTransitionScreen(Screen2()));
               Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(2.toString());
+                  .setNumberScreen(3.toString());
             },
           ),
           CatagoryCount(
