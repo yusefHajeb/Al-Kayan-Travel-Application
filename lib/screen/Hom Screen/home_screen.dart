@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:animations/animations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -13,6 +15,7 @@ import 'package:yah_app/screen/servis/sirvece_screen.dart';
 import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
 import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
+import '../../Widget/AnimaiWidget/slide_secreen.dart';
 import '../../styles/style.dart';
 import '../../styles/tolls.dart';
 import '../about screen/account_screen.dart';
@@ -38,22 +41,48 @@ class _firstScreenState extends State<firstScreen> {
   late StreamSubscription subscription;
   late StreamSubscription internetSubscription;
   bool hasInternet = false;
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _loading = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // to close Kyboarde
   FocusNode _focusNode = FocusNode();
   TextEditingController numPass = TextEditingController()..text = "";
   var key = GlobalKey<FormState>();
   @override
+  List listImage = [];
+
+  Future<void> getImage() async {
+    CollectionReference ref =
+        FirebaseFirestore.instance.collection("Bouncing Scroll");
+
+    QuerySnapshot querySnapshot = await ref.get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      querySnapshot.docs.forEach((doc) {
+        listImage.add(doc.data());
+      });
+      setState(() {
+        _loading = true;
+      });
+    }
+  }
+
+  // Future<void> getImage() async {
+  //   var refImage = FirebaseStorage.instance.ref("Bouncing Scroll");
+  //   var url = await refImage.getDownloadURL();
+
+  //   listImage.add(url);
+  //   print("===============");
+  //   print(listImage);
+  // }
+
   void initState() {
     key = GlobalKey<FormState>();
     setNumPass();
+    getImage().then((value) => _loading = true);
     internetSubscription =
         InternetConnectionChecker().onStatusChange.listen((status) {
       final hasInternet = status == InternetConnectionStatus.connected;
       this.hasInternet = hasInternet;
-      // setState(() {
-
-      // });
     });
 
     subscription =
@@ -70,6 +99,7 @@ class _firstScreenState extends State<firstScreen> {
         ? "You are connected to mobile network"
         : "تاكد من إتصالك با الإنترنت ";
     final Color color = hasInternet ? Colors.green : Colors.red;
+
     return message;
   }
 
@@ -158,7 +188,7 @@ class _firstScreenState extends State<firstScreen> {
                     } else if (numPass.text.isEmpty ||
                         numPass.text.length < 9) {
                       _focusNode.unfocus();
-                      MySnackBar(scaffold, "القيمة المدخله خاطة");
+                      MySnackBar(scaffold, "القيمة المدخله خاطئة");
                     } else {
                       print("Passbord is :" + numPass.text);
                       Provider.of<PasspordProvider>(context, listen: false)
@@ -168,9 +198,9 @@ class _firstScreenState extends State<firstScreen> {
                           MaterialPageRoute(builder: (_) => SecondScreen()));
                     }
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "ابحث برقم الجواز",
-                    prefixIcon: const Icon(
+                    prefixIcon: Icon(
                       Icons.search,
                       color: primary,
                     ),
@@ -184,33 +214,33 @@ class _firstScreenState extends State<firstScreen> {
                       horizontal: 16.0,
                     ),
 
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        if (numPass.text.isEmpty || numPass.text.length < 9) {
-                          _focusNode.unfocus();
-                          MySnackBar(scaffold, "القيمة المدخله خاطة");
-                        } else {
-                          print("Passbord is :" + numPass.text);
-                          Provider.of<PasspordProvider>(context, listen: false)
-                              .setNumberPassbord(numPass.text);
-                          // Navigator.of(context).Reblase
-                          _focusNode.unfocus();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => SecondScreen()));
-                        }
-                      },
-                      focusColor: Colors.amber,
-                      hoverColor: Colors.black,
-                      child: Container(
-                        // color: Colors.amber,
-                        child: const Text("Search"),
-                        decoration: const BoxDecoration(
-                          color: Colors.amber,
-                        ),
-                      ),
-                    ),
+                    // suffixIcon: InkWell(
+                    //   onTap: () {
+                    //     if (numPass.text.isEmpty || numPass.text.length < 9) {
+                    //       _focusNode.unfocus();
+                    //       MySnackBar(scaffold, "القيمة المدخله خاطة");
+                    //     } else {
+                    //       print("Passbord is :" + numPass.text);
+                    //       Provider.of<PasspordProvider>(context, listen: false)
+                    //           .setNumberPassbord(numPass.text);
+                    //       // Navigator.of(context).Reblase
+                    //       _focusNode.unfocus();
+                    //       Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (_) => SecondScreen()));
+                    //     }
+                    //   },
+                    //   focusColor: Colors.amber,
+                    //   hoverColor: Colors.black,
+                    //   child: Container(
+                    //     // color: Colors.amber,
+                    //     child: const Text("Search"),
+                    //     decoration: const BoxDecoration(
+                    //       color: Colors.amber,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                 ),
               ),
@@ -233,11 +263,10 @@ class _firstScreenState extends State<firstScreen> {
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return Container(
-                        padding: const EdgeInsets.only(
-                          top: 10.0,
-                        ),
-                        child: carousView(index, size),
-                      );
+                          padding: const EdgeInsets.only(
+                            top: 10.0,
+                          ),
+                          child: carousView(index, size));
                     }),
               ),
             ),
@@ -256,70 +285,76 @@ class _firstScreenState extends State<firstScreen> {
       flex: 3,
       child: Container(
         height: 700,
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 0.0),
         margin: const EdgeInsets.only(right: 20),
-        child: ListView(scrollDirection: Axis.horizontal, children: [
-          CatagoryCount(
-            titleCurd: "لماذا كيان",
-            myIcon: const Icon(
-              Icons.diamond,
-              color: Colors.blue,
-              size: 40,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            CatagoryCount(
+              titleCurd: " كيان",
+              myIcon: const Icon(
+                Icons.diamond,
+                color: Color.fromARGB(255, 4, 10, 15),
+                size: 40,
+              ),
+              press: () {
+                Navigator.push(context, ScaleTransitionScreen(Screen2()));
+                Provider.of<ProviderService>(context, listen: false)
+                    .setNumberScreen(0.toString());
+              },
             ),
-            press: () {
-              Navigator.push(context, ScaleTransitionScreen(Screen2()));
-              Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(0.toString());
-            },
-          ),
-          CatagoryCount(
-            titleCurd: "شركائنا",
-            myIcon: const Icon(
-              Icons.handshake,
-              color: Color.fromARGB(255, 22, 51, 26),
-              size: 50,
+            CatagoryCount(
+              titleCurd: "شركائنا",
+              myIcon: const Icon(
+                Icons.handshake,
+                color: Color.fromARGB(255, 22, 51, 26),
+                size: 50,
+              ),
+              press: () {
+                Navigator.push(context, ScaleTransitionScreen(Screen2()));
+                //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
+                Provider.of<ProviderService>(context, listen: false)
+                    .setNumberScreen(1.toString());
+              },
             ),
-            press: () {
-              Navigator.push(context, ScaleTransitionScreen(Screen2()));
-              //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
-              Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(1.toString());
-            },
-          ),
-          CatagoryCount(
-            titleCurd: "الفروع",
-            myIcon: const Icon(
-              Icons.slideshow,
-              color: const Color.fromARGB(255, 22, 51, 26),
+            CatagoryCount(
+              titleCurd: "الفروع",
+              myIcon: const Icon(
+                Icons.slideshow,
+                color: const Color.fromARGB(255, 22, 51, 26),
+              ),
+              press: () {
+                Navigator.push(context, ScaleTransitionScreen(Screen2()));
+                Provider.of<ProviderService>(context, listen: false)
+                    .setNumberScreen(2.toString());
+              },
             ),
-            press: () {
-              Navigator.push(context, ScaleTransitionScreen(Screen2()));
-              Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(2.toString());
-            },
-          ),
-          CatagoryCount(
-            titleCurd: "حساباتنا",
-            myIcon: const Icon(
-              Icons.media_bluetooth_on,
-              size: 30,
-              color: Color.fromARGB(255, 22, 51, 26),
+            CatagoryCount(
+              titleCurd: "حساباتنا",
+              myIcon: const Icon(
+                Icons.media_bluetooth_on,
+                size: 30,
+                color: Color.fromARGB(255, 22, 51, 26),
+              ),
+              press: () {
+                setState(
+                  () {
+                    Navigator.push(context, SizeTransition5(ScreenMedia()));
+                  },
+                );
+              },
             ),
-            press: () {
-              setState(() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => ScreenMedia())));
-              });
-            },
-          ),
-          CatagoryCount(
+            CatagoryCount(
               titleCurd: "خدماتنا",
               myIcon: const Icon(Icons.design_services),
               press: () {
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => ShowService()));
-              }),
-        ]),
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -331,56 +366,77 @@ class _firstScreenState extends State<firstScreen> {
   }
 
   Widget carousView(int index, Size s) {
-    return Container(
-      child: AnimatedBuilder(
-          animation: _pageController,
-          builder: (context, child) {
-            double value = 0.0;
-            if (_pageController.position.haveDimensions) {
-              value = index.toDouble() - (_pageController.page ?? 0);
-              value = (value * 0.038).clamp(-1, 1);
-              print("value $value indexss $index");
-            }
-            return Transform.rotate(
-              angle: -3.14 * value,
-              child: crouseCard(dataList[index], s),
+    var urll =
+        "https://firebasestorage.googleapis.com/v0/b/alkayantravel-a1c6e.appspot.com/o/Bouncing%20Scroll%2Fimg_update.jpg?alt=media&token=baa6bfd3-ed2f-48dc-b29e-df55e2566206";
+    return AnimatedBuilder(
+      animation: _pageController,
+      builder: (context, child) {
+        double value = 0.0;
+        if (_pageController.position.haveDimensions) {
+          value = index.toDouble() - (_pageController.page ?? 0);
+          value = (value * 0.038).clamp(-1, 1);
+          print("value $value indexss $index");
+        }
+        return Transform.rotate(
+            angle: -3.14 * value,
+            child: _loading
+                ? crouseCard(listImage[index]["imageUrl"], s)
+                : crouseCard(urll, s)
+            // child: crouseCard(urll, s),
             );
-          }),
+      },
     );
   }
 
-  Widget crouseCard(DataModel data, Size size) {
+  Widget crouseCard(String urlImage, Size size) {
     return Column(
       children: [
         Container(
           // padding: EdgeInsets.only(bottom: 30),
-
           width: 300,
           height: size.height / 4.3,
           margin: const EdgeInsets.only(
             left: 20,
           ),
           decoration: BoxDecoration(
-              color: primary,
-              borderRadius: BorderRadius.circular(30),
-              image: DecorationImage(
-                image: AssetImage(
-                  data.imageName,
-                ),
-                fit: BoxFit.fill,
-              ),
-              boxShadow: [
-                const BoxShadow(
-                    offset: Offset(0, 4), blurRadius: 4, color: Colors.black)
-              ]),
+            color: Colors.black.withOpacity(0.04),
+            borderRadius: BorderRadius.circular(30),
+            image: DecorationImage(
+              image: NetworkImage(urlImage),
+              fit: BoxFit.fill,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget crouseCard2(String urlImage, Size size) {
+    return Column(
+      children: [
+        Container(
+          // padding: EdgeInsets.only(bottom: 30),
+          width: 300,
+          height: size.height / 4.3,
+          margin: const EdgeInsets.only(
+            left: 20,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.04),
+            borderRadius: BorderRadius.circular(30),
+            // image: DecorationImage(
+            //   image: NetworkImage(urlImage),
+            //   fit: BoxFit.fill,
+            // ),
+          ),
         )
       ],
     );
   }
 }
 
-class textForm extends StatelessWidget {
-  const textForm({
+class TextForm extends StatelessWidget {
+  const TextForm({
     Key? key,
     required this.numPass,
   }) : super(key: key);
