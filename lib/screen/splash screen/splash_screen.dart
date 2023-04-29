@@ -3,6 +3,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 import 'package:yah_app/styles/style.dart';
+import 'package:flutter/services.dart';
+
+import '../../dataBase/button_slide.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -11,13 +14,38 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => SplateScreenState();
 }
 
-class SplateScreenState extends State<SplashScreen> {
+class SplateScreenState extends State<SplashScreen>
+    with TickerProviderStateMixin {
+  late AnimationController scaleController;
+  late Animation<double> scaleAnimation;
   @override
   void initState() {
     Timer(Duration(seconds: 6), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => firstScreen()));
     });
+    scaleController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
+          ..addStatusListener(
+            (status) {
+              if (status == AnimationStatus.completed) {
+                Navigator.pushReplacement(
+                  context,
+                  AnimatingRoute(
+                    route: Destination(),
+                    page: Container(),
+                  ),
+                );
+                Timer(
+                  Duration(milliseconds: 300),
+                  () {
+                    // print('worked');
+                    scaleController.reset();
+                  },
+                );
+              }
+            },
+          );
     super.initState();
   }
 

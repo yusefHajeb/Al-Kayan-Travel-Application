@@ -1,8 +1,3 @@
-import 'package:flutter/material.dart';
-
-TextStyle stl =
-    TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w700);
-
 class DataModel {
   final String imageName;
 

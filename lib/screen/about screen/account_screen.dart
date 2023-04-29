@@ -1,21 +1,14 @@
-// import 'dart:html';
-// import 'package:flutter/cupertino.dart';
-// import 'dart:html';
-// import 'dart:html';
-
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 // import 'package:url_launcher/url_launcher.dart';
 import 'package:yah_app/styles/style.dart';
-import 'package:yah_app/styles/provider_passboard.dart';
+
 // import 'package:slimy_card/slimy_card.dart';
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
-import '../../styles/tolls.dart';
 
 class ScreenMedia extends StatelessWidget {
-  @override
   List myIcons = [
     "assest/icon/icons8-facebook-64.png",
     "assest/icon/icons8-twitter-64.png",
@@ -30,13 +23,16 @@ class ScreenMedia extends StatelessWidget {
   List<Uri> _listLunchUrl = [
     //https
     // Uri.https('whatsapp:send?phone=+967771274299&text=Hellow'),
-    Uri(
-        scheme: 'whatsapp',
-        path: 'https://api.whatsapp.com/send?phone=+967734084140&text=hello',
-        query: encodeQueryParameters(<String, String>{
-          'subject': 'Testing mail lunch from flutter app',
-          'body': 'this mail body is from flutter code'
-        })),
+    Uri.parse(('https://www.facebook.com/AlkayanTravel')),
+    // Uri(
+    //     scheme: 'whatsapp',
+    //     path: Uri.parse(
+    //       ('https://www.facebook.com/alkyan_travel'),
+    //     ).toString(),
+    //     query: encodeQueryParameters(<String, String>{
+    //       'subject': 'Testing mail lunch from flutter app',
+    //       'body': 'this mail body is from flutter code'
+    //     })),
     //mail
     Uri(
         scheme: 'mailto',
@@ -45,19 +41,15 @@ class ScreenMedia extends StatelessWidget {
           'subject': 'Testing mail lunch from flutter app',
           'body': 'this mail body is from flutter code'
         })),
-//whatsapp
-    Uri(
-      scheme: 'whatsapp',
-      path: '//api.whatsapp.com/send?phone=967771274299&text=Hellow',
-      query: encodeQueryParameters(<String, String>{
-        'subject': 'Testing whatsapp lunch from flutter app',
-        'body': 'this whatsapp body is from flutter code'
-      }),
-    ),
-//sms
+
+    //sms
     Uri(scheme: 'sms', path: '+967771274299', queryParameters: <String, String>{
       'body': Uri.encodeComponent('Hello'),
     }),
+    //whatsapp
+
+    Uri.parse(
+        "whatsapp://send?phone=+967771274299&text=${Uri.encodeFull('Hello')}"),
 
     //phone
     Uri(
@@ -69,7 +61,6 @@ class ScreenMedia extends StatelessWidget {
       scheme: 'tel',
       path: '+967771274299',
     ),
-
     Uri(
       scheme: 'tel',
       path: '+967771274299',
@@ -83,6 +74,9 @@ class ScreenMedia extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primary,
+        // ignore: deprecated_member_use
+        // brightness: Brightness.light,
+
         title: Text(
           "حساباتنا ",
           style: header2,
@@ -95,7 +89,7 @@ class ScreenMedia extends StatelessWidget {
           Expanded(
             child: AnimationLimiter(
               child: GridView.count(
-                physics: BouncingScrollPhysics(
+                physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
                 padding: EdgeInsets.all(_w / 60),
                 crossAxisCount: columnCount,

@@ -29,7 +29,8 @@ class DataVisa extends StatelessWidget {
             margin: const EdgeInsets.all(20.0),
             // padding: const EdgeInsets.all(20.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   child: Text(
@@ -40,12 +41,26 @@ class DataVisa extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.network(
+                      filterData.image, fit: BoxFit.fill,
+                      width: double.infinity,
+                      height: 200,
+                      // color: Colors.transparent,
+                    )),
+                // Container(
+                //   child: Image.network(
+                //     filterData.image,
+                //     fit: BoxFit.fill,
+                //   ),
+                // ),
                 const SizedBox(
                   height: 20,
                 ),
                 Container(
                   child: Text(
-                    " صاحب الجواز :" + filterData.name,
+                    " الاسم : " + filterData.name,
                     style: header2,
                   ),
                 ),
@@ -54,7 +69,7 @@ class DataVisa extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    " الرقم :" + filterData.phone,
+                    "  الرقم : " + filterData.phone,
                     style: header2,
                   ),
                 ),
@@ -63,7 +78,7 @@ class DataVisa extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    " نوع المعاملة :" + filterData.state,
+                    " حالة المعاملة : " + filterData.state,
                     style: header2,
                   ),
                 ),
@@ -72,9 +87,12 @@ class DataVisa extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    " نوع المعاملة :" + filterData.state,
+                    " نوع المعاملة : " + filterData.another,
                     style: header2,
                   ),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
               ],
             ),

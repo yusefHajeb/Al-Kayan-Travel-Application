@@ -11,6 +11,8 @@ import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 import 'package:yah_app/styles/myprovider.dart';
 import 'package:yah_app/styles/style.dart';
 
+import '../../Widget/loading_show/sktolin_loding.dart';
+
 class Screen2 extends StatefulWidget {
   static const routeName = 'screen2 ';
 
@@ -303,26 +305,6 @@ class myAppBarServece extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class Skelton extends StatelessWidget {
-  const Skelton({
-    Key? key,
-    this.width,
-    this.height,
-  }) : super(key: key);
-  final double? width, height;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.04),
-          borderRadius: const BorderRadius.all(Radius.circular(16))),
     );
   }
 }
