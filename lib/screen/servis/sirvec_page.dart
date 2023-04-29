@@ -1,11 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yah_app/dataBase/dealetes.dart';
-// import 'package:yah_app/Widget/widget_tools/dealetes.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
 
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
-// import '../../Widget/widget_tools/dealetes.dart';
 import 'package:yah_app/styles/style.dart';
 
 import '../../providers/service_provider.dart';
@@ -16,14 +15,24 @@ class PageService extends StatefulWidget {
   State<PageService> createState() => _PageService();
 }
 
-@override
-// void showService(BuildContext ctx, int index) {
-//   Navigator.of(ctx).pushNamed(
-//     PageService.routeName,
-//     arguments: index,
-//   );
-// }
+List<DataService> listService = [];
 
+Future<void> getData() async {
+  CollectionReference ref = FirebaseFirestore.instance.collection("users");
+
+  QuerySnapshot querySnapshot = await ref.get();
+
+  List mylist = [];
+  if (querySnapshot.docs.isNotEmpty) {
+    querySnapshot.docs.forEach((doc) {
+      mylist.add(doc.data());
+    });
+    listService.add(DataService(imgUrl: '', paragraph: '', title: ''));
+    print("-------------------------------");
+  }
+}
+
+@override
 class _PageService extends State<PageService> {
   @override
   Widget build(BuildContext context) {
@@ -32,143 +41,153 @@ class _PageService extends State<PageService> {
     final int sectionIndex =
         Provider.of<ProviderShowService>(context).getIndex();
     return WillPopScope(
-      onWillPop: () async {
-        return await Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => ShowService()));
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(children: [
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: [
-                Stack(children: <Widget>[
-                  Container(
-                    height: size.height / 3.5,
-                    width: double.infinity,
-                    child: Image.asset(
-                      DUMMY_MEALS[sectionIndex].imageUrl,
-                      fit: BoxFit.fill,
+        onWillPop: () async {
+          return await Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => ShowService()));
+        },
+        child: Scaffold(
+          // resizeToAvoidBottomInset: true,
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            child: SizedBox(
+              height: size.height,
+              child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  // scrollDirection: Axis.vertical,
+                  // shrinkWrap: true,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Stack(children: <Widget>[
+                        Container(
+                          height: size.height / 3.5,
+                          width: double.infinity,
+                          child: Image.asset(
+                            data[sectionIndex].imgUrl,
+                            fit: BoxFit.fill,
+                          ),
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(50),
+                                  bottomRight: Radius.circular(50))),
+                        ),
+                        Positioned(
+                          top: 50,
+                          right: 20,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => ShowService()));
+                              // Navigator.popAndPushNamed(context, ShowService.routeName);
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: -2,
+                          height: 25,
+                          child: Container(
+                            // height: 600,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25.0),
+                                topRight: Radius.circular(25.0),
+                              ),
+                            ),
+                          ),
+                        )
+                      ]),
                     ),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(50),
-                            bottomRight: Radius.circular(50))),
-                  ),
-                  Positioned(
-                    top: 50,
-                    right: 20,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (_) => ShowService()));
-                        // Navigator.popAndPushNamed(context, ShowService.routeName);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: -2,
-                    height: 25,
-                    child: Container(
-                      height: 60,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25.0),
-                          topRight: Radius.circular(25.0),
+                    Transform.translate(
+                      offset: Offset(0, -50),
+                      child: Container(
+                        width: size.width / 1.50,
+                        padding: EdgeInsets.all(13),
+                        // color: Colors.white,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(13),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 6),
+                                blurRadius: 17,
+                                spreadRadius: -6,
+                                color: Colors.black,
+                              )
+                            ]),
+                        child: Center(
+                          child: Text(
+                            data[sectionIndex].title,
+                            textAlign: TextAlign.center,
+                            style: header2,
+                          ),
                         ),
                       ),
                     ),
-                  )
-                ]),
-
-                //=------------------------------------
-                Transform.translate(
-                  offset: Offset(0, -50),
-                  child: Container(
-                    width: size.width / 1.50,
-                    padding: EdgeInsets.all(13),
-                    // color: Colors.white,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(13),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 6),
-                            blurRadius: 17,
-                            spreadRadius: -6,
-                            color: Colors.black,
-                          )
-                        ]),
-                    child: Center(
-                      child: Text(
-                        DUMMY_MEALS[sectionIndex].title,
-                        textAlign: TextAlign.center,
-                        style: header2,
+                    //-=============================================
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        height: size.height / 2.6,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 15),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 10),
+                            child: Text(
+                              data[sectionIndex].paragtaph,
+                              style: paragraph,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ],
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3, horizontal: 20),
+                              child: Text(
+                                "مزيد من الخدمات",
+                                style: header2,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                                height: 80.0,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  physics: BouncingScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    return Bouncing(
+                                        onPress: () {},
+                                        child:
+                                            (CardBottom(sectionIndex: index)));
+                                  },
+                                  itemCount: data.length,
+                                )),
+                          ],
+                        ))
+                  ]),
             ),
           ),
-          //-=============================================
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // SizedBox(height: 40),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    child: Text(
-                      DUMMY_MEALS[sectionIndex].paragraph,
-                      style: paragraph2,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-              flex: 1,
-              child: Column(
-                children: [
-                  Text(
-                    "مزيد من الخدمات",
-                    style: header,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                      height: 80.0,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Bouncing(
-                              onPress: () {},
-                              child: (CardBottom(sectionIndex: index)));
-                        },
-                        itemCount: DUMMY_MEALS.length,
-                      )),
-                ],
-              ))
-        ]),
-      ),
-    );
+        ));
   }
 }
 
@@ -191,7 +210,7 @@ class CardBottom extends StatelessWidget {
         aspectRatio: 3 / 1,
         child: Container(
           margin: EdgeInsets.only(left: 5, right: 10, bottom: 10),
-          padding: EdgeInsets.all(13),
+          padding: EdgeInsets.all(9),
           decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(15),
@@ -216,7 +235,7 @@ class CardBottom extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: Image.asset(
-                  DUMMY_MEALS[sectionIndex].imageUrl,
+                  data[sectionIndex].imgUrl,
                   fit: BoxFit.fill,
                   width: 100,
                   height: 100,
@@ -225,7 +244,7 @@ class CardBottom extends StatelessWidget {
               ),
             ),
             Text(
-              DUMMY_MEALS[sectionIndex].title,
+              data[sectionIndex].title,
               style: paragraph,
               //  TextStyle(
               //     color: Color.fromARGB(255, 54, 52, 52), fontSize: 13),

@@ -48,14 +48,14 @@ class _SecondScreenState extends State<SecondScreen> {
     double _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         body: Stack(
           children: [
             AnimatedContainer(
               duration: Duration(milliseconds: 6000),
               curve: Curves.fastLinearToSlowEaseIn,
               width: _a ? _width : 0,
-              color: primary,
+              color: Colors.amber[50],
               height: _height,
               // color: Color.fromARGB(255, 234, 166, 18),
             ),
@@ -134,7 +134,7 @@ class _SecondePage extends State<SecondPage> {
     getData().then((value) {
       setState(() {
         _isLoding = false;
-        // _isCheck = true;
+        // _isCheck = true; // _isCheck = true;
       });
     });
     // _isLoding = true;
@@ -205,16 +205,6 @@ class _SecondePage extends State<SecondPage> {
     super.dispose();
   }
 
-  // getData() async {
-  //   CollectionReference ref = FirebaseFirestore.instance.collection("users");
-
-  //   await ref.get().then((value) {
-  //     value.docs.forEach((element) {
-  //       print(element.data());
-  //     });
-  //   });
-  // }
-
   Future<void> getData() async {
     final myProvider = Provider.of<PasspordProvider>(context, listen: false);
     CollectionReference ref = FirebaseFirestore.instance.collection("users");
@@ -233,34 +223,14 @@ class _SecondePage extends State<SecondPage> {
           state: mylist[0]["state"],
           name: mylist[0]["name"],
           phone: "772323",
-          another: "nothing",
-          image: "asdgfhg");
+          another: mylist[0]["typeVisa"],
+          image: mylist[0]["imageUrl"]);
       print("-------------------------------");
       setState(() {
         _isLoding = false;
         _isCheck = true;
       });
     }
-    //     .then((value){
-    //   value.docs.forEach((element) {
-    //     print(element.data());
-    //     _isCheck = true;
-    //     List mylist = [];
-    //     mylist.add(element.data());
-    //     if (mylist != null) {
-    //       filterData1 = Passbord(
-    //           numberPassbord: mylist[0]["passboard_num"],
-    //           state: "الجواز مؤشر",
-    //           name: mylist[0]["name"],
-    //           phone: mylist[0]["phone"],
-    //           another: "nothing",
-    //           image: "asdgfhg");
-    //       _isLoding = false;
-    //       _isCheck = true;
-    //       print("-------------------------------");
-    //     }
-    //   });
-    // });
   }
 
   Widget build(BuildContext context) {
@@ -284,7 +254,7 @@ class _SecondePage extends State<SecondPage> {
                       child: AnimatedTextKit(
                         animatedTexts: [
                           TypewriterAnimatedText(
-                            'معاملتك قيد ',
+                            'حاول مرة اخرى',
                             speed: Duration(milliseconds: 150),
                             textStyle: TextStyle(
                               fontSize: 30,

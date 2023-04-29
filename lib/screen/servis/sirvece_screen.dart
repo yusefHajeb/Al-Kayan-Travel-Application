@@ -26,13 +26,6 @@ class ShowService extends StatelessWidget {
     );
   }
 
-  // void showService(BuildContext ctx, int index) {
-  //   Navigator.of(ctx).pushNamed(
-  //     PageService.routeName,
-  //     arguments: index,
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     // final mealId = ModalRoute.of(context)?.settings.arguments;
@@ -113,7 +106,7 @@ class ShowService extends StatelessWidget {
                             SizedBox(
                               height: MediaQuery.of(context).size.height / 1.3,
                               child: ListView.builder(
-                                itemCount: DUMMY_MEALS.length,
+                                itemCount: data.length,
                                 itemBuilder: (ctx, index) {
                                   return Container(
                                     margin: EdgeInsets.only(
@@ -136,36 +129,36 @@ class ShowService extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Hero(
-                                              tag: DUMMY_MEALS[index].id,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(15),
-                                                  topRight: Radius.circular(15),
-                                                ),
-                                                child: Image.asset(
-                                                  DUMMY_MEALS[index].imageUrl,
-                                                  width: double.infinity,
-                                                  height: size.height / 4,
-                                                  fit: BoxFit.fill,
-                                                ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(15),
+                                                topRight: Radius.circular(15),
+                                              ),
+                                              child: Image.asset(
+                                                data[index].imgUrl,
+                                                width: double.infinity,
+                                                height: size.height / 4,
+                                                fit: BoxFit.fill,
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.all(8.0),
+                                              padding: EdgeInsets.all(10.0),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    DUMMY_MEALS[index].title,
+                                                    data[index].title,
                                                     style: header2,
                                                     textAlign: TextAlign.center,
                                                   ),
+                                                  SizedBox(
+                                                    height: 8,
+                                                  ),
                                                   Text(
-                                                    DUMMY_MEALS[index]
-                                                            .paragraph
+                                                    data[index]
+                                                            .paragtaph
                                                             .split("_")[0] +
                                                         "...",
                                                     style: paragraph,
