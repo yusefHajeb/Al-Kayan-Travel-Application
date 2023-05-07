@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:animations/animations.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:yah_app/Widget/new_page.dart';
+import 'package:yah_app/providers/service_provider.dart';
 import 'package:yah_app/screen/Hom%20Screen/widget/mysnackbar.dart';
 import 'package:yah_app/screen/servis/widget/scale_transition.dart';
 import 'package:yah_app/styles/myprovider.dart';
@@ -65,15 +67,6 @@ class _firstScreenState extends State<firstScreen> {
       });
     }
   }
-
-  // Future<void> getImage() async {
-  //   var refImage = FirebaseStorage.instance.ref("Bouncing Scroll");
-  //   var url = await refImage.getDownloadURL();
-
-  //   listImage.add(url);
-  //   print("===============");
-  //   print(listImage);
-  // }
 
   void initState() {
     key = GlobalKey<FormState>();
@@ -185,8 +178,10 @@ class _firstScreenState extends State<firstScreen> {
                         "تاكد من إتصالك با الإنترنت ") {
                       _focusNode.unfocus();
                       MySnackBar(scaffold, _showConnectivityResult(result));
-                    } else if (numPass.text.isEmpty ||
-                        numPass.text.length < 9) {
+                    } else if (numPass.text.isEmpty) {
+                      _focusNode.unfocus();
+                      MySnackBar(scaffold, "الرجاء ادخال رقم الجواز");
+                    } else if (numPass.text.length < 9) {
                       _focusNode.unfocus();
                       MySnackBar(scaffold, "القيمة المدخله خاطئة");
                     } else {
@@ -194,8 +189,9 @@ class _firstScreenState extends State<firstScreen> {
                       Provider.of<PasspordProvider>(context, listen: false)
                           .setNumberPassbord(numPass.text);
                       _focusNode.unfocus();
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => SecondScreen()));
+
+                      Navigator.push(
+                          context, ScaleTransitionScreen2(SecondScreen()));
                     }
                   },
                   decoration: const InputDecoration(
@@ -213,34 +209,6 @@ class _firstScreenState extends State<firstScreen> {
                       vertical: 10.0,
                       horizontal: 16.0,
                     ),
-
-                    // suffixIcon: InkWell(
-                    //   onTap: () {
-                    //     if (numPass.text.isEmpty || numPass.text.length < 9) {
-                    //       _focusNode.unfocus();
-                    //       MySnackBar(scaffold, "القيمة المدخله خاطة");
-                    //     } else {
-                    //       print("Passbord is :" + numPass.text);
-                    //       Provider.of<PasspordProvider>(context, listen: false)
-                    //           .setNumberPassbord(numPass.text);
-                    //       // Navigator.of(context).Reblase
-                    //       _focusNode.unfocus();
-                    //       Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //               builder: (_) => SecondScreen()));
-                    //     }
-                    //   },
-                    //   focusColor: Colors.amber,
-                    //   hoverColor: Colors.black,
-                    //   child: Container(
-                    //     // color: Colors.amber,
-                    //     child: const Text("Search"),
-                    //     decoration: const BoxDecoration(
-                    //       color: Colors.amber,
-                    //     ),
-                    //   ),
-                    // ),
                   ),
                 ),
               ),
@@ -299,6 +267,7 @@ class _firstScreenState extends State<firstScreen> {
                 size: 40,
               ),
               press: () {
+                _focusNode.unfocus();
                 Navigator.push(context, ScaleTransitionScreen(Screen2()));
                 Provider.of<ProviderService>(context, listen: false)
                     .setNumberScreen(0.toString());
@@ -312,6 +281,7 @@ class _firstScreenState extends State<firstScreen> {
                 size: 50,
               ),
               press: () {
+                _focusNode.unfocus();
                 Navigator.push(context, ScaleTransitionScreen(Screen2()));
                 //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
                 Provider.of<ProviderService>(context, listen: false)
@@ -325,6 +295,7 @@ class _firstScreenState extends State<firstScreen> {
                 color: const Color.fromARGB(255, 22, 51, 26),
               ),
               press: () {
+                _focusNode.unfocus();
                 Navigator.push(context, ScaleTransitionScreen(Screen2()));
                 Provider.of<ProviderService>(context, listen: false)
                     .setNumberScreen(2.toString());
@@ -338,17 +309,16 @@ class _firstScreenState extends State<firstScreen> {
                 color: Color.fromARGB(255, 22, 51, 26),
               ),
               press: () {
-                setState(
-                  () {
-                    Navigator.push(context, SizeTransition5(ScreenMedia()));
-                  },
-                );
+                _focusNode.unfocus();
+                Navigator.push(context, SizeTransition5(ScreenMedia()));
               },
             ),
             CatagoryCount(
               titleCurd: "خدماتنا",
               myIcon: const Icon(Icons.design_services),
               press: () {
+                Provider.of<ServicesProvider>(context, listen: false)
+                    .setValueLoading(false);
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => ShowService()));
               },
@@ -366,8 +336,6 @@ class _firstScreenState extends State<firstScreen> {
   }
 
   Widget carousView(int index, Size s) {
-    var urll =
-        "https://firebasestorage.googleapis.com/v0/b/alkayantravel-a1c6e.appspot.com/o/Bouncing%20Scroll%2Fimg_update.jpg?alt=media&token=baa6bfd3-ed2f-48dc-b29e-df55e2566206";
     return AnimatedBuilder(
       animation: _pageController,
       builder: (context, child) {
@@ -381,7 +349,7 @@ class _firstScreenState extends State<firstScreen> {
             angle: -3.14 * value,
             child: _loading
                 ? crouseCard(listImage[index]["imageUrl"], s)
-                : crouseCard(urll, s)
+                : crouseCard2('', s)
             // child: crouseCard(urll, s),
             );
       },
@@ -391,8 +359,27 @@ class _firstScreenState extends State<firstScreen> {
   Widget crouseCard(String urlImage, Size size) {
     return Column(
       children: [
+        // Container(
+        //   width: 300,
+        //   height: size.height / 4.3,
+        //   margin: const EdgeInsets.only(
+        //     left: 20,
+        //   ),
+        //   decoration: BoxDecoration(
+        //     color: Colors.black.withOpacity(0.04),
+        //     borderRadius: BorderRadius.circular(30),
+        //   ),
+        //   child: InteractiveViewer(
+        //       // clipBehavior: Clip.hardEdge,
+        //       child: FadeInImage(
+        //     width: 300,
+        //     height: size.height / 4.3,
+        //     image: CachedNetworkImageProvider(urlImage),
+        //     fit: BoxFit.fill,
+        //     placeholder: AssetImage("assest/image/top_image.png"),
+        //   )),
+        // ),
         Container(
-          // padding: EdgeInsets.only(bottom: 30),
           width: 300,
           height: size.height / 4.3,
           margin: const EdgeInsets.only(
@@ -402,7 +389,7 @@ class _firstScreenState extends State<firstScreen> {
             color: Colors.black.withOpacity(0.04),
             borderRadius: BorderRadius.circular(30),
             image: DecorationImage(
-              image: NetworkImage(urlImage),
+              image: CachedNetworkImageProvider(urlImage),
               fit: BoxFit.fill,
             ),
           ),
@@ -447,35 +434,6 @@ class TextForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: numPass,
-      // onChanged: ((value) {
-      //   setState(() {
-      //     numPass.text = value;
-      //   });
-      // }),
-      // onSaved: (ipnut) {
-      //   setState(() {
-      //     numPass.text = ipnut.toString();
-      //   });
-      //   numPass.text = ipnut.toString();
-      // },
-      // validator: (val) {
-      //   if (val!.isEmpty) {
-      //     setState(() {
-      //       messageError = "الرجاء ادخال رقم الجواز";
-      //     });
-
-      //   numPass = val as TextEditingController;
-      // } else if (val.length < 9) {
-      //   setState(() {
-      //     messageError =
-      //         "رقم الجواز يجب أن يتكون من 9 أرقام على الأقل";
-      //   });
-
-      //     return "";
-      //   } else {
-      //     return null;
-      //   }
-      // },
       keyboardType: TextInputType.number,
       obscureText: true,
       decoration: InputDecoration(

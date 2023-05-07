@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:yah_app/dataBase/dealetes.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
@@ -15,7 +17,7 @@ class PageService extends StatefulWidget {
   State<PageService> createState() => _PageService();
 }
 
-List<DataService> listService = [];
+// List<DataService> listService = [];
 
 Future<void> getData() async {
   CollectionReference ref = FirebaseFirestore.instance.collection("users");
@@ -27,19 +29,21 @@ Future<void> getData() async {
     querySnapshot.docs.forEach((doc) {
       mylist.add(doc.data());
     });
-    listService.add(DataService(imgUrl: '', paragraph: '', title: ''));
+    // listService.add(DataService(imgUrl: '', paragraph: '', title: ''));
     print("-------------------------------");
   }
 }
+
+List myList = [];
 
 @override
 class _PageService extends State<PageService> {
   @override
   Widget build(BuildContext context) {
+    myList = Provider.of<ServicesProvider>(context, listen: false).DataProvider;
     var size = MediaQuery.of(context).size;
     //عند الا
-    final int sectionIndex =
-        Provider.of<ProviderShowService>(context).getIndex();
+    final int sectionIndex = Provider.of<ServicesProvider>(context).getIndex();
     return WillPopScope(
         onWillPop: () async {
           return await Navigator.pushReplacement(
@@ -62,9 +66,16 @@ class _PageService extends State<PageService> {
                         Container(
                           height: size.height / 3.5,
                           width: double.infinity,
-                          child: Image.asset(
-                            data[sectionIndex].imgUrl,
-                            fit: BoxFit.fill,
+                          child: Container(
+                            width: double.infinity,
+                            // height: size.height / 4,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                  myList[sectionIndex]['imgUrl']),
+                              fit: BoxFit.fill,
+                              // dataServices[index].imgUrl,
+                            )),
                           ),
                           decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
@@ -125,7 +136,8 @@ class _PageService extends State<PageService> {
                             ]),
                         child: Center(
                           child: Text(
-                            data[sectionIndex].title,
+                            myList[sectionIndex]['title'],
+                            // data[sectionIndex].title,
                             textAlign: TextAlign.center,
                             style: header2,
                           ),
@@ -144,7 +156,8 @@ class _PageService extends State<PageService> {
                             padding: EdgeInsets.symmetric(
                                 vertical: 20, horizontal: 10),
                             child: Text(
-                              data[sectionIndex].paragtaph,
+                              myList[sectionIndex]['paragraph'],
+                              // data[sectionIndex].paragtaph,
                               style: paragraph,
                             ),
                           ),
@@ -170,17 +183,38 @@ class _PageService extends State<PageService> {
                             ),
                             Container(
                                 height: 80.0,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  physics: BouncingScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return Bouncing(
-                                        onPress: () {},
-                                        child:
-                                            (CardBottom(sectionIndex: index)));
-                                  },
-                                  itemCount: data.length,
+                                child: AnimationConfiguration.synchronized(
+                                  duration: Duration(milliseconds: 600),
+                                  child: SlideAnimation(
+                                    curve: Curves.easeInCirc,
+                                    child: FadeInAnimation(
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        physics: BouncingScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          return AnimationConfiguration
+                                              .staggeredList(
+                                            position: index,
+                                            duration:
+                                                Duration(milliseconds: 600),
+                                            child: SlideAnimation(
+                                              horizontalOffset: 30.0,
+                                              child: FadeInAnimation(
+                                                delay:
+                                                    Duration(milliseconds: 200),
+                                                child: Bouncing(
+                                                    onPress: () {},
+                                                    child: (CardBottom(
+                                                        sectionIndex: index))),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        itemCount: data.length,
+                                      ),
+                                    ),
+                                  ),
                                 )),
                           ],
                         ))
@@ -203,7 +237,7 @@ class CardBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Provider.of<ProviderShowService>(context, listen: false)
+        Provider.of<ServicesProvider>(context, listen: false)
             .showService(context, sectionIndex);
       },
       child: AspectRatio(
@@ -234,17 +268,22 @@ class CardBottom extends StatelessWidget {
                   color: Color.fromARGB(255, 40, 39, 37)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: Image.asset(
-                  data[sectionIndex].imgUrl,
-                  fit: BoxFit.fill,
+                child: Container(
                   width: 100,
                   height: 100,
-                  // color: Colors.transparent,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                        myList[sectionIndex]['imgUrl']),
+                    fit: BoxFit.fill,
+                    // dataServices[index].imgUrl,
+                  )),
                 ),
               ),
             ),
             Text(
-              data[sectionIndex].title,
+              myList[sectionIndex]['title'],
+              // data[sectionIndex].title,
               style: paragraph,
               //  TextStyle(
               //     color: Color.fromARGB(255, 54, 52, 52), fontSize: 13),

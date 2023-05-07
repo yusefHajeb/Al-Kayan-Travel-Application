@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 
 import '../../Widget/screen search/loading.dart';
 import '../../Widget/screen search/show_loading.dart';
-import '../../styles/tolls.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -25,12 +24,12 @@ class _SecondScreenState extends State<SecondScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 700), () {
+    Timer(const Duration(milliseconds: 700), () {
       setState(() {
         _a = !_a;
       });
     });
-    Timer(Duration(milliseconds: 2000), () {
+    Timer(const Duration(milliseconds: 2090), () {
       Navigator.of(context)
           .pushReplacement(SlideTransitionAnimation(SecondPage()));
     });
@@ -48,14 +47,14 @@ class _SecondScreenState extends State<SecondScreen> {
     double _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Color.fromARGB(255, 254, 253, 250),
         body: Stack(
           children: [
             AnimatedContainer(
               duration: Duration(milliseconds: 6000),
               curve: Curves.fastLinearToSlowEaseIn,
               width: _a ? _width : 0,
-              color: Colors.amber[50],
+              color: Color.fromARGB(255, 0, 0, 0),
               height: _height,
               // color: Color.fromARGB(255, 234, 166, 18),
             ),

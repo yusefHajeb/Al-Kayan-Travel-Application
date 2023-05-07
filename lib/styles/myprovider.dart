@@ -22,7 +22,7 @@ class ProviderService with ChangeNotifier {
         "assest/image/thim2.png", 'الكيان الدولي',  ""),
   ];
 
-  //اقائمة هذي حق شركائنا
+  //القائمة هذي حق شركائنا
   List partners = [
     Product("assest/image/imageKaian.png", 'طيران السعيدة', ""),
     Product("assest/image/imageKaian.png", 'مصر للطيران', ""),
@@ -69,7 +69,7 @@ class ProviderService with ChangeNotifier {
       return products;
     else if (getIndex() == "1"){
 return partners;
-print("XXXXXXXXXXXXXXXX");
+ print("XXXXXXXXXXXXXXXX");
     }
       
     else if (getIndex() == "2")

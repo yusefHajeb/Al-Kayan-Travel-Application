@@ -61,6 +61,8 @@ dependencies:
   cloud_firestore: ^4.5.1
   firebase_messaging: ^14.4.0
   flutter_svg: ^2.0.5
+  # shared_preferences: ^2.1.0
+  cached_network_image: ^3.2.3
   # firebase_storage: ^11.1.1
   # slimy_card: ^1.0.3
   # url to open any link 

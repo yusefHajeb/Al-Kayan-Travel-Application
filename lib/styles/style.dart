@@ -20,7 +20,7 @@ TextStyle header = const TextStyle(
 );
 
 TextStyle paragraph = const TextStyle(
-  fontSize: 14,
+  fontSize: 12,
   fontFamily: 'ReadexPro',
   fontWeight: FontWeight.w400,
   color: ktextColor,
