@@ -1,11 +1,17 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
+import 'package:yah_app/screen/screen_search/dataselect.dart';
 import 'package:yah_app/styles/style.dart';
-import 'package:yah_app/styles/tolls.dart';
+import 'package:yah_app/styles/provider_passboard.dart';
 import 'package:provider/provider.dart';
+
+import '../../Widget/screen search/loading.dart';
+import '../../Widget/screen search/show_loading.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -18,12 +24,12 @@ class _SecondScreenState extends State<SecondScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 700), () {
+    Timer(const Duration(milliseconds: 700), () {
       setState(() {
         _a = !_a;
       });
     });
-    Timer(Duration(milliseconds: 2000), () {
+    Timer(const Duration(milliseconds: 2090), () {
       Navigator.of(context)
           .pushReplacement(SlideTransitionAnimation(SecondPage()));
     });
@@ -41,15 +47,16 @@ class _SecondScreenState extends State<SecondScreen> {
     double _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 254, 253, 250),
         body: Stack(
           children: [
             AnimatedContainer(
               duration: Duration(milliseconds: 6000),
               curve: Curves.fastLinearToSlowEaseIn,
               width: _a ? _width : 0,
+              color: Color.fromARGB(255, 0, 0, 0),
               height: _height,
-              color: Color.fromARGB(255, 238, 224, 194),
+              // color: Color.fromARGB(255, 234, 166, 18),
             ),
             Center(
               child: Stack(
@@ -64,8 +71,6 @@ class _SecondScreenState extends State<SecondScreen> {
                     left: MediaQuery.of(context).size.width * 0.065,
                     right: MediaQuery.of(context).size.width * 0.065,
                     child: Container(
-                      child:
-                          Image.asset("assest/image/14_No Search Results.png"),
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -119,28 +124,112 @@ class SecondPage extends StatefulWidget {
 class _SecondePage extends State<SecondPage> {
   late bool _isLoding = true;
   late bool _isCheck = false;
-  late List<passbord> Data;
-  var filterData;
-  String searchNumber = "123456789";
+  late List<Passbord> Data;
+  var filterData1;
+  String? searchNumber;
+
   @override
   void initState() {
-    // _isLoding = true;
-    Provider.of<passpordProvider>(context, listen: false).fectData().then((_) {
-      Data = Provider.of<passpordProvider>(context, listen: false).listClint;
-      if (Data.isEmpty) {
-        _isLoding = true;
-      } else {
-        print("xxxxxxxxxxxxxxxxxxxxxxx");
-        // _isCheck =
-        //     Provider.of<passpordProvider>(context).searchList(searchNumber);
-
-        filterData =
-            Data.firstWhere((element) => element.numberPassbord == 123456789);
-
+    getData().then((value) {
+      setState(() {
         _isLoding = false;
-      }
+        // _isCheck = true; // _isCheck = true;
+      });
     });
+    // _isLoding = true;
+    // Provider.of<PasspordProvider>(context, listen: false).fectData().then((_) {
+    // Data = Provider.of<passpordProvider>(context, listen: false).listClint;
+    // if (!Data.isEmpty) {
+    //   filterData1 = Data.firstWhere(
+    //     (element) => element.numberPassbord.toString() == searchNumber,
+    //   );
+    // }
+    // _isLoding = false;
+    // try {
+    //   Timer(Duration(seconds: 2), () {
+    //     setState(() {
+    //       if (filterData1!.numberPassbord.isEmpty) {
+    //         _isLoding = true;
+    //         _isCheck = false;
+    //         print("xxxxxxxxxxxxxxxxxxxxxxx");
+    //       } else {
+    //         // print("xxxxxxxxxxxxxxxxxxxxxxx");
+    //         // _isCheck =
+    //         //     Provider.of<passpordProvider>(context).searchList("123456789");
+    //         // filterData = Data.firstWhere(
+    //         //     (element) => element.numberPassbord == searchNumber);
+    //         _isLoding = false;
+
+    //         print("xxxxxxxxxxxxxxxxxxxxxxx" + _isCheck.toString());
+    //       }
+    //     });
+    //   });
+    // } catch (_) {
+    //   //
+    // }
+    // _isLoding = false;
+    // print("xxxxxxxxxxxxxxxxxxxxxxx");
+    // _isCheck = false;
+    // });
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // searchNumber = Provider.of<PasspordProvider>(context, listen: true)
+    //     .getNumberPassbord();
+
+    // _isCheck = Provider.of<PasspordProvider>(context, listen: true).getExist();
+    // if (_isCheck) {
+    //   filterData1 =
+    //       Provider.of<PasspordProvider>(context, listen: true).getPasspordVar();
+    //   _isLoding = false;
+    // } else {
+    //   Timer(Duration(seconds: 2), () {
+    //     _isLoding = false;
+    //   });
+    // }
+
+    // if (filterData1.toString().isEmpty) _isCheck = false;
+    // _isCheck = filterData.toString().isEmpty;
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _isCheck = false;
+    _isLoding = true;
+    filterData1 = null;
+    super.dispose();
+  }
+
+  Future<void> getData() async {
+    final myProvider = Provider.of<PasspordProvider>(context, listen: false);
+    CollectionReference ref = FirebaseFirestore.instance.collection("users");
+
+    QuerySnapshot querySnapshot = await ref
+        .where("passboard_num", isEqualTo: myProvider.getNumberPassbord())
+        .get();
+
+    List mylist = [];
+    if (querySnapshot.docs.isNotEmpty) {
+      querySnapshot.docs.forEach((doc) {
+        mylist.add(doc.data());
+      });
+      filterData1 = Passbord(
+          numberPassbord: mylist[0]["passboard_num"],
+          state: mylist[0]["state"],
+          name: mylist[0]["name"],
+          phone: "772323",
+          another: mylist[0]["typeVisa"],
+          image: mylist[0]["imageUrl"]);
+      print("-------------------------------");
+      setState(() {
+        _isLoding = false;
+        _isCheck = true;
+      });
+    }
   }
 
   Widget build(BuildContext context) {
@@ -158,13 +247,13 @@ class _SecondePage extends State<SecondPage> {
           ? SizedBox(height: size.height, child: ShowSktolin(size: size))
           : SizedBox(
               height: size.height,
-              child: !_isLoding
-                  ? clintData(filterData: filterData, size: size)
+              child: _isCheck
+                  ? DataVisa(filterData: filterData1, size: size)
                   : Center(
                       child: AnimatedTextKit(
                         animatedTexts: [
                           TypewriterAnimatedText(
-                            'معاملتك قيد ',
+                            'حاول مرة اخرى',
                             speed: Duration(milliseconds: 150),
                             textStyle: TextStyle(
                               fontSize: 30,
@@ -186,258 +275,5 @@ class _SecondePage extends State<SecondPage> {
   State<StatefulWidget> createState() {
     // TODO: implement createState
     throw UnimplementedError();
-  }
-}
-
-class clintData extends StatelessWidget {
-  const clintData({
-    Key? key,
-    required this.filterData,
-    required this.size,
-  }) : super(key: key);
-
-  final passbord filterData;
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Card(
-            semanticContainer: false,
-            elevation: 20,
-            clipBehavior: Clip.antiAlias,
-            margin: EdgeInsets.all(20.0),
-            // padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  child: Text(
-                    filterData.name,
-                    style: header,
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    filterData.image,
-                    fit: BoxFit.cover,
-                    width: size.width - 50,
-                    height: size.height / 3,
-                    // color: Colors.transparent,
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  child: Text(
-                    " صاحب الجواز :" + filterData.name,
-                    style: header2,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  child: Text(
-                    " الرقم :" + filterData.phone,
-                    style: header2,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  child: Text(
-                    " نوع المعاملة :" + filterData.state,
-                    style: header2,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  child: Text(
-                    " نوع المعاملة :" + filterData.state,
-                    style: header2,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ShowSktolin extends StatelessWidget {
-  const ShowSktolin({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Expanded(
-                child: Column(
-              children: const [
-                Skelton(
-                  height: 20,
-                  width: 230,
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Skelton(
-                  height: 20,
-                  width: 230,
-                ),
-              ],
-            )),
-            Skelton(
-              height: 30,
-              width: 120,
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 40,
-        ),
-        Column(
-          children: [
-            Skelton(
-              width: size.width - 50,
-              height: size.height / 3,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                    child: Column(
-                  children: const [
-                    Skelton(
-                      height: 20,
-                      width: 230,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Skelton(
-                      height: 20,
-                      width: 230,
-                    ),
-                  ],
-                )),
-                Skelton(
-                  height: 30,
-                  width: 120,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                    child: Column(
-                  children: const [
-                    Skelton(
-                      height: 20,
-                      width: 230,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Skelton(
-                      height: 20,
-                      width: 230,
-                    ),
-                  ],
-                )),
-                Skelton(
-                  height: 30,
-                  width: 120,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                    child: Column(
-                  children: const [
-                    Skelton(
-                      height: 20,
-                      width: 230,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Skelton(
-                      height: 20,
-                      width: 230,
-                    ),
-                  ],
-                )),
-                Skelton(
-                  height: 25,
-                  width: 120,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class Skelton extends StatelessWidget {
-  const Skelton({
-    Key? key,
-    this.width,
-    this.height,
-  }) : super(key: key);
-  final double? width, height;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.04),
-          borderRadius: const BorderRadius.all(Radius.circular(16))),
-    );
   }
 }

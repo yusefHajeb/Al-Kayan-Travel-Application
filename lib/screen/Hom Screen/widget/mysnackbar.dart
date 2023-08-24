@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yah_app/styles/style.dart';
-import 'package:yah_app/styles/tolls.dart';
+import 'package:yah_app/styles/provider_passboard.dart';
 
-void MySnackBar(ScaffoldMessengerState scaffold) {
+import '../../../styles/tolls.dart';
+
+void MySnackBar(ScaffoldMessengerState scaffold, String message) {
   scaffold.showSnackBar(SnackBar(
     content: Stack(
       clipBehavior: Clip.none,
@@ -29,6 +31,11 @@ void MySnackBar(ScaffoldMessengerState scaffold) {
                       style: header2,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
+                    ),
+
+                    Text(
+                      message,
+                      style: paragraph,
                     ),
                     // myBilder(context),
                   ],

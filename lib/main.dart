@@ -1,19 +1,21 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yah_app/providers/service_provider.dart';
-import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
+
 import 'package:yah_app/screen/servis/sirvec_page.dart';
 import 'package:yah_app/screen/servis/sirvece_screen.dart';
-import 'package:yah_app/screen/kaian__screen.dart';
+import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
+import 'package:yah_app/screen/splash%20screen/splash_screen.dart';
 import 'package:yah_app/styles/myprovider.dart';
-import 'package:yah_app/styles/tolls.dart';
+import 'package:yah_app/styles/provider_passboard.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:http/http.dart' as http;
+// import 'package:firebase_database/firebase_database.dart';
+// import 'package:http/http.dart' as http;
+import 'package:yah_app/styles/style.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
@@ -42,9 +44,9 @@ void main() async {
   //       'Note': "after month will arrive passbord"
   //     }));
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<passpordProvider>(create: (_) => passpordProvider()),
+    ChangeNotifierProvider<PasspordProvider>(create: (_) => PasspordProvider()),
     ChangeNotifierProvider<ProviderService>(create: (_) => ProviderService()),
-    ChangeNotifierProvider(create: (_) => ProviderShowService()),
+    ChangeNotifierProvider(create: (_) => ServicesProvider()),
   ], child: MyApp()));
 }
 
@@ -77,19 +79,9 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: const [Locale("ar", "AE")],
-        home: StreamBuilder<ConnectivityResult>(
-          stream: Connectivity().onConnectivityChanged,
-          builder: (context, snapshot) {
-            return snapshot.data == ConnectivityResult.none
-                ? const Center(
-                    child: Text("No Inter net Connecrion "),
-                  )
-                : firstScreen();
-          },
-        ),
         debugShowCheckedModeBanner: false,
         routes: {
-          // '/': (context) => firstScreen(),
+          '/': (context) => SplashScreen(),
           Screen2.routeName: (context) => Screen2(),
           ShowService.routeName: (context) => ShowService(),
           PageService.routeName: (context) => PageService(),
@@ -117,21 +109,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Screen2();
-  }
-}
-
-class HomePage2 extends StatelessWidget {
-  void selectScren(BuildContext ctx, int n) {
-    Navigator.of(ctx).pushNamed(
-      '/x',
-    );
-  }
-
-  const HomePage2({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
+    return const Screen2();
   }
 }

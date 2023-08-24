@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../styles/style.dart';
+import '../../styles/provider_passboard.dart';
 import '../../styles/tolls.dart';
 
 class MessageShow extends StatefulWidget {

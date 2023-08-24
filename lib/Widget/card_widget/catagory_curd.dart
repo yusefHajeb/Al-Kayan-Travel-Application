@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yah_app/screen/kaian__screen.dart';
-import 'package:yah_app/styles/tolls.dart';
+import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
+import 'package:yah_app/styles/provider_passboard.dart';
+
+import '../../styles/style.dart';
+import '../../styles/tolls.dart';
 
 class CatagoryCount extends StatelessWidget {
   final String titleCurd;
