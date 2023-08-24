@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yah_app/styles/style.dart';
-import 'package:yah_app/styles/provider_passboard.dart';
 
-import '../../../styles/tolls.dart';
 
 void MySnackBar(ScaffoldMessengerState scaffold, String message) {
   scaffold.showSnackBar(SnackBar(
@@ -11,7 +9,7 @@ void MySnackBar(ScaffoldMessengerState scaffold, String message) {
       clipBehavior: Clip.none,
       children: [
         Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           height: 90,
           decoration: const BoxDecoration(
             color: primary,
@@ -54,7 +52,7 @@ void MySnackBar(ScaffoldMessengerState scaffold, String message) {
               "assest/image/svg/bubbles.svg",
               height: 48,
               width: 48,
-              color: Color.fromARGB(255, 212, 152, 0),
+              color: const Color.fromARGB(255, 212, 152, 0),
             ),
           ),
         ),
@@ -72,7 +70,7 @@ void MySnackBar(ScaffoldMessengerState scaffold, String message) {
               SvgPicture.asset(
                 "assest/image/svg/close.svg",
                 height: 15,
-                color: Color.fromARGB(255, 212, 152, 0),
+                color: const Color.fromARGB(255, 212, 152, 0),
               ),
             ],
           ),

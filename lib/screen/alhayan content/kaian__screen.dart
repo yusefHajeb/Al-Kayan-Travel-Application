@@ -26,7 +26,7 @@ class _AlkianScreen extends State<Screen2> {
   @override
   void initState() {
     _isLoding = true;
-    Future.delayed(Duration(seconds: 1)).then((_) {
+    Future.delayed(const Duration(seconds: 1)).then((_) {
       setState(() {
         _isLoding = false;
       });
@@ -45,9 +45,9 @@ class _AlkianScreen extends State<Screen2> {
     super.dispose();
   }
 
-  late final AnimationController _controller;
+  // late final AnimationController _controller;
 
-  late Animation<double> _fadeInFadeOut;
+  // late Animation<double> _fadeInFadeOut;
 // @override
 // GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   @override
@@ -132,9 +132,9 @@ class _AlkianScreen extends State<Screen2> {
                       // scrollDirection: Axis.vertical,
                       itemCount: 3,
                       itemBuilder: (BuildContext context, int index) =>
-                          LoadingShowService(),
+                          const LoadingShowService(),
                       separatorBuilder: (BuildContext context, int index) =>
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
                     ),
                   )
                 : Expanded(
@@ -198,7 +198,7 @@ class _AlkianScreen extends State<Screen2> {
                                                 e.discrib,
                                                 style: paragraph,
                                               ),
-                                              SizedBox(height: 10),
+                                              const SizedBox(height: 10),
                                             ],
                                           ),
                                         ),
@@ -222,28 +222,28 @@ class LoadingShowService extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       // crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Skelton(
+        Skelton(
           height: 120,
           width: 120,
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 16),
         Expanded(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const Skelton(width: 80),
-            const SizedBox(height: 8),
-            const Skelton(),
-            const SizedBox(height: 8),
-            const Skelton(),
-            const SizedBox(height: 8),
+            Skelton(width: 80),
+            SizedBox(height: 8),
+            Skelton(),
+            SizedBox(height: 8),
+            Skelton(),
+            SizedBox(height: 8),
             Row(
-              children: const [
+              children: [
                 Expanded(child: Skelton()),
                 SizedBox(
                   width: 16,
@@ -290,7 +290,7 @@ class myAppBarServece extends StatelessWidget {
             onPressed: () {
               Navigator.popAndPushNamed(context, '/');
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
               color: Colors.black,
             ),

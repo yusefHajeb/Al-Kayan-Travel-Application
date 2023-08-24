@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class AboutUs extends StatelessWidget {
   static const routeName = 'page_kaian_about';
+
+  const AboutUs({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: <Widget>[
             _buildInfo1(),
@@ -19,14 +21,14 @@ class AboutUs extends StatelessWidget {
 
   Widget _buildInfo1() {
     return Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Card(
           child: Container(
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 children: <Widget>[
-                  Row(
+                  const Row(
                     children: <Widget>[
                       CircleAvatar(
                         radius: 30,
@@ -46,33 +48,33 @@ class AboutUs extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.location_city,
                       size: 23,
                     ),
-                    title: Text("إب"),
-                    subtitle: Text("1.0"),
+                    title: const Text("إب"),
+                    subtitle: const Text("1.0"),
                     onTap: () {},
                   ),
-                  Divider(),
+                  const Divider(),
                   ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.roundabout_right_outlined,
                       size: 23,
                     ),
-                    title: Text("شارع العدين"),
-                    subtitle: Text("نزلة شركة سبافون"),
+                    title: const Text("شارع العدين"),
+                    subtitle: const Text("نزلة شركة سبافون"),
                     onTap: () {},
                   ),
-                  Divider(),
+                  const Divider(),
                   ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.lock_clock,
                       size: 23,
                     ),
-                    title: Text("08:00 - -ص 12:00"),
+                    title: const Text("08:00 - -ص 12:00"),
                     onTap: () {},
                   ),
                 ],
@@ -82,32 +84,32 @@ class AboutUs extends StatelessWidget {
 
   Widget _buildInfo2() {
     return Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Card(
           child: Container(
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Author'),
-                  SizedBox(height: 10),
+                  const Text('Author'),
+                  const SizedBox(height: 10),
                   ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.person,
                       size: 23,
                     ),
-                    title: Text("Deepakkumar"),
-                    subtitle: Text("Coimbatore,TamilNadu"),
+                    title: const Text("Deepakkumar"),
+                    subtitle: const Text("Coimbatore,TamilNadu"),
                     onTap: () {},
                   ),
-                  Divider(),
+                  const Divider(),
                   ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.file_download,
                       size: 23,
                     ),
-                    title: Text("Download From Cloud"),
+                    title: const Text("Download From Cloud"),
                     onTap: () {},
                   ),
                 ],

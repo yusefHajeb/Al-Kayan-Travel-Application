@@ -13,6 +13,8 @@ import '../../providers/service_provider.dart';
 
 class PageService extends StatefulWidget {
   static const routeName = 'show_servece_index';
+
+  const PageService({Key? key}) : super(key: key);
   @override
   State<PageService> createState() => _PageService();
 }
@@ -26,9 +28,9 @@ Future<void> getData() async {
 
   List mylist = [];
   if (querySnapshot.docs.isNotEmpty) {
-    querySnapshot.docs.forEach((doc) {
+    for (var doc in querySnapshot.docs) {
       mylist.add(doc.data());
-    });
+    }
     // listService.add(DataService(imgUrl: '', paragraph: '', title: ''));
     print("-------------------------------");
   }
@@ -47,7 +49,7 @@ class _PageService extends State<PageService> {
     return WillPopScope(
         onWillPop: () async {
           return await Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => ShowService()));
+              context, MaterialPageRoute(builder: (_) => const ShowService()));
         },
         child: Scaffold(
           // resizeToAvoidBottomInset: true,
@@ -90,7 +92,7 @@ class _PageService extends State<PageService> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => ShowService()));
+                                      builder: (_) => const ShowService()));
                               // Navigator.popAndPushNamed(context, ShowService.routeName);
                             },
                             icon: const Icon(
@@ -106,7 +108,7 @@ class _PageService extends State<PageService> {
                           height: 25,
                           child: Container(
                             // height: 600,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(25.0),
@@ -118,15 +120,15 @@ class _PageService extends State<PageService> {
                       ]),
                     ),
                     Transform.translate(
-                      offset: Offset(0, -50),
+                      offset: const Offset(0, -50),
                       child: Container(
                         width: size.width / 1.50,
-                        padding: EdgeInsets.all(13),
+                        padding: const EdgeInsets.all(13),
                         // color: Colors.white,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(13),
                             color: Colors.white,
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 offset: Offset(0, 6),
                                 blurRadius: 17,
@@ -150,10 +152,10 @@ class _PageService extends State<PageService> {
                       child: SizedBox(
                         height: size.height / 2.6,
                         child: Padding(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 15),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 20, horizontal: 10),
                             child: Text(
                               myList[sectionIndex]['paragraph'],
@@ -181,28 +183,28 @@ class _PageService extends State<PageService> {
                             const SizedBox(
                               height: 20,
                             ),
-                            Container(
+                            SizedBox(
                                 height: 80.0,
                                 child: AnimationConfiguration.synchronized(
-                                  duration: Duration(milliseconds: 600),
+                                  duration: const Duration(milliseconds: 600),
                                   child: SlideAnimation(
                                     curve: Curves.easeInCirc,
                                     child: FadeInAnimation(
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
-                                        physics: BouncingScrollPhysics(),
+                                        physics: const BouncingScrollPhysics(),
                                         itemBuilder: (context, index) {
                                           return AnimationConfiguration
                                               .staggeredList(
                                             position: index,
                                             duration:
-                                                Duration(milliseconds: 600),
+                                                const Duration(milliseconds: 600),
                                             child: SlideAnimation(
                                               horizontalOffset: 30.0,
                                               child: FadeInAnimation(
                                                 delay:
-                                                    Duration(milliseconds: 200),
+                                                    const Duration(milliseconds: 200),
                                                 child: Bouncing(
                                                     onPress: () {},
                                                     child: (CardBottom(
@@ -243,13 +245,13 @@ class CardBottom extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 3 / 1,
         child: Container(
-          margin: EdgeInsets.only(left: 5, right: 10, bottom: 10),
-          padding: EdgeInsets.all(9),
+          margin: const EdgeInsets.only(left: 5, right: 10, bottom: 10),
+          padding: const EdgeInsets.all(9),
           decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(15),
               color: Colors.white,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   offset: Offset(0, 6),
                   blurRadius: 3,
@@ -265,7 +267,7 @@ class CardBottom extends StatelessWidget {
               // padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: Color.fromARGB(255, 40, 39, 37)),
+                  color: const Color.fromARGB(255, 40, 39, 37)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: Container(

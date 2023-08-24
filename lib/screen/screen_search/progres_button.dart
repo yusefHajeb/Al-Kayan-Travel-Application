@@ -1,10 +1,11 @@
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_state_button/iconed_button.dart';
 import 'package:progress_state_button/progress_button.dart';
 
 class MyCustomWidget extends StatefulWidget {
+  const MyCustomWidget({Key? key}) : super(key: key);
+
   @override
   _MyCustomWidgetState createState() => _MyCustomWidgetState();
 }
@@ -18,9 +19,9 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
     return Scaffold(
       body: Center(
         child: Container(
-          margin: EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          decoration: BoxDecoration(boxShadow: [
+          margin: const EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          decoration: BoxDecoration(boxShadow: const [
             BoxShadow(
               offset: Offset(0, 6),
               blurRadius: 17,
@@ -32,7 +33,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   hintText: "ابحث برقم الجواز",
-                  icon: Icon(Icons.search),
+                  icon: const Icon(Icons.search),
                   border: InputBorder.none,
                   suffixIcon: MaterialButton(
                     onPressed: () {},
@@ -40,18 +41,18 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                         iconedButtons: {
                           ButtonState.idle: IconedButton(
                               text: 'Send',
-                              icon: Icon(Icons.send, color: Colors.white),
+                              icon: const Icon(Icons.send, color: Colors.white),
                               color: Colors.deepPurple.shade500),
                           ButtonState.loading: IconedButton(
                               text: 'Loading',
                               color: Colors.deepPurple.shade700),
                           ButtonState.fail: IconedButton(
                               text: 'Failed',
-                              icon: Icon(Icons.cancel, color: Colors.white),
+                              icon: const Icon(Icons.cancel, color: Colors.white),
                               color: Colors.red.shade300),
                           ButtonState.success: IconedButton(
                               text: 'Success',
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.check_circle,
                                 color: Colors.white,
                               ),
@@ -89,7 +90,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
       case ButtonState.idle:
         stateTextWithIcon = ButtonState.loading;
         Future.delayed(
-          Duration(seconds: 1),
+          const Duration(seconds: 1),
           () {
             setState(
               () {

@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ListAnmiScreen extends StatefulWidget {
+  const ListAnmiScreen({Key? key}) : super(key: key);
+
   @override
   _MyCustomWidgetState createState() => _MyCustomWidgetState();
 }
@@ -19,7 +19,7 @@ class _MyCustomWidgetState extends State<ListAnmiScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => SlideAnimation2(
+                  builder: (context) => const SlideAnimation2(
                         imgurl: 'd',
                         Name: "S",
                         title: "s",
@@ -52,22 +52,22 @@ class SlideAnimation2 extends StatelessWidget {
             child: ListView.builder(
                 shrinkWrap: true,
                 padding: EdgeInsets.all(_w / 30),
-                physics: BouncingScrollPhysics(
+                physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
                 itemCount: 1,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
-                    delay: Duration(milliseconds: 100),
+                    delay: const Duration(milliseconds: 100),
                     child: SlideAnimation(
-                      duration: Duration(milliseconds: 2500),
+                      duration: const Duration(milliseconds: 2500),
                       curve: Curves.fastLinearToSlowEaseIn,
                       child: SlideAnimation(
-                        duration: Duration(milliseconds: 2500),
+                        duration: const Duration(milliseconds: 2500),
                         curve: Curves.fastLinearToSlowEaseIn,
                         child: FadeInAnimation(
                           curve: Curves.fastLinearToSlowEaseIn,
-                          duration: Duration(milliseconds: 2500),
+                          duration: const Duration(milliseconds: 2500),
                           child: Container(
                             margin: EdgeInsets.only(bottom: _w / 50),
                             height: (_w / 4) + 5,
@@ -85,21 +85,21 @@ class SlideAnimation2 extends StatelessWidget {
                               ),
                               title: Text(
                                 Name,
-                                style: TextStyle(fontSize: 20),
+                                style: const TextStyle(fontSize: 20),
                               ),
                               subtitle: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(title),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                 ],
                               ),
                             ),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                                  const BorderRadius.all(Radius.circular(20)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.1),

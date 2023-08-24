@@ -1,10 +1,11 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 
 class MyCustomWidget extends StatefulWidget {
+  const MyCustomWidget({Key? key}) : super(key: key);
+
   @override
   _MyCustomWidgetState createState() => _MyCustomWidgetState();
 }
@@ -18,25 +19,25 @@ class _MyCustomWidgetState extends State<MyCustomWidget>
   void initState() {
     super.initState();
 
-    scaleController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
-          ..addStatusListener((status) {
-            // if (status == AnimationStatus.completed) {
-            Navigator.push(
-                context,
-                AnimatingRoute(
-                  route: firstScreen(),
-                  page: Container(),
-                ));
-            Timer(
-              Duration(milliseconds: 300),
-              () {
-                // print('worked');
-                scaleController.reset();
-                //  scaleController.forward();
-              },
-            );
-          });
+    scaleController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500))
+      ..addStatusListener((status) {
+        // if (status == AnimationStatus.completed) {
+        Navigator.push(
+            context,
+            AnimatingRoute(
+              route: const firstScreen(),
+              page: Container(),
+            ));
+        Timer(
+          const Duration(milliseconds: 300),
+          () {
+            // print('worked');
+            scaleController.reset();
+            //  scaleController.forward();
+          },
+        );
+      });
 
     scaleAnimation =
         Tween<double>(begin: 0.0, end: 10.0).animate(scaleController);
@@ -50,7 +51,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget>
 
   @override
   Widget build(BuildContext c) {
-    double _w = MediaQuery.of(context).size.width;
+    // double _w = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
         child: InkWell(
@@ -60,7 +61,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget>
           child: Container(
             width: 100,
             height: 100,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.blue,
               shape: BoxShape.circle,
             ),
@@ -69,7 +70,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget>
               builder: (c, child) => Transform.scale(
                 scale: scaleAnimation.value,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.blue,
                   ),
@@ -84,13 +85,15 @@ class _MyCustomWidgetState extends State<MyCustomWidget>
 }
 
 class Destination extends StatelessWidget {
+  const Destination({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark,
         centerTitle: true,
-        title: Text('Go Back'),
+        title: const Text('Go Back'),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
     );
   }

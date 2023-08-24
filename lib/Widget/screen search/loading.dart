@@ -64,7 +64,7 @@ class DataVisa extends StatelessWidget {
                     style: header2,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -73,7 +73,7 @@ class DataVisa extends StatelessWidget {
                     style: header2,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -82,7 +82,7 @@ class DataVisa extends StatelessWidget {
                     style: header2,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -91,7 +91,7 @@ class DataVisa extends StatelessWidget {
                     style: header2,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
               ],

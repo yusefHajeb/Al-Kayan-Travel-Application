@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppBottomBar extends StatefulWidget {
+  const AppBottomBar({Key? key}) : super(key: key);
+
   @override
   _AppBottomBarState createState() => _AppBottomBarState();
 }
@@ -19,7 +21,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
             inx = index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.create_new_folder), label: 'Feed'),

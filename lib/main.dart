@@ -1,6 +1,6 @@
 // import 'dart:convert';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yah_app/providers/service_provider.dart';
@@ -25,7 +25,7 @@ void _xx(int index) {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  future:
+  // future:
   await Firebase.initializeApp();
   // var _ref = FirebaseDatabase.instance.ref().child("customer");
 
@@ -47,22 +47,22 @@ void main() async {
     ChangeNotifierProvider<PasspordProvider>(create: (_) => PasspordProvider()),
     ChangeNotifierProvider<ProviderService>(create: (_) => ProviderService()),
     ChangeNotifierProvider(create: (_) => ServicesProvider()),
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
   void initState() {
     checkConnecrivity();
   }
 
   void checkConnecrivity() async {
-    var result = await Connectivity().checkConnectivity();
-    print(result.name);
+    // var result = await Connectivity().checkConnectivity();
+    // print(result.name);
   }
 
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
@@ -81,14 +81,13 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [Locale("ar", "AE")],
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => SplashScreen(),
-          Screen2.routeName: (context) => Screen2(),
-          ShowService.routeName: (context) => ShowService(),
-          PageService.routeName: (context) => PageService(),
+          '/': (context) => const SplashScreen(),
+          Screen2.routeName: (context) => const Screen2(),
+          ShowService.routeName: (context) => const ShowService(),
+          PageService.routeName: (context) => const PageService(),
         });
   }
 
-  @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     throw UnimplementedError();
@@ -97,12 +96,14 @@ class MyApp extends StatelessWidget {
 
 final List<Map<String, Object>> _page = [
   {
-    'page': const Scaffold(body: const Center()),
+    'page': const Scaffold(body: Center()),
     'title': "Part1",
   },
 ];
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   void selectScreen(BuildContext ctx, int n) {
     Navigator.of(ctx).pushNamed('/x1');
   }

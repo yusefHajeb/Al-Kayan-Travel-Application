@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
-import 'package:yah_app/styles/provider_passboard.dart';
 
 import '../../styles/style.dart';
-import '../../styles/tolls.dart';
 
 class CatagoryCount extends StatelessWidget {
   final String titleCurd;
@@ -20,17 +17,17 @@ class CatagoryCount extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return ClipRRect(
-      borderRadius: BorderRadius.only(
+      borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(40),
         bottomRight: Radius.circular(40),
       ),
       child: Padding(
         padding: const EdgeInsets.all(0.0),
         child: Container(
-          margin: EdgeInsets.only(left: 10, bottom: 20),
+          margin: const EdgeInsets.only(left: 10, bottom: 20),
           width: size.width / 3,
           height: 200,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromRGBO(255, 255, 255, 1),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
@@ -52,12 +49,12 @@ class CatagoryCount extends StatelessWidget {
                 press();
               },
               child: Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: SizedBox(
                   child: Column(children: <Widget>[
-                    Spacer(),
+                    const Spacer(),
                     myIcon,
-                    Spacer(),
+                    const Spacer(),
                     Text(
                       titleCurd,
                       textAlign: TextAlign.center,
