@@ -9,13 +9,8 @@ import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 
 // import 'package:yah_app/screen/servis/sirvec_page.dart';
 import 'package:yah_app/styles/style.dart';
-<<<<<<< HEAD
-
-import '../../providers/service_provider.dart';
-=======
 import '../../providers/service_provider.dart';
 // import '../../styles/provider_passboard.dart';
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
 
 import '../alhayan content/kaian__screen.dart';
 
@@ -37,8 +32,6 @@ class ShowService extends StatefulWidget {
 class _Screenkhadmatana extends State<ShowService> {
   @override
   void initState() {
-<<<<<<< HEAD
-=======
     setState(() {
       fetchData().then((value) =>
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
@@ -47,7 +40,6 @@ class _Screenkhadmatana extends State<ShowService> {
           }));
     });
 
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
     super.initState();
     fetchData()
         .then((value) => Future.delayed(Duration(milliseconds: 100)).then((_) {
@@ -192,21 +184,12 @@ class _Screenkhadmatana extends State<ShowService> {
                               itemBuilder: (ctx, index) {
                                 return AnimationConfiguration.staggeredList(
                                   position: index,
-<<<<<<< HEAD
-                                  duration: Duration(milliseconds: 800),
-                                  child: SlideAnimation(
-                                    // delay: Duration(milliseconds: 200),
-                                    verticalOffset: 50.0,
-                                    child: FadeInAnimation(
-                                      delay: Duration(milliseconds: 100),
-=======
                                   duration: const Duration(milliseconds: 700),
                                   child: SlideAnimation(
                                     delay: const Duration(milliseconds: 200),
                                     verticalOffset: 50.0,
                                     child: FadeInAnimation(
                                       delay: const Duration(milliseconds: 200),
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
                                       child: Container(
                                         margin: const EdgeInsets.only(
                                             right: 5,

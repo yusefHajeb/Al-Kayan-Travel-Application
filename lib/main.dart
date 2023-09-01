@@ -77,8 +77,6 @@ class MyApp extends StatelessWidget {
     throw UnimplementedError();
   }
 }
-<<<<<<< HEAD
-=======
 
 final List<Map<String, Object>> _page = [
   {
@@ -99,4 +97,3 @@ class MyHomePage extends StatelessWidget {
     return const Screen2();
   }
 }
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4

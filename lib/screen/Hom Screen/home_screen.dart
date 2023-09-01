@@ -305,8 +305,6 @@ class _firstScreenState extends State<firstScreen> {
               },
             ),
             CatagoryCount(
-<<<<<<< HEAD
-=======
               titleCurd: "الفروع",
               myIcon: const Icon(
                 Icons.slideshow,
@@ -320,7 +318,6 @@ class _firstScreenState extends State<firstScreen> {
               },
             ),
             CatagoryCount(
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
               titleCurd: "حساباتنا",
               myIcon: const Icon(
                 Icons.local_phone_outlined,

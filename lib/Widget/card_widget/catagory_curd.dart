@@ -26,13 +26,8 @@ class CatagoryCount extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.only(left: 10, bottom: 20),
           width: size.width / 3,
-<<<<<<< HEAD
-          height: 250,
-          decoration: BoxDecoration(
-=======
           height: 200,
           decoration: const BoxDecoration(
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
             color: Color.fromRGBO(255, 255, 255, 1),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
@@ -59,10 +54,6 @@ class CatagoryCount extends StatelessWidget {
                   child: Column(children: <Widget>[
                     const Spacer(),
                     myIcon,
-<<<<<<< HEAD
-                    Spacer(),
-                    Text(titleCurd, textAlign: TextAlign.center, style: card),
-=======
                     const Spacer(),
                     Text(
                       titleCurd,
@@ -73,7 +64,6 @@ class CatagoryCount extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                     ),
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
                   ]),
                 ),
               ),

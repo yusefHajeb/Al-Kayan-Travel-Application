@@ -4,11 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-<<<<<<< HEAD
-import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
-import 'package:yah_app/styles/style.dart';
-=======
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
 import 'package:yah_app/styles/provider_passboard.dart';
 import 'package:provider/provider.dart';
 
@@ -172,12 +167,7 @@ class _SecondePage extends State<SecondPage> {
     if (querySnapshot.docs.isNotEmpty) {
       for (var doc in querySnapshot.docs) {
         mylist.add(doc.data());
-<<<<<<< HEAD
-      });
-      // print("========== fetch data ========="+ );
-=======
       }
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
       filterData1 = Passbord(
           numberPassbord: mylist[0]["numPassport"],
           state: mylist[0]["StatusTrans"],

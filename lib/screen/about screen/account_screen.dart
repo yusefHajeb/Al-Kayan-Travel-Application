@@ -92,11 +92,7 @@ class ScreenMedia extends StatelessWidget {
                   (int index) {
                     return AnimationConfiguration.staggeredGrid(
                       position: index,
-<<<<<<< HEAD
-                      duration: Duration(milliseconds: 900),
-=======
                       duration: const Duration(milliseconds: 500),
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
                       columnCount: columnCount,
                       child: ScaleAnimation(
                         duration: const Duration(milliseconds: 900),

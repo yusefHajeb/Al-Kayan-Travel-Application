@@ -87,33 +87,6 @@ class _PageService extends State<PageService> {
                         Positioned(
                           top: 50,
                           right: 20,
-<<<<<<< HEAD
-                          child: Container(
-                            // elevation: 9,
-                            decoration: BoxDecoration(
-                                // borderRadius: BorderRadius.circular(13),
-                                // color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(5, 0),
-                                    blurRadius: 20,
-                                    spreadRadius: -17,
-                                    color: Colors.black,
-                                  )
-                                ]),
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => ShowService()));
-                                // Navigator.popAndPushNamed(context, ShowService.routeName);
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.white,
-                              ),
-=======
                           child: IconButton(
                             onPressed: () {
                               Navigator.pushReplacement(
@@ -125,7 +98,6 @@ class _PageService extends State<PageService> {
                             icon: const Icon(
                               Icons.arrow_back_ios,
                               color: Colors.black,
->>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
                             ),
                           ),
                         ),
@@ -226,13 +198,13 @@ class _PageService extends State<PageService> {
                                           return AnimationConfiguration
                                               .staggeredList(
                                             position: index,
-                                            duration:
-                                                const Duration(milliseconds: 600),
+                                            duration: const Duration(
+                                                milliseconds: 600),
                                             child: SlideAnimation(
                                               horizontalOffset: 30.0,
                                               child: FadeInAnimation(
-                                                delay:
-                                                    const Duration(milliseconds: 200),
+                                                delay: const Duration(
+                                                    milliseconds: 200),
                                                 child: Bouncing(
                                                     onPress: () {},
                                                     child: (CardBottom(
