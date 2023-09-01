@@ -147,6 +147,30 @@ class ScreenMedia extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 70,
+            child: Container(
+              height: 200,
+              width: double.infinity,
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                    width: 1,
+                    color: Colors.black,
+                    strokeAlign: 1.0,
+                    style: BorderStyle.solid),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  myDialoge(context);
+                },
+                child: Text(
+                  "حول المطور",
+                  style: paragraph,
+                ),
+              ),
+            ),
+          )
 
           // SlimyCard(
           //   topCardWidget: topCardWidget(),
@@ -202,4 +226,58 @@ Widget bottomCardWidget() {
       color: Colors.white.withOpacity(.85),
     ),
   );
+}
+
+Future<void> myDialoge(BuildContext ctx) async {
+  return showDialog(
+      context: ctx,
+      builder: ((ctx) {
+        return AlertDialog(
+          title: Text(
+            "برمجة وتطوير",
+            style: paragraph2,
+          ),
+          content: Flex(
+            direction: Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                  child: Text(
+                "م/ يوسف حاجب",
+                style: paragraph,
+              )),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(left: 6),
+                      child: Text(
+                        "771274299",
+                        style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold),
+                      )),
+                  Icon(
+                    Icons.link,
+                    size: 19,
+                    color: Colors.black54,
+                  )
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                },
+                child: Text("اغلاق"))
+          ],
+        );
+      }));
 }
