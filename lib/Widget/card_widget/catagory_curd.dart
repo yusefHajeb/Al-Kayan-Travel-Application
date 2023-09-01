@@ -29,7 +29,7 @@ class CatagoryCount extends StatelessWidget {
         child: Container(
           margin: EdgeInsets.only(left: 10, bottom: 20),
           width: size.width / 3,
-          height: 200,
+          height: 250,
           decoration: BoxDecoration(
             color: Color.fromRGBO(255, 255, 255, 1),
             borderRadius: BorderRadius.only(
@@ -58,15 +58,7 @@ class CatagoryCount extends StatelessWidget {
                     Spacer(),
                     myIcon,
                     Spacer(),
-                    Text(
-                      titleCurd,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontSize: 12,
-                            color: primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
+                    Text(titleCurd, textAlign: TextAlign.center, style: card),
                   ]),
                 ),
               ),

@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
-import 'package:yah_app/screen/screen_search/dataselect.dart';
 import 'package:yah_app/styles/style.dart';
 import 'package:yah_app/styles/provider_passboard.dart';
 import 'package:provider/provider.dart';
@@ -136,63 +135,12 @@ class _SecondePage extends State<SecondPage> {
         // _isCheck = true; // _isCheck = true;
       });
     });
-    // _isLoding = true;
-    // Provider.of<PasspordProvider>(context, listen: false).fectData().then((_) {
-    // Data = Provider.of<passpordProvider>(context, listen: false).listClint;
-    // if (!Data.isEmpty) {
-    //   filterData1 = Data.firstWhere(
-    //     (element) => element.numberPassbord.toString() == searchNumber,
-    //   );
-    // }
-    // _isLoding = false;
-    // try {
-    //   Timer(Duration(seconds: 2), () {
-    //     setState(() {
-    //       if (filterData1!.numberPassbord.isEmpty) {
-    //         _isLoding = true;
-    //         _isCheck = false;
-    //         print("xxxxxxxxxxxxxxxxxxxxxxx");
-    //       } else {
-    //         // print("xxxxxxxxxxxxxxxxxxxxxxx");
-    //         // _isCheck =
-    //         //     Provider.of<passpordProvider>(context).searchList("123456789");
-    //         // filterData = Data.firstWhere(
-    //         //     (element) => element.numberPassbord == searchNumber);
-    //         _isLoding = false;
-
-    //         print("xxxxxxxxxxxxxxxxxxxxxxx" + _isCheck.toString());
-    //       }
-    //     });
-    //   });
-    // } catch (_) {
-    //   //
-    // }
-    // _isLoding = false;
-    // print("xxxxxxxxxxxxxxxxxxxxxxx");
-    // _isCheck = false;
-    // });
 
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    // searchNumber = Provider.of<PasspordProvider>(context, listen: true)
-    //     .getNumberPassbord();
-
-    // _isCheck = Provider.of<PasspordProvider>(context, listen: true).getExist();
-    // if (_isCheck) {
-    //   filterData1 =
-    //       Provider.of<PasspordProvider>(context, listen: true).getPasspordVar();
-    //   _isLoding = false;
-    // } else {
-    //   Timer(Duration(seconds: 2), () {
-    //     _isLoding = false;
-    //   });
-    // }
-
-    // if (filterData1.toString().isEmpty) _isCheck = false;
-    // _isCheck = filterData.toString().isEmpty;
     super.didChangeDependencies();
   }
 
@@ -206,10 +154,11 @@ class _SecondePage extends State<SecondPage> {
 
   Future<void> getData() async {
     final myProvider = Provider.of<PasspordProvider>(context, listen: false);
-    CollectionReference ref = FirebaseFirestore.instance.collection("users");
+    CollectionReference ref =
+        FirebaseFirestore.instance.collection("Customers");
 
     QuerySnapshot querySnapshot = await ref
-        .where("passboard_num", isEqualTo: myProvider.getNumberPassbord())
+        .where("numPassport", isEqualTo: myProvider.getNumberPassbord())
         .get();
 
     List mylist = [];
@@ -217,13 +166,14 @@ class _SecondePage extends State<SecondPage> {
       querySnapshot.docs.forEach((doc) {
         mylist.add(doc.data());
       });
+      // print("========== fetch data ========="+ );
       filterData1 = Passbord(
-          numberPassbord: mylist[0]["passboard_num"],
-          state: mylist[0]["state"],
-          name: mylist[0]["name"],
-          phone: "772323",
-          another: mylist[0]["typeVisa"],
-          image: mylist[0]["imageUrl"]);
+          numberPassbord: mylist[0]["numPassport"],
+          state: mylist[0]["StatusTrans"],
+          name: mylist[0]["NameCust"],
+          phone: mylist[0]["numberPhone"],
+          another: mylist[0]["TypeTrans"],
+          image: mylist[0]['ImageTrans']);
       print("-------------------------------");
       setState(() {
         _isLoding = false;

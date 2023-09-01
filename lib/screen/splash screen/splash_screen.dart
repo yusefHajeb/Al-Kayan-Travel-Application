@@ -58,7 +58,7 @@ class SplateScreenState extends State<SplashScreen>
           children: [
             Image.asset(
               "assest/image/imageKaian.png",
-              height: 200,
+              height: 300,
             ),
             const SizedBox(
               height: 30,

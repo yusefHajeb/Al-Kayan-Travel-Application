@@ -26,8 +26,15 @@ TextStyle paragraph = const TextStyle(
   color: ktextColor,
 );
 
+TextStyle card = const TextStyle(
+  fontSize: 11,
+  fontFamily: 'ReadexPro',
+  fontWeight: FontWeight.w400,
+  color: Color.fromARGB(255, 56, 24, 2),
+);
+
 TextStyle header2 = const TextStyle(
-  fontSize: 17,
+  fontSize: 16,
   fontFamily: 'ReadexPro',
   fontWeight: FontWeight.w500,
   color: bBackDark,

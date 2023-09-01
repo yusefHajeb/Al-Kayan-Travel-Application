@@ -64,7 +64,7 @@ class _PageService extends State<PageService> {
                       flex: 1,
                       child: Stack(children: <Widget>[
                         Container(
-                          height: size.height / 3.5,
+                          height: size.height / 3,
                           width: double.infinity,
                           child: Container(
                             width: double.infinity,
@@ -73,7 +73,7 @@ class _PageService extends State<PageService> {
                                 image: DecorationImage(
                               image: CachedNetworkImageProvider(
                                   myList[sectionIndex]['imgUrl']),
-                              fit: BoxFit.fill,
+                              fit: BoxFit.cover,
                               // dataServices[index].imgUrl,
                             )),
                           ),
@@ -85,17 +85,31 @@ class _PageService extends State<PageService> {
                         Positioned(
                           top: 50,
                           right: 20,
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => ShowService()));
-                              // Navigator.popAndPushNamed(context, ShowService.routeName);
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.black,
+                          child: Container(
+                            // elevation: 9,
+                            decoration: BoxDecoration(
+                                // borderRadius: BorderRadius.circular(13),
+                                // color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(5, 0),
+                                    blurRadius: 20,
+                                    spreadRadius: -17,
+                                    color: Colors.black,
+                                  )
+                                ]),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => ShowService()));
+                                // Navigator.popAndPushNamed(context, ShowService.routeName);
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -126,7 +140,7 @@ class _PageService extends State<PageService> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(13),
                             color: Colors.white,
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 offset: Offset(0, 6),
                                 blurRadius: 17,

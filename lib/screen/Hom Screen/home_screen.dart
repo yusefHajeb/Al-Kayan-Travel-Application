@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -53,8 +54,7 @@ class _firstScreenState extends State<firstScreen> {
   List listImage = [];
 
   Future<void> getImage() async {
-    CollectionReference ref =
-        FirebaseFirestore.instance.collection("Bouncing Scroll");
+    CollectionReference ref = FirebaseFirestore.instance.collection("StoryAds");
 
     QuerySnapshot querySnapshot = await ref.get();
 
@@ -91,7 +91,7 @@ class _firstScreenState extends State<firstScreen> {
     final message = hasInternet
         ? "You are connected to mobile network"
         : "تاكد من إتصالك با الإنترنت ";
-    final Color color = hasInternet ? Colors.green : Colors.red;
+    // final Color color = hasInternet ? Colors.green : Colors.red;
 
     return message;
   }
@@ -101,7 +101,10 @@ class _firstScreenState extends State<firstScreen> {
 
   @override
   void dispose() {
-    super.dispose();
+    if (mounted) {
+      super.dispose();
+    }
+
     _pageController.dispose();
   }
 
@@ -134,7 +137,7 @@ class _firstScreenState extends State<firstScreen> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(40),
                     child: Image.asset(
                       "assest/image/imageKaian.png",
                       color: primary,
@@ -149,14 +152,14 @@ class _firstScreenState extends State<firstScreen> {
             child: Container(
               width: 400,
               margin: const EdgeInsets.only(
-                  top: 0, right: 30, left: 30, bottom: 30),
+                  top: 0, right: 30, left: 30, bottom: 23),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               decoration: BoxDecoration(
                 boxShadow: const [
                   BoxShadow(
-                    offset: Offset(0, 6),
-                    blurRadius: 17,
-                    spreadRadius: -20,
+                    offset: Offset(0, 7),
+                    blurRadius: 18,
+                    spreadRadius: -17,
                     color: Colors.black,
                   ),
                 ],
@@ -202,7 +205,6 @@ class _firstScreenState extends State<firstScreen> {
                     ),
 
                     border: InputBorder.none,
-
                     //  suffixIcon: 24.0,
                     suffixIconColor: Colors.grey,
                     contentPadding: EdgeInsets.symmetric(
@@ -255,7 +257,7 @@ class _firstScreenState extends State<firstScreen> {
         height: 700,
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 0.0),
-        margin: const EdgeInsets.only(right: 20),
+        margin: const EdgeInsets.only(right: 5),
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
@@ -274,11 +276,25 @@ class _firstScreenState extends State<firstScreen> {
               },
             ),
             CatagoryCount(
+              titleCurd: "الفروع",
+              myIcon: const Icon(
+                Icons.hotel_class_outlined,
+                color: const Color.fromARGB(255, 22, 51, 26),
+                size: 34,
+              ),
+              press: () {
+                _focusNode.unfocus();
+                Navigator.push(context, ScaleTransitionScreen(Screen2()));
+                Provider.of<ProviderService>(context, listen: false)
+                    .setNumberScreen(2.toString());
+              },
+            ),
+            CatagoryCount(
               titleCurd: "شركائنا",
               myIcon: const Icon(
-                Icons.handshake,
+                Icons.local_airport_sharp,
                 color: Color.fromARGB(255, 22, 51, 26),
-                size: 50,
+                size: 34,
               ),
               press: () {
                 _focusNode.unfocus();
@@ -289,23 +305,10 @@ class _firstScreenState extends State<firstScreen> {
               },
             ),
             CatagoryCount(
-              titleCurd: "الفروع",
-              myIcon: const Icon(
-                Icons.slideshow,
-                color: const Color.fromARGB(255, 22, 51, 26),
-              ),
-              press: () {
-                _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(Screen2()));
-                Provider.of<ProviderService>(context, listen: false)
-                    .setNumberScreen(2.toString());
-              },
-            ),
-            CatagoryCount(
               titleCurd: "حساباتنا",
               myIcon: const Icon(
-                Icons.media_bluetooth_on,
-                size: 30,
+                Icons.local_phone_outlined,
+                size: 34,
                 color: Color.fromARGB(255, 22, 51, 26),
               ),
               press: () {
@@ -315,7 +318,10 @@ class _firstScreenState extends State<firstScreen> {
             ),
             CatagoryCount(
               titleCurd: "خدماتنا",
-              myIcon: const Icon(Icons.design_services),
+              myIcon: const Icon(
+                Icons.local_mall_sharp,
+                size: 34,
+              ),
               press: () {
                 Provider.of<ServicesProvider>(context, listen: false)
                     .setValueLoading(false);
@@ -347,9 +353,8 @@ class _firstScreenState extends State<firstScreen> {
         }
         return Transform.rotate(
             angle: -3.14 * value,
-            child: _loading
-                ? crouseCard(listImage[index]["imageUrl"], s)
-                : crouseCard2('', s)
+            child: crouseCard(listImage[index]["image"], s)
+            // : crouseCard2('', s)
             // child: crouseCard(urll, s),
             );
       },
@@ -357,28 +362,14 @@ class _firstScreenState extends State<firstScreen> {
   }
 
   Widget crouseCard(String urlImage, Size size) {
+    Image image = Image.memory(
+      base64Decode(urlImage), fit: BoxFit.fill,
+      // width: double.infinity,
+      // height: 200,
+      // color: Colors.transparent,
+    )..image;
     return Column(
       children: [
-        // Container(
-        //   width: 300,
-        //   height: size.height / 4.3,
-        //   margin: const EdgeInsets.only(
-        //     left: 20,
-        //   ),
-        //   decoration: BoxDecoration(
-        //     color: Colors.black.withOpacity(0.04),
-        //     borderRadius: BorderRadius.circular(30),
-        //   ),
-        //   child: InteractiveViewer(
-        //       // clipBehavior: Clip.hardEdge,
-        //       child: FadeInImage(
-        //     width: 300,
-        //     height: size.height / 4.3,
-        //     image: CachedNetworkImageProvider(urlImage),
-        //     fit: BoxFit.fill,
-        //     placeholder: AssetImage("assest/image/top_image.png"),
-        //   )),
-        // ),
         Container(
           width: 300,
           height: size.height / 4.3,
@@ -388,12 +379,41 @@ class _firstScreenState extends State<firstScreen> {
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.04),
             borderRadius: BorderRadius.circular(30),
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(urlImage),
-              fit: BoxFit.fill,
-            ),
           ),
-        )
+          child: InteractiveViewer(
+              // clipBehavior: Clip.hardEdge,
+              child: FadeInImage(
+            width: 300,
+            height: size.height / 4.3,
+            image: CachedNetworkImageProvider(urlImage),
+            fit: BoxFit.fill,
+            placeholder: AssetImage("assest/image/top_image.png"),
+          )),
+        ),
+        // Container(
+        //   width: 300,
+        //   height: size.height / 4.3,
+        //   margin: const EdgeInsets.only(
+        //     left: 20,
+        //   ),
+        //   decoration: BoxDecoration(
+        //     // color: Colors.black.withOpacity(0.04),
+        //     borderRadius: BorderRadius.circular(30),
+        // image: DecorationImage(
+        // image: ,
+        // )
+        // image:
+        // imag
+        // ),
+        // child: InteractiveViewer(
+        //   child: Image.memory(
+        //     base64Decode(urlImage), fit: BoxFit.fill,
+        //     // width: double.infinity,
+        //     // height: 200,
+        //     // color: Colors.transparent,
+        //   ),
+        // ),
+        // ),
       ],
     );
   }

@@ -5,15 +5,12 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:yah_app/Widget/loading_show/sktolin_loding.dart';
 import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 
 // import 'package:yah_app/screen/servis/sirvec_page.dart';
 import 'package:yah_app/styles/style.dart';
-import 'package:yah_app/styles/tolls.dart';
+
 import '../../providers/service_provider.dart';
-// import '../../styles/provider_passboard.dart';
-import 'package:yah_app/dataBase/dealetes.dart';
 
 import '../alhayan content/kaian__screen.dart';
 
@@ -33,15 +30,13 @@ class ShowService extends StatefulWidget {
 class _Screenkhadmatana extends State<ShowService> {
   @override
   void initState() {
-    setState(() {
-      fetchData().then(
-          (value) => Future.delayed(Duration(milliseconds: 100)).then((_) {
-                Provider.of<ServicesProvider>(context, listen: false)
-                    .setValueLoading(true);
-              }));
-    });
-
     super.initState();
+    fetchData()
+        .then((value) => Future.delayed(Duration(milliseconds: 100)).then((_) {
+              Provider.of<ServicesProvider>(context, listen: false)
+                  .setValueLoading(true);
+              print("Okkkkkkkkkkk");
+            }));
   }
 
   List mylist = [];
@@ -171,7 +166,7 @@ class _Screenkhadmatana extends State<ShowService> {
                     ? AnimationConfiguration.synchronized(
                         duration: Duration(milliseconds: 700),
                         child: SlideAnimation(
-                          curve: Curves.easeInOut,
+                          curve: Curves.slowMiddle,
                           child: FadeInAnimation(
                             child: ListView.builder(
                               padding: EdgeInsets.all(0),
@@ -179,12 +174,12 @@ class _Screenkhadmatana extends State<ShowService> {
                               itemBuilder: (ctx, index) {
                                 return AnimationConfiguration.staggeredList(
                                   position: index,
-                                  duration: Duration(milliseconds: 700),
+                                  duration: Duration(milliseconds: 800),
                                   child: SlideAnimation(
-                                    delay: Duration(milliseconds: 200),
+                                    // delay: Duration(milliseconds: 200),
                                     verticalOffset: 50.0,
                                     child: FadeInAnimation(
-                                      delay: Duration(milliseconds: 200),
+                                      delay: Duration(milliseconds: 100),
                                       child: Container(
                                         margin: const EdgeInsets.only(
                                             right: 5,

@@ -24,15 +24,6 @@ class ScreenMedia extends StatelessWidget {
     //https
     // Uri.https('whatsapp:send?phone=+967771274299&text=Hellow'),
     Uri.parse(('https://www.facebook.com/AlkayanTravel')),
-    // Uri(
-    //     scheme: 'whatsapp',
-    //     path: Uri.parse(
-    //       ('https://www.facebook.com/alkyan_travel'),
-    //     ).toString(),
-    //     query: encodeQueryParameters(<String, String>{
-    //       'subject': 'Testing mail lunch from flutter app',
-    //       'body': 'this mail body is from flutter code'
-    //     })),
     //mail
     Uri(
         scheme: 'mailto',
@@ -98,7 +89,7 @@ class ScreenMedia extends StatelessWidget {
                   (int index) {
                     return AnimationConfiguration.staggeredGrid(
                       position: index,
-                      duration: Duration(milliseconds: 500),
+                      duration: Duration(milliseconds: 900),
                       columnCount: columnCount,
                       child: ScaleAnimation(
                         duration: const Duration(milliseconds: 900),
@@ -124,7 +115,7 @@ class ScreenMedia extends StatelessWidget {
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(24),
                                   ),
-                                  gradient: LinearGradient(
+                                  gradient: const LinearGradient(
                                       colors: [Colors.white, yBackgroundColor],
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight),
@@ -152,13 +143,10 @@ class ScreenMedia extends StatelessWidget {
             child: Container(
               height: 200,
               width: double.infinity,
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 border: Border.all(
-                    width: 1,
-                    color: Colors.black,
-                    strokeAlign: 1.0,
-                    style: BorderStyle.solid),
+                    width: 1, color: Colors.black, style: BorderStyle.solid),
               ),
               child: TextButton(
                 onPressed: () {
@@ -170,7 +158,7 @@ class ScreenMedia extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
 
           // SlimyCard(
           //   topCardWidget: topCardWidget(),
@@ -244,7 +232,7 @@ Future<void> myDialoge(BuildContext ctx) async {
             children: [
               Container(
                   child: Text(
-                "م/ يوسف حاجب",
+                '',
                 style: paragraph,
               )),
               SizedBox(
@@ -256,7 +244,7 @@ Future<void> myDialoge(BuildContext ctx) async {
                   Container(
                       margin: EdgeInsets.only(left: 6),
                       child: Text(
-                        "771274299",
+                        '', // "771274299",
                         style: TextStyle(
                             color: Colors.blueAccent,
                             fontSize: 12,

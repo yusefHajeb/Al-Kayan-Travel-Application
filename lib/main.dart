@@ -27,22 +27,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   future:
   await Firebase.initializeApp();
-  // var _ref = FirebaseDatabase.instance.ref().child("customer");
-
-  // _ref.set(10);
-  // final url = Uri.parse(
-  //     "https://alkayantravel-a1c6e-default-rtdb.firebaseio.com/customer.json");
-  // "https://alkayantravel-a1c6e-default-rtdb.firebaseio.com/customer.json";
-  // http.post(url,
-  //     body: json.encode({
-  //       "passbord": 123456789,
-  //       'phone': 771274299,
-  //       'transictionNum': 222222222,
-  //       "name": "Yousef Abda AL-malick",
-  //       'typeTrnsaction': "Omra",
-  //       "stateTransaction": 'Ok',
-  //       'Note': "after month will arrive passbord"
-  //     }));
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<PasspordProvider>(create: (_) => PasspordProvider()),
     ChangeNotifierProvider<ProviderService>(create: (_) => ProviderService()),
@@ -92,23 +76,5 @@ class MyApp extends StatelessWidget {
   State<StatefulWidget> createState() {
     // TODO: implement createState
     throw UnimplementedError();
-  }
-}
-
-final List<Map<String, Object>> _page = [
-  {
-    'page': const Scaffold(body: const Center()),
-    'title': "Part1",
-  },
-];
-
-class MyHomePage extends StatelessWidget {
-  void selectScreen(BuildContext ctx, int n) {
-    Navigator.of(ctx).pushNamed('/x1');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return const Screen2();
   }
 }

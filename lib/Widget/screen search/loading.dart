@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../../styles/provider_passboard.dart';
@@ -43,13 +45,13 @@ class DataVisa extends StatelessWidget {
                 ),
                 ClipRRect(
                     borderRadius: BorderRadius.circular(5),
-                    child: Image.network(
-                      filterData.image, fit: BoxFit.fill,
+                    child: Image.memory(
+                      base64Decode(filterData.image), fit: BoxFit.fill,
                       width: double.infinity,
                       height: 200,
                       // color: Colors.transparent,
                     )),
-                // Container(
+                // // Container(
                 //   child: Image.network(
                 //     filterData.image,
                 //     fit: BoxFit.fill,
