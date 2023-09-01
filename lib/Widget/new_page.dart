@@ -16,7 +16,7 @@ class _MyHeaderState extends State<MyHeader2> {
           padding: const EdgeInsets.only(left: 40, top: 50, right: 20),
           height: 350,
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
@@ -29,7 +29,7 @@ class _MyHeaderState extends State<MyHeader2> {
             //   image: AssetImage("assets/images/virus.png"),
             // ),
           ),
-          child: Text(""),
+          child: const Text(""),
         ));
   }
 }

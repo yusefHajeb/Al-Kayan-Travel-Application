@@ -47,10 +47,9 @@ class _firstScreenState extends State<firstScreen> {
   bool _loading = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // to close Kyboarde
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   TextEditingController numPass = TextEditingController()..text = "";
   var key = GlobalKey<FormState>();
-  @override
   List listImage = [];
 
   Future<void> getImage() async {
@@ -59,15 +58,16 @@ class _firstScreenState extends State<firstScreen> {
     QuerySnapshot querySnapshot = await ref.get();
 
     if (querySnapshot.docs.isNotEmpty) {
-      querySnapshot.docs.forEach((doc) {
+      for (var doc in querySnapshot.docs) {
         listImage.add(doc.data());
-      });
+      }
       setState(() {
         _loading = true;
       });
     }
   }
 
+  @override
   void initState() {
     key = GlobalKey<FormState>();
     setNumPass();
@@ -111,7 +111,7 @@ class _firstScreenState extends State<firstScreen> {
   @override
   Widget build(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
-    String searchQuery = '';
+    // String searchQuery = '';
     Size size = MediaQuery.of(context).size;
 
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -193,8 +193,8 @@ class _firstScreenState extends State<firstScreen> {
                           .setNumberPassbord(numPass.text);
                       _focusNode.unfocus();
 
-                      Navigator.push(
-                          context, ScaleTransitionScreen2(SecondScreen()));
+                      Navigator.push(context,
+                          ScaleTransitionScreen2(const SecondScreen()));
                     }
                   },
                   decoration: const InputDecoration(
@@ -270,7 +270,7 @@ class _firstScreenState extends State<firstScreen> {
               ),
               press: () {
                 _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(Screen2()));
+                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
                 Provider.of<ProviderService>(context, listen: false)
                     .setNumberScreen(0.toString());
               },
@@ -298,13 +298,29 @@ class _firstScreenState extends State<firstScreen> {
               ),
               press: () {
                 _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(Screen2()));
+                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
                 //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
                 Provider.of<ProviderService>(context, listen: false)
                     .setNumberScreen(1.toString());
               },
             ),
             CatagoryCount(
+<<<<<<< HEAD
+=======
+              titleCurd: "الفروع",
+              myIcon: const Icon(
+                Icons.slideshow,
+                color: Color.fromARGB(255, 22, 51, 26),
+              ),
+              press: () {
+                _focusNode.unfocus();
+                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+                Provider.of<ProviderService>(context, listen: false)
+                    .setNumberScreen(2.toString());
+              },
+            ),
+            CatagoryCount(
+>>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
               titleCurd: "حساباتنا",
               myIcon: const Icon(
                 Icons.local_phone_outlined,
@@ -325,8 +341,8 @@ class _firstScreenState extends State<firstScreen> {
               press: () {
                 Provider.of<ServicesProvider>(context, listen: false)
                     .setValueLoading(false);
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => ShowService()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (_) => const ShowService()));
               },
             ),
           ],
@@ -337,7 +353,7 @@ class _firstScreenState extends State<firstScreen> {
 
   void setNumPass() {
     return setState(() {
-      SecondScreen();
+      const SecondScreen();
     });
   }
 
@@ -469,21 +485,21 @@ class TextForm extends StatelessWidget {
             return Container(
               height: 50,
               width: 100,
-              color: Color(0x3234234),
+              color: const Color(0x03234234),
               child: Container(
-                child: Center(child: Text('بحث')),
+                child: const Center(child: Text('بحث')),
               ),
             );
           },
           closedShape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          transitionDuration: Duration(milliseconds: 700),
+          transitionDuration: const Duration(milliseconds: 700),
           openBuilder: (_, closeConntainer) {
             if (numPass.text.isEmpty || numPass.text.length < 9) {
               // setNumPass();
-              return firstScreen();
+              return const firstScreen();
             } else {
-              return SecondScreen();
+              return const SecondScreen();
             }
           },
         ),

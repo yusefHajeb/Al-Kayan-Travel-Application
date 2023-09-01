@@ -9,8 +9,13 @@ import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 
 // import 'package:yah_app/screen/servis/sirvec_page.dart';
 import 'package:yah_app/styles/style.dart';
+<<<<<<< HEAD
 
 import '../../providers/service_provider.dart';
+=======
+import '../../providers/service_provider.dart';
+// import '../../styles/provider_passboard.dart';
+>>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
 
 import '../alhayan content/kaian__screen.dart';
 
@@ -23,6 +28,8 @@ class ShowService extends StatefulWidget {
   static const routeName = 'servece_screen';
 
   static const roteName = "Screen Home";
+
+  const ShowService({Key? key}) : super(key: key);
   @override
   State<ShowService> createState() => _Screenkhadmatana();
 }
@@ -30,6 +37,17 @@ class ShowService extends StatefulWidget {
 class _Screenkhadmatana extends State<ShowService> {
   @override
   void initState() {
+<<<<<<< HEAD
+=======
+    setState(() {
+      fetchData().then((value) =>
+          Future.delayed(const Duration(milliseconds: 100)).then((_) {
+            Provider.of<ServicesProvider>(context, listen: false)
+                .setValueLoading(true);
+          }));
+    });
+
+>>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
     super.initState();
     fetchData()
         .then((value) => Future.delayed(Duration(milliseconds: 100)).then((_) {
@@ -46,9 +64,9 @@ class _Screenkhadmatana extends State<ShowService> {
     CollectionReference ref = FirebaseFirestore.instance.collection("service");
     QuerySnapshot querySnapshot = await ref.get();
     if (querySnapshot.docs.isNotEmpty) {
-      querySnapshot.docs.forEach((doc) {
+      for (var doc in querySnapshot.docs) {
         mylist.add(doc.data());
-      });
+      }
       Provider.of<ServicesProvider>(context, listen: false)
           .DataProvider
           .addAll(mylist);
@@ -88,10 +106,10 @@ class _Screenkhadmatana extends State<ShowService> {
     // final mealId = ModalRoute.of(context)?.settings.arguments;
     // final selectedMeal = DUMMY_MEALS.firstWhere((meal) => mealId == meal.id);
     var size = MediaQuery.of(context).size;
-    final DataProvider = Provider.of<ServicesProvider>(context);
-    final dataServices = DataProvider.Data;
+    // final DataProvider = Provider.of<ServicesProvider>(context);
+    // final dataServices = DataProvider.Data;
 
-    CollectionReference ref = FirebaseFirestore.instance.collection("service");
+    // CollectionReference ref = FirebaseFirestore.instance.collection("service");
     String cutDescription(String desc) {
       return desc.length > 70
           ? desc.replaceRange(70, desc.length, '...')
@@ -164,22 +182,31 @@ class _Screenkhadmatana extends State<ShowService> {
                 height: MediaQuery.of(context).size.height / 1.3,
                 child: Provider.of<ServicesProvider>(context).getLoadinf()
                     ? AnimationConfiguration.synchronized(
-                        duration: Duration(milliseconds: 700),
+                        duration: const Duration(milliseconds: 700),
                         child: SlideAnimation(
                           curve: Curves.slowMiddle,
                           child: FadeInAnimation(
                             child: ListView.builder(
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
                               itemCount: mylist.length,
                               itemBuilder: (ctx, index) {
                                 return AnimationConfiguration.staggeredList(
                                   position: index,
+<<<<<<< HEAD
                                   duration: Duration(milliseconds: 800),
                                   child: SlideAnimation(
                                     // delay: Duration(milliseconds: 200),
                                     verticalOffset: 50.0,
                                     child: FadeInAnimation(
                                       delay: Duration(milliseconds: 100),
+=======
+                                  duration: const Duration(milliseconds: 700),
+                                  child: SlideAnimation(
+                                    delay: const Duration(milliseconds: 200),
+                                    verticalOffset: 50.0,
+                                    child: FadeInAnimation(
+                                      delay: const Duration(milliseconds: 200),
+>>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
                                       child: Container(
                                         margin: const EdgeInsets.only(
                                             right: 5,
@@ -256,7 +283,8 @@ class _Screenkhadmatana extends State<ShowService> {
                                                         //     "...",
                                                         style: paragraph,
                                                       ),
-                                                      SizedBox(height: 10),
+                                                      const SizedBox(
+                                                          height: 10),
                                                     ],
                                                   ),
                                                 ),
@@ -278,9 +306,9 @@ class _Screenkhadmatana extends State<ShowService> {
                         // scrollDirection: Axis.vertical,
                         itemCount: 3,
                         itemBuilder: (BuildContext context, int index) =>
-                            LoadingShowService(),
+                            const LoadingShowService(),
                         separatorBuilder: (BuildContext context, int index) =>
-                            SizedBox(height: 15),
+                            const SizedBox(height: 15),
                       ),
               )
             ]),

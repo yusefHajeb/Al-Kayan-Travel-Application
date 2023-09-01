@@ -8,7 +8,9 @@ import 'package:yah_app/styles/style.dart';
 // import 'package:slimy_card/slimy_card.dart';
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
 
+// ignore: must_be_immutable
 class ScreenMedia extends StatelessWidget {
+  ScreenMedia({Key? key}) : super(key: key);
   List myIcons = [
     "assest/icon/icons8-facebook-64.png",
     "assest/icon/icons8-twitter-64.png",
@@ -58,6 +60,7 @@ class ScreenMedia extends StatelessWidget {
     ),
   ];
 
+  @override
   Widget build(BuildContext context) {
     double _w = MediaQuery.of(context).size.width;
     int columnCount = 3;
@@ -89,7 +92,11 @@ class ScreenMedia extends StatelessWidget {
                   (int index) {
                     return AnimationConfiguration.staggeredGrid(
                       position: index,
+<<<<<<< HEAD
                       duration: Duration(milliseconds: 900),
+=======
+                      duration: const Duration(milliseconds: 500),
+>>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
                       columnCount: columnCount,
                       child: ScaleAnimation(
                         duration: const Duration(milliseconds: 900),
@@ -189,9 +196,9 @@ String? encodeQueryParameters(Map<String, String> params) {
       .join('&');
 }
 
-Color purple = Color.fromARGB(255, 255, 170, 0);
-Color blue = Color.fromARGB(255, 251, 212, 169);
-Color navy = Color(0xff0f0434);
+Color purple = const Color.fromARGB(255, 255, 170, 0);
+Color blue = const Color.fromARGB(255, 251, 212, 169);
+Color navy = const Color(0xff0f0434);
 
 Widget topCardWidget() {
   return Text(

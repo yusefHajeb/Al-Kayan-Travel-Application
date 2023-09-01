@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NoResultFoundScreen extends StatelessWidget {
+  const NoResultFoundScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,25 +21,25 @@ class NoResultFoundScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    offset: Offset(0, 13),
+                    offset: const Offset(0, 13),
                     blurRadius: 25,
-                    color: Color(0xFF5666C2).withOpacity(0.17),
+                    color: const Color(0xFF5666C2).withOpacity(0.17),
                   ),
                 ],
               ),
               child: TextField(
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
                 onChanged: (value) {},
                 decoration: InputDecoration(
                   hintText: "Search...",
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                   fillColor: Colors.white,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
                     borderSide: BorderSide.none,
                   ),
-                  suffixIcon: Icon(
+                  suffixIcon: const Icon(
                     Icons.search,
                     color: Colors.black,
                   ),

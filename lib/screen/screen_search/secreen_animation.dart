@@ -4,8 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+<<<<<<< HEAD
 import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 import 'package:yah_app/styles/style.dart';
+=======
+>>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
 import 'package:yah_app/styles/provider_passboard.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +16,8 @@ import '../../Widget/screen search/loading.dart';
 import '../../Widget/screen search/show_loading.dart';
 
 class SecondScreen extends StatefulWidget {
+  const SecondScreen({Key? key}) : super(key: key);
+
   @override
   _SecondScreenState createState() => _SecondScreenState();
 }
@@ -30,7 +35,7 @@ class _SecondScreenState extends State<SecondScreen> {
     });
     Timer(const Duration(milliseconds: 2090), () {
       Navigator.of(context)
-          .pushReplacement(SlideTransitionAnimation(SecondPage()));
+          .pushReplacement(SlideTransitionAnimation(const SecondPage()));
     });
   }
 
@@ -46,14 +51,14 @@ class _SecondScreenState extends State<SecondScreen> {
     double _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 254, 253, 250),
+        backgroundColor: const Color.fromARGB(255, 254, 253, 250),
         body: Stack(
           children: [
             AnimatedContainer(
-              duration: Duration(milliseconds: 6000),
+              duration: const Duration(milliseconds: 6000),
               curve: Curves.fastLinearToSlowEaseIn,
               width: _a ? _width : 0,
-              color: Color.fromARGB(255, 0, 0, 0),
+              color: const Color.fromARGB(255, 0, 0, 0),
               height: _height,
               // color: Color.fromARGB(255, 234, 166, 18),
             ),
@@ -73,9 +78,9 @@ class _SecondScreenState extends State<SecondScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            offset: Offset(0, 13),
+                            offset: const Offset(0, 13),
                             blurRadius: 25,
-                            color: Color(0xFF5666C2).withOpacity(0.17),
+                            color: const Color(0xFF5666C2).withOpacity(0.17),
                           ),
                         ],
                       ),
@@ -96,14 +101,16 @@ class SlideTransitionAnimation extends PageRouteBuilder {
   SlideTransitionAnimation(this.page)
       : super(
             pageBuilder: (context, animation, anotherAnimation) => page,
-            transitionDuration: Duration(milliseconds: 2000),
+            transitionDuration: const Duration(milliseconds: 2000),
             transitionsBuilder: (context, animation, anotherAnimation, child) {
               animation = CurvedAnimation(
                 curve: Curves.fastLinearToSlowEaseIn,
                 parent: animation,
               );
               return SlideTransition(
-                position: Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                position: Tween(
+                        begin: const Offset(1.0, 0.0),
+                        end: const Offset(0.0, 0.0))
                     .animate(animation),
                 textDirection: TextDirection.rtl,
                 child: page,
@@ -163,10 +170,14 @@ class _SecondePage extends State<SecondPage> {
 
     List mylist = [];
     if (querySnapshot.docs.isNotEmpty) {
-      querySnapshot.docs.forEach((doc) {
+      for (var doc in querySnapshot.docs) {
         mylist.add(doc.data());
+<<<<<<< HEAD
       });
       // print("========== fetch data ========="+ );
+=======
+      }
+>>>>>>> 5035911d6811ccb0c95452793424fc7bed5118b4
       filterData1 = Passbord(
           numberPassbord: mylist[0]["numPassport"],
           state: mylist[0]["StatusTrans"],
@@ -182,6 +193,7 @@ class _SecondePage extends State<SecondPage> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     // searchNumber = Provider.of<passpordProvider>(context, listen: true)
     //     .getNumberPassbord();
@@ -204,8 +216,8 @@ class _SecondePage extends State<SecondPage> {
                         animatedTexts: [
                           TypewriterAnimatedText(
                             'حاول مرة اخرى',
-                            speed: Duration(milliseconds: 150),
-                            textStyle: TextStyle(
+                            speed: const Duration(milliseconds: 150),
+                            textStyle: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
                             ),
@@ -221,7 +233,6 @@ class _SecondePage extends State<SecondPage> {
     );
   }
 
-  @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     throw UnimplementedError();

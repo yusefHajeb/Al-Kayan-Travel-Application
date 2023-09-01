@@ -6,11 +6,11 @@ class ServiceScreen extends StatelessWidget {
 
   final String title;
   //constracter
-  const ServiceScreen({
+  const ServiceScreen({Key? key, 
     required this.imageUrl,
     required this.id,
     required this.title,
-  });
+  }) : super(key: key);
 
   void selectMeal() {}
 
@@ -21,12 +21,12 @@ class ServiceScreen extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: Column(children: [
           Stack(
             children: [
               //widget to Rudios to Image
-              ClipRRect(
+              const ClipRRect(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
@@ -37,11 +37,11 @@ class ServiceScreen extends StatelessWidget {
                 right: 10,
                 child: Container(
                   width: 300,
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                   color: Colors.black54,
                   child: Text(
                     title,
-                    style: TextStyle(fontSize: 26, color: Colors.white),
+                    style: const TextStyle(fontSize: 26, color: Colors.white),
                     softWrap: true,
                     overflow: TextOverflow.fade,
                   ),

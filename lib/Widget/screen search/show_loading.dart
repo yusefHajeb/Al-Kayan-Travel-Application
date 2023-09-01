@@ -14,16 +14,16 @@ class ShowSktolin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(
                 child: Column(
-              children: const [
+              children: [
                 Skelton(
                   height: 20,
                   width: 230,
@@ -43,7 +43,7 @@ class ShowSktolin extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 40,
         ),
         Column(
@@ -52,16 +52,16 @@ class ShowSktolin extends StatelessWidget {
               width: size.width - 50,
               height: size.height / 3,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
                     child: Column(
-                  children: const [
+                  children: [
                     Skelton(
                       height: 20,
                       width: 230,
@@ -81,16 +81,16 @@ class ShowSktolin extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
                     child: Column(
-                  children: const [
+                  children: [
                     Skelton(
                       height: 20,
                       width: 230,
@@ -110,16 +110,16 @@ class ShowSktolin extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
                     child: Column(
-                  children: const [
+                  children: [
                     Skelton(
                       height: 20,
                       width: 230,

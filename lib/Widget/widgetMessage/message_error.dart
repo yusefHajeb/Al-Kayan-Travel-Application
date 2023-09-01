@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../styles/style.dart';
-import '../../styles/provider_passboard.dart';
-import '../../styles/tolls.dart';
 
 class MessageShow extends StatefulWidget {
-  MessageShow({
+  const MessageShow({
     Key? key,
     required this.messageError,
   }) : super(key: key);
@@ -20,7 +18,6 @@ class _MessageShow extends State<MessageShow> {
     return Text(error);
   }
 
-  @override
   Widget myBilder(BuildContext context) {
     return _showErrorMessage(widget.messageError);
   }
@@ -33,7 +30,7 @@ class _MessageShow extends State<MessageShow> {
           clipBehavior: Clip.none,
           children: [
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               height: 90,
               decoration: const BoxDecoration(
                 color: primary,
@@ -71,7 +68,7 @@ class _MessageShow extends State<MessageShow> {
                   "assest/image/svg/bubbles.svg",
                   height: 48,
                   width: 48,
-                  color: Color.fromARGB(255, 212, 152, 0),
+                  color: const Color.fromARGB(255, 212, 152, 0),
                 ),
               ),
             ),
@@ -89,7 +86,7 @@ class _MessageShow extends State<MessageShow> {
                   SvgPicture.asset(
                     "assest/image/svg/close.svg",
                     height: 15,
-                    color: Color.fromARGB(255, 212, 152, 0),
+                    color: const Color.fromARGB(255, 212, 152, 0),
                   ),
                 ],
               ),

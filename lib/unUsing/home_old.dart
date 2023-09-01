@@ -1,10 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:yah_app/unUsing/bottomNav.dart';
 import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
 
 class MyHome extends StatelessWidget {
@@ -18,10 +17,15 @@ class MyHome extends StatelessWidget {
   //       return BottomPage();
   //     }));
 
-  int _selectedPageIndex = 0;
-  void _x1(int index) {
-    _selectedPageIndex = index;
-  }
+  // int _selectedPageIndex = 0;
+
+  MyHome({
+    Key? key,
+    // required this._selectedPageIndex,
+  }) : super(key: key);
+  // void _x1(int index) {
+  //   _selectedPageIndex = index;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +69,7 @@ class MyHome extends StatelessWidget {
                   // height: 200,
                   height: size.height * .45,
                   width: double.infinity,
-                  color: Color(0x1abc9c),
+                  color: Color(0x001abc9c),
                 ),
                 Container(
                     child: Column(

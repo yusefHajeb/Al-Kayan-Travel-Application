@@ -7,13 +7,13 @@ class ReponsiveCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final orientation = MediaQuery.of(context).orientation;
     return Scaffold(
-      backgroundColor: Color(0xff12239),
+      backgroundColor: const Color(0x0ff12239),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
+            const Text(
               "al-Kaian",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -34,7 +34,7 @@ class ReponsiveCard extends StatelessWidget {
                         // Colors.primaries[index + Colors.primaries.length]);
                       })
                   : GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2),
                       itemCount: 20,
                       itemBuilder: (context, index) {
@@ -71,7 +71,7 @@ class _CardItem extends StatelessWidget {
                   ],
                 ),
                 borderRadius: BorderRadius.circular(20.8)),
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [

@@ -5,15 +5,15 @@ class SlideTransition1 extends PageRouteBuilder {
   SlideTransition1(this.page)
       : super(
             pageBuilder: (context, animation, anotherAnimation) => page,
-            transitionDuration: Duration(milliseconds: 1000),
-            reverseTransitionDuration: Duration(milliseconds: 400),
+            transitionDuration: const Duration(milliseconds: 1000),
+            reverseTransitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (context, animation, anotherAnimation, child) {
               animation = CurvedAnimation(
                   curve: Curves.fastLinearToSlowEaseIn,
                   parent: animation,
                   reverseCurve: Curves.fastOutSlowIn);
               return SlideTransition(
-                position: Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                position: Tween(begin: const Offset(1.0, 0.0), end: const Offset(0.0, 0.0))
                     .animate(animation),
                 child: page,
               );
@@ -26,8 +26,8 @@ class SizeTransition5 extends PageRouteBuilder {
   SizeTransition5(this.page)
       : super(
           pageBuilder: (context, animation, anotherAnimation) => page,
-          transitionDuration: Duration(milliseconds: 1000),
-          reverseTransitionDuration: Duration(milliseconds: 200),
+          transitionDuration: const Duration(milliseconds: 1000),
+          reverseTransitionDuration: const Duration(milliseconds: 200),
           transitionsBuilder: (context, animation, anotherAnimation, child) {
             animation = CurvedAnimation(
                 curve: Curves.fastLinearToSlowEaseIn,
