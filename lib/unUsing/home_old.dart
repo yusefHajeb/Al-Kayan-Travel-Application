@@ -118,7 +118,7 @@ class MyHome extends StatelessWidget {
                               mainAxisSpacing: 20,
                               crossAxisSpacing: 10,
                               children: <Widget>[
-                            CatagoryCount(
+                            CategoryCount(
                               titleCurd: "لماذا كيان",
                               myIcon: Icon(
                                 Icons.diamond,
@@ -126,7 +126,7 @@ class MyHome extends StatelessWidget {
                               ),
                               press: () {},
                             ),
-                            CatagoryCount(
+                            CategoryCount(
                               titleCurd: "حساباتنا",
                               myIcon: Icon(
                                 Icons.share,
@@ -134,11 +134,11 @@ class MyHome extends StatelessWidget {
                               ),
                               press: () {},
                             ),
-                            CatagoryCount(
+                            CategoryCount(
                                 titleCurd: "خدماتنا",
                                 myIcon: Icon(Icons.design_services),
                                 press: () {}),
-                            CatagoryCount(
+                            CategoryCount(
                               titleCurd: "المطور",
                               myIcon: Icon(Icons.developer_board,
                                   color: Colors.blue),

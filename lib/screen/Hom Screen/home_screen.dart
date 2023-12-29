@@ -261,7 +261,7 @@ class _firstScreenState extends State<firstScreen> {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
-            CatagoryCount(
+            CategoryCount(
               titleCurd: " كيان",
               myIcon: const Icon(
                 Icons.diamond,
@@ -275,7 +275,7 @@ class _firstScreenState extends State<firstScreen> {
                     .setNumberScreen(0.toString());
               },
             ),
-            CatagoryCount(
+            CategoryCount(
               titleCurd: "الفروع",
               myIcon: const Icon(
                 Icons.hotel_class_outlined,
@@ -289,7 +289,7 @@ class _firstScreenState extends State<firstScreen> {
                     .setNumberScreen(2.toString());
               },
             ),
-            CatagoryCount(
+            CategoryCount(
               titleCurd: "شركائنا",
               myIcon: const Icon(
                 Icons.local_airport_sharp,
@@ -304,7 +304,7 @@ class _firstScreenState extends State<firstScreen> {
                     .setNumberScreen(1.toString());
               },
             ),
-            CatagoryCount(
+            CategoryCount(
               titleCurd: "الفروع",
               myIcon: const Icon(
                 Icons.slideshow,
@@ -317,7 +317,7 @@ class _firstScreenState extends State<firstScreen> {
                     .setNumberScreen(2.toString());
               },
             ),
-            CatagoryCount(
+            CategoryCount(
               titleCurd: "حساباتنا",
               myIcon: const Icon(
                 Icons.local_phone_outlined,
@@ -329,7 +329,7 @@ class _firstScreenState extends State<firstScreen> {
                 Navigator.push(context, SizeTransition5(ScreenMedia()));
               },
             ),
-            CatagoryCount(
+            CategoryCount(
               titleCurd: "خدماتنا",
               myIcon: const Icon(
                 Icons.local_mall_sharp,

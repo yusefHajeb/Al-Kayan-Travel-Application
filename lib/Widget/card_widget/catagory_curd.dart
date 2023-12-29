@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../styles/style.dart';
 
-class CatagoryCount extends StatelessWidget {
+class CategoryCount extends StatelessWidget {
   final String titleCurd;
   final Icon myIcon;
   final Function press;
-  const CatagoryCount({
+  const CategoryCount({
     Key? key,
     required this.titleCurd,
     required this.myIcon,
