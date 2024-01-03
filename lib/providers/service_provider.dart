@@ -1,7 +1,7 @@
 // import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:yah_app/screen/servis/widget/scale_transition.dart';
-import '../screen/servis/sirvec_page.dart';
+import 'package:yah_app/screen/services_screen/widget/scale_transition.dart';
+import '../screen/services_screen/sirvec_page.dart';
 
 class DataService {
   final String title;

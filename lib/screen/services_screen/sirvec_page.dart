@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:yah_app/dataBase/dealetes.dart';
-import 'package:yah_app/screen/servis/sirvece_screen.dart';
+import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
 
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
 import 'package:yah_app/styles/style.dart';

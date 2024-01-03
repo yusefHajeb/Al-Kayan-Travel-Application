@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yah_app/styles/provider_passboard.dart';
@@ -55,16 +54,11 @@ class _SecondScreenState extends State<SecondScreen> {
               width: _a ? _width : 0,
               color: const Color.fromARGB(255, 0, 0, 0),
               height: _height,
-              // color: Color.fromARGB(255, 234, 166, 18),
             ),
             Center(
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Image.asset(
-                  //   "assest/image/14_No Search Results.png",
-                  //   fit: BoxFit.cover,
-                  // ),
                   Positioned(
                     bottom: MediaQuery.of(context).size.height * 0.15,
                     left: MediaQuery.of(context).size.width * 0.065,

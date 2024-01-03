@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yah_app/providers/service_provider.dart';
 
-import 'package:yah_app/screen/servis/sirvec_page.dart';
-import 'package:yah_app/screen/servis/sirvece_screen.dart';
+import 'package:yah_app/screen/services_screen/sirvec_page.dart';
+import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
 import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
 import 'package:yah_app/screen/splash%20screen/splash_screen.dart';
 import 'package:yah_app/styles/myprovider.dart';

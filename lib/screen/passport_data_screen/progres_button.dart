@@ -19,7 +19,8 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
     return Scaffold(
       body: Center(
         child: Container(
-          margin: const EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
+          margin:
+              const EdgeInsets.only(top: 0, right: 30, left: 30, bottom: 30),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           decoration: BoxDecoration(boxShadow: const [
             BoxShadow(
@@ -48,7 +49,8 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                               color: Colors.deepPurple.shade700),
                           ButtonState.fail: IconedButton(
                               text: 'Failed',
-                              icon: const Icon(Icons.cancel, color: Colors.white),
+                              icon:
+                                  const Icon(Icons.cancel, color: Colors.white),
                               color: Colors.red.shade300),
                           ButtonState.success: IconedButton(
                               text: 'Success',
@@ -62,25 +64,6 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                         state: stateTextWithIcon),
                   ))),
         ),
-        // child: ProgressButton.icon(iconedButtons: {
-        //   ButtonState.idle: IconedButton(
-        //       text: 'Send',
-        //       icon: Icon(Icons.send, color: Colors.white),
-        //       color: Colors.deepPurple.shade500),
-        //   ButtonState.loading:
-        //       IconedButton(text: 'Loading', color: Colors.deepPurple.shade700),
-        //   ButtonState.fail: IconedButton(
-        //       text: 'Failed',
-        //       icon: Icon(Icons.cancel, color: Colors.white),
-        //       color: Colors.red.shade300),
-        //   ButtonState.success: IconedButton(
-        //       text: 'Success',
-        //       icon: Icon(
-        //         Icons.check_circle,
-        //         color: Colors.white,
-        //       ),
-        //       color: Colors.green.shade400)
-        // }, onPressed: onPressedIconWithText, state: stateTextWithIcon),
       ),
     );
   }
