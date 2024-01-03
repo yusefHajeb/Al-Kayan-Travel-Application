@@ -149,7 +149,7 @@ class _SecondePage extends State<SecondPage> {
   }
 
   Future<void> getData() async {
-    final myProvider = Provider.of<PasspordProvider>(context, listen: false);
+    final myProvider = Provider.of<PassportProvider>(context, listen: false);
     CollectionReference ref =
         FirebaseFirestore.instance.collection("Customers");
 

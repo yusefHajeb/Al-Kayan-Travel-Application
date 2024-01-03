@@ -4,7 +4,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yah_app/providers/service_provider.dart';
-
 import 'package:yah_app/screen/services_screen/sirvec_page.dart';
 import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
 import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
@@ -13,22 +12,17 @@ import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/providers/provider_passboard.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_database/firebase_database.dart';
-// import 'package:http/http.dart' as http;
 import 'package:yah_app/styles/style.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
-void _xx(int index) {
-  _selectedIndex = index;
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // future:
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<PasspordProvider>(create: (_) => PasspordProvider()),
+    ChangeNotifierProvider<PassportProvider>(create: (_) => PassportProvider()),
     ChangeNotifierProvider<ProviderService>(create: (_) => ProviderService()),
     ChangeNotifierProvider(create: (_) => ServicesProvider()),
   ], child: const MyApp()));

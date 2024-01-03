@@ -52,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List listImage = [];
 
   Future<void> getImage() async {
-    CollectionReference ref = FirebaseFirestore.instance.collection("StoryAds");
+    CollectionReference ref =
+        FirebaseFirestore.instance.collection("Bouncing Scroll");
 
     QuerySnapshot querySnapshot = await ref.get();
 
@@ -110,7 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
-    // String searchQuery = '';
     Size size = MediaQuery.of(context).size;
 
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       MySnackBar(scaffold, "القيمة المدخله خاطئة");
                     } else {
                       print("Passbord is :" + numPass.text);
-                      Provider.of<PasspordProvider>(context, listen: false)
+                      Provider.of<PassportProvider>(context, listen: false)
                           .setNumberPassbord(numPass.text);
                       _focusNode.unfocus();
 
@@ -227,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // margin: EdgeInsets.only(bottom: 5),
                 padding: const EdgeInsets.all(0),
                 child: PageView.builder(
-                    itemCount: dataList.length,
+                    itemCount: listImage.length,
                     controller: _pageController,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -361,25 +361,22 @@ class _HomeScreenState extends State<HomeScreen> {
         if (_pageController.position.haveDimensions) {
           value = index.toDouble() - (_pageController.page ?? 0);
           value = (value * 0.038).clamp(-1, 1);
-          print("value $value indexss $index");
         }
         return Transform.rotate(
             angle: -3.14 * value,
-            child: crouseCard(listImage[index]["image"], s)
-            // : crouseCard2('', s)
-            // child: crouseCard(urll, s),
-            );
+            child: crouseCard(listImage[index]["imageUrl"].toString(), s));
       },
     );
   }
 
   Widget crouseCard(String urlImage, Size size) {
-    Image image = Image.memory(
-      base64Decode(urlImage), fit: BoxFit.fill,
-      // width: double.infinity,
-      // height: 200,
-      // color: Colors.transparent,
-    )..image;
+    // Image image = Image.memory(
+    //   base64Decode(urlImage),
+    //   fit: BoxFit.fill,
+    //   width: double.infinity,
+    //   height: 200,
+    //   color: Colors.transparent,
+    // )..image;
     return Column(
       children: [
         Container(
@@ -392,15 +389,33 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.black.withOpacity(0.04),
             borderRadius: BorderRadius.circular(30),
           ),
-          child: InteractiveViewer(
-              // clipBehavior: Clip.hardEdge,
-              child: FadeInImage(
-            width: 300,
-            height: size.height / 4.3,
-            image: CachedNetworkImageProvider(urlImage),
-            fit: BoxFit.fill,
-            placeholder: AssetImage("assest/image/top_image.png"),
-          )),
+          child: ClipRRect(
+            // borderRadius: BorderRadius.circular(25),
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.04),
+                  borderRadius: BorderRadius.circular(30),
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(urlImage),
+                    fit: BoxFit.fill,
+                    // dataServices[index].imgUrl,
+                  )),
+            ),
+          ),
+
+          //  InteractiveViewer(
+          //   clipBehavior: Clip.antiAlias,
+
+          //   child: FadeInImage(
+          //     width: 300,
+          //     height: size.height / 4.3,
+          //     image: CachedNetworkImageProvider(urlImage),
+          //     fit: BoxFit.fill,
+          //     placeholder: AssetImage("assest/image/top_image.png"),
+          //   ),
+          // ),
         ),
       ],
     );

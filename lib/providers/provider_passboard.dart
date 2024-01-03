@@ -23,7 +23,7 @@ class Passbord {
       required this.image});
 }
 
-class PasspordProvider with ChangeNotifier {
+class PassportProvider with ChangeNotifier {
   // Future<void> fetchDataCliud() async {
   //   firestoreInstance
   //       .collection("users")
