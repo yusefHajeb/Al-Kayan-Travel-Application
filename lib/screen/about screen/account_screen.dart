@@ -1,11 +1,7 @@
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-// import 'package:url_launcher/url_launcher.dart';
 import 'package:yah_app/styles/style.dart';
-
-// import 'package:slimy_card/slimy_card.dart';
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
 
 // ignore: must_be_immutable
@@ -23,10 +19,7 @@ class ScreenMedia extends StatelessWidget {
   String msg = " Hello";
   // ignore: prefer_final_fields
   List<Uri> _listLunchUrl = [
-    //https
-    // Uri.https('whatsapp:send?phone=+967771274299&text=Hellow'),
     Uri.parse(('https://www.facebook.com/AlkayanTravel')),
-    //mail
     Uri(
         scheme: 'mailto',
         path: 'watanalihsas@gmail.com',
@@ -68,9 +61,6 @@ class ScreenMedia extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primary,
-        // ignore: deprecated_member_use
-        // brightness: Brightness.light,
-
         title: Text(
           "حساباتنا ",
           style: header2,
@@ -162,11 +152,6 @@ class ScreenMedia extends StatelessWidget {
               ),
             ),
           ),
-
-          // SlimyCard(
-          //   topCardWidget: topCardWidget(),
-          //   bottomCardWidget: bottomCardWidget(),
-          // ),
         ],
       ),
     );
@@ -238,14 +223,14 @@ Future<void> myDialoge(BuildContext ctx) async {
                 '',
                 style: paragraph,
               )),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                      margin: EdgeInsets.only(left: 6),
+                      margin: const EdgeInsets.only(left: 6),
                       child: Text(
                         '', // "771274299",
                         style: TextStyle(

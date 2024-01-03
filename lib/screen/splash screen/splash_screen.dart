@@ -20,31 +20,31 @@ class SplateScreenState extends State<SplashScreen>
   @override
   void initState() {
     Timer(const Duration(seconds: 6), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => const firstScreen()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const HomeScreen()));
     });
-    scaleController =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 500))
-          ..addStatusListener(
-            (status) {
-              if (status == AnimationStatus.completed) {
-                Navigator.pushReplacement(
-                  context,
-                  AnimatingRoute(
-                    route: const Destination(),
-                    page: Container(),
-                  ),
-                );
-                Timer(
-                  const Duration(milliseconds: 300),
-                  () {
-                    // print('worked');
-                    scaleController.reset();
-                  },
-                );
-              }
-            },
-          );
+    scaleController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500))
+      ..addStatusListener(
+        (status) {
+          if (status == AnimationStatus.completed) {
+            Navigator.pushReplacement(
+              context,
+              AnimatingRoute(
+                route: const Destination(),
+                page: Container(),
+              ),
+            );
+            Timer(
+              const Duration(milliseconds: 300),
+              () {
+                // print('worked');
+                scaleController.reset();
+              },
+            );
+          }
+        },
+      );
     super.initState();
   }
 

@@ -26,7 +26,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget>
         Navigator.push(
             context,
             AnimatingRoute(
-              route: const firstScreen(),
+              route: const HomeScreen(),
               page: Container(),
             ));
         Timer(

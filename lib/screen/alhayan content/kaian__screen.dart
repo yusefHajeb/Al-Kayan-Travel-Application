@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 
 // import 'package:yah_app/screen/screen_search/secreen_animation.dart';
-import 'package:yah_app/styles/myprovider.dart';
+import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/styles/style.dart';
 
 import '../../Widget/loading_show/sktolin_loding.dart';
@@ -93,7 +93,7 @@ class _AlkianScreen extends State<Screen2> {
                 child: IconButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (_) => const firstScreen()));
+                        MaterialPageRoute(builder: (_) => const HomeScreen()));
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios,

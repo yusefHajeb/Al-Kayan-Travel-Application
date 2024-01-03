@@ -4,16 +4,15 @@ import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:yah_app/Widget/new_page.dart';
+import 'package:yah_app/Widget/custom_clipper.dart';
 import 'package:yah_app/providers/service_provider.dart';
 import 'package:yah_app/Widget/home_screen/mysnackbar.dart';
 import 'package:yah_app/screen/services_screen/widget/scale_transition.dart';
-import 'package:yah_app/styles/myprovider.dart';
-import 'package:yah_app/styles/provider_passboard.dart';
+import 'package:yah_app/providers/myprovider.dart';
+import 'package:yah_app/providers/provider_passboard.dart';
 import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
 import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
 import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
@@ -32,15 +31,15 @@ void selectScreen2(BuildContext ctx, int index) {
   Navigator.of(ctx).pushNamed(Screen2.routeName, arguments: index);
 }
 
-class firstScreen extends StatefulWidget {
-  const firstScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
   static const roteName = "Screen Home";
 
   @override
-  State<firstScreen> createState() => _firstScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _firstScreenState extends State<firstScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   late StreamSubscription subscription;
   late StreamSubscription internetSubscription;
   bool hasInternet = false;
@@ -326,7 +325,7 @@ class _firstScreenState extends State<firstScreen> {
               ),
               press: () {
                 _focusNode.unfocus();
-                Navigator.push(context, SizeTransition5(ScreenMedia()));
+                Navigator.push(context, MySlideTransition(ScreenMedia()));
               },
             ),
             CategoryCount(
@@ -403,30 +402,6 @@ class _firstScreenState extends State<firstScreen> {
             placeholder: AssetImage("assest/image/top_image.png"),
           )),
         ),
-        // Container(
-        //   width: 300,
-        //   height: size.height / 4.3,
-        //   margin: const EdgeInsets.only(
-        //     left: 20,
-        //   ),
-        //   decoration: BoxDecoration(
-        //     // color: Colors.black.withOpacity(0.04),
-        //     borderRadius: BorderRadius.circular(30),
-        // image: DecorationImage(
-        // image: ,
-        // )
-        // image:
-        // imag
-        // ),
-        // child: InteractiveViewer(
-        //   child: Image.memory(
-        //     base64Decode(urlImage), fit: BoxFit.fill,
-        //     // width: double.infinity,
-        //     // height: 200,
-        //     // color: Colors.transparent,
-        //   ),
-        // ),
-        // ),
       ],
     );
   }
@@ -444,10 +419,6 @@ class _firstScreenState extends State<firstScreen> {
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.04),
             borderRadius: BorderRadius.circular(30),
-            // image: DecorationImage(
-            //   image: NetworkImage(urlImage),
-            //   fit: BoxFit.fill,
-            // ),
           ),
         )
       ],
@@ -494,7 +465,7 @@ class TextForm extends StatelessWidget {
           openBuilder: (_, closeConntainer) {
             if (numPass.text.isEmpty || numPass.text.length < 9) {
               // setNumPass();
-              return const firstScreen();
+              return const HomeScreen();
             } else {
               return const SecondScreen();
             }

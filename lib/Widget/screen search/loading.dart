@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import '../../styles/provider_passboard.dart';
+import '../../providers/provider_passboard.dart';
 import '../../styles/style.dart';
 
 class DataVisa extends StatelessWidget {

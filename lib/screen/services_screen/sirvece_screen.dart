@@ -111,7 +111,7 @@ class _Screenkhadmatana extends State<ShowService> {
     return WillPopScope(
         onWillPop: () async {
           return await Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => const firstScreen()));
+              context, MaterialPageRoute(builder: (_) => const HomeScreen()));
         },
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -141,7 +141,7 @@ class _Screenkhadmatana extends State<ShowService> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => const firstScreen()));
+                              builder: (_) => const HomeScreen()));
                     },
                     icon: const Icon(
                       Icons.arrow_back_ios,
