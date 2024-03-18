@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +9,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:yah_app/Widget/custom_clipper.dart';
 import 'package:yah_app/providers/service_provider.dart';
 import 'package:yah_app/Widget/home_screen/mysnackbar.dart';
-import 'package:yah_app/screen/services_screen/widget/scale_transition.dart';
+import 'package:yah_app/Widget/scale_transition.dart';
 import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/providers/provider_passboard.dart';
 import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
