@@ -19,7 +19,7 @@ import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
 import '../../Widget/AnimaiWidget/slide_secreen.dart';
 import '../../styles/style.dart';
-import '../../styles/tolls.dart';
+
 import '../about screen/account_screen.dart';
 import '../passport_data_screen/secreen_animation.dart';
 import 'package:provider/provider.dart';
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
       resizeToAvoidBottomInset: false,
       body: Flex(direction: Axis.vertical, children: <Widget>[
         Expanded(
-            flex: 7,
+            flex: 9,
             child: ClipPath(
                 clipper: MyClipper(),
                 child: Container(
@@ -144,82 +144,82 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ))),
         const SizedBox(height: 20),
-        Expanded(
-          flex: 2,
-          child: Bouncing(
-            onPress: () {},
-            child: Container(
-              width: 400,
-              margin: const EdgeInsets.only(
-                  top: 0, right: 30, left: 30, bottom: 23),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(
-                    offset: Offset(0, 7),
-                    blurRadius: 18,
-                    spreadRadius: -17,
-                    color: Colors.black,
+        Bouncing(
+          onPress: () {},
+          child: Container(
+            width: 370,
+            // height: 200,
+            // margin:
+            //     const EdgeInsets.only(top: 0, right: 30, left: 30, bottom: ),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  offset: Offset(0, 7),
+                  blurRadius: 18,
+                  spreadRadius: -17,
+                  color: Colors.black,
+                ),
+              ],
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(29.5),
+            ),
+            child: Form(
+              key: key,
+              child: TextFormField(
+                controller: numPass,
+                focusNode: _focusNode,
+                keyboardType: TextInputType.number,
+                obscureText: false,
+                textInputAction: TextInputAction.search,
+                onEditingComplete: () async {
+                  final result = await Connectivity().checkConnectivity();
+                  // _showConnectivityResult(result);
+                  if (_showConnectivityResult(result) ==
+                      "تاكد من إتصالك با الإنترنت ") {
+                    _focusNode.unfocus();
+                    MySnackBar(scaffold, _showConnectivityResult(result));
+                  } else if (numPass.text.isEmpty) {
+                    _focusNode.unfocus();
+                    MySnackBar(scaffold, "الرجاء ادخال رقم الجواز");
+                  } else if (numPass.text.length < 9) {
+                    _focusNode.unfocus();
+                    MySnackBar(scaffold, "القيمة المدخله خاطئة");
+                  } else {
+                    print("Passbord is :" + numPass.text);
+                    Provider.of<PassportProvider>(context, listen: false)
+                        .setNumberPassbord(numPass.text);
+                    _focusNode.unfocus();
+
+                    Navigator.push(
+                        context, ScaleTransitionScreen2(const SecondScreen()));
+                  }
+                },
+                decoration: InputDecoration(
+                  hintText: "ابحث برقم الجواز",
+                  hintStyle: header2.copyWith(fontSize: 15),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: primary,
                   ),
-                ],
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(29.5),
-              ),
-              child: Form(
-                key: key,
-                child: TextFormField(
-                  controller: numPass,
-                  focusNode: _focusNode,
-                  keyboardType: TextInputType.number,
-                  obscureText: false,
-                  textInputAction: TextInputAction.search,
-                  onEditingComplete: () async {
-                    final result = await Connectivity().checkConnectivity();
-                    // _showConnectivityResult(result);
-                    if (_showConnectivityResult(result) ==
-                        "تاكد من إتصالك با الإنترنت ") {
-                      _focusNode.unfocus();
-                      MySnackBar(scaffold, _showConnectivityResult(result));
-                    } else if (numPass.text.isEmpty) {
-                      _focusNode.unfocus();
-                      MySnackBar(scaffold, "الرجاء ادخال رقم الجواز");
-                    } else if (numPass.text.length < 9) {
-                      _focusNode.unfocus();
-                      MySnackBar(scaffold, "القيمة المدخله خاطئة");
-                    } else {
-                      print("Passbord is :" + numPass.text);
-                      Provider.of<PassportProvider>(context, listen: false)
-                          .setNumberPassbord(numPass.text);
-                      _focusNode.unfocus();
 
-                      Navigator.push(context,
-                          ScaleTransitionScreen2(const SecondScreen()));
-                    }
-                  },
-                  decoration: const InputDecoration(
-                    hintText: "ابحث برقم الجواز",
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: primary,
-                    ),
-
-                    border: InputBorder.none,
-                    //  suffixIcon: 24.0,
-                    suffixIconColor: Colors.grey,
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 16.0,
-                    ),
+                  border: InputBorder.none,
+                  //  suffixIcon: 24.0,
+                  suffixIconColor: Colors.grey,
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 16.0,
                   ),
                 ),
               ),
             ),
           ),
         ),
+        const SizedBox(height: 20),
         Expanded(
-          flex: 6,
+          flex: 7,
           child: Container(
-            padding: const EdgeInsets.only(top: 20, bottom: 20),
+            padding: const EdgeInsets.only(top: 10, bottom: 20),
             width: double.infinity,
             child: AspectRatio(
               aspectRatio: 10,
@@ -249,100 +249,97 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Expanded CardBottom(BuildContext context) {
-    return Expanded(
-      flex: 3,
-      child: Container(
-        height: 700,
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 0.0),
-        margin: const EdgeInsets.only(right: 5),
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            CategoryCount(
-              titleCurd: " كيان",
-              myIcon: const Icon(
-                Icons.diamond,
-                color: Color.fromARGB(255, 4, 10, 15),
-                size: 40,
-              ),
-              press: () {
-                _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
-                Provider.of<ProviderService>(context, listen: false)
-                    .setNumberScreen(0.toString());
-              },
+  // ignore: non_constant_identifier_names
+  Container CardBottom(BuildContext context) {
+    return Container(
+      height: 126,
+      padding: const EdgeInsets.symmetric(horizontal: 0.0),
+      margin: const EdgeInsets.only(right: 5),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          CategoryCount(
+            titleCurd: " كيان",
+            myIcon: const Icon(
+              Icons.diamond,
+              color: Color.fromARGB(255, 4, 10, 15),
+              size: 40,
             ),
-            CategoryCount(
-              titleCurd: "الفروع",
-              myIcon: const Icon(
-                Icons.hotel_class_outlined,
-                color: const Color.fromARGB(255, 22, 51, 26),
-                size: 34,
-              ),
-              press: () {
-                _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(Screen2()));
-                Provider.of<ProviderService>(context, listen: false)
-                    .setNumberScreen(2.toString());
-              },
+            press: () {
+              _focusNode.unfocus();
+              Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+              Provider.of<ProviderService>(context, listen: false)
+                  .setNumberScreen(0.toString());
+            },
+          ),
+          CategoryCount(
+            titleCurd: "الفروع",
+            myIcon: const Icon(
+              Icons.hotel_class_outlined,
+              color: Color.fromARGB(255, 22, 51, 26),
+              size: 34,
             ),
-            CategoryCount(
-              titleCurd: "شركائنا",
-              myIcon: const Icon(
-                Icons.local_airport_sharp,
-                color: Color.fromARGB(255, 22, 51, 26),
-                size: 34,
-              ),
-              press: () {
-                _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
-                //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
-                Provider.of<ProviderService>(context, listen: false)
-                    .setNumberScreen(1.toString());
-              },
+            press: () {
+              _focusNode.unfocus();
+              Navigator.push(context, ScaleTransitionScreen(Screen2()));
+              Provider.of<ProviderService>(context, listen: false)
+                  .setNumberScreen(2.toString());
+            },
+          ),
+          CategoryCount(
+            titleCurd: "شركائنا",
+            myIcon: const Icon(
+              Icons.local_airport_sharp,
+              color: Color.fromARGB(255, 22, 51, 26),
+              size: 34,
             ),
-            CategoryCount(
-              titleCurd: "الفروع",
-              myIcon: const Icon(
-                Icons.slideshow,
-                color: Color.fromARGB(255, 22, 51, 26),
-              ),
-              press: () {
-                _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
-                Provider.of<ProviderService>(context, listen: false)
-                    .setNumberScreen(2.toString());
-              },
+            press: () {
+              _focusNode.unfocus();
+              Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+              //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
+              Provider.of<ProviderService>(context, listen: false)
+                  .setNumberScreen(1.toString());
+            },
+          ),
+          CategoryCount(
+            titleCurd: "الفروع",
+            myIcon: const Icon(
+              Icons.slideshow,
+              color: Color.fromARGB(255, 22, 51, 26),
             ),
-            CategoryCount(
-              titleCurd: "حساباتنا",
-              myIcon: const Icon(
-                Icons.local_phone_outlined,
-                size: 34,
-                color: Color.fromARGB(255, 22, 51, 26),
-              ),
-              press: () {
-                _focusNode.unfocus();
-                Navigator.push(context, MySlideTransition(ScreenMedia()));
-              },
+            press: () {
+              _focusNode.unfocus();
+              Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+              Provider.of<ProviderService>(context, listen: false)
+                  .setNumberScreen("2");
+            },
+          ),
+          CategoryCount(
+            titleCurd: "حساباتنا",
+            myIcon: const Icon(
+              Icons.local_phone_outlined,
+              size: 34,
+              color: Color.fromARGB(255, 22, 51, 26),
             ),
-            CategoryCount(
-              titleCurd: "خدماتنا",
-              myIcon: const Icon(
-                Icons.local_mall_sharp,
-                size: 34,
-              ),
-              press: () {
-                Provider.of<ServicesProvider>(context, listen: false)
-                    .setValueLoading(false);
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (_) => const ShowService()));
-              },
+            press: () {
+              _focusNode.unfocus();
+              Navigator.push(context, MySlideTransition(ScreenMedia()));
+            },
+          ),
+          CategoryCount(
+            titleCurd: "خدماتنا",
+            myIcon: const Icon(
+              Icons.local_mall_sharp,
+              size: 34,
             ),
-          ],
-        ),
+            press: () {
+              Provider.of<ServicesProvider>(context, listen: false)
+                  .setValueLoading(false);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (_) => const ShowService()));
+            },
+          ),
+        ],
       ),
     );
   }
@@ -393,7 +390,6 @@ class _HomeScreenState extends State<HomeScreen> {
             // borderRadius: BorderRadius.circular(25),
             child: Container(
               width: 100,
-              height: 100,
               decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.04),
                   borderRadius: BorderRadius.circular(30),
@@ -425,7 +421,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         Container(
-          // padding: EdgeInsets.only(bottom: 30),
           width: 300,
           height: size.height / 4.3,
           margin: const EdgeInsets.only(
@@ -437,56 +432,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         )
       ],
-    );
-  }
-}
-
-class TextForm extends StatelessWidget {
-  const TextForm({
-    Key? key,
-    required this.numPass,
-  }) : super(key: key);
-
-  final TextEditingController numPass;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: numPass,
-      keyboardType: TextInputType.number,
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: "ابحث برقم الجواز",
-        prefixIcon: const Icon(
-          Icons.search,
-          color: primary,
-        ),
-        border: InputBorder.none,
-        suffixIcon: OpenContainer(
-          openColor: Colors.white,
-          closedBuilder: (_, openContainer) {
-            return Container(
-              height: 50,
-              width: 100,
-              color: const Color(0x03234234),
-              child: Container(
-                child: const Center(child: Text('بحث')),
-              ),
-            );
-          },
-          closedShape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          transitionDuration: const Duration(milliseconds: 700),
-          openBuilder: (_, closeConntainer) {
-            if (numPass.text.isEmpty || numPass.text.length < 9) {
-              // setNumPass();
-              return const HomeScreen();
-            } else {
-              return const SecondScreen();
-            }
-          },
-        ),
-      ),
     );
   }
 }

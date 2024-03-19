@@ -14,35 +14,35 @@ const blue = Color.fromARGB(255, 251, 212, 169);
 
 TextStyle header = const TextStyle(
   fontSize: 20,
-  fontFamily: 'ReadexPro',
-  fontWeight: FontWeight.w600,
+  fontFamily: 'Almarai',
+  fontWeight: FontWeight.bold,
   color: bBackDark,
 );
 
 TextStyle paragraph = const TextStyle(
   fontSize: 12,
-  fontFamily: 'ReadexPro',
+  fontFamily: 'Almarai',
   fontWeight: FontWeight.w400,
   color: ktextColor,
 );
 
 TextStyle card = const TextStyle(
   fontSize: 11,
-  fontFamily: 'ReadexPro',
+  fontFamily: 'Almarai',
   fontWeight: FontWeight.w400,
   color: Color.fromARGB(255, 56, 24, 2),
 );
 
 TextStyle header2 = const TextStyle(
   fontSize: 16,
-  fontFamily: 'ReadexPro',
-  fontWeight: FontWeight.w500,
+  fontFamily: 'Almarai',
+  fontWeight: FontWeight.bold,
   color: bBackDark,
 );
 
 var paragraph2 = const TextStyle(
   fontSize: 16,
-  fontFamily: 'ReadexPro',
+  fontFamily: 'Almarai',
   fontWeight: FontWeight.w400,
   color: bBackDark,
 );
