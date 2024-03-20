@@ -122,15 +122,7 @@ flutter:
         # - asset: assest/fonts/AL-Mohanad-Regular.ttf
         #   weight: 700
 
-    - family: Janna
-      fonts:
-        - asset: assest/fonts/Janna LT Bold.ttf
-
-    - family: ReadexPro
-      fonts:
-        - asset: assest/image/Fonts/ReadexPro-Medium.ttf
-        - asset: assest/image/Fonts/ReadexPro-Light.ttf
-          weight: 600   
+    
     # - assest/svg/
     # - assest/image/me.jpg
   #   - images/a_dot_ham.jpeg

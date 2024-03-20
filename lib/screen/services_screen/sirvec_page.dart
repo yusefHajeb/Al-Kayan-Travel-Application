@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
-import 'package:yah_app/dataBase/dealetes.dart';
 import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
 
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
@@ -19,29 +17,15 @@ class PageService extends StatefulWidget {
   State<PageService> createState() => _PageService();
 }
 
-Future<void> getData() async {
-  CollectionReference ref = FirebaseFirestore.instance.collection("users");
-
-  QuerySnapshot querySnapshot = await ref.get();
-
-  List mylist = [];
-  if (querySnapshot.docs.isNotEmpty) {
-    for (var doc in querySnapshot.docs) {
-      mylist.add(doc.data());
-    }
-    print("-------------------------------");
-  }
-}
-
-List myList = [];
+List serveceDetails = [];
 
 @override
 class _PageService extends State<PageService> {
   @override
   Widget build(BuildContext context) {
-    myList = Provider.of<ServicesProvider>(context, listen: false).DataProvider;
+    serveceDetails = Provider.of<ServicesProvider>(context, listen: false)
+        .getListReosponse();
     var size = MediaQuery.of(context).size;
-    //عند الا
     final int sectionIndex = Provider.of<ServicesProvider>(context).getIndex();
     return WillPopScope(
       onWillPop: () async {
@@ -65,7 +49,7 @@ class _PageService extends State<PageService> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: CachedNetworkImageProvider(
-                              myList[sectionIndex]['imgUrl']),
+                              serveceDetails[sectionIndex]['imgUrl']),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -144,7 +128,7 @@ class _PageService extends State<PageService> {
                       ]),
                   child: Center(
                     child: Text(
-                      myList[sectionIndex]['title'],
+                      serveceDetails[sectionIndex]['title'],
                       // data[sectionIndex].title,
                       textAlign: TextAlign.center,
                       style: header2,
@@ -160,7 +144,7 @@ class _PageService extends State<PageService> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 15),
                     child: Text(
-                      myList[sectionIndex]['paragraph'],
+                      serveceDetails[sectionIndex]['paragraph'],
                       style: paragraph.copyWith(fontSize: 15),
                     ),
                   ),
@@ -211,7 +195,7 @@ class _PageService extends State<PageService> {
                                     ),
                                   );
                                 },
-                                itemCount: data.length,
+                                itemCount: serveceDetails.length,
                               ),
                             ),
                           )),
@@ -274,7 +258,7 @@ class CardBottom extends StatelessWidget {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                       image: CachedNetworkImageProvider(
-                          myList[sectionIndex]['imgUrl']),
+                          serveceDetails[sectionIndex]['imgUrl']),
                       fit: BoxFit.fill,
                     )),
                   ),
@@ -285,7 +269,7 @@ class CardBottom extends StatelessWidget {
             Expanded(
               flex: 4,
               child: Text(
-                myList[sectionIndex]['title'],
+                '${serveceDetails[sectionIndex]['title']}',
                 style: paragraph2,
               ),
             ),

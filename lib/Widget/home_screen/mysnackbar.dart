@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yah_app/styles/style.dart';
 
-
-void MySnackBar(ScaffoldMessengerState scaffold, String message) {
+void mySnackBar(ScaffoldMessengerState scaffold, String message) {
   scaffold.showSnackBar(SnackBar(
     content: Stack(
       clipBehavior: Clip.none,
@@ -27,7 +26,7 @@ void MySnackBar(ScaffoldMessengerState scaffold, String message) {
                     Text(
                       "خطاء",
                       style: header2,
-                      maxLines: 2,
+                      maxLines: 5,
                       overflow: TextOverflow.ellipsis,
                     ),
 
@@ -50,14 +49,14 @@ void MySnackBar(ScaffoldMessengerState scaffold, String message) {
                 const BorderRadius.only(bottomLeft: Radius.circular(20)),
             child: SvgPicture.asset(
               "assest/image/svg/bubbles.svg",
-              height: 48,
+              height: 60,
               width: 48,
               color: const Color.fromARGB(255, 212, 152, 0),
             ),
           ),
         ),
         Positioned(
-          top: -20,
+          top: -15,
           right: 0,
           child: Stack(
             alignment: Alignment.center,
@@ -67,10 +66,13 @@ void MySnackBar(ScaffoldMessengerState scaffold, String message) {
                 height: 40,
                 color: bBackDark,
               ),
-              SvgPicture.asset(
-                "assest/image/svg/close.svg",
-                height: 15,
-                color: const Color.fromARGB(255, 212, 152, 0),
+              InkWell(
+                onTap: () => scaffold.hideCurrentSnackBar(),
+                child: SvgPicture.asset(
+                  "assest/image/svg/close.svg",
+                  height: 18,
+                  color: const Color.fromARGB(255, 212, 152, 0),
+                ),
               ),
             ],
           ),

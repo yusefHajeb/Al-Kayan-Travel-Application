@@ -43,7 +43,9 @@ class _Screenkhadmatana extends State<ShowService> {
   List mylist = [];
 
   Future<void> fetchData() async {
-    Provider.of<ServicesProvider>(context, listen: false).DataProvider.clear();
+    Provider.of<ServicesProvider>(context, listen: false)
+        .responseListService
+        .clear();
     CollectionReference ref = FirebaseFirestore.instance.collection("service");
     QuerySnapshot querySnapshot = await ref.get();
     if (querySnapshot.docs.isNotEmpty) {
@@ -51,14 +53,14 @@ class _Screenkhadmatana extends State<ShowService> {
         mylist.add(doc.data());
       }
       Provider.of<ServicesProvider>(context, listen: false)
-          .DataProvider
-          .addAll(mylist);
+          .setResponceServese(mylist);
     }
   }
 
   @override
   void dispose() {
     if (mounted) {}
+
     super.dispose();
   }
 

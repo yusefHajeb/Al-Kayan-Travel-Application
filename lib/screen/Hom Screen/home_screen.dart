@@ -172,13 +172,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (_showConnectivityResult(result) ==
                       "تاكد من إتصالك با الإنترنت ") {
                     _focusNode.unfocus();
-                    MySnackBar(scaffold, _showConnectivityResult(result));
+                    mySnackBar(scaffold, _showConnectivityResult(result));
                   } else if (numPass.text.isEmpty) {
                     _focusNode.unfocus();
-                    MySnackBar(scaffold, "الرجاء ادخال رقم الجواز");
+                    mySnackBar(scaffold, "الرجاء ادخال رقم الجواز");
                   } else if (numPass.text.length < 9) {
                     _focusNode.unfocus();
-                    MySnackBar(scaffold, "القيمة المدخله خاطئة");
+                    mySnackBar(scaffold, "القيمة المدخله خاطئة");
                   } else {
                     print("Passbord is :" + numPass.text);
                     Provider.of<PassportProvider>(context, listen: false)

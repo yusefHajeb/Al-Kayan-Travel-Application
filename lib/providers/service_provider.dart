@@ -13,7 +13,7 @@ class DataService {
 }
 
 class ServicesProvider with ChangeNotifier {
-  List DataProvider = [];
+  List responseListService = [];
 
   List<DataService> Data = [];
   bool isLoading = false;
@@ -23,8 +23,17 @@ class ServicesProvider with ChangeNotifier {
     isLoading = flage;
   }
 
+  void setResponceServese(List list) {
+    responseListService = list;
+    notifyListeners();
+  }
+
   bool getLoadinf() {
     return isLoading;
+  }
+
+  List getListReosponse() {
+    return responseListService;
   }
 
   int _index = 0;

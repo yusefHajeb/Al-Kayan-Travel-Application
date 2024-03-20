@@ -18,7 +18,7 @@ class ProviderService with ChangeNotifier {
         "سرعة في انجاز المعاملات"),
     Product("assest/image/imageKaian.png", 'سرعة في انجاز المعاملات',
         " تاشيرات مضمونه  "),
-    Product("assest/image/thim2.png", 'الكيان الدولي', ""),
+    Product("assest/image/imageKaian.png", 'الكيان الدولي', ""),
   ];
 
   //القائمة هذي حق شركائنا
