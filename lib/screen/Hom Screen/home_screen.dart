@@ -121,12 +121,11 @@ class _HomeScreenState extends State<HomeScreen> {
       resizeToAvoidBottomInset: false,
       body: Flex(direction: Axis.vertical, children: <Widget>[
         Expanded(
-            flex: 9,
+            flex: 4,
             child: ClipPath(
                 clipper: MyClipper(),
                 child: Container(
                   padding: const EdgeInsets.only(left: 40, top: 50, right: 20),
-                  height: 500,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
@@ -143,22 +142,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ))),
-        const SizedBox(height: 20),
         Bouncing(
           onPress: () {},
           child: Container(
             width: 370,
-            // height: 200,
-            // margin:
-            //     const EdgeInsets.only(top: 0, right: 30, left: 30, bottom: ),
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 3),
             decoration: BoxDecoration(
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  offset: Offset(0, 7),
-                  blurRadius: 18,
-                  spreadRadius: -17,
-                  color: Colors.black,
+                  offset: const Offset(0, 7),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                  color: Colors.black.withOpacity(0.3),
                 ),
               ],
               color: Colors.white,
@@ -174,7 +169,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 textInputAction: TextInputAction.search,
                 onEditingComplete: () async {
                   final result = await Connectivity().checkConnectivity();
-                  // _showConnectivityResult(result);
                   if (_showConnectivityResult(result) ==
                       "تاكد من إتصالك با الإنترنت ") {
                     _focusNode.unfocus();
@@ -202,9 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Icons.search,
                     color: primary,
                   ),
-
                   border: InputBorder.none,
-                  //  suffixIcon: 24.0,
                   suffixIconColor: Colors.grey,
                   contentPadding: const EdgeInsets.symmetric(
                     vertical: 10.0,
@@ -215,16 +207,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 20),
         Expanded(
-          flex: 7,
+          flex: 3,
           child: Container(
-            padding: const EdgeInsets.only(top: 10, bottom: 20),
+            padding: const EdgeInsets.only(top: 20, bottom: 0),
             width: double.infinity,
             child: AspectRatio(
-              aspectRatio: 10,
+              aspectRatio: 7,
               child: Container(
-                // margin: EdgeInsets.only(bottom: 5),
                 padding: const EdgeInsets.all(0),
                 child: PageView.builder(
                     itemCount: listImage.length,
@@ -235,113 +225,118 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(
                             top: 10.0,
                           ),
-                          child: carousView(index, size));
+                          child: _carousView(index, size));
                     }),
               ),
             ),
           ),
         ),
-        const SizedBox(
-          height: 6,
-        ),
-        CardBottom(context),
+        Expanded(flex: 4, child: CardBottom(context)),
       ]),
     );
   }
 
   // ignore: non_constant_identifier_names
-  Container CardBottom(BuildContext context) {
+  Container CardBottom(
+    BuildContext context,
+  ) {
     return Container(
-      height: 126,
-      padding: const EdgeInsets.symmetric(horizontal: 0.0),
-      margin: const EdgeInsets.only(right: 5),
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          CategoryCount(
-            titleCurd: " كيان",
-            myIcon: const Icon(
-              Icons.diamond,
-              color: Color.fromARGB(255, 4, 10, 15),
-              size: 40,
-            ),
-            press: () {
-              _focusNode.unfocus();
-              Navigator.push(context, ScaleTransitionScreen(const Screen2()));
-              Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(0.toString());
-            },
+        margin: const EdgeInsets.only(right: 5),
+        child: GridView.builder(
+          itemCount: 6,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 14,
+            mainAxisSpacing: 4,
           ),
-          CategoryCount(
-            titleCurd: "الفروع",
-            myIcon: const Icon(
-              Icons.hotel_class_outlined,
-              color: Color.fromARGB(255, 22, 51, 26),
-              size: 34,
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index) => [
+            CategoryCount(
+              titleCurd: " كيان",
+              myIcon: const Icon(
+                Icons.diamond,
+                color: Color.fromARGB(255, 4, 10, 15),
+                size: 40,
+              ),
+              press: () {
+                _focusNode.unfocus();
+                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+                Provider.of<ProviderService>(context, listen: false)
+                    .setNumberScreen(0.toString());
+              },
             ),
-            press: () {
-              _focusNode.unfocus();
-              Navigator.push(context, ScaleTransitionScreen(Screen2()));
-              Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(2.toString());
-            },
-          ),
-          CategoryCount(
-            titleCurd: "شركائنا",
-            myIcon: const Icon(
-              Icons.local_airport_sharp,
-              color: Color.fromARGB(255, 22, 51, 26),
-              size: 34,
+            CategoryCount(
+              titleCurd: "الفروع",
+              myIcon: const Icon(
+                Icons.hotel_class_outlined,
+                color: Color.fromARGB(255, 22, 51, 26),
+                size: 34,
+              ),
+              press: () {
+                _focusNode.unfocus();
+                Navigator.push(context, ScaleTransitionScreen(Screen2()));
+                Provider.of<ProviderService>(context, listen: false)
+                    .setNumberScreen(2.toString());
+              },
             ),
-            press: () {
-              _focusNode.unfocus();
-              Navigator.push(context, ScaleTransitionScreen(const Screen2()));
-              //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
-              Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen(1.toString());
-            },
-          ),
-          CategoryCount(
-            titleCurd: "الفروع",
-            myIcon: const Icon(
-              Icons.slideshow,
-              color: Color.fromARGB(255, 22, 51, 26),
+            CategoryCount(
+              titleCurd: "شركائنا",
+              myIcon: const Icon(
+                Icons.local_airport_sharp,
+                color: Color.fromARGB(255, 22, 51, 26),
+                size: 34,
+              ),
+              press: () {
+                _focusNode.unfocus();
+                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+                //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
+                Provider.of<ProviderService>(context, listen: false)
+                    .setNumberScreen(1.toString());
+              },
             ),
-            press: () {
-              _focusNode.unfocus();
-              Navigator.push(context, ScaleTransitionScreen(const Screen2()));
-              Provider.of<ProviderService>(context, listen: false)
-                  .setNumberScreen("2");
-            },
-          ),
-          CategoryCount(
-            titleCurd: "حساباتنا",
-            myIcon: const Icon(
-              Icons.local_phone_outlined,
-              size: 34,
-              color: Color.fromARGB(255, 22, 51, 26),
+            CategoryCount(
+              titleCurd: "حساباتنا",
+              myIcon: const Icon(
+                Icons.local_phone_outlined,
+                size: 34,
+                color: Color.fromARGB(255, 22, 51, 26),
+              ),
+              press: () {
+                _focusNode.unfocus();
+                Navigator.push(context, MySlideTransition(ScreenMedia()));
+              },
             ),
-            press: () {
-              _focusNode.unfocus();
-              Navigator.push(context, MySlideTransition(ScreenMedia()));
-            },
-          ),
-          CategoryCount(
-            titleCurd: "خدماتنا",
-            myIcon: const Icon(
-              Icons.local_mall_sharp,
-              size: 34,
+            CategoryCount(
+              titleCurd: "خدماتنا",
+              myIcon: const Icon(
+                Icons.local_mall_sharp,
+                size: 34,
+              ),
+              press: () {
+                Provider.of<ServicesProvider>(context, listen: false)
+                    .setValueLoading(false);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (_) => const ShowService()));
+              },
             ),
-            press: () {
-              Provider.of<ServicesProvider>(context, listen: false)
-                  .setValueLoading(false);
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (_) => const ShowService()));
-            },
-          ),
-        ],
-      ),
-    );
+            CategoryCount(
+              titleCurd: " كيان",
+              myIcon: const Icon(
+                Icons.diamond,
+                color: Color.fromARGB(255, 4, 10, 15),
+                size: 40,
+              ),
+              press: () {
+                _focusNode.unfocus();
+                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+                Provider.of<ProviderService>(context, listen: false)
+                    .setNumberScreen(0.toString());
+              },
+            ),
+          ].elementAt(index),
+        ));
   }
 
   void setNumPass() {
@@ -350,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Widget carousView(int index, Size s) {
+  Widget _carousView(int index, Size s) {
     return AnimatedBuilder(
       animation: _pageController,
       builder: (context, child) {
@@ -361,24 +356,16 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         return Transform.rotate(
             angle: -3.14 * value,
-            child: crouseCard(listImage[index]["imageUrl"].toString(), s));
+            child: _crouseCard(listImage[index]["imageUrl"].toString(), s));
       },
     );
   }
 
-  Widget crouseCard(String urlImage, Size size) {
-    // Image image = Image.memory(
-    //   base64Decode(urlImage),
-    //   fit: BoxFit.fill,
-    //   width: double.infinity,
-    //   height: 200,
-    //   color: Colors.transparent,
-    // )..image;
+  Widget _crouseCard(String urlImage, Size size) {
     return Column(
       children: [
         Container(
-          width: 300,
-          height: size.height / 4.3,
+          height: size.height / 4.5,
           margin: const EdgeInsets.only(
             left: 20,
           ),
@@ -387,50 +374,17 @@ class _HomeScreenState extends State<HomeScreen> {
             borderRadius: BorderRadius.circular(30),
           ),
           child: ClipRRect(
-            // borderRadius: BorderRadius.circular(25),
             child: Container(
-              width: 100,
               decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.04),
                   borderRadius: BorderRadius.circular(30),
                   image: DecorationImage(
                     image: CachedNetworkImageProvider(urlImage),
                     fit: BoxFit.fill,
-                    // dataServices[index].imgUrl,
                   )),
             ),
           ),
-
-          //  InteractiveViewer(
-          //   clipBehavior: Clip.antiAlias,
-
-          //   child: FadeInImage(
-          //     width: 300,
-          //     height: size.height / 4.3,
-          //     image: CachedNetworkImageProvider(urlImage),
-          //     fit: BoxFit.fill,
-          //     placeholder: AssetImage("assest/image/top_image.png"),
-          //   ),
-          // ),
         ),
-      ],
-    );
-  }
-
-  Widget crouseCard2(String urlImage, Size size) {
-    return Column(
-      children: [
-        Container(
-          width: 300,
-          height: size.height / 4.3,
-          margin: const EdgeInsets.only(
-            left: 20,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.04),
-            borderRadius: BorderRadius.circular(30),
-          ),
-        )
       ],
     );
   }

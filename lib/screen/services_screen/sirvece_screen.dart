@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yah_app/Widget/kayancontent/appbar_contant.dart';
 import 'package:yah_app/Widget/kayancontent/loadingshow_servece.dart';
 
 import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
@@ -92,58 +93,7 @@ class _Screenkhadmatana extends State<ShowService> {
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(children: [
-              Stack(children: <Widget>[
-                Container(
-                  height: size.height / 4.5,
-                  width: double.infinity,
-                  child: Image.asset(
-                    "assest/image/top_image.png",
-                    fit: BoxFit.fill,
-                  ),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 50,
-                  right: 20,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const HomeScreen()));
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  height: 38,
-                  child: Container(
-                    child: Text(
-                      "خدماتنا",
-                      textAlign: TextAlign.center,
-                      style: header,
-                    ),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25.0),
-                        topRight: Radius.circular(25.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ]),
+              AppBarHeadder(size: size, title: "خدماتنا"),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 1.3,
                 child: Provider.of<ServicesProvider>(context).getLoadinf()

@@ -1,9 +1,10 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
-import 'package:yah_app/Widget/kayancontent/appbar_contant.dart';
 import 'package:yah_app/dataBase/dealetes.dart';
 import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
 
@@ -20,8 +21,6 @@ class PageService extends StatefulWidget {
   State<PageService> createState() => _PageService();
 }
 
-// List<DataService> listService = [];
-
 Future<void> getData() async {
   CollectionReference ref = FirebaseFirestore.instance.collection("users");
 
@@ -32,7 +31,6 @@ Future<void> getData() async {
     for (var doc in querySnapshot.docs) {
       mylist.add(doc.data());
     }
-    // listService.add(DataService(imgUrl: '', paragraph: '', title: ''));
     print("-------------------------------");
   }
 }
@@ -60,9 +58,74 @@ class _PageService extends State<PageService> {
             child: Column(children: [
               Expanded(
                 flex: 1,
-                child: AppBarHeadder(
-                  size: size,
-                ),
+                child: Stack(children: <Widget>[
+                  Container(
+                    height: size.height / 3,
+                    width: double.infinity,
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                              myList[sectionIndex]['imgUrl']),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(50),
+                            bottomRight: Radius.circular(50))),
+                  ),
+                  Positioned(
+                    top: 50,
+                    right: 20,
+                    child: IconButton(
+                      alignment: Alignment.center,
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const ShowService()));
+                      },
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            const CircleBorder(),
+                          ),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(0)),
+                          elevation: MaterialStateProperty.all(0),
+                          minimumSize:
+                              MaterialStateProperty.all(const Size(34, 34)),
+                          visualDensity: VisualDensity.adaptivePlatformDensity,
+                          alignment: Alignment.center,
+                          shadowColor: MaterialStateProperty.all(Colors.black),
+                          backgroundColor: MaterialStateProperty.all(
+                            const Color.fromARGB(255, 218, 172, 31),
+                          )),
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: -2,
+                    height: 25,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25.0),
+                          topRight: Radius.circular(25.0),
+                        ),
+                      ),
+                    ),
+                  )
+                ]),
               ),
               Transform.translate(
                 offset: const Offset(0, -50),
@@ -95,7 +158,6 @@ class _PageService extends State<PageService> {
               Expanded(
                 flex: 2,
                 child: SizedBox(
-                  // height: size.height / 2.6,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 15),
@@ -130,31 +192,28 @@ class _PageService extends State<PageService> {
                             duration: const Duration(milliseconds: 600),
                             child: SlideAnimation(
                               curve: Curves.easeInCirc,
-                              child: FadeInAnimation(
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return AnimationConfiguration.staggeredList(
-                                      position: index,
-                                      duration:
-                                          const Duration(milliseconds: 600),
-                                      child: SlideAnimation(
-                                        horizontalOffset: 30.0,
-                                        child: FadeInAnimation(
-                                          delay:
-                                              const Duration(milliseconds: 200),
-                                          child: Bouncing(
-                                              onPress: () {},
-                                              child: (CardBottom(
-                                                  sectionIndex: index))),
-                                        ),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return AnimationConfiguration.staggeredList(
+                                    position: index,
+                                    duration: const Duration(milliseconds: 600),
+                                    child: SlideAnimation(
+                                      horizontalOffset: 30.0,
+                                      child: FadeInAnimation(
+                                        delay:
+                                            const Duration(microseconds: 200),
+                                        child: Bouncing(
+                                            onPress: () {},
+                                            child: (CardBottom(
+                                                sectionIndex: index))),
                                       ),
-                                    );
-                                  },
-                                  itemCount: data.length,
-                                ),
+                                    ),
+                                  );
+                                },
+                                itemCount: data.length,
                               ),
                             ),
                           )),
@@ -204,9 +263,6 @@ class CardBottom extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Container(
-                // width: 70,
-                // height: 50,
-                // padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: const Color.fromARGB(255, 40, 39, 37)),
@@ -222,21 +278,17 @@ class CardBottom extends StatelessWidget {
                       image: CachedNetworkImageProvider(
                           myList[sectionIndex]['imgUrl']),
                       fit: BoxFit.fill,
-                      // dataServices[index].imgUrl,
                     )),
                   ),
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               flex: 4,
               child: Text(
                 myList[sectionIndex]['title'],
-                // data[sectionIndex].title,
                 style: paragraph2,
-                //  TextStyle(
-                //     color: Color.fromARGB(255, 54, 52, 52), fontSize: 13),
               ),
             ),
           ]),
