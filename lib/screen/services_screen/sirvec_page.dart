@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
+import 'package:yah_app/Widget/kayancontent/appbar_contant.dart';
 import 'package:yah_app/dataBase/dealetes.dart';
 import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
 
@@ -61,74 +60,9 @@ class _PageService extends State<PageService> {
             child: Column(children: [
               Expanded(
                 flex: 1,
-                child: Stack(children: <Widget>[
-                  Container(
-                    height: size.height / 3,
-                    width: double.infinity,
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: CachedNetworkImageProvider(
-                              myList[sectionIndex]['imgUrl']),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(50),
-                            bottomRight: Radius.circular(50))),
-                  ),
-                  Positioned(
-                    top: 50,
-                    right: 20,
-                    child: IconButton(
-                      alignment: Alignment.center,
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const ShowService()));
-                      },
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            const CircleBorder(),
-                          ),
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.all(0)),
-                          elevation: MaterialStateProperty.all(0),
-                          minimumSize:
-                              MaterialStateProperty.all(const Size(34, 34)),
-                          visualDensity: VisualDensity.adaptivePlatformDensity,
-                          alignment: Alignment.center,
-                          shadowColor: MaterialStateProperty.all(Colors.black),
-                          backgroundColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 218, 172, 31),
-                          )),
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: -2,
-                    height: 25,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25.0),
-                          topRight: Radius.circular(25.0),
-                        ),
-                      ),
-                    ),
-                  )
-                ]),
+                child: AppBarHeadder(
+                  size: size,
+                ),
               ),
               Transform.translate(
                 offset: const Offset(0, -50),

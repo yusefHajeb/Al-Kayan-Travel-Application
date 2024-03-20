@@ -1,23 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yah_app/Widget/kayancontent/loadingshow_servece.dart';
 
 import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
 
-// import 'package:yah_app/screen/servis/sirvec_page.dart';
 import 'package:yah_app/styles/style.dart';
 import '../../providers/service_provider.dart';
-// import '../../styles/provider_passboard.dart';
-
-import '../alhayan content/kaian__screen.dart';
-
-// import '../../styles/tolls.dart';
-// import '../alhayan content/kaian__screen.dart';
-
-// import 'package:yah_app/styles/style.dart';
 
 class ShowService extends StatefulWidget {
   static const routeName = 'servece_screen';
@@ -41,11 +32,10 @@ class _Screenkhadmatana extends State<ShowService> {
     });
 
     super.initState();
-    fetchData()
-        .then((value) => Future.delayed(Duration(milliseconds: 100)).then((_) {
+    fetchData().then(
+        (value) => Future.delayed(const Duration(milliseconds: 100)).then((_) {
               Provider.of<ServicesProvider>(context, listen: false)
                   .setValueLoading(true);
-              print("Okkkkkkkkkkk");
             }));
   }
 
@@ -66,18 +56,6 @@ class _Screenkhadmatana extends State<ShowService> {
   }
 
   @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   // mylist.clear();
-  // setState(() {
-  //   Provider.of<ServicesProvider>(context, listen: false)
-  //       .setValueLoading(false);
-  // });
-  // ServicesProvider myProvider = dependOnInheritedWidgetOfExactType<ServicesProvider>();
-  // (myProvider as ServicesProvider).setValueLoading(false);
-  // }
-
-  @override
   void dispose() {
     if (mounted) {}
     super.dispose();
@@ -95,19 +73,15 @@ class _Screenkhadmatana extends State<ShowService> {
 
   @override
   Widget build(BuildContext context) {
-    // final mealId = ModalRoute.of(context)?.settings.arguments;
-    // final selectedMeal = DUMMY_MEALS.firstWhere((meal) => mealId == meal.id);
     var size = MediaQuery.of(context).size;
-    // final DataProvider = Provider.of<ServicesProvider>(context);
-    // final dataServices = DataProvider.Data;
 
-    // CollectionReference ref = FirebaseFirestore.instance.collection("service");
     String cutDescription(String desc) {
       return desc.length > 70
           ? desc.replaceRange(70, desc.length, '...')
           : desc;
     }
 
+    // ignore: deprecated_member_use
     return WillPopScope(
         onWillPop: () async {
           return await Navigator.pushReplacement(
@@ -176,7 +150,7 @@ class _Screenkhadmatana extends State<ShowService> {
                     ? AnimationConfiguration.synchronized(
                         duration: const Duration(milliseconds: 700),
                         child: SlideAnimation(
-                          curve: Curves.slowMiddle,
+                          curve: Curves.ease,
                           child: FadeInAnimation(
                             child: ListView.builder(
                               padding: const EdgeInsets.all(0),
@@ -184,96 +158,83 @@ class _Screenkhadmatana extends State<ShowService> {
                               itemBuilder: (ctx, index) {
                                 return AnimationConfiguration.staggeredList(
                                   position: index,
-                                  duration: const Duration(milliseconds: 700),
+                                  duration: const Duration(milliseconds: 400),
                                   child: SlideAnimation(
                                     delay: const Duration(milliseconds: 200),
-                                    verticalOffset: 50.0,
-                                    child: FadeInAnimation(
-                                      delay: const Duration(milliseconds: 200),
-                                      child: Container(
-                                        margin: const EdgeInsets.only(
-                                            right: 5,
-                                            left: 5,
-                                            top: 5,
-                                            bottom: 7),
-                                        child: InkWell(
-                                          onTap: () {
-                                            Provider.of<ServicesProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .showService(context, index);
-                                          },
+                                    verticalOffset: 30.0,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(15),
-                                          splashColor: primary,
-                                          child: Card(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15)),
-                                            elevation: 10,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(15),
-                                                    topRight:
-                                                        Radius.circular(15),
-                                                  ),
-                                                  child: Container(
-                                                    width: double.infinity,
-                                                    height: size.height / 4,
-                                                    decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                      image:
-                                                          CachedNetworkImageProvider(
-                                                              mylist[index]
-                                                                  ['imgUrl']),
-                                                      fit: BoxFit.fill,
-                                                      // dataServices[index].imgUrl,
-                                                    )),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        // mylist[index].title,
-                                                        // data[index].title,
-                                                        mylist[index]['title'],
-                                                        style: header2,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Text(
-                                                        cutDescription(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.5),
+                                              blurRadius: 10,
+                                              offset: const Offset(0, 5),
+                                            )
+                                          ]),
+                                      margin: const EdgeInsets.only(
+                                          right: 5, left: 5, top: 5, bottom: 7),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Provider.of<ServicesProvider>(context,
+                                                  listen: false)
+                                              .showService(context, index);
+                                        },
+                                        borderRadius: BorderRadius.circular(15),
+                                        splashColor: primary,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(15),
+                                                topRight: Radius.circular(15),
+                                              ),
+                                              child: Container(
+                                                width: double.infinity,
+                                                height: size.height / 4,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image:
+                                                        CachedNetworkImageProvider(
                                                             mylist[index]
-                                                                ['paragraph']),
-                                                        // data[index]
-                                                        //         .paragtaph
-                                                        //         .split("_")[0] +
-                                                        //     "...",
-                                                        style: paragraph,
-                                                      ),
-                                                      const SizedBox(
-                                                          height: 10),
-                                                    ],
+                                                                ['imgUrl']),
+                                                    fit: BoxFit.fill,
                                                   ),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    mylist[index]['title'],
+                                                    style: header2,
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  Text(
+                                                    cutDescription(mylist[index]
+                                                        ['paragraph']),
+                                                    style: paragraph,
+                                                  ),
+                                                  const SizedBox(height: 10),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
