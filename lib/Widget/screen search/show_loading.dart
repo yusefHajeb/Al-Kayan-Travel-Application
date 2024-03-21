@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import 'lodaing_widget.dart';
 
 class ShowSktolin extends StatelessWidget {
@@ -19,7 +18,6 @@ class ShowSktolin extends StatelessWidget {
         ),
         const Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(
                 child: Column(

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Bouncing extends StatefulWidget {
+class BouncingButton extends StatefulWidget {
   final Widget child;
   final VoidCallback onPress;
 
-  const Bouncing({required this.child, Key? key, required this.onPress})
+  const BouncingButton({required this.child, Key? key, required this.onPress})
       : super(key: key);
 
   @override
-  _BouncingState createState() => _BouncingState();
+  _BouncingButtonState createState() => _BouncingButtonState();
 }
 
-class _BouncingState extends State<Bouncing>
+class _BouncingButtonState extends State<BouncingButton>
     with SingleTickerProviderStateMixin {
   late double _scale;
   late AnimationController _controller;

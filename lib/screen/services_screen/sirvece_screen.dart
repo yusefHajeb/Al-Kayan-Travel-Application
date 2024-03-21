@@ -148,18 +148,16 @@ class _Screenkhadmatana extends State<ShowService> {
                                                 topLeft: Radius.circular(15),
                                                 topRight: Radius.circular(15),
                                               ),
-                                              child: Container(
-                                                width: double.infinity,
-                                                height: size.height / 4,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image:
-                                                        CachedNetworkImageProvider(
-                                                            mylist[index]
-                                                                ['imgUrl']),
-                                                    fit: BoxFit.fill,
-                                                  ),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: mylist[index]
+                                                    ['imgUrl'],
+                                                placeholder: (context, url) =>
+                                                    const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
                                                 ),
+                                                width: double.infinity,
                                               ),
                                             ),
                                             Padding(

@@ -1,12 +1,13 @@
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:yah_app/Widget/kayancontent/appbar_contant.dart';
 import 'package:yah_app/styles/style.dart';
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
 
 // ignore: must_be_immutable
-class ScreenMedia extends StatelessWidget {
-  ScreenMedia({Key? key}) : super(key: key);
+class AccountsPage extends StatelessWidget {
+  AccountsPage({Key? key}) : super(key: key);
   List myIcons = [
     "assest/icon/icons8-facebook-64.png",
     "assest/icon/icons8-twitter-64.png",
@@ -30,12 +31,12 @@ class ScreenMedia extends StatelessWidget {
 
     //sms
     Uri(scheme: 'sms', path: '+967771274299', queryParameters: <String, String>{
-      'body': Uri.encodeComponent('Hello'),
+      'body': Uri.encodeComponent('مرحبا مكتب الكيان'),
     }),
     //whatsapp
 
     Uri.parse(
-        "whatsapp://send?phone=+967771274299&text=${Uri.encodeFull('Hello')}"),
+        "whatsapp://send?phone=+967771274299&text=${Uri.encodeFull('السلام عليكم')}"),
 
     //phone
     Uri(
@@ -59,17 +60,10 @@ class ScreenMedia extends StatelessWidget {
     int columnCount = 3;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primary,
-        title: Text(
-          "حساباتنا ",
-          style: header2,
-        ),
-        centerTitle: true,
-      ),
       body: Flex(
         direction: Axis.vertical,
         children: <Widget>[
+          AppBarHeadder(size: MediaQuery.of(context).size, title: "حساباتنا"),
           Expanded(
             child: AnimationLimiter(
               child: GridView.count(
@@ -88,7 +82,7 @@ class ScreenMedia extends StatelessWidget {
                         duration: const Duration(milliseconds: 900),
                         curve: Curves.fastLinearToSlowEaseIn,
                         child: FadeInAnimation(
-                          child: Bouncing(
+                          child: BouncingButton(
                             onPress: () {},
                             child: InkWell(
                               onTap: () {
@@ -231,14 +225,14 @@ Future<void> myDialoge(BuildContext ctx) async {
                 children: [
                   Container(
                       margin: const EdgeInsets.only(left: 6),
-                      child: Text(
+                      child: const Text(
                         '', // "771274299",
                         style: TextStyle(
                             color: Colors.blueAccent,
                             fontSize: 12,
                             fontWeight: FontWeight.bold),
                       )),
-                  Icon(
+                  const Icon(
                     Icons.link,
                     size: 19,
                     color: Colors.black54,

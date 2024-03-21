@@ -10,7 +10,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:yah_app/Widget/custom_clipper.dart';
 import 'package:yah_app/providers/service_provider.dart';
 import 'package:yah_app/Widget/home_screen/mysnackbar.dart';
-import 'package:yah_app/screen/services_screen/widget/scale_transition.dart';
+import 'package:yah_app/Widget/scale_transition.dart';
 import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/providers/provider_passboard.dart';
 import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ))),
-        Bouncing(
+        BouncingButton(
           onPress: () {},
           child: Container(
             width: 370,
@@ -305,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               press: () {
                 _focusNode.unfocus();
-                Navigator.push(context, MySlideTransition(ScreenMedia()));
+                Navigator.push(context, MySlideTransition(AccountsPage()));
               },
             ),
             CategoryCount(

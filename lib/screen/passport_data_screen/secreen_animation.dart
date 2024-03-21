@@ -6,7 +6,7 @@ import 'package:yah_app/Widget/kayancontent/appbar_contant.dart';
 import 'package:yah_app/providers/provider_passboard.dart';
 import 'package:provider/provider.dart';
 
-import '../../Widget/screen search/loading.dart';
+import '../../Widget/screen search/passbord_details.dart';
 import '../../Widget/screen search/show_loading.dart';
 
 class SecondScreen extends StatefulWidget {
@@ -191,7 +191,7 @@ class _SecondePage extends State<SecondPage> {
                 : SizedBox(
                     height: size.height / 1.5,
                     child: _isCheck
-                        ? DataVisa(filterData: _resonseData, size: size)
+                        ? PassbordDetails(filterData: _resonseData, size: size)
                         : Center(
                             child: AnimatedTextKit(
                               animatedTexts: [

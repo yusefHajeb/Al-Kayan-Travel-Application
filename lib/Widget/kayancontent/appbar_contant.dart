@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yah_app/styles/style.dart';
 
-import '../../screen/Hom Screen/home_screen.dart';
-
 class AppBarHeadder extends StatelessWidget {
   const AppBarHeadder({
     super.key,
@@ -17,7 +15,7 @@ class AppBarHeadder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
       Container(
-        height: size.height / 4.5,
+        height: size.height / 5.2,
         width: double.infinity,
         child: Image.asset(
           "assest/image/top_image.png",
@@ -35,8 +33,7 @@ class AppBarHeadder extends StatelessWidget {
         right: 20,
         child: IconButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => const HomeScreen()));
+            Navigator.of(context).pop();
           },
           icon: const Icon(
             Icons.arrow_back_ios,

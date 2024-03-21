@@ -82,22 +82,7 @@ class PassportProvider with ChangeNotifier {
 
   List<Passbord> listClint = [];
 
-  List<Passbord> listData = [
-    Passbord(
-        numberPassbord: "123456789",
-        state: "المعامله جاهزه",
-        name: "احمد علي قاسم",
-        phone: "777777777",
-        another: "المعامله في السفاره  في حال وصولها ستصلك رساله نصيه",
-        image: "assest/image/me.jpg"),
-    Passbord(
-        numberPassbord: "1111111111",
-        state: "المعامله مازالت في السفاره",
-        name: "يوسف عبدالملك حاجب",
-        phone: "777777777",
-        another: "المعامله في السفاره  في حال وصولها ستصلك رساله نصيه",
-        image: "assest/image/me.jpg"),
-  ];
+  List<Passbord> listData = [];
 
   bool searchList(String searchNumber) {
     for (var item in listClint) {

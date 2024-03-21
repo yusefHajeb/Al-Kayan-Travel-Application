@@ -44,15 +44,13 @@ class _PageService extends State<PageService> {
                   Container(
                     height: size.height / 3,
                     width: double.infinity,
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: CachedNetworkImageProvider(
-                              serveceDetails[sectionIndex]['imgUrl']),
-                          fit: BoxFit.cover,
-                        ),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.fill,
+                      imageUrl: serveceDetails[sectionIndex]['imgUrl'],
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(),
                       ),
+                      width: double.infinity,
                     ),
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -187,7 +185,7 @@ class _PageService extends State<PageService> {
                                       child: FadeInAnimation(
                                         delay:
                                             const Duration(microseconds: 200),
-                                        child: Bouncing(
+                                        child: BouncingButton(
                                             onPress: () {},
                                             child: (CardBottom(
                                                 sectionIndex: index))),
@@ -245,6 +243,9 @@ class CardBottom extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Container(
+                // width: double.infinity,
+                // height: 200,
+
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: const Color.fromARGB(255, 40, 39, 37)),
@@ -252,15 +253,14 @@ class CardBottom extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                       bottomRight: Radius.circular(15),
                       topRight: Radius.circular(15)),
-                  child: Container(
-                    // width: 100,
-                    // height: 100,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                          serveceDetails[sectionIndex]['imgUrl']),
-                      fit: BoxFit.fill,
-                    )),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.fitHeight,
+                    height: 200,
+                    imageUrl: serveceDetails[sectionIndex]['imgUrl'],
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    // width: double.infinity,
                   ),
                 ),
               ),
