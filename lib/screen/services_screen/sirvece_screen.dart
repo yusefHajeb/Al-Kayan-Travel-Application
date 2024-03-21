@@ -84,11 +84,14 @@ class _Screenkhadmatana extends State<ShowService> {
           : desc;
     }
 
-    // ignore: deprecated_member_use
     return WillPopScope(
         onWillPop: () async {
-          return await Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+          return await Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const HomeScreen(),
+              ),
+              (route) => false);
         },
         child: Scaffold(
           backgroundColor: Colors.white,

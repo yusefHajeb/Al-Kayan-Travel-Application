@@ -102,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     if (mounted) {
+      _loading = false;
       super.dispose();
     }
 
