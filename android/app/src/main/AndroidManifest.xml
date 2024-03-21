@@ -16,7 +16,7 @@
 </queries>
      <!-- +====== -->
    <application
-        android:label="yah_app"
+        android:label="مكتب الكيان"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
