@@ -6,13 +6,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yah_app/providers/service_provider.dart';
 import 'package:yah_app/screen/services_screen/sirvec_page.dart';
 import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
-import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
 import 'package:yah_app/screen/splash%20screen/splash_screen.dart';
 import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/providers/provider_passboard.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:yah_app/styles/style.dart';
+
+import 'screen/buttons_alkyan_branches_screen/Buttons_kyan_branches.dart';
 
 Image myImage = Image.asset("assets/image/me.jpg");
 int _selectedIndex = 0;
@@ -60,7 +61,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => const SplashScreen(),
-          Screen2.routeName: (context) => const Screen2(),
+          ButtonsKyanBranchesAndPartnersScreen.routeName: (context) =>
+              const ButtonsKyanBranchesAndPartnersScreen(),
           ShowService.routeName: (context) => const ShowService(),
           PageService.routeName: (context) => const PageService(),
         });
@@ -88,6 +90,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Screen2();
+    return const ButtonsKyanBranchesAndPartnersScreen();
   }
 }

@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -8,13 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:yah_app/Widget/custom_clipper.dart';
+import 'package:yah_app/core/extension.dart';
 import 'package:yah_app/providers/service_provider.dart';
 import 'package:yah_app/Widget/home_screen/mysnackbar.dart';
 import 'package:yah_app/Widget/scale_transition.dart';
 import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/providers/provider_passboard.dart';
+import 'package:yah_app/screen/buttons_alkyan_branches_screen/buttons_kyan_branches.dart';
 import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
-import 'package:yah_app/screen/alhayan%20content/kaian__screen.dart';
 import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
 import '../../Widget/AnimaiWidget/slide_secreen.dart';
@@ -28,7 +27,8 @@ int _currentPage = 0;
 // void select_screen(BuildContext ctx, int tab) {}
 
 void selectScreen2(BuildContext ctx, int index) {
-  Navigator.of(ctx).pushNamed(Screen2.routeName, arguments: index);
+  Navigator.of(ctx).pushNamed(ButtonsKyanBranchesAndPartnersScreen.routeName,
+      arguments: index);
 }
 
 class HomeScreen extends StatefulWidget {
@@ -43,13 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
   late StreamSubscription subscription;
   late StreamSubscription internetSubscription;
   bool hasInternet = false;
-  bool _loading = false;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // to close Kyboarde
   final FocusNode _focusNode = FocusNode();
   TextEditingController numPass = TextEditingController()..text = "";
   var key = GlobalKey<FormState>();
-  List listImage = [];
+  List? listImage = [];
 
   Future<void> getImage() async {
     CollectionReference ref =
@@ -59,11 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (querySnapshot.docs.isNotEmpty) {
       for (var doc in querySnapshot.docs) {
-        listImage.add(doc.data());
+        setState(() {
+          listImage?.add(doc.data());
+        });
       }
-      setState(() {
-        _loading = true;
-      });
     }
   }
 
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     key = GlobalKey<FormState>();
     setNumPass();
-    getImage().then((value) => _loading = true);
+    getImage();
     internetSubscription =
         InternetConnectionChecker().onStatusChange.listen((status) {
       final hasInternet = status == InternetConnectionStatus.connected;
@@ -102,7 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     if (mounted) {
-      _loading = false;
       super.dispose();
     }
 
@@ -121,6 +119,12 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       body: Flex(direction: Axis.vertical, children: <Widget>[
+        context.responsive(
+          Container(),
+          md: Container(),
+          sm: Container(),
+          xl: Container(),
+        ),
         Expanded(
             flex: 4,
             child: ClipPath(
@@ -218,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 padding: const EdgeInsets.all(0),
                 child: PageView.builder(
-                    itemCount: listImage.length,
+                    itemCount: listImage?.length ?? 4,
                     controller: _pageController,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -263,7 +267,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               press: () {
                 _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+                Navigator.push(
+                    context,
+                    ScaleTransitionScreen(
+                        const ButtonsKyanBranchesAndPartnersScreen()));
                 Provider.of<ProviderService>(context, listen: false)
                     .setNumberScreen(0.toString());
               },
@@ -277,7 +284,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               press: () {
                 _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(Screen2()));
+                Navigator.push(
+                    context,
+                    ScaleTransitionScreen(
+                        const ButtonsKyanBranchesAndPartnersScreen()));
                 Provider.of<ProviderService>(context, listen: false)
                     .setNumberScreen(2.toString());
               },
@@ -291,7 +301,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               press: () {
                 _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+                Navigator.push(
+                    context,
+                    ScaleTransitionScreen(
+                        const ButtonsKyanBranchesAndPartnersScreen()));
                 //the provider work number spacitial number screen || in past was send number by argument and arrive by setting arggumrnt in noviagtion
                 Provider.of<ProviderService>(context, listen: false)
                     .setNumberScreen(1.toString());
@@ -331,7 +344,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               press: () {
                 _focusNode.unfocus();
-                Navigator.push(context, ScaleTransitionScreen(const Screen2()));
+                Navigator.push(
+                    context,
+                    ScaleTransitionScreen(
+                        const ButtonsKyanBranchesAndPartnersScreen()));
                 Provider.of<ProviderService>(context, listen: false)
                     .setNumberScreen(0.toString());
               },
@@ -357,7 +373,8 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         return Transform.rotate(
             angle: -3.14 * value,
-            child: _crouseCard(listImage[index]["imageUrl"].toString(), s));
+            child:
+                _crouseCard(listImage?[index]["imageUrl"].toString() ?? "", s));
       },
     );
   }

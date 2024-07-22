@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
+
+import '../screen/home_screen/home_screen.dart';
 
 class MyCustomWidget extends StatefulWidget {
   const MyCustomWidget({Key? key}) : super(key: key);

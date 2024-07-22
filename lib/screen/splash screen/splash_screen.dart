@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:yah_app/screen/Hom%20Screen/home_screen.dart';
+import 'package:yah_app/screen/home_screen/home_screen.dart';
 import 'package:yah_app/styles/style.dart';
 
 import '../../dataBase/button_slide.dart';

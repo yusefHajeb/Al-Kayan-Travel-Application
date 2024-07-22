@@ -1,27 +1,21 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
-// import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:yah_app/Widget/kayancontent/loadingshow_servece.dart';
-
-// import 'package:yah_app/screen/screen_search/secreen_animation.dart';
 import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/styles/style.dart';
-
 import '../../Widget/kayancontent/appbar_contant.dart';
 
-class Screen2 extends StatefulWidget {
+class ButtonsKyanBranchesAndPartnersScreen extends StatefulWidget {
   static const routeName = 'screen2 ';
 
-  const Screen2({Key? key}) : super(key: key);
+  const ButtonsKyanBranchesAndPartnersScreen({Key? key}) : super(key: key);
   @override
-  State<Screen2> createState() => _AlkianScreen();
+  State<ButtonsKyanBranchesAndPartnersScreen> createState() => _AlkianScreen();
 }
 
-class _AlkianScreen extends State<Screen2> {
+class _AlkianScreen extends State<ButtonsKyanBranchesAndPartnersScreen> {
   late bool _isLoding;
   @override
   void initState() {
