@@ -13,13 +13,13 @@ import 'package:yah_app/Widget/scale_transition.dart';
 import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/providers/provider_passboard.dart';
 import 'package:yah_app/screen/buttons_alkyan_branches_screen/buttons_kyan_branches.dart';
-import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
+import 'package:yah_app/screen/services_screen/our_service_screen.dart';
 import 'package:yah_app/Widget/card_widget/catagory_curd.dart';
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
 import '../../Widget/AnimaiWidget/slide_secreen.dart';
 import '../../styles/style.dart';
 
-import '../about screen/account_screen.dart';
+import '../accounts_screen' '/account_screen.dart';
 import '../passport_data_screen/secreen_animation.dart';
 import 'package:provider/provider.dart';
 
@@ -259,6 +259,18 @@ class _HomeScreenState extends State<HomeScreen> {
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) => [
             CategoryCount(
+              titleCurd: "خدماتنا",
+              myIcon: const Icon(
+                Icons.local_mall_sharp,
+                size: 34,
+              ),
+              press: () {
+                Provider.of<ServicesProvider>(context, listen: false)
+                    .setValueLoading(false);
+                Navigator.pushNamed(context, OurSreviceScreen.routeName);
+              },
+            ),
+            CategoryCount(
               titleCurd: " كيان",
               myIcon: const Icon(
                 Icons.diamond,
@@ -311,31 +323,6 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             CategoryCount(
-              titleCurd: "حساباتنا",
-              myIcon: const Icon(
-                Icons.local_phone_outlined,
-                size: 34,
-                color: Color.fromARGB(255, 22, 51, 26),
-              ),
-              press: () {
-                _focusNode.unfocus();
-                Navigator.push(context, MySlideTransition(AccountsPage()));
-              },
-            ),
-            CategoryCount(
-              titleCurd: "خدماتنا",
-              myIcon: const Icon(
-                Icons.local_mall_sharp,
-                size: 34,
-              ),
-              press: () {
-                Provider.of<ServicesProvider>(context, listen: false)
-                    .setValueLoading(false);
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (_) => const ShowService()));
-              },
-            ),
-            CategoryCount(
               titleCurd: " كيان",
               myIcon: const Icon(
                 Icons.diamond,
@@ -350,6 +337,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         const ButtonsKyanBranchesAndPartnersScreen()));
                 Provider.of<ProviderService>(context, listen: false)
                     .setNumberScreen(0.toString());
+              },
+            ),
+            CategoryCount(
+              titleCurd: "حساباتنا",
+              myIcon: const Icon(
+                Icons.local_phone_outlined,
+                size: 34,
+                color: Color.fromARGB(255, 22, 51, 26),
+              ),
+              press: () {
+                _focusNode.unfocus();
+                Navigator.push(context, MySlideTransition(AccountsScreen()));
               },
             ),
           ].elementAt(index),

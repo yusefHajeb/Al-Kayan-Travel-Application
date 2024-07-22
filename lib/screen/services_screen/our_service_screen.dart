@@ -9,17 +9,17 @@ import 'package:yah_app/styles/style.dart';
 import '../../providers/service_provider.dart';
 import '../home_screen/home_screen.dart';
 
-class ShowService extends StatefulWidget {
+class OurSreviceScreen extends StatefulWidget {
   static const routeName = 'servece_screen';
 
   static const roteName = "Screen Home";
 
-  const ShowService({Key? key}) : super(key: key);
+  const OurSreviceScreen({Key? key}) : super(key: key);
   @override
-  State<ShowService> createState() => _Screenkhadmatana();
+  State<OurSreviceScreen> createState() => _Screenkhadmatana();
 }
 
-class _Screenkhadmatana extends State<ShowService> {
+class _Screenkhadmatana extends State<OurSreviceScreen> {
   @override
   void initState() {
     setState(() {

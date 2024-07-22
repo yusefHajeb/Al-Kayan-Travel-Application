@@ -1,7 +1,7 @@
 // import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:yah_app/Widget/scale_transition.dart';
-import '../screen/services_screen/sirvec_page.dart';
+import '../screen/services_screen/content_service_screen.dart';
 
 class DataService {
   final String title;
@@ -49,6 +49,7 @@ class ServicesProvider with ChangeNotifier {
   void showService(BuildContext ctx, int index) {
     setIndexScreen(index);
     setValueLoading(false);
-    Navigator.pushReplacement(ctx, ScaleTransitionScreen2(const PageService()));
+    Navigator.pushReplacement(
+        ctx, ScaleTransitionScreen2(const ContentServiceScreen()));
   }
 }

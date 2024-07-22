@@ -2,25 +2,25 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
-import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
+import 'package:yah_app/screen/services_screen/our_service_screen.dart';
 
 import '../../Widget/AnimaiWidget/BouncingButton.dart';
 import 'package:yah_app/styles/style.dart';
 
 import '../../providers/service_provider.dart';
 
-class PageService extends StatefulWidget {
+class ContentServiceScreen extends StatefulWidget {
   static const routeName = 'show_servece_index';
 
-  const PageService({Key? key}) : super(key: key);
+  const ContentServiceScreen({Key? key}) : super(key: key);
   @override
-  State<PageService> createState() => _PageService();
+  State<ContentServiceScreen> createState() => _PageService();
 }
 
 List serveceDetails = [];
 
 @override
-class _PageService extends State<PageService> {
+class _PageService extends State<ContentServiceScreen> {
   @override
   Widget build(BuildContext context) {
     serveceDetails = Provider.of<ServicesProvider>(context, listen: false)
@@ -29,8 +29,8 @@ class _PageService extends State<PageService> {
     final int sectionIndex = Provider.of<ServicesProvider>(context).getIndex();
     return WillPopScope(
       onWillPop: () async {
-        return await Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => const ShowService()));
+        return await Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (_) => const OurSreviceScreen()));
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -66,7 +66,7 @@ class _PageService extends State<PageService> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => const ShowService()));
+                                builder: (_) => const OurSreviceScreen()));
                       },
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all(
