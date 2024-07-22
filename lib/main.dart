@@ -4,8 +4,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yah_app/providers/service_provider.dart';
-import 'package:yah_app/screen/services_screen/sirvec_page.dart';
-import 'package:yah_app/screen/services_screen/sirvece_screen.dart';
+import 'package:yah_app/screen/services_screen/content_service_screen.dart';
+import 'package:yah_app/screen/services_screen/our_service_screen.dart';
 import 'package:yah_app/screen/splash%20screen/splash_screen.dart';
 import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/providers/provider_passboard.dart';
@@ -63,8 +63,9 @@ class MyApp extends StatelessWidget {
           '/': (context) => const SplashScreen(),
           ButtonsKyanBranchesAndPartnersScreen.routeName: (context) =>
               const ButtonsKyanBranchesAndPartnersScreen(),
-          ShowService.routeName: (context) => const ShowService(),
-          PageService.routeName: (context) => const PageService(),
+          OurSreviceScreen.routeName: (context) => const OurSreviceScreen(),
+          ContentServiceScreen.routeName: (context) =>
+              const ContentServiceScreen(),
         });
   }
 
