@@ -15,11 +15,13 @@
   </intent>
 </queries>
      <!-- +====== -->
-   <application
+   <application    
         android:label="مكتب الكيان"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        android:requestLegacyExternalStorage="true"
         <activity
+        
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"

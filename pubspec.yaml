@@ -32,22 +32,22 @@ dependencies:
     sdk: flutter
   # url_launcher: ^6.1.10 
   # curved_navigation_bar: ^1.0.1
-  progress_state_button: ^1.0.2
+  # progress_state_button: ^1.0.2
   # slideButton 
   slider_button: any
   # is animation to list
   flutter_staggered_animations:
   # naimation Text
   animated_text_kit:
-  google_fonts: ^3.0.1
+  # google_fonts: ^3.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  google_nav_bar: ^5.0.6
+  # cupertino_icons: ^1.0.2
+  # google_nav_bar: ^5.0.6
   flutter_localizations:
     sdk: flutter
   animations: ^2.0.2
-  fluttertoast: ^8.1.2
+  # fluttertoast: ^8.1.2
   flare_flutter: ^3.0.2
   # flutter_svg: ^1.0.3
 
@@ -64,6 +64,9 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter_svg: ^1.1.6
   cloud_firestore: ^4.15.8
+  image_picker: ^1.1.2
+  firebase_storage: ^11.7.7
+  flutter_local_notifications: ^17.2.2
   # firebase_storage: ^11.1.1
   # slimy_card: ^1.0.3
   # url to open any link 
