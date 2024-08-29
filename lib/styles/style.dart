@@ -46,3 +46,10 @@ var paragraph2 = const TextStyle(
   fontWeight: FontWeight.w400,
   color: bBackDark,
 );
+
+const TextStyle fieldStyle = TextStyle(
+  fontSize: 14,
+  fontFamily: 'Almarai',
+  fontWeight: FontWeight.w400,
+  color: ktextColor,
+);
