@@ -33,14 +33,14 @@ TextStyle card = const TextStyle(
   color: Color.fromARGB(255, 56, 24, 2),
 );
 
-TextStyle header2 = const TextStyle(
+const header2 = TextStyle(
   fontSize: 16,
   fontFamily: 'Almarai',
   fontWeight: FontWeight.bold,
   color: bBackDark,
 );
 
-var paragraph2 = const TextStyle(
+const paragraph2 = TextStyle(
   fontSize: 16,
   fontFamily: 'Almarai',
   fontWeight: FontWeight.w400,

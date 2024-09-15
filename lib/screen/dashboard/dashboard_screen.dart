@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:yah_app/Widget/my_text_from_filed.dart';
+import 'package:yah_app/screen/dashboard/add_service_dashboard.dart';
+import 'package:yah_app/screen/dashboard/add_service_screen.dart';
 import 'package:yah_app/screen/dashboard/add_user_passport.dart';
+import 'package:yah_app/styles/style.dart';
 
 // ignore: must_be_immutable
 class DashboardScreen extends StatelessWidget {
@@ -15,50 +16,45 @@ class DashboardScreen extends StatelessWidget {
         appBar: AppBar(
             title: const Text('Dashboard'),
             bottom: const TabBar(
+              physics: BouncingScrollPhysics(),
               indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(width: 4, color: Colors.red),
+                  borderSide: BorderSide(width: 4, color: primary),
                   insets: EdgeInsets.symmetric(horizontal: 16.0)),
               indicatorWeight: 4,
               indicatorPadding: EdgeInsets.zero,
-              indicatorColor: Colors.red,
+              indicatorColor: primary,
               labelColor: Colors.black,
-              labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              labelStyle: header2,
               unselectedLabelColor: Colors.grey,
-              unselectedLabelStyle: TextStyle(
-                fontSize: 16,
-              ),
+              unselectedLabelStyle: paragraph2,
               tabs: [
                 Tab(
-                  icon: Icon(Icons.directions_car),
                   text: 'إضافة معاملة',
                 ),
                 Tab(
-                  icon: Icon(Icons.directions_transit),
                   text: 'إضافة خدمة ',
                 ),
                 Tab(
-                  icon: Icon(Icons.directions_bike),
                   text: 'إضافة إعلان',
                 ),
               ],
             )),
-        body: TabBarView(
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+        body: const TabBarView(
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: [
-            const AnimatedSwitcher(
+            AnimatedSwitcher(
+              duration: Duration(milliseconds: 800),
+              child: UserDetailsTab(),
+            ),
+            AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
-              child: UserDetailsScreen(),
+              child: AddServiceTab(),
             ),
-            InkWell(
-              onTap: () async {
-                final image =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
-                if (image == null) return;
-              },
-              child: Text('upload'),
+            AnimatedSwitcher(
+              duration: Duration(milliseconds: 300),
+              child: AdcDashboardTab(),
             ),
-            AddAdver(),
           ],
         ),
       ),
@@ -78,121 +74,5 @@ class DashboardScreen extends StatelessWidget {
 
   void selectScreen3(BuildContext ctx, int index) {
     Navigator.of(ctx).pushNamed('/x3');
-  }
-}
-
-class AddDeal extends StatelessWidget {
-  const AddDeal({super.key});
-
-  static const String routeName = '/add-deal';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('إضافة معاملة'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'عنوان المعاملة',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'وصف المعاملة',
-                border: OutlineInputBorder(),
-              ),
-              maxLines: 3,
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('إضافة'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class AddAdver extends StatefulWidget {
-  const AddAdver({super.key});
-
-  static const String routeName = '/add-adver';
-
-  @override
-  State<AddAdver> createState() => _AddAdverState();
-}
-
-class _AddAdverState extends State<AddAdver> {
-  final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
-
-  @override
-  void dispose() {
-    _titleController.dispose();
-    _descriptionController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('إضافة إعلان'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              MyTextFormField(
-                hint: 'اسم الاعلان',
-                controller: _titleController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'الرجاء إدخال اسم الاعلان';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'وصف الإعلان',
-                  border: OutlineInputBorder(),
-                ),
-                controller: _descriptionController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'الرجاء إدخال وصف الإعلان';
-                  }
-                  return null;
-                },
-                maxLines: 3,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.of(context).pop();
-                  }
-                },
-                child: const Text('إضافة'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:yah_app/screen/navigation/main_wrapper.dart';
 import 'package:yah_app/styles/style.dart';
-
 import '../../dataBase/button_slide.dart';
-import '../dashboard/dashboard_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -21,7 +20,7 @@ class SplateScreenState extends State<SplashScreen>
   void initState() {
     Timer(const Duration(seconds: 6), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const DashboardScreen()));
+          MaterialPageRoute(builder: (_) => const MainWrapper()));
     });
     scaleController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500))
