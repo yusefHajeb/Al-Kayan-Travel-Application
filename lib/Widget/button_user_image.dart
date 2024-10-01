@@ -30,7 +30,7 @@ class ButtonChooseImage extends StatelessWidget {
                         height: 300,
                         File(provider.imageFile?.path ?? '')),
                   )
-                : const Text('أضف صورة', style: fieldStyle),
+                : const Text('أضف صورة', style: card),
           ),
         ),
         Positioned(

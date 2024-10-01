@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yah_app/Widget/home_screen/mysnackbar.dart';
 import 'package:yah_app/Widget/my_dropdown_field.dart';
 import 'package:yah_app/Widget/my_text_from_filed.dart';
 import 'package:yah_app/providers/dashboard_provider.dart';
@@ -9,8 +10,8 @@ import 'package:yah_app/providers/form_provider.dart';
 import '../../Widget/button_user_image.dart';
 import '../../Widget/my_button.dart';
 
-class UserDetailsTab extends StatelessWidget {
-  const UserDetailsTab({super.key});
+class UserDetAddUserPassportScreen extends StatelessWidget {
+  const UserDetAddUserPassportScreen({super.key});
 
   static const String routeName = '/add-service';
 
@@ -18,8 +19,8 @@ class UserDetailsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<FormProvider>(context);
 
-    return Scaffold(body:
-        Consumer<DashboardProvider>(builder: (context, formProvider, child) {
+    return Scaffold(
+        body: Consumer<FormProvider>(builder: (context, formProvider, child) {
       return formProvider.isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
@@ -92,11 +93,15 @@ class UserDetailsTab extends StatelessWidget {
                     MyButton(
                       onPressed: () {
                         provider.validate();
-                        if (provider.isValid) {
+                        if (provider.isValid &&
+                            provider.imageFile?.path != null) {
                           provider.sendPasspoardDataToFirestore(
                               FirebaseFirestore.instance
                                   .collection('Customers')
                                   .doc());
+                        } else {
+                          mySnackBar(ScaffoldMessenger.of(context),
+                              'يرجى اختيار صوره للجواز');
                         }
                       },
                       buttonName: 'إضافة',

@@ -20,7 +20,7 @@ class MyButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: StadiumBorder(side: BorderSide(color: backgroundColor!)),
         backgroundColor: backgroundColor,
-        minimumSize: const Size.fromHeight(50),
+        minimumSize: const Size.fromHeight(10),
         elevation: 4,
         shadowColor: shadowColor,
         textStyle: const TextStyle(fontSize: 20),

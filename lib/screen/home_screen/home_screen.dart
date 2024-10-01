@@ -58,9 +58,15 @@ class _HomeScreenState extends State<HomeScreen> {
     QuerySnapshot querySnapshot = await ref.get();
 
     if (querySnapshot.docs.isNotEmpty) {
+      final tempList = <dynamic>[];
+
       for (var doc in querySnapshot.docs) {
+        tempList.add(doc.data());
+      }
+
+      if (mounted) {
         setState(() {
-          listImage?.add(doc.data());
+          listImage = tempList;
         });
       }
     }

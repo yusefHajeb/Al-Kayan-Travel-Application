@@ -26,13 +26,6 @@ TextStyle paragraph = const TextStyle(
   color: ktextColor,
 );
 
-TextStyle card = const TextStyle(
-  fontSize: 11,
-  fontFamily: 'Almarai',
-  fontWeight: FontWeight.w400,
-  color: Color.fromARGB(255, 56, 24, 2),
-);
-
 const header2 = TextStyle(
   fontSize: 16,
   fontFamily: 'Almarai',
@@ -40,6 +33,12 @@ const header2 = TextStyle(
   color: bBackDark,
 );
 
+const card = TextStyle(
+  fontSize: 14,
+  fontFamily: 'Almarai',
+  fontWeight: FontWeight.bold,
+  color: bBackDark,
+);
 const paragraph2 = TextStyle(
   fontSize: 16,
   fontFamily: 'Almarai',

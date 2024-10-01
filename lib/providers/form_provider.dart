@@ -14,6 +14,7 @@ class FormProvider extends ChangeNotifier {
   final TextEditingController _anotherNoteController = TextEditingController();
   final TextEditingController _serviceName = TextEditingController();
   final TextEditingController _serviceDescribtion = TextEditingController();
+  bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   final _formKeyService = GlobalKey<FormState>();
   String? _statusTrans;
@@ -36,6 +37,11 @@ class FormProvider extends ChangeNotifier {
 
   void setStatusTrans(String val) {
     _statusTrans = val;
+  }
+
+  void setLoading(bool value) {
+    isLoading = value;
+    notifyListeners();
   }
 
   Future<void> pickImage(
@@ -88,6 +94,11 @@ class FormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void validateAddService() {
+    _isValid = _formKeyService.currentState?.validate() ?? false;
+    notifyListeners();
+  }
+
   void removeImage() {
     _imageFile = null;
     _imageServiceFile = null;
@@ -107,6 +118,7 @@ class FormProvider extends ChangeNotifier {
   }
 
   Future<void> sendPasspoardDataToFirestore(DocumentReference docRef) async {
+    setLoading(true);
     try {
       print('upload data');
       final _storage = FirebaseStorage.instance;
@@ -116,13 +128,16 @@ class FormProvider extends ChangeNotifier {
       _uploadedImageUrl = await imageRef.getDownloadURL();
       // print(_uploadedImageUrl.toString());
       await docRef.set(getFormData(_uploadedImageUrl ?? ''));
+      setLoading(false);
     } on FirebaseException catch (e) {
+      setLoading(false);
       print('Error sending data: =================${e.toString()}');
     }
   }
 
   Future<void> sendServiceDataToFirestore(DocumentReference docRect) async {
     try {
+      setLoading(true);
       final _storage = FirebaseStorage.instance;
       final imageRef =
           _storage.ref(("customer/${path.basename(_imageServiceFile!.path)}"));
@@ -134,7 +149,9 @@ class FormProvider extends ChangeNotifier {
         'serviceDescribtion': _serviceDescribtion.text,
         'serviceImage': _uploadedImageUrl
       });
+      setLoading(false);
     } catch (e) {
+      setLoading(false);
       print(e);
     }
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yah_app/screen/dashboard/dashboard_screen.dart';
 import 'package:yah_app/screen/home_screen/home_screen.dart';
-import 'package:yah_app/screen/navigation/user_list.dart';
 import 'package:yah_app/styles/style.dart';
+
+import '../home_screen/dashboard_home_screen.dart';
 
 class MainWrapper extends StatefulWidget {
   const MainWrapper({super.key});
@@ -70,9 +71,9 @@ class _MainWrapperState extends State<MainWrapper>
           top: false,
           child: IndexedStack(
             index: _selectedIndex,
-            children: [
-              const Userlist(),
-              const DashboardScreen(),
+            children: const [
+              DashboardHomeScreen(),
+              DashboardScreen(),
               HomeScreen(),
             ],
           ),

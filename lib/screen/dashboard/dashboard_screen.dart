@@ -45,7 +45,7 @@ class DashboardScreen extends StatelessWidget {
           children: [
             AnimatedSwitcher(
               duration: Duration(milliseconds: 800),
-              child: UserDetailsTab(),
+              child: UserDetAddUserPassportScreen(),
             ),
             AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
