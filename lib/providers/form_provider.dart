@@ -7,25 +7,25 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 
 class FormProvider extends ChangeNotifier {
-  final TextEditingController _passboardController = TextEditingController();
+  final TextEditingController _passportController = TextEditingController();
   final TextEditingController _customerController = TextEditingController();
   final TextEditingController _phoneCustomerController =
       TextEditingController();
   final TextEditingController _anotherNoteController = TextEditingController();
   final TextEditingController _serviceName = TextEditingController();
-  final TextEditingController _serviceDescribtion = TextEditingController();
+  final TextEditingController _serviceDescription = TextEditingController();
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   final _formKeyService = GlobalKey<FormState>();
   String? _statusTrans;
   GlobalKey<FormState> get formKey => _formKey;
   GlobalKey<FormState> get formServiceKey => _formKeyService;
-  TextEditingController get numberPassboardController => _passboardController;
+  TextEditingController get numberPassportController => _passportController;
   TextEditingController get nameUserController => _customerController;
   TextEditingController get phoneUserController => _phoneCustomerController;
   TextEditingController get anotherUserController => _anotherNoteController;
   TextEditingController get serviceNameController => _serviceName;
-  TextEditingController get serviceDescribtionController => _serviceDescribtion;
+  TextEditingController get serviceDescriptionController => _serviceDescription;
 
   File? _imageFile;
   File? _imageServiceFile;
@@ -47,41 +47,31 @@ class FormProvider extends ChangeNotifier {
   Future<void> pickImage(
     ImageSource source,
   ) async {
-    print('[-]');
-    try {
-      final pickedFile = await ImagePicker().pickImage(source: source);
-      if (pickedFile != null) {
-        _imageFile = File(pickedFile.path);
-        notifyListeners();
-      }
-    } catch (e) {
-      print('status ============== ${e.toString()}');
+    final pickedFile = await ImagePicker().pickImage(source: source);
+    if (pickedFile != null) {
+      _imageFile = File(pickedFile.path);
+      notifyListeners();
     }
   }
 
   Future<void> pickImageService(
     ImageSource source,
   ) async {
-    print('[-]');
-    try {
-      final pickedFile = await ImagePicker().pickImage(source: source);
-      if (pickedFile != null) {
-        _imageServiceFile = File(pickedFile.path);
-        notifyListeners();
-      }
-    } catch (e) {
-      print('status ============== ${e.toString()}');
+    final pickedFile = await ImagePicker().pickImage(source: source);
+    if (pickedFile != null) {
+      _imageServiceFile = File(pickedFile.path);
+      notifyListeners();
     }
   }
 
   @override
   void dispose() {
-    _passboardController.dispose();
+    _passportController.dispose();
     _customerController.dispose();
     _phoneCustomerController.dispose();
     _anotherNoteController.dispose();
     _serviceName.dispose();
-    _serviceDescribtion.dispose();
+    _serviceDescription.dispose();
 
     super.dispose();
   }
@@ -105,33 +95,35 @@ class FormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<String, String> getFormData(String imageUrl) {
+  Map<String, String> getFormData(String imageUrl, String id) {
     return {
-      'numPassport': _passboardController.text,
+      'numPassport': _passportController.text,
       'NameCust': _customerController.text,
       "ImageTrans": imageUrl,
       "numberPhone": _phoneCustomerController.text,
-      'NumberTrans': '98',
-      "StatusTrans": 'جار المعاملة',
-      "TypeTrans": _statusTrans ?? '',
+      'NumberTrans': _phoneCustomerController.text,
+      'DocumentID': id,
+      'index': '23',
+      "StatusTrans": _statusTrans.toString(),
+      "DateTrans": DateTime.now().toIso8601String().split('T')[0],
     };
   }
 
   Future<void> sendPasspoardDataToFirestore(DocumentReference docRef) async {
     setLoading(true);
     try {
-      print('upload data');
       final _storage = FirebaseStorage.instance;
       final imageRef =
-          _storage.ref(("customer/${path.basename(_imageFile!.path)}"));
+          _storage.ref("customer/${path.basename(_imageFile!.path)}");
       await imageRef.putFile(_imageFile!);
       _uploadedImageUrl = await imageRef.getDownloadURL();
-      // print(_uploadedImageUrl.toString());
-      await docRef.set(getFormData(_uploadedImageUrl ?? ''));
+
+      await docRef.set(getFormData(_uploadedImageUrl ?? '', docRef.id));
       setLoading(false);
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       setLoading(false);
-      print('Error sending data: =================${e.toString()}');
+    } catch (e) {
+      setLoading(false);
     }
   }
 
@@ -140,19 +132,27 @@ class FormProvider extends ChangeNotifier {
       setLoading(true);
       final _storage = FirebaseStorage.instance;
       final imageRef =
-          _storage.ref(("customer/${path.basename(_imageServiceFile!.path)}"));
+          _storage.ref("customer/${path.basename(_imageServiceFile!.path)}");
+
+      // رفع الصورة
       await imageRef.putFile(_imageServiceFile!);
-      _uploadedImageUrl = await imageRef.getDownloadURL();
-      // print(_uploadedImageUrl.toString());
+
+      // الحصول على رابط الصورة
+      final _uploadedImageUrl = await imageRef.getDownloadURL();
+
+      final docRect = FirebaseFirestore.instance
+          .collection('service')
+          .doc(); // Automatically generates a new document ID
+      // حفظ البيانات في Firestore
       await docRect.set({
-        'serviceName': _serviceName.text,
-        'serviceDescribtion': _serviceDescribtion.text,
-        'serviceImage': _uploadedImageUrl
+        'title': _serviceName.text,
+        'paragraph': _serviceDescription.text,
+        'imgUrl': _uploadedImageUrl
       });
+
       setLoading(false);
     } catch (e) {
       setLoading(false);
-      print(e);
     }
   }
 }

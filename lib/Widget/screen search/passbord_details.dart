@@ -17,70 +17,43 @@ class PassbordDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Card(
-            semanticContainer: false,
-            elevation: 20,
-            clipBehavior: Clip.antiAlias,
-            margin: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  filterData.name,
-                  style: header,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image.memory(
-                      base64Decode(filterData.image),
-                      fit: BoxFit.fill,
-                      width: double.infinity,
-                      height: 200,
-                    )),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  " الاسم : " + filterData.name,
-                  style: header2,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "  الرقم : " + filterData.phone,
-                  style: header2,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  " حالة المعاملة : " + filterData.state,
-                  style: header2,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  " نوع المعاملة : " + filterData.another,
-                  style: header2,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
+          Center(
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(filterData.image),
+              radius: 80,
             ),
           ),
+          const SizedBox(height: 20),
+          _buildInfoSection('الاسم', filterData.name),
+          _buildInfoSection('الرقم', filterData.phone),
+          _buildInfoSection('حالة المعاملة', filterData.state),
+          _buildInfoSection('نوع المعاملة', filterData.another),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoSection(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: header2,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: paragraph2,
+          ),
+          const Divider(color: yShadowColor),
         ],
       ),
     );

@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:yah_app/Widget/home_screen/mysnackbar.dart';
 import 'package:yah_app/Widget/my_dropdown_field.dart';
 import 'package:yah_app/Widget/my_text_from_filed.dart';
-import 'package:yah_app/providers/dashboard_provider.dart';
 import 'package:yah_app/providers/form_provider.dart';
 
 import '../../Widget/button_user_image.dart';
@@ -30,7 +29,7 @@ class UserDetAddUserPassportScreen extends StatelessWidget {
                 child: ListView(
                   children: [
                     MyTextFormField(
-                      controller: provider.numberPassboardController,
+                      controller: provider.numberPassportController,
                       hint: 'رقم الجواز',
                       validator: (value) {
                         if (value == null || value.isEmpty) {

@@ -119,12 +119,12 @@ class _SecondePage extends State<SecondPage> {
   late bool _isLoding = true;
   late bool _isCheck = false;
 
-  var _resonseData;
+  Passbord? _resonseData;
   String? searchNumber;
 
   @override
   void initState() {
-    getData().then((value) {
+    _getData().then((value) {
       setState(() {
         _isLoding = false;
       });
@@ -146,31 +146,47 @@ class _SecondePage extends State<SecondPage> {
     super.dispose();
   }
 
-  Future<void> getData() async {
+  Future<void> _getData() async {
     final myProvider = Provider.of<PassportProvider>(context, listen: false);
-    CollectionReference ref =
-        FirebaseFirestore.instance.collection("Customers");
+    final ref = FirebaseFirestore.instance.collection('Customers');
 
-    QuerySnapshot querySnapshot = await ref
-        .where("numPassport", isEqualTo: myProvider.getNumberPassbord())
-        .get();
+    try {
+      final querySnapshot = await ref
+          .where('numPassport', isEqualTo: myProvider.getNumberPassbord())
+          .get();
 
-    List mylist = [];
-    if (querySnapshot.docs.isNotEmpty) {
-      for (var doc in querySnapshot.docs) {
-        mylist.add(doc.data());
+      if (querySnapshot.docs.isNotEmpty) {
+        final mylist = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+        final data = mylist.first;
+        _resonseData = Passbord(
+          numberPassbord: data['numPassport']?.toString() ?? '',
+          state: data['StatusTrans']?.toString() ?? '',
+          name: data['NameCust']?.toString() ?? '',
+          phone: data['numberPhone']?.toString() ?? '',
+          another: data['TypeTrans']?.toString() ?? '',
+          image: data['ImageTrans']?.toString() ?? '',
+        );
+
+        setState(() {
+          _isLoding = false;
+          _isCheck = true;
+        });
+      } else {
+        setState(() {
+          _isLoding = false;
+          _isCheck = false;
+        });
       }
-      _resonseData = Passbord(
-          numberPassbord: mylist[0]["numPassport"],
-          state: mylist[0]["StatusTrans"],
-          name: mylist[0]["NameCust"],
-          phone: mylist[0]["numberPhone"],
-          another: mylist[0]["TypeTrans"],
-          image: mylist[0]['ImageTrans']);
-      print("-------------------------------");
+    } on FirebaseException catch (e) {
+      print('Error fetching data: $e');
       setState(() {
         _isLoding = false;
-        _isCheck = true;
+        _isCheck = false;
+      });
+    } finally {
+      setState(() {
+        _isLoding = false;
       });
     }
   }
@@ -191,7 +207,7 @@ class _SecondePage extends State<SecondPage> {
                 : SizedBox(
                     height: size.height / 1.5,
                     child: _isCheck
-                        ? PassbordDetails(filterData: _resonseData, size: size)
+                        ? PassbordDetails(filterData: _resonseData!, size: size)
                         : Center(
                             child: AnimatedTextKit(
                               animatedTexts: [

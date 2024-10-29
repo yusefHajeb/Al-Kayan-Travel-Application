@@ -45,7 +45,7 @@ class AppBarHeadder extends StatelessWidget {
         left: 0,
         right: 0,
         bottom: 0,
-        height: 30,
+        height: 35,
         child: Container(
           child: title!.isNotEmpty
               ? Text(

@@ -110,19 +110,7 @@ class CardContant extends StatelessWidget {
                         duration: const Duration(milliseconds: 2500),
                         child: Container(
                           margin: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(13),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
-                                blurRadius: 8,
-                                spreadRadius: 2,
-                                offset: const Offset(0, 3),
-                              )
-                            ],
-                          ),
+                              vertical: 6, horizontal: 20),
                           child: Column(
                             children: [
                               Container(
@@ -132,8 +120,8 @@ class CardContant extends StatelessWidget {
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black.withOpacity(0.1),
-                                        blurRadius: 8,
-                                        spreadRadius: 2,
+                                        blurRadius: 10,
+                                        spreadRadius: 5,
                                       )
                                     ]),
                                 child: Column(

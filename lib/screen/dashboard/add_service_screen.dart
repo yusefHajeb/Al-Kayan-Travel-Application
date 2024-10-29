@@ -43,7 +43,7 @@ class AddServiceTab extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       MyTextFormField(
-                        controller: formProvider.serviceDescribtionController,
+                        controller: formProvider.serviceDescriptionController,
                         hint: 'وصف الخدمة ',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -62,7 +62,7 @@ class AddServiceTab extends StatelessWidget {
                               formProvider.imageService?.path != null) {
                             formProvider.sendServiceDataToFirestore(
                                 FirebaseFirestore.instance
-                                    .collection('Customers')
+                                    .collection('service')
                                     .doc());
                           } else {
                             mySnackBar(ScaffoldMessenger.of(context),
