@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:yah_app/styles/style.dart';
 
+import 'providers/ads_provider.dart';
 import 'providers/form_provider.dart';
 import 'screen/buttons_alkyan_branches_screen/Buttons_kyan_branches.dart';
 
@@ -33,6 +34,7 @@ void main() async {
     ChangeNotifierProvider(create: (_) => ServicesProvider()),
     ChangeNotifierProvider(create: (_) => FormProvider()),
     ChangeNotifierProvider(create: (_) => DashboardProvider()),
+    ChangeNotifierProvider(create: (_) => AdsProvider())
   ], child: const MyApp()));
 }
 

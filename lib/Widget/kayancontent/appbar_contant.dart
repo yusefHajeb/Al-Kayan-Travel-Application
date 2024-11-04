@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:yah_app/styles/style.dart';
 
-class AppBarHeadder extends StatelessWidget {
-  const AppBarHeadder({
+class AppBarHeader extends StatelessWidget {
+  const AppBarHeader({
     super.key,
-    required this.size,
     this.title,
   });
 
-  final Size size;
   final String? title;
 
   @override
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
       Container(
-        height: size.height / 5.2,
+        height: MediaQuery.sizeOf(context).height / 5.2,
         width: double.infinity,
         child: Image.asset(
           "assest/image/top_image.png",

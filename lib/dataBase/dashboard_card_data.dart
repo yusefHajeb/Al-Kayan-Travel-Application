@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yah_app/Widget/scale_transition.dart';
-import 'package:yah_app/screen/services_screen/our_service_screen.dart';
+import 'package:yah_app/screen/dashboard/add_user_passport.dart';
 
+import '../screen/dashboard/add_service_dashboard.dart';
+import '../screen/dashboard/add_service_screen.dart';
 import '../screen/home_screen/home_screen.dart';
 
 class DashboardCardData {
@@ -26,22 +28,22 @@ class DashboardCardData {
       ),
       DashboardCardData(
         onTap: () => Navigator.of(context)
-            .push(ScaleTransitionScreen(const HomeScreen())),
-        name: 'العملاء',
+            .push(ScaleTransitionScreen(const UserDetAddUserPassportScreen())),
+        name: 'إضافة معاملة',
         navigateTo: '/users',
         imageLink: 'assest/icon/user_icon.png',
       ),
       DashboardCardData(
         onTap: () => Navigator.of(context)
-            .push(ScaleTransitionScreen(const OurSreviceScreen())),
-        name: 'الخدمات',
+            .push(ScaleTransitionScreen(const AddServiceTab())),
+        name: 'إضافة خدمة',
         navigateTo: '/services',
         imageLink: 'assest/icon/service_icon.png',
       ),
       DashboardCardData(
         onTap: () => Navigator.of(context)
-            .push(ScaleTransitionScreen(const HomeScreen())),
-        name: 'لوحة التحكم',
+            .push(ScaleTransitionScreen(const AddAdsScreen())),
+        name: 'إضافة إعلان',
         navigateTo: '/dashboard',
         imageLink: 'assest/icon/service_icon.png',
       ),

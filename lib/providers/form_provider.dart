@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -66,6 +67,7 @@ class FormProvider extends ChangeNotifier {
 
   @override
   void dispose() {
+    isSuccessUpload(false);
     _passportController.dispose();
     _customerController.dispose();
     _phoneCustomerController.dispose();
@@ -78,7 +80,7 @@ class FormProvider extends ChangeNotifier {
 
   bool _isValid = false;
   bool get isValid => _isValid;
-
+  bool successUploadService = false;
   void validate() {
     _isValid = _formKey.currentState?.validate() ?? false;
     notifyListeners();
@@ -127,8 +129,14 @@ class FormProvider extends ChangeNotifier {
     }
   }
 
+  void isSuccessUpload(bool value) {
+    successUploadService = value;
+    notifyListeners();
+  }
+
   Future<void> sendServiceDataToFirestore(DocumentReference docRect) async {
     try {
+      isSuccessUpload(false);
       setLoading(true);
       final _storage = FirebaseStorage.instance;
       final imageRef =
@@ -139,7 +147,7 @@ class FormProvider extends ChangeNotifier {
 
       // الحصول على رابط الصورة
       final _uploadedImageUrl = await imageRef.getDownloadURL();
-
+      log(_uploadedImageUrl);
       final docRect = FirebaseFirestore.instance
           .collection('service')
           .doc(); // Automatically generates a new document ID
@@ -151,7 +159,10 @@ class FormProvider extends ChangeNotifier {
       });
 
       setLoading(false);
+      isSuccessUpload(true);
+      notifyListeners();
     } catch (e) {
+      isSuccessUpload(false);
       setLoading(false);
     }
   }

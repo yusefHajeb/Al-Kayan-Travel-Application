@@ -8,16 +8,16 @@ import 'package:http/http.dart' as http;
 // final firestoreInstance = FirebaseFirestore.instance;
 
 // import 'package:yah_app/screen/kaian_screen.dart';
-class Passbord {
-  final String numberPassbord;
+class Passport {
+  final String numberPassport;
 
   final String state;
   final String name;
   final String phone;
   final String another;
   final String image;
-  Passbord({
-    required this.numberPassbord,
+  Passport({
+    required this.numberPassport,
     required this.state,
     required this.name,
     required this.phone,
@@ -25,16 +25,16 @@ class Passbord {
     required this.image,
   });
 
-  Passbord copyWith({
-    String? numberPassbord,
+  Passport copyWith({
+    String? numberPassport,
     String? state,
     String? name,
     String? phone,
     String? another,
     String? image,
   }) {
-    return Passbord(
-      numberPassbord: numberPassbord ?? this.numberPassbord,
+    return Passport(
+      numberPassport: numberPassport ?? this.numberPassport,
       state: state ?? this.state,
       name: name ?? this.name,
       phone: phone ?? this.phone,
@@ -45,7 +45,7 @@ class Passbord {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'numberPassbord': numberPassbord,
+      'numberPassbord': numberPassport,
       'state': state,
       'name': name,
       'phone': phone,
@@ -54,9 +54,9 @@ class Passbord {
     };
   }
 
-  factory Passbord.fromMap(Map<String, dynamic> map) {
-    return Passbord(
-      numberPassbord: map['numberPassbord'] as String,
+  factory Passport.fromMap(Map<String, dynamic> map) {
+    return Passport(
+      numberPassport: map['numberPassbord'] as String,
       state: map['state'] as String,
       name: map['name'] as String,
       phone: map['phone'] as String,
@@ -67,19 +67,19 @@ class Passbord {
 
   String toJson() => json.encode(toMap());
 
-  factory Passbord.fromJson(String source) =>
-      Passbord.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Passport.fromJson(String source) =>
+      Passport.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'Passbord(numberPassbord: $numberPassbord, state: $state, name: $name, phone: $phone, another: $another, image: $image)';
+    return 'Passbord(numberPassbord: $numberPassport, state: $state, name: $name, phone: $phone, another: $another, image: $image)';
   }
 
   @override
-  bool operator ==(covariant Passbord other) {
+  bool operator ==(covariant Passport other) {
     if (identical(this, other)) return true;
 
-    return other.numberPassbord == numberPassbord &&
+    return other.numberPassport == numberPassport &&
         other.state == state &&
         other.name == name &&
         other.phone == phone &&
@@ -89,7 +89,7 @@ class Passbord {
 
   @override
   int get hashCode {
-    return numberPassbord.hashCode ^
+    return numberPassport.hashCode ^
         state.hashCode ^
         name.hashCode ^
         phone.hashCode ^
@@ -115,8 +115,8 @@ class PassportProvider with ChangeNotifier {
 
       extractedData.forEach((clintID, clintData) {
         if (clintData['Passbord'].toString() == getNumberPassbord()) {
-          filterData = Passbord(
-              numberPassbord: clintData['Passbord'].toString(),
+          filterData = Passport(
+              numberPassport: clintData['Passbord'].toString(),
               state: clintData['stateTransaction'],
               name: clintData['name'],
               phone: clintData['phone'].toString(),
@@ -146,22 +146,22 @@ class PassportProvider with ChangeNotifier {
   }
 
   var filterData;
-  void setFilterData(Passbord pass) {
+  void setFilterData(Passport pass) {
     filterData = pass;
     notifyListeners();
   }
 
-  Passbord getPasspordVar() {
+  Passport getPasspordVar() {
     return filterData;
   }
 
-  List<Passbord> listClint = [];
+  List<Passport> listClint = [];
 
-  List<Passbord> listData = [];
+  List<Passport> listData = [];
 
   bool searchList(String searchNumber) {
     for (var item in listClint) {
-      if (item.numberPassbord == searchNumber) {
+      if (item.numberPassport == searchNumber) {
         return true;
       }
     }

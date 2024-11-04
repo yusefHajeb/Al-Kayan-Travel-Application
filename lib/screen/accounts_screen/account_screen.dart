@@ -59,7 +59,7 @@ class AccountsScreen extends StatelessWidget {
       body: Flex(
         direction: Axis.vertical,
         children: <Widget>[
-          AppBarHeadder(size: MediaQuery.of(context).size, title: "حساباتنا"),
+          const AppBarHeader(title: "حساباتنا"),
           Expanded(
             child: AnimationLimiter(
               child: GridView.count(

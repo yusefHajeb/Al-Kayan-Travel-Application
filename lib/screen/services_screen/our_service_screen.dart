@@ -74,8 +74,6 @@ class _Screenkhadmatana extends State<OurSreviceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-
     String cutDescription(String desc) {
       return desc.length > 70
           ? desc.replaceRange(70, desc.length, '...')
@@ -96,7 +94,7 @@ class _Screenkhadmatana extends State<OurSreviceScreen> {
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(children: [
-              AppBarHeadder(size: size, title: "خدماتنا"),
+              const AppBarHeader(title: "خدماتنا"),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 1.3,
                 child: Provider.of<ServicesProvider>(context).getLoadinf()

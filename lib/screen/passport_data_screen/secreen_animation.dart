@@ -119,7 +119,7 @@ class _SecondePage extends State<SecondPage> {
   late bool _isLoding = true;
   late bool _isCheck = false;
 
-  Passbord? _resonseData;
+  Passport? _resonseData;
   String? searchNumber;
 
   @override
@@ -159,8 +159,8 @@ class _SecondePage extends State<SecondPage> {
         final mylist = querySnapshot.docs.map((doc) => doc.data()).toList();
 
         final data = mylist.first;
-        _resonseData = Passbord(
-          numberPassbord: data['numPassport']?.toString() ?? '',
+        _resonseData = Passport(
+          numberPassport: data['numPassport']?.toString() ?? '',
           state: data['StatusTrans']?.toString() ?? '',
           name: data['NameCust']?.toString() ?? '',
           phone: data['numberPhone']?.toString() ?? '',
@@ -198,8 +198,7 @@ class _SecondePage extends State<SecondPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AppBarHeadder(
-              size: size,
+            const AppBarHeader(
               title: 'عرض البيانات',
             ),
             _isLoding
@@ -207,7 +206,7 @@ class _SecondePage extends State<SecondPage> {
                 : SizedBox(
                     height: size.height / 1.5,
                     child: _isCheck
-                        ? PassbordDetails(filterData: _resonseData!, size: size)
+                        ? PassportDetails(filterData: _resonseData!, size: size)
                         : Center(
                             child: AnimatedTextKit(
                               animatedTexts: [

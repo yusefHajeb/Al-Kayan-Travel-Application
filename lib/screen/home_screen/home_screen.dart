@@ -224,32 +224,31 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 padding: const EdgeInsets.all(0),
                 child: PageView.builder(
-                    itemCount: listImage?.length ?? 4,
-                    controller: _pageController,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Container(
-                          padding: const EdgeInsets.only(
-                            top: 10.0,
-                          ),
-                          child: _carousView(index, size));
-                    }),
+                  itemCount: listImage?.length ?? 4,
+                  controller: _pageController,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Container(
+                        padding: const EdgeInsets.only(
+                          top: 10.0,
+                        ),
+                        child: _carolsView(index, size));
+                  },
+                ),
               ),
             ),
           ),
         ),
-        Expanded(flex: 4, child: CardBottom(context)),
+        Expanded(flex: 4, child: cardBottom(context)),
       ]),
     );
   }
 
   // ignore: non_constant_identifier_names
-  Container CardBottom(
+  Widget cardBottom(
     BuildContext context,
   ) {
-    return Container(
-        // margin: const EdgeInsets.only(bottom: 10),
-        child: GridView.builder(
+    return GridView.builder(
       itemCount: 6,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -372,7 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ].elementAt(index),
-    ));
+    );
   }
 
   void setNumPass() {
@@ -381,7 +380,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Widget _carousView(int index, Size s) {
+  Widget _carolsView(int index, Size s) {
     return AnimatedBuilder(
       animation: _pageController,
       builder: (context, child) {
@@ -402,9 +401,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         Container(
+          width: double.infinity,
           height: size.height / 4.5,
           margin: const EdgeInsets.only(
-            left: 20,
+            left: 40,
           ),
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.04),

@@ -16,13 +16,13 @@ class ButtonsKyanBranchesAndPartnersScreen extends StatefulWidget {
 }
 
 class _AlkianScreen extends State<ButtonsKyanBranchesAndPartnersScreen> {
-  late bool _isLoding;
+  late bool _isLoading;
   @override
   void initState() {
-    _isLoding = true;
+    _isLoading = true;
     Future.delayed(const Duration(seconds: 1)).then((_) {
       setState(() {
-        _isLoding = false;
+        _isLoading = false;
       });
     });
 
@@ -31,14 +31,13 @@ class _AlkianScreen extends State<ButtonsKyanBranchesAndPartnersScreen> {
 
   @override
   void dispose() {
-    _isLoding = true;
+    _isLoading = true;
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     final numTab = Provider.of<ProviderService>(context).getNumberScreen();
 
     //set val to index in provider
@@ -53,16 +52,14 @@ class _AlkianScreen extends State<ButtonsKyanBranchesAndPartnersScreen> {
       // appBar: ,
       backgroundColor: Colors.white,
       body: SizedBox(
-        height: size.height,
-        width: size.width,
         child: Column(
           // shrinkWrap: true,
           children: <Widget>[
-            AppBarHeadder(size: size, title: title),
+            AppBarHeader(title: title),
             const SizedBox(
               height: 4,
             ),
-            _isLoding
+            _isLoading
                 ? Expanded(
                     child: ListView.separated(
                       shrinkWrap: false,
@@ -74,7 +71,7 @@ class _AlkianScreen extends State<ButtonsKyanBranchesAndPartnersScreen> {
                           const SizedBox(height: 15),
                     ),
                   )
-                : CardContant(check: check)
+                : CardContent(check: check)
           ],
         ),
       ),
@@ -82,8 +79,8 @@ class _AlkianScreen extends State<ButtonsKyanBranchesAndPartnersScreen> {
   }
 }
 
-class CardContant extends StatelessWidget {
-  const CardContant({
+class CardContent extends StatelessWidget {
+  const CardContent({
     super.key,
     required this.check,
   });

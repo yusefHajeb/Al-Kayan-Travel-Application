@@ -12,7 +12,7 @@ class DashboardProvider extends ChangeNotifier {
   }
 
   final _firestore = FirebaseFirestore.instance;
-  Future<void> uploadUserData(Passbord passbord) async {
+  Future<void> uploadUserData(Passport passbord) async {
     try {
       setLoading(true);
       final userRef = _firestore.collection('Customers').doc();

@@ -1,18 +1,16 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 import '../../providers/provider_passboard.dart';
 import '../../styles/style.dart';
 
-class PassbordDetails extends StatelessWidget {
-  const PassbordDetails({
+class PassportDetails extends StatelessWidget {
+  const PassportDetails({
     Key? key,
     required this.filterData,
     required this.size,
   }) : super(key: key);
 
-  final Passbord filterData;
+  final Passport filterData;
   final Size size;
 
   @override

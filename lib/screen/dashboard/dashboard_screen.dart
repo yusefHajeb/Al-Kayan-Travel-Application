@@ -53,7 +53,7 @@ class DashboardScreen extends StatelessWidget {
             ),
             AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
-              child: AdcDashboardTab(),
+              child: AddAdsScreen(),
             ),
           ],
         ),
