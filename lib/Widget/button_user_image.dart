@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:yah_app/Widget/my_text_from_filed.dart';
 import 'package:yah_app/providers/form_provider.dart';
 import 'package:yah_app/styles/style.dart';
 
@@ -30,7 +31,21 @@ class ButtonChooseImage extends StatelessWidget {
                         height: 300,
                         File(provider.imageFile?.path ?? '')),
                   )
-                : const Text('أضف صورة', style: card),
+                : MyTextFormField(
+                    focusColor: Colors.grey,
+
+                    isPassword: false,
+                    readOnly: true,
+                    autoFocus: false,
+                    raduis: 10.0,
+                    maxLines: 1,
+                    onTap: () async {
+                      await provider.pickImage(ImageSource.gallery);
+                    },
+                    contentPadding: const EdgeInsets.all(15), // زيادة padding
+                    icon: Icons.image,
+                    hint: 'إضافة صورة المعاملة',
+                  ),
           ),
         ),
         Positioned(

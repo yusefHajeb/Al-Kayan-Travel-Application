@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:yah_app/Widget/custom_clipper.dart';
-import 'package:yah_app/core/extension.dart';
 import 'package:yah_app/providers/service_provider.dart';
 import 'package:yah_app/Widget/home_screen/mysnackbar.dart';
 import 'package:yah_app/Widget/scale_transition.dart';
@@ -124,12 +123,6 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       body: Flex(direction: Axis.vertical, children: <Widget>[
-        context.responsive(
-          Container(),
-          md: Container(),
-          sm: Container(),
-          xl: Container(),
-        ),
         Expanded(
             flex: 4,
             child: ClipPath(

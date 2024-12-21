@@ -33,12 +33,14 @@ class MyDropdownButtonFormField extends StatelessWidget {
   final double raduis;
   final String? Function(String?)? validator;
   final EdgeInsetsGeometry contentPadding;
-
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       isExpanded: true,
-      hint: Text(hint ?? "اختر عنصرًا"),
+      // hint: Text(
+      //   hint ?? "اختر عنصرًا",
+      //   style: fieldStyle,
+      // ),
       value: value,
       items: items
           .map(
@@ -46,8 +48,7 @@ class MyDropdownButtonFormField extends StatelessWidget {
               value: item,
               child: Text(
                 item,
-                style: const TextStyle(
-                    height: 1.5, fontSize: 16), // زيادة الارتفاع
+                style: fieldStyle, // زيادة الارتفاع
               ),
             ),
           )
@@ -56,8 +57,14 @@ class MyDropdownButtonFormField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validator,
       decoration: InputDecoration(
+        labelText: value != null ? null : hint,
+        labelStyle: fieldStyle,
+        hintStyle: fieldStyle,
+        counterStyle: paragraph,
+        errorStyle: paragraph,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
+        alignLabelWithHint: true,
         filled: fillColor != null,
         fillColor: fillColor,
         contentPadding: contentPadding,

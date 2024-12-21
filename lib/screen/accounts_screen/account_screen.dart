@@ -205,7 +205,7 @@ Future<void> myDialoge(BuildContext ctx) async {
       context: ctx,
       builder: ((ctx) {
         return AlertDialog(
-          title: Text(
+          title: const Text(
             "برمجة وتطوير",
             style: paragraph2,
           ),
@@ -214,11 +214,10 @@ Future<void> myDialoge(BuildContext ctx) async {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                  child: Text(
-                '',
+              Text(
+                'YAH',
                 style: paragraph,
-              )),
+              ),
               const SizedBox(
                 height: 8,
               ),
@@ -228,10 +227,11 @@ Future<void> myDialoge(BuildContext ctx) async {
                   Container(
                       margin: const EdgeInsets.only(left: 6),
                       child: const Text(
-                        '', // "771274299",
+                        'يوسف حاجب', // "771274299",
                         style: TextStyle(
                             color: Colors.blueAccent,
-                            fontSize: 12,
+                            fontSize: 15,
+                            fontFamily: 'Almarai',
                             fontWeight: FontWeight.bold),
                       )),
                   const Icon(
@@ -248,7 +248,7 @@ Future<void> myDialoge(BuildContext ctx) async {
                 onPressed: () {
                   Navigator.pop(ctx);
                 },
-                child: Text("اغلاق"))
+                child: const Text("اغلاق"))
           ],
         );
       }));
