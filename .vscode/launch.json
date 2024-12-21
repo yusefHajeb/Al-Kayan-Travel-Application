@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Alkian Admin",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/main_admin.dart",
+        "args": ["--flavor", "Admin", "--target", "lib/main_admin.dart" ]
+      },
+      {
+        "name": "مكتب الكيان",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/main.dart",
+        "args": ["--flavor", "Production", "--target", "lib/main.dart" ]
+      }
+    ],
+    "compounds": []
+}
+
+
+
+
+

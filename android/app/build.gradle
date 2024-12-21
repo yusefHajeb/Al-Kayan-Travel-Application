@@ -43,6 +43,19 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    flavorDimensions "default"
+    productFlavors {
+        admin {
+            dimension "default"
+            resValue "string", "app_name", "Alkian Admin"
+
+        }
+        production {
+            dimension "default"
+            resValue "string", "app_name", "مكتب الكيان"
+        }
+    }
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.yah_app"
