@@ -9,11 +9,11 @@ import 'package:yah_app/providers/service_provider.dart';
 import 'package:yah_app/screen/notification/notification_screen.dart';
 import 'package:yah_app/screen/services_screen/content_service_screen.dart';
 import 'package:yah_app/screen/services_screen/our_service_screen.dart';
+import 'package:yah_app/screen/splash%20screen/splash_screen.dart';
 import 'package:yah_app/providers/myprovider.dart';
 import 'package:yah_app/providers/provider_passboard.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:yah_app/screen/splash%20screen/splash_screen_prduction.dart';
 import 'package:yah_app/styles/style.dart';
 
 import 'providers/ads_provider.dart';
@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [Locale("ar", "AE")],
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => const SplashProductionScreen(),
+          '/': (context) => const SplashScreen(),
           NotificationScreen.routeName: (context) => const NotificationScreen(),
           ButtonsKyanBranchesAndPartnersScreen.routeName: (context) =>
               const ButtonsKyanBranchesAndPartnersScreen(),
